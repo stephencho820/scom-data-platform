@@ -11,6 +11,7 @@
   <header>
     <a class="brand" href="./">S.com Data Platform</a>
     <nav>
+      <a href="#explorer">Data Explorer</a>
       <a href="#architecture">Architecture</a>
       <a href="#markets">Markets</a>
       <a href="#mcp">MCP</a>
@@ -24,8 +25,52 @@
       <h1>Samsung.com,<br />as usable data.</h1>
       <p class="lede">A zero-cost-first platform that discovers, normalizes, versions, and exposes public Samsung.com information for AI agents and developers.</p>
       <div class="actions">
-        <a class="primary" href="#mcp">Use the MCP</a>
+        <a class="primary" href="#explorer">Explore the data</a>
+        <a class="secondary" href="#mcp">Use the MCP</a>
         <a class="secondary" href="https://github.com/stephencho820/scom-data-platform/blob/main/docs/PRD.md">Read the PRD</a>
+      </div>
+    </section>
+
+    <section class="explorer-section" id="explorer">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">DATA EXPLORER</p>
+          <h2>See what was crawled.</h2>
+        </div>
+        <p>Browse the current Samsung.com snapshot by market. Search normalized products or page text, inspect the extracted fields, and jump back to the source page.</p>
+      </div>
+
+      <div class="explorer-shell">
+        <div class="explorer-toolbar">
+          <label class="control">
+            <span>Market</span>
+            <select id="explorer-market" aria-label="Select market"></select>
+          </label>
+
+          <div class="control">
+            <span>Dataset</span>
+            <div class="segmented" role="group" aria-label="Select dataset">
+              <button class="dataset-tab active" type="button" data-dataset="products">Products</button>
+              <button class="dataset-tab" type="button" data-dataset="pages">Pages</button>
+            </div>
+          </div>
+
+          <label class="control search-control">
+            <span>Search</span>
+            <input id="explorer-search" type="search" placeholder="Search products…" autocomplete="off" />
+          </label>
+        </div>
+
+        <div class="explorer-meta">
+          <div id="explorer-summary">Loading dataset…</div>
+          <div id="explorer-captured"></div>
+        </div>
+
+        <div id="explorer-results" class="explorer-results" aria-live="polite"></div>
+
+        <div class="explorer-footer">
+          <button id="explorer-more" class="load-more" type="button" hidden>Show more</button>
+        </div>
       </div>
     </section>
 
@@ -72,6 +117,21 @@ npm install
 npm run mcp</code></pre>
     </section>
   </main>
+
+  <dialog id="data-dialog" class="data-dialog">
+    <div class="dialog-bar">
+      <div>
+        <p class="eyebrow" id="dialog-type">DETAIL</p>
+        <h3 id="dialog-title">Data detail</h3>
+      </div>
+      <button id="dialog-close" class="dialog-close" type="button" aria-label="Close detail">×</button>
+    </div>
+    <div id="dialog-body" class="dialog-body"></div>
+    <div class="dialog-actions">
+      <a id="dialog-source" class="primary" href="#" target="_blank" rel="noopener noreferrer">Open source</a>
+      <button id="dialog-close-bottom" class="secondary" type="button">Close</button>
+    </div>
+  </dialog>
 
   <footer>
     <p>Community project. Source records link back to Samsung.com.</p>
