@@ -23,6 +23,7 @@ const explicitUrl = arg("url", "");
 const discoverOnly = process.argv.includes("--discover-only") || batchPages === 0;
 
 const registry = JSON.parse(await readFile(path.join(ROOT, "config/markets.json"), "utf8"));
+const crawlScope = JSON.parse(await readFile(path.join(ROOT, "config/crawl-scope.json"), "utf8"));
 const market = registry.markets.find((item) => item.code === marketCode);
 if (!market) throw new Error("Unknown market: " + marketCode);
 
@@ -268,6 +269,134 @@ function visibleText(html) {
   ).replace(/\s+/g, " ").trim().slice(0, MAX_TEXT_CHARS);
 }
 
+function structuredSpecs(product) {
+  const values = Array.isArray(product?.additionalProperty)
+    ? product.additionalProperty
+    : product?.additionalProperty
+      ? [product.additionalProperty]
+      : [];
+
+  return values
+    .filter((item) => item && typeof item === "object")
+    .map((item) => ({
+      name: String(item.name || item.propertyID || "").trim(),
+      value: item.value ?? item.valueReference?.name ?? "",
+      ...(item.unitText || item.unitCode ? { unit: String(item.unitText || item.unitCode) } : {})
+    }))
+    .filter((item) => item.name && item.value !== "");
+}
+
+function skuFromUrl(pageUrl) {
+  const match = String(pageUrl).match(/(?:^|[-/])sku-([^/?#]+)/i);
+  return match ? match[1].toUpperCase() : "";
+}
+
+function evidenceSnippet(text, regex, max = 320) {
+  const match = String(text || "").match(regex);
+  if (!match || match.index === undefined) return "";
+  const start = Math.max(0, match.index - Math.floor(max / 3));
+  return String(text).slice(start, start + max).trim();
+}
+
+function evidenceOption(page, type, label, regex, details = null) {
+  const evidence = evidenceSnippet(page.text, regex);
+  if (!evidence) return null;
+  return {
+    type,
+    available: true,
+    label,
+    details,
+    evidence,
+    source_url: page.canonical_url || page.url,
+    captured_at: page.captured_at
+  };
+}
+
+function extractCommerce(page) {
+  const pick = (type, label, regex, details = null) =>
+    evidenceOption(page, type, label, regex, details);
+
+  const compact = (values) => values.filter(Boolean);
+  return {
+    purchase_methods: compact([
+      pick("financing", "Financing / installments", /\b(financ(?:e|ing)|installments?|monthly payments?|pay monthly|net 30|net 60|net 90)\b|할부|금융/i)
+    ]),
+    subscriptions: compact([
+      pick("subscription", "Subscription / rental", /\b(subscription|subscribe|rental|renting|upgrade program)\b|구독|렌탈/i)
+    ]),
+    trade_in: compact([
+      pick("trade_in", "Trade-in", /trade[- ]?in|보상판매|중고.{0,12}보상/i)
+    ]),
+    protection: compact([
+      pick("samsung_care_plus", "Samsung Care+", /samsung\s*care\+?|care\+|삼성케어\+?|삼성케어플러스/i),
+      pick("extended_warranty", "Extended warranty", /extended warranty|warranty extension|보증.{0,8}연장/i)
+    ]),
+    delivery: compact([
+      pick("delivery", "Delivery / shipping", /\b(delivery|shipping|doorstep delivery)\b|배송/i)
+    ]),
+    installation: compact([
+      pick("installation", "Installation", /\b(installation|install service|professional install)\b|설치/i)
+    ]),
+    haul_away: compact([
+      pick("haul_away", "Haul away / recycling", /haul[- ]?away|old appliance removal|take away your old|recycl(?:e|ing)|폐가전|기존.{0,10}수거|수거/i)
+    ]),
+    bundles: compact([
+      pick("bundle", "Bundle / add-on", /\b(bundle|bundle builder|add[- ]?on|accessor(?:y|ies) offer)\b|묶음|패키지.{0,8}할인/i)
+    ]),
+    membership: compact([
+      pick("rewards", "Rewards / membership", /samsung rewards|membership|business account|리워드|멤버십/i)
+    ]),
+    promotions: compact([
+      pick("promotion", "Promotion / discount", /\b(cashback|discount|promotion|special offer|save [0-9]|save up to)\b|쿠폰|할인|혜택/i)
+    ])
+  };
+}
+
+function audienceFromUrl(url) {
+  const value = String(url || "").toLowerCase();
+  if (value.includes("/business/")) return "business";
+  return value ? "consumer" : "unknown";
+}
+
+function categoryPathFromUrl(url) {
+  try {
+    const segments = new URL(url).pathname.split("/").filter(Boolean);
+    const ignored = new Set(["us", "uk", "sec", "business", "buy", "product", "products"]);
+    return segments
+      .filter((segment) => !ignored.has(segment.toLowerCase()))
+      .filter((segment) => !/^sku-/i.test(segment))
+      .slice(0, 4)
+      .map((segment) => decodeURIComponent(segment).replace(/-/g, " "));
+  } catch {
+    return [];
+  }
+}
+
+function pathMatchesAny(url, patterns = []) {
+  let pathname = "";
+  try {
+    pathname = new URL(url).pathname.toLowerCase();
+  } catch {
+    return false;
+  }
+  return patterns.some((pattern) => pathname.includes(String(pattern).toLowerCase()));
+}
+
+function isTargetUrl(url) {
+  if (pathMatchesAny(url, crawlScope.excludePathPatterns || [])) return false;
+  return pathMatchesAny(url, crawlScope.includePathPatterns || []);
+}
+
+function targetPriority(url) {
+  let score = -priority(url);
+  const value = String(url).toLowerCase();
+  for (const pattern of crawlScope.priorityPatterns || []) {
+    if (value.includes(String(pattern).toLowerCase())) score += 10;
+  }
+  if (!value.includes("/business/")) score += 3;
+  return -score;
+}
+
 function findProductObjects(value, out = []) {
   if (!value || typeof value !== "object") return out;
   if (Array.isArray(value)) {
@@ -291,8 +420,9 @@ function parseProducts(html, pageUrl) {
       for (const product of findProductObjects(parsed)) {
         const offers = Array.isArray(product.offers) ? product.offers[0] : product.offers;
         const name = String(product.name || "").trim();
-        const sku = String(product.sku || product.mpn || "").trim();
+        const sku = String(product.sku || product.mpn || skuFromUrl(pageUrl) || "").trim();
         const model = String(product.model || product.productID || "").trim();
+        const specs = structuredSpecs(product);
         const keySeed = sku || model || name || pageUrl;
         const normalized = {
           key: sha(marketCode + "|" + keySeed.toLowerCase()).slice(0, 24),
@@ -307,6 +437,7 @@ function parseProducts(html, pageUrl) {
             currency: offers.priceCurrency ?? "",
             availability: offers.availability ?? ""
           } : null,
+          specs,
           captured_at: capturedAt
         };
 
@@ -315,7 +446,8 @@ function parseProducts(html, pageUrl) {
           sku: normalized.sku,
           model: normalized.model,
           brand: normalized.brand,
-          offers: normalized.offers
+          offers: normalized.offers,
+          specs: normalized.specs
         }));
 
         products.push(normalized);
@@ -446,16 +578,21 @@ const discoveredUrls = discovery.urls
 const crawlableUrls = discoveredUrls.filter((url) => allowedByRobots(url, robots));
 if (!crawlableUrls.length && !explicitUrl) throw new Error("No crawlable URLs discovered for " + marketCode);
 
-const urlHash = sha(crawlableUrls.join("\n"));
+const targetUrls = crawlableUrls
+  .filter(isTargetUrl)
+  .sort((a, b) => targetPriority(a) - targetPriority(b) || a.localeCompare(b));
+if (!targetUrls.length && !explicitUrl) throw new Error("No data-mart target URLs discovered for " + marketCode);
+
+const urlHash = sha(targetUrls.join("\n"));
 const cursorBase = previousManifest.url_hash === urlHash
   ? Number(previousManifest.cursor || 0)
-  : Math.min(Number(previousManifest.cursor || 0), Math.max(crawlableUrls.length - 1, 0));
+  : Math.min(Number(previousManifest.cursor || 0), Math.max(targetUrls.length - 1, 0));
 
-const crawlableSet = new Set(crawlableUrls);
-const visitedUrls = new Set(previousManifest.visited_urls || []);
+const targetSet = new Set(targetUrls);
+const visitedUrls = new Set((previousManifest.visited_urls || []).filter((url) => targetSet.has(url)));
 for (const page of existingPages) {
   for (const candidate of [page.discovered_url, page.url, page.canonical_url]) {
-    if (candidate && crawlableSet.has(candidate)) visitedUrls.add(candidate);
+    if (candidate && targetSet.has(candidate)) visitedUrls.add(candidate);
   }
 }
 
@@ -467,7 +604,7 @@ let wrapped = false;
 if (explicitUrl) {
   selected = [explicitUrl];
 } else if (!discoverOnly) {
-  const batch = chooseBatch(crawlableUrls, visitedUrls, cursorBase, batchPages);
+  const batch = chooseBatch(targetUrls, visitedUrls, cursorBase, batchPages);
   selected = batch.selected;
   nextCursor = batch.nextCursor;
   wrapped = batch.wrapped;
@@ -484,18 +621,20 @@ const manifest = {
   failed_sitemaps: discovery.failedSitemaps,
   discovered_urls_total: discoveredUrls.length,
   crawlable_urls_total: crawlableUrls.length,
+  target_urls_total: targetUrls.length,
   url_hash: urlHash,
   cursor: nextCursor,
   cycle,
   visited_urls_total: visitedUrls.size,
   visited_urls: [...visitedUrls].sort(),
+  target_urls: targetUrls,
   urls: crawlableUrls
 };
 
 await writeFile(manifestFile, JSON.stringify(manifest, null, 2) + "\n");
 
 if (discoverOnly) {
-  const coveragePercent = crawlableUrls.length ? Math.round((visitedUrls.size / crawlableUrls.length) * 10000) / 100 : 0;
+  const coveragePercent = targetUrls.length ? Math.round((visitedUrls.size / targetUrls.length) * 10000) / 100 : 0;
 
   await writeFile(metaFile, JSON.stringify({
     ...existingMeta,
@@ -506,6 +645,7 @@ if (discoverOnly) {
     failed_sitemaps: discovery.failedSitemaps.length,
     discovered_urls_total: discoveredUrls.length,
     crawlable_urls_total: crawlableUrls.length,
+    target_urls_total: targetUrls.length,
     coverage_urls: visitedUrls.size,
     coverage_pages: visitedUrls.size,
     coverage_percent: coveragePercent,
@@ -513,13 +653,13 @@ if (discoverOnly) {
     crawl_cycle: cycle
   }, null, 2) + "\n");
 
-  console.error("inventory: " + marketCode + ": " + crawlableUrls.length + " crawlable URLs across " + discovery.sitemapCount + " sitemaps");
+  console.error("inventory: " + marketCode + ": " + targetUrls.length + " mart target URLs from " + crawlableUrls.length + " crawlable URLs across " + discovery.sitemapCount + " sitemaps");
   process.exit(0);
 }
 
 if (!selected.length) throw new Error("No URLs selected for crawl for " + marketCode);
 
-console.error("inventory: " + marketCode + ": " + crawlableUrls.length + " crawlable URLs; crawling batch of " + selected.length);
+console.error("inventory: " + marketCode + ": " + targetUrls.length + " mart target URLs from " + crawlableUrls.length + " crawlable URLs; crawling batch of " + selected.length);
 
 const crawledPages = [];
 const crawledProducts = new Map();
@@ -575,7 +715,7 @@ manifest.visited_urls_total = visitedUrls.size;
 manifest.visited_urls = [...visitedUrls].sort();
 await writeFile(manifestFile, JSON.stringify(manifest, null, 2) + "\n");
 
-const coveragePercent = crawlableUrls.length ? Math.round((visitedUrls.size / crawlableUrls.length) * 10000) / 100 : 0;
+const coveragePercent = targetUrls.length ? Math.round((visitedUrls.size / targetUrls.length) * 10000) / 100 : 0;
 
 await writeFile(path.join(currentDir, "pages.jsonl"), toJsonl(allPages));
 await writeFile(path.join(currentDir, "products.jsonl"), toJsonl(allProducts));
@@ -589,6 +729,7 @@ await writeFile(metaFile, JSON.stringify({
   failed_sitemaps: discovery.failedSitemaps.length,
   discovered_urls_total: discoveredUrls.length,
   crawlable_urls_total: crawlableUrls.length,
+  target_urls_total: targetUrls.length,
   crawl_cursor: nextCursor,
   crawl_cycle: cycle,
   batch_requested: selected.length,
@@ -602,4 +743,4 @@ await writeFile(metaFile, JSON.stringify({
   history_versions: history.length
 }, null, 2) + "\n");
 
-console.error("done: " + marketCode + ": " + crawledPages.length + "/" + selected.length + " batch pages ok; " + allPages.length + " total unique pages stored; " + visitedUrls.size + "/" + crawlableUrls.length + " sitemap URLs visited (" + coveragePercent + "%); " + allProducts.length + " products; " + failures + " failures");
+console.error("done: " + marketCode + ": " + crawledPages.length + "/" + selected.length + " batch pages ok; " + allPages.length + " total unique pages stored; " + visitedUrls.size + "/" + targetUrls.length + " mart target URLs visited (" + coveragePercent + "%); " + allProducts.length + " products; " + failures + " failures");
