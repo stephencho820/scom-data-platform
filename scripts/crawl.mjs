@@ -66,6 +66,21 @@ const toJsonl = (rows) => rows.map((row) => JSON.stringify(row)).join("\n") + (r
 
 let catalogBrowser = null;
 
+function findCatalogGoods(value, out = []) {
+  if (!value || typeof value !== "object") return out;
+  if (Array.isArray(value)) {
+    for (const item of value) findCatalogGoods(item, out);
+    return out;
+  }
+
+  const model = String(value.mdlCode || "").trim().toUpperCase();
+  const name = String(value.goodsNm || "").trim();
+  if (/^SM-[A-Z][0-9]{3}[A-Z0-9]{4,12}$/.test(model) && name) out.push(value);
+
+  for (const child of Object.values(value)) findCatalogGoods(child, out);
+  return out;
+}
+
 async function renderCatalogHtml(url) {
   const chromePath = process.env.CHROME_PATH || "";
   if (!chromePath) throw new Error("CHROME_PATH is not configured for rendered catalog fallback");
@@ -194,6 +209,30 @@ async function renderCatalogHtml(url) {
     }
 
     console.error("catalog rendered: accumulated model cards=" + fragmentsByModel.size + "; payloads=" + catalogPayloads.length);
+
+    for (const payload of catalogPayloads.filter((item) => item.url.includes("/cxhr/pf/goodsList"))) {
+      try {
+        const goods = findCatalogGoods(JSON.parse(payload.body));
+        const unique = [...new Map(goods.map((item) => [String(item.mdlCode).toUpperCase(), item])).values()];
+        const statuses = {};
+        for (const item of unique) {
+          const key = String(item.saleStatCd ?? "null");
+          statuses[key] = (statuses[key] || 0) + 1;
+        }
+        console.error("catalog goodsList debug: unique=" + unique.length + " saleStatCd=" + JSON.stringify(statuses));
+        console.error("catalog goodsList sample=" + JSON.stringify(unique.slice(0, 8).map((item) => ({
+          goodsNm: item.goodsNm,
+          mdlCode: item.mdlCode,
+          saleStatCd: item.saleStatCd,
+          salePrice: item.salePrice,
+          soldOutYn: item.soldOutYn,
+          restockGoodsYn: item.goodsMdlExcpt?.restockGoodsYn,
+          stockQty: item.stockQty,
+          buyNowYn: item.buyNowYn
+        }))));
+      } catch {}
+    }
+
     const payloadText = catalogPayloads
       .map((payload) => {
         try {
