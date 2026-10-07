@@ -36,6 +36,12 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Sync latest main before crawling
+        run: |
+          git fetch origin main
+          git checkout main
+          git reset --hard origin/main
+
       - name: Discover full inventory and crawl incremental batches
         id: crawl
         continue-on-error: true
