@@ -81,63 +81,102 @@ async function renderCatalogHtml(url) {
 
   const page = await catalogBrowser.newPage({
     userAgent: USER_AGENT,
-    viewport: { width: 1440, height: 1400 }
+    viewport: { width: 1440, height: 1200 }
   });
+
+  const fragmentsByModel = new Map();
+
+  const collectVisibleProducts = async () => {
+    const text = await page.locator("body").innerText().catch(() => "");
+    const lines = text
+      .split(/\n+/)
+      .map((line) => line.replace(/\s+/g, " ").trim())
+      .filter(Boolean);
+
+    for (let index = 0; index < lines.length; index++) {
+      const matches = [...lines[index].matchAll(/SM-[A-Z0-9-]+/gi)];
+      for (const match of matches) {
+        const model = match[0].toUpperCase();
+        const from = Math.max(0, index - 14);
+        const to = Math.min(lines.length, index + 32);
+        const fragment = lines.slice(from, to).join("\n");
+        const previous = fragmentsByModel.get(model) || "";
+        if (fragment.length > previous.length) fragmentsByModel.set(model, fragment);
+      }
+    }
+  };
 
   try {
     await page.goto(url, { waitUntil: "domcontentloaded", timeout: 45000 });
-    await page.waitForTimeout(2500);
+    await page.waitForTimeout(2200);
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await collectVisibleProducts();
 
-    const modelCount = async () => page.locator("body").innerText()
-      .then((text) => new Set(text.match(/SM-[A-Z0-9-]+/gi) || []).size)
-      .catch(() => 0);
+    let stagnant = 0;
+    let previousCount = fragmentsByModel.size;
+    let previousY = -1;
 
-    let lastCount = await modelCount();
-    let stableRounds = 0;
+    for (let round = 0; round < 140; round++) {
+      const state = await page.evaluate(() => ({
+        y: window.scrollY,
+        height: document.documentElement.scrollHeight,
+        viewport: window.innerHeight
+      }));
 
-    for (let round = 0; round < 30; round++) {
-      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-      await page.waitForTimeout(700);
+      const nextY = Math.min(state.height, state.y + Math.max(650, Math.floor(state.viewport * 0.72)));
+      await page.evaluate((y) => window.scrollTo(0, y), nextY);
+      await page.waitForTimeout(180);
+      await collectVisibleProducts();
 
-      const beforeClick = await modelCount();
-      let expanded = false;
+      const newCount = fragmentsByModel.size;
+      if (newCount > previousCount) stagnant = 0;
+      else stagnant += 1;
 
-      const buttons = page.locator("button:visible");
-      const buttonCount = await buttons.count();
+      const after = await page.evaluate(() => ({
+        y: window.scrollY,
+        height: document.documentElement.scrollHeight,
+        viewport: window.innerHeight
+      }));
 
-      for (let index = buttonCount - 1; index >= 0; index--) {
-        const button = buttons.nth(index);
-        const label = (await button.innerText().catch(() => "")).replace(/\s+/g, " ").trim();
-        if (!/^(더\s*보기|load\s*more|view\s*more)(?:\s*\/.*)?$/i.test(label)) continue;
+      const reachedBottom = after.y + after.viewport >= after.height - 24;
+      const didNotMove = Math.abs(after.y - previousY) < 2;
+      previousCount = newCount;
+      previousY = after.y;
 
-        try {
-          await button.scrollIntoViewIfNeeded();
-          await button.click({ timeout: 2500 });
-          await page.waitForTimeout(900);
-          const afterClick = await modelCount();
-          if (afterClick > beforeClick) {
-            expanded = true;
-            console.error("catalog rendered: clicked load more; models " + beforeClick + " -> " + afterClick);
-            break;
-          }
-        } catch {}
+      if (reachedBottom && stagnant >= 5) {
+        const buttons = page.locator("button:visible");
+        const count = await buttons.count();
+        let expanded = false;
+
+        for (let index = count - 1; index >= 0; index--) {
+          const button = buttons.nth(index);
+          const label = (await button.innerText().catch(() => "")).replace(/\s+/g, " ").trim();
+          if (!/^(더\s*보기|load\s*more|view\s*more)(?:\s*\/.*)?$/i.test(label)) continue;
+          try {
+            await button.click({ timeout: 1800 });
+            await page.waitForTimeout(700);
+            await collectVisibleProducts();
+            if (fragmentsByModel.size > newCount) {
+              expanded = true;
+              stagnant = 0;
+              console.error("catalog rendered: load-more expanded models " + newCount + " -> " + fragmentsByModel.size);
+              break;
+            }
+          } catch {}
+        }
+
+        if (!expanded) break;
       }
 
-      const count = await modelCount();
-      if (count === lastCount && !expanded) stableRounds += 1;
-      else stableRounds = 0;
-
-      lastCount = count;
-      if (stableRounds >= 3) break;
+      if (didNotMove && stagnant >= 8) break;
     }
 
-    console.error("catalog rendered: final model tokens=" + lastCount);
-    return await page.content();
+    console.error("catalog rendered: accumulated model cards=" + fragmentsByModel.size);
+    return [...fragmentsByModel.values()].join("\n\n");
   } finally {
     await page.close();
   }
 }
-
 async function closeCatalogBrowser() {
   if (catalogBrowser) {
     await catalogBrowser.close();
