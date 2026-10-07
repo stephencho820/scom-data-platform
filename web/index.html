@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Open, text-first Samsung.com data platform for agents and developers." />
+  <title>S.com Data Platform</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header>
+    <a class="brand" href="./">S.com Data Platform</a>
+    <nav>
+      <a href="#architecture">Architecture</a>
+      <a href="#markets">Markets</a>
+      <a href="#mcp">MCP</a>
+      <a href="https://github.com/stephencho820/scom-data-platform">GitHub</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">OPEN · TEXT-FIRST · AGENT-NATIVE</p>
+      <h1>Samsung.com,<br />as usable data.</h1>
+      <p class="lede">A zero-cost-first platform that discovers, normalizes, versions, and exposes public Samsung.com information for AI agents and developers.</p>
+      <div class="actions">
+        <a class="primary" href="#mcp">Use the MCP</a>
+        <a class="secondary" href="https://github.com/stephencho820/scom-data-platform/blob/main/docs/PRD.md">Read the PRD</a>
+      </div>
+    </section>
+
+    <section class="grid" id="architecture">
+      <article>
+        <span>01</span>
+        <h2>Discover</h2>
+        <p>Market-aware crawling starts from robots.txt and Samsung.com sitemaps.</p>
+      </article>
+      <article>
+        <span>02</span>
+        <h2>Normalize</h2>
+        <p>Pages become compact source-linked text records. Images are not mirrored.</p>
+      </article>
+      <article>
+        <span>03</span>
+        <h2>Version</h2>
+        <p>Current page data is replaced; meaningful product changes retain history.</p>
+      </article>
+      <article>
+        <span>04</span>
+        <h2>Serve</h2>
+        <p>Agents query the local dataset through MCP without another paid database.</p>
+      </article>
+    </section>
+
+    <section class="section" id="markets">
+      <div>
+        <p class="eyebrow">LIVE DATASET</p>
+        <h2>Market status</h2>
+      </div>
+      <div id="market-list" class="market-list"><p>Loading repository data…</p></div>
+    </section>
+
+    <section class="section mcp" id="mcp">
+      <div>
+        <p class="eyebrow">MODEL CONTEXT PROTOCOL</p>
+        <h2>Plug the data into an agent.</h2>
+        <p>Clone the repository, install dependencies, then run the stdio server. The MCP exposes market listing, search, exact-page retrieval, market comparison, and product history.</p>
+      </div>
+      <pre><code>git clone https://github.com/stephencho820/scom-data-platform.git
+cd scom-data-platform
+npm install
+npm run mcp</code></pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>Community project. Source records link back to Samsung.com.</p>
+    <p id="build-status">Git-backed · zero-cost-first</p>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>
