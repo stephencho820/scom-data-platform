@@ -174,41 +174,69 @@ function xmlLocs(xml) {
   });
 }
 
+async function mapLimit(items, limit, worker) {
+  const results = new Array(items.length);
+  let next = 0;
+
+  async function run() {
+    while (true) {
+      const index = next++;
+      if (index >= items.length) return;
+      results[index] = await worker(items[index], index);
+    }
+  }
+
+  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, () => run()));
+  return results;
+}
+
 async function discoverUrls(sitemapSeeds) {
-  const queue = [...new Set(sitemapSeeds)];
+  let frontier = [...new Set(sitemapSeeds)];
   const seenMaps = new Set();
   const urls = new Set();
   const failedSitemaps = [];
+  const concurrency = 8;
 
-  while (queue.length) {
-    const sitemapUrl = queue.shift();
-    if (!sitemapUrl || seenMaps.has(sitemapUrl)) continue;
-    seenMaps.add(sitemapUrl);
+  while (frontier.length) {
+    const current = frontier.filter((url) => url && !seenMaps.has(url));
+    frontier = [];
+    for (const url of current) seenMaps.add(url);
+    if (!current.length) continue;
 
-    try {
-      const { text } = await fetchText(sitemapUrl);
-      const locs = xmlLocs(text);
-      const isIndex = /<sitemapindex[\s>]/i.test(text);
+    const results = await mapLimit(current, concurrency, async (sitemapUrl) => {
+      try {
+        const { text } = await fetchText(sitemapUrl);
+        return {
+          sitemapUrl,
+          locs: xmlLocs(text),
+          isIndex: /<sitemapindex[\s>]/i.test(text)
+        };
+      } catch (error) {
+        failedSitemaps.push({ url: sitemapUrl, error: error.message });
+        console.error("sitemap failed: " + sitemapUrl + ": " + error.message);
+        return null;
+      }
+    });
 
-      if (isIndex) {
-        for (const loc of locs) {
+    for (const result of results.filter(Boolean)) {
+      if (result.isIndex) {
+        for (const loc of result.locs) {
           try {
             const candidate = new URL(loc);
-            if (candidate.origin === base.origin && !seenMaps.has(candidate.href)) queue.push(candidate.href);
+            if (candidate.origin === base.origin && !seenMaps.has(candidate.href)) frontier.push(candidate.href);
           } catch {}
         }
       } else {
-        for (const loc of locs) {
+        for (const loc of result.locs) {
           try {
             const candidate = new URL(loc);
             if (candidate.origin === base.origin && candidate.pathname.startsWith(marketPrefix)) urls.add(candidate.href);
           } catch {}
         }
       }
-    } catch (error) {
-      failedSitemaps.push({ url: sitemapUrl, error: error.message });
-      console.error("sitemap failed: " + sitemapUrl + ": " + error.message);
     }
+
+    frontier = [...new Set(frontier)];
   }
 
   return { urls: [...urls], sitemapCount: seenMaps.size, failedSitemaps };
