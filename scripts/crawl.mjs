@@ -1127,8 +1127,10 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
       captured_at: product.captured_at || capturedAt
     });
 
-    if (lifecycle.lifecycle_status === "current_unavailable" || lifecycle.commerce_eligible !== false) {
-      const currentUnavailable = lifecycle.lifecycle_status === "current_unavailable";
+    if (lifecycle.commerce_eligible !== false &&
+        lifecycle.lifecycle_status !== "legacy" &&
+        lifecycle.lifecycle_status !== "current_unavailable") {
+      const currentUnavailable = false;
       const offerCore = {
         market_product_key: product.key,
         market: marketCode,
@@ -1222,8 +1224,51 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
   };
 }
 
-async function appendChangedHistory(file, rows) {
-  const history = await readJsonl(file);
+function toProductHistoryRecord(product) {
+  const row = {
+    key: product.key,
+    market: product.market,
+    url: product.url || "",
+    name: product.name || "",
+    sku: product.sku || "",
+    model: product.model || "",
+    brand: product.brand || "Samsung",
+    specs: product.specs || [],
+    captured_at: product.captured_at || capturedAt
+  };
+  row.fingerprint = sha(JSON.stringify({
+    name: row.name,
+    sku: row.sku,
+    model: row.model,
+    brand: row.brand,
+    specs: row.specs
+  }));
+  return row;
+}
+
+function normalizeProductHistory(rows) {
+  const normalized = [];
+  const latest = new Map();
+
+  for (const item of rows) {
+    if (!item?.key) continue;
+    const row = toProductHistoryRecord(item);
+    if (latest.get(row.key) === row.fingerprint) continue;
+    normalized.push(row);
+    latest.set(row.key, row.fingerprint);
+  }
+
+  return normalized;
+}
+
+async function appendChangedHistory(file, rows, { pruneToCurrent = false } = {}) {
+  let history = await readJsonl(file);
+  const allowedKeys = new Set(rows.map((row) => row.market_product_key || row.key).filter(Boolean));
+
+  if (pruneToCurrent) {
+    history = history.filter((item) => allowedKeys.has(item.market_product_key || item.key));
+  }
+
   const latest = new Map();
   for (const item of history) {
     const key = item.market_product_key || item.key;
@@ -1458,13 +1503,14 @@ const productMap = new Map(existingProducts.map((product) => [product.key, produ
 for (const product of crawledProducts.values()) productMap.set(product.key, product);
 
 const historyFile = path.join(historyDir, marketCode + ".jsonl");
-const history = await readJsonl(historyFile);
+const history = normalizeProductHistory(await readJsonl(historyFile));
 const latestFingerprint = new Map();
 for (const item of history) latestFingerprint.set(item.key, item.fingerprint);
 for (const product of crawledProducts.values()) {
-  if (latestFingerprint.get(product.key) !== product.fingerprint) {
-    history.push(product);
-    latestFingerprint.set(product.key, product.fingerprint);
+  const historyRecord = toProductHistoryRecord(product);
+  if (latestFingerprint.get(historyRecord.key) !== historyRecord.fingerprint) {
+    history.push(historyRecord);
+    latestFingerprint.set(historyRecord.key, historyRecord.fingerprint);
   }
 }
 
@@ -1490,11 +1536,13 @@ await writeFile(path.join(martDir, "catalog_current.jsonl"), toJsonl(marts.curre
 
 const offerHistoryVersions = await appendChangedHistory(
   path.join(offerHistoryDir, marketCode + ".jsonl"),
-  marts.marketOffers
+  marts.marketOffers,
+  { pruneToCurrent: true }
 );
 const commerceHistoryVersions = await appendChangedHistory(
   path.join(commerceHistoryDir, marketCode + ".jsonl"),
-  marts.commerceOptions
+  marts.commerceOptions,
+  { pruneToCurrent: true }
 );
 
 await writeFile(path.join(currentDir, "pages.jsonl"), toJsonl(allPages));
