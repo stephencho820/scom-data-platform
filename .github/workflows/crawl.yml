@@ -1,0 +1,53 @@
+name: Crawl Samsung.com
+
+on:
+  workflow_dispatch:
+    inputs:
+      max_pages:
+        description: Pages per market
+        required: false
+        default: "80"
+  schedule:
+    - cron: "17 17 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scom-crawl
+  cancel-in-progress: false
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Crawl configured markets sequentially
+        env:
+          MAX_PAGES: ${{ github.event.inputs.max_pages || '80' }}
+        run: |
+          node -e "const c=require('./config/markets.json'); for(const m of c.markets) console.log(m.code)" > /tmp/markets.txt
+          while read -r market; do
+            echo "=== $market ==="
+            node scripts/crawl.mjs --market="$market" --max="$MAX_PAGES" --delay=700 || echo "Market $market failed; preserving previous files where possible."
+          done < /tmp/markets.txt
+
+      - name: Commit changed data
+        run: |
+          if git diff --quiet -- data; then
+            echo "No data changes."
+            exit 0
+          fi
+          git config user.name "scom-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data
+          git commit -m "data: refresh Samsung.com snapshots"
+          git push
