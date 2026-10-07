@@ -958,6 +958,8 @@ for (const source of catalogSourceDefs) {
     if (!/html/i.test(contentType) && !/<html[\s>]/i.test(html)) throw new Error("Catalog source was not HTML");
     const page = extractPage(html, finalUrl, source.url);
     catalogPages.push(page);
+    const rawModelMatches = [...String(html).matchAll(/SM-[A-Z0-9-]+/gi)];
+    console.error("catalog " + source.id + ": raw model tokens=" + new Set(rawModelMatches.map((match) => match[0].toUpperCase())).size);
     const rows = parseCatalogListing(html, source);
     for (const row of rows) catalogRows.push(row);
     successfulCatalogSources.add(source.id);
