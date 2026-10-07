@@ -1,8 +1,8 @@
 {
   "market": "kr",
   "base_url": "https://www.samsung.com/sec/",
-  "captured_at": "2026-10-07T14:53:38.182Z",
-  "inventory_updated_at": "2026-10-07T14:53:38.182Z",
+  "captured_at": "2026-10-07T14:59:29.030Z",
+  "inventory_updated_at": "2026-10-07T14:59:29.030Z",
   "sitemap_count": 8,
   "failed_sitemaps": 0,
   "discovered_urls_total": 16827,
@@ -13,16 +13,16 @@
   "batch_requested": 12,
   "batch_success": 14,
   "failures": 0,
-  "coverage_urls": 188,
-  "coverage_pages": 188,
-  "coverage_percent": 2.53,
-  "pages_written": 108,
+  "coverage_urls": 200,
+  "coverage_pages": 200,
+  "coverage_percent": 2.69,
+  "pages_written": 110,
   "products_written": 309,
-  "history_versions": 346,
+  "history_versions": 310,
   "marts": {
     "product_master": 275,
     "product_specs": 275,
-    "market_offers": 241,
+    "market_offers": 166,
     "commerce_options": 166,
     "support_resources": 4,
     "taxonomy": 8,
@@ -37,7 +37,7 @@
     },
     "catalog_sources_ok": 2,
     "catalog_sources_failed": 0,
-    "offer_history_versions": 434,
-    "commerce_history_versions": 173
+    "offer_history_versions": 324,
+    "commerce_history_versions": 172
   }
 }
