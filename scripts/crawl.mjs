@@ -527,14 +527,198 @@ function chooseBatch(urls, visitedUrls, previousCursor, requestedBatch) {
   return { selected, nextCursor: (cursor + scanned) % urls.length, wrapped: cursor + scanned >= urls.length };
 }
 
+function supportType(url) {
+  const value = String(url || "").toLowerCase();
+  if (value.includes("manual")) return "manual";
+  if (value.includes("download")) return "download";
+  if (value.includes("warranty")) return "warranty";
+  if (value.includes("repair")) return "repair";
+  return "support";
+}
+
+function pageForProduct(product, pages) {
+  const direct = pages.find((page) =>
+    page.canonical_url === product.url ||
+    page.url === product.url ||
+    page.discovered_url === product.url
+  );
+  if (direct) return direct;
+
+  const identity = String(product.sku || product.model || "").toLowerCase();
+  if (!identity) return null;
+  return pages.find((page) =>
+    String(page.url || "").toLowerCase().includes(identity) ||
+    String(page.canonical_url || "").toLowerCase().includes(identity) ||
+    String(page.title || "").toLowerCase().includes(identity)
+  ) || null;
+}
+
+function buildDataMarts(pages, products) {
+  const productMaster = [];
+  const productSpecs = [];
+  const marketOffers = [];
+  const commerceOptions = [];
+  const taxonomyMap = new Map();
+
+  for (const product of products) {
+    const page = pageForProduct(product, pages);
+    const sourceUrl = product.url || page?.canonical_url || page?.url || market.baseUrl;
+    const categoryPath = categoryPathFromUrl(sourceUrl);
+    const isDetail = /\/buy\//i.test(sourceUrl) ||
+      (!!product.sku && String(sourceUrl).toLowerCase().includes(product.sku.toLowerCase())) ||
+      (!!product.model && String(sourceUrl).toLowerCase().includes(product.model.toLowerCase()));
+    const commerce = page && isDetail ? extractCommerce(page) : {
+      purchase_methods: [],
+      subscriptions: [],
+      trade_in: [],
+      protection: [],
+      delivery: [],
+      installation: [],
+      haul_away: [],
+      bundles: [],
+      membership: [],
+      promotions: []
+    };
+
+    productMaster.push({
+      market_product_key: product.key,
+      market: marketCode,
+      audience: audienceFromUrl(sourceUrl),
+      name: product.name || "",
+      sku: product.sku || "",
+      model: product.model || "",
+      brand: product.brand || "Samsung",
+      category_path: categoryPath,
+      product_url: sourceUrl,
+      source_urls: [...new Set([sourceUrl, page?.canonical_url, page?.url].filter(Boolean))],
+      captured_at: product.captured_at || page?.captured_at || capturedAt
+    });
+
+    productSpecs.push({
+      market_product_key: product.key,
+      market: marketCode,
+      sku: product.sku || "",
+      model: product.model || "",
+      specs: product.specs || [],
+      source_url: sourceUrl,
+      captured_at: product.captured_at || capturedAt
+    });
+
+    const offerCore = {
+      market_product_key: product.key,
+      market: marketCode,
+      price: product.offers?.price ?? "",
+      currency: product.offers?.currency ?? "",
+      availability: product.offers?.availability ?? "",
+      purchase_url: sourceUrl,
+      promotions: commerce.promotions,
+      captured_at: product.captured_at || capturedAt
+    };
+    offerCore.fingerprint = sha(JSON.stringify({
+      price: offerCore.price,
+      currency: offerCore.currency,
+      availability: offerCore.availability,
+      promotions: offerCore.promotions.map(({ type, label, evidence }) => ({ type, label, evidence }))
+    }));
+    marketOffers.push(offerCore);
+
+    const commerceCore = {
+      market_product_key: product.key,
+      market: marketCode,
+      purchase_methods: commerce.purchase_methods,
+      subscriptions: commerce.subscriptions,
+      trade_in: commerce.trade_in,
+      protection: commerce.protection,
+      delivery: commerce.delivery,
+      installation: commerce.installation,
+      haul_away: commerce.haul_away,
+      bundles: commerce.bundles,
+      membership: commerce.membership,
+      source_url: sourceUrl,
+      captured_at: page?.captured_at || product.captured_at || capturedAt
+    };
+    commerceCore.fingerprint = sha(JSON.stringify({
+      purchase_methods: commerceCore.purchase_methods,
+      subscriptions: commerceCore.subscriptions,
+      trade_in: commerceCore.trade_in,
+      protection: commerceCore.protection,
+      delivery: commerceCore.delivery,
+      installation: commerceCore.installation,
+      haul_away: commerceCore.haul_away,
+      bundles: commerceCore.bundles,
+      membership: commerceCore.membership
+    }));
+    commerceOptions.push(commerceCore);
+
+    if (categoryPath.length) {
+      const key = categoryPath.join(" > ");
+      if (!taxonomyMap.has(key)) {
+        taxonomyMap.set(key, {
+          taxonomy_key: sha(marketCode + "|" + key.toLowerCase()).slice(0, 24),
+          market: marketCode,
+          path: categoryPath,
+          source_url: sourceUrl,
+          captured_at: product.captured_at || capturedAt
+        });
+      }
+    }
+  }
+
+  const supportResources = pages
+    .filter((page) => /\/support\/|manual|download|warranty|repair/i.test(page.canonical_url || page.url || ""))
+    .map((page) => ({
+      support_key: page.id,
+      market: marketCode,
+      type: supportType(page.canonical_url || page.url),
+      title: page.title || "",
+      description: page.description || "",
+      source_url: page.canonical_url || page.url,
+      captured_at: page.captured_at
+    }));
+
+  return {
+    productMaster,
+    productSpecs,
+    marketOffers,
+    commerceOptions,
+    supportResources,
+    taxonomy: [...taxonomyMap.values()]
+  };
+}
+
+async function appendChangedHistory(file, rows) {
+  const history = await readJsonl(file);
+  const latest = new Map();
+  for (const item of history) {
+    const key = item.market_product_key || item.key;
+    if (key) latest.set(key, item.fingerprint || "");
+  }
+  for (const row of rows) {
+    const key = row.market_product_key || row.key;
+    if (!key) continue;
+    if (latest.get(key) !== row.fingerprint) {
+      history.push(row);
+      latest.set(key, row.fingerprint);
+    }
+  }
+  await writeFile(file, toJsonl(history));
+  return history.length;
+}
+
 const currentDir = path.join(ROOT, "data/current", marketCode);
 const historyDir = path.join(ROOT, "data/history/products");
+const offerHistoryDir = path.join(ROOT, "data/history/offers");
+const commerceHistoryDir = path.join(ROOT, "data/history/commerce_options");
+const martDir = path.join(ROOT, "data/marts", marketCode);
 const manifestDir = path.join(ROOT, "data/manifests");
 const manifestFile = path.join(manifestDir, marketCode + ".json");
 const metaFile = path.join(currentDir, "meta.json");
 
 await mkdir(currentDir, { recursive: true });
 await mkdir(historyDir, { recursive: true });
+await mkdir(offerHistoryDir, { recursive: true });
+await mkdir(commerceHistoryDir, { recursive: true });
+await mkdir(martDir, { recursive: true });
 await mkdir(manifestDir, { recursive: true });
 
 const existingPages = await readJsonl(path.join(currentDir, "pages.jsonl"));
@@ -717,6 +901,23 @@ await writeFile(manifestFile, JSON.stringify(manifest, null, 2) + "\n");
 
 const coveragePercent = targetUrls.length ? Math.round((visitedUrls.size / targetUrls.length) * 10000) / 100 : 0;
 
+const marts = buildDataMarts(allPages, allProducts);
+await writeFile(path.join(martDir, "product_master.jsonl"), toJsonl(marts.productMaster));
+await writeFile(path.join(martDir, "product_specs.jsonl"), toJsonl(marts.productSpecs));
+await writeFile(path.join(martDir, "market_offers.jsonl"), toJsonl(marts.marketOffers));
+await writeFile(path.join(martDir, "commerce_options.jsonl"), toJsonl(marts.commerceOptions));
+await writeFile(path.join(martDir, "support_resources.jsonl"), toJsonl(marts.supportResources));
+await writeFile(path.join(martDir, "taxonomy.jsonl"), toJsonl(marts.taxonomy));
+
+const offerHistoryVersions = await appendChangedHistory(
+  path.join(offerHistoryDir, marketCode + ".jsonl"),
+  marts.marketOffers
+);
+const commerceHistoryVersions = await appendChangedHistory(
+  path.join(commerceHistoryDir, marketCode + ".jsonl"),
+  marts.commerceOptions
+);
+
 await writeFile(path.join(currentDir, "pages.jsonl"), toJsonl(allPages));
 await writeFile(path.join(currentDir, "products.jsonl"), toJsonl(allProducts));
 await writeFile(historyFile, toJsonl(history));
@@ -740,7 +941,17 @@ await writeFile(metaFile, JSON.stringify({
   coverage_percent: coveragePercent,
   pages_written: allPages.length,
   products_written: allProducts.length,
-  history_versions: history.length
+  history_versions: history.length,
+  marts: {
+    product_master: marts.productMaster.length,
+    product_specs: marts.productSpecs.length,
+    market_offers: marts.marketOffers.length,
+    commerce_options: marts.commerceOptions.length,
+    support_resources: marts.supportResources.length,
+    taxonomy: marts.taxonomy.length,
+    offer_history_versions: offerHistoryVersions,
+    commerce_history_versions: commerceHistoryVersions
+  }
 }, null, 2) + "\n");
 
-console.error("done: " + marketCode + ": " + crawledPages.length + "/" + selected.length + " batch pages ok; " + allPages.length + " total unique pages stored; " + visitedUrls.size + "/" + targetUrls.length + " mart target URLs visited (" + coveragePercent + "%); " + allProducts.length + " products; " + failures + " failures");
+console.error("done: " + marketCode + ": " + crawledPages.length + "/" + selected.length + " batch pages ok; " + allPages.length + " total unique pages stored; " + visitedUrls.size + "/" + targetUrls.length + " mart target URLs visited (" + coveragePercent + "%); " + allProducts.length + " products; " + marts.commerceOptions.length + " commerce mart rows; " + failures + " failures");
