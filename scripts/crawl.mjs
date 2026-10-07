@@ -64,6 +64,59 @@ async function readJsonl(file) {
 
 const toJsonl = (rows) => rows.map((row) => JSON.stringify(row)).join("\n") + (rows.length ? "\n" : "");
 
+let catalogBrowser = null;
+
+async function renderCatalogHtml(url) {
+  const chromePath = process.env.CHROME_PATH || "";
+  if (!chromePath) throw new Error("CHROME_PATH is not configured for rendered catalog fallback");
+
+  const { chromium } = await import("playwright-core");
+  if (!catalogBrowser) {
+    catalogBrowser = await chromium.launch({
+      headless: true,
+      executablePath: chromePath,
+      args: ["--no-sandbox", "--disable-dev-shm-usage"]
+    });
+  }
+
+  const page = await catalogBrowser.newPage({
+    userAgent: USER_AGENT,
+    viewport: { width: 1440, height: 1400 }
+  });
+
+  try {
+    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 45000 });
+    await page.waitForTimeout(2500);
+
+    let lastCount = -1;
+    let stableRounds = 0;
+    for (let round = 0; round < 12; round++) {
+      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+      await page.waitForTimeout(900);
+
+      const count = await page.locator("body").innerText()
+        .then((text) => new Set(text.match(/SM-[A-Z0-9-]+/gi) || []).size)
+        .catch(() => 0);
+
+      if (count === lastCount) stableRounds += 1;
+      else stableRounds = 0;
+      lastCount = count;
+      if (stableRounds >= 2) break;
+    }
+
+    return await page.content();
+  } finally {
+    await page.close();
+  }
+}
+
+async function closeCatalogBrowser() {
+  if (catalogBrowser) {
+    await catalogBrowser.close();
+    catalogBrowser = null;
+  }
+}
+
 async function fetchText(url) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
@@ -960,7 +1013,14 @@ for (const source of catalogSourceDefs) {
     catalogPages.push(page);
     const rawModelMatches = [...String(html).matchAll(/SM-[A-Z0-9-]+/gi)];
     console.error("catalog " + source.id + ": raw model tokens=" + new Set(rawModelMatches.map((match) => match[0].toUpperCase())).size);
-    const rows = parseCatalogListing(html, source);
+
+    let rows = parseCatalogListing(html, source);
+    if (!rows.length) {
+      console.error("catalog " + source.id + ": static HTML has no product cards; using rendered fallback");
+      const renderedHtml = await renderCatalogHtml(source.url);
+      rows = parseCatalogListing(renderedHtml, source);
+    }
+
     for (const row of rows) catalogRows.push(row);
     successfulCatalogSources.add(source.id);
     console.error("catalog " + source.id + ": " + rows.length + " current products");
@@ -969,6 +1029,8 @@ for (const source of catalogSourceDefs) {
     console.error("catalog failed: " + source.url + ": " + error.message);
   }
 }
+
+await closeCatalogBrowser();
 
 const lifecycleFor = buildLifecycleResolver(catalogRows, successfulCatalogSources);
 
