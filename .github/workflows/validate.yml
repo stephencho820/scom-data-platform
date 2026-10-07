@@ -1,0 +1,39 @@
+name: Validate project
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "package.json"
+      - "scripts/**"
+      - "src/**"
+      - "config/**"
+      - ".github/workflows/validate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check scripts/crawl.mjs
+          node --check src/mcp/server.mjs
+          node -e "JSON.parse(require('fs').readFileSync('config/markets.json','utf8')); console.log('markets.json ok')"
+
+      - name: Install MCP dependencies
+        run: npm install --ignore-scripts --no-audit --no-fund
+
+      - name: Verify MCP SDK imports
+        run: |
+          node -e "Promise.all([import('@modelcontextprotocol/server'), import('@modelcontextprotocol/server/stdio'), import('zod/v4')]).then(()=>console.log('MCP imports ok'))"
