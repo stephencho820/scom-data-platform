@@ -1,10 +1,20 @@
 {
   "market": "uk",
   "base_url": "https://www.samsung.com/uk/",
-  "captured_at": "2026-10-07T06:46:24.131Z",
-  "requested_urls": 12,
-  "pages_written": 12,
-  "products_written": 41,
+  "captured_at": "2026-10-07T09:29:28.895Z",
+  "inventory_updated_at": "2026-10-07T09:29:28.895Z",
+  "sitemap_count": 13,
+  "failed_sitemaps": 0,
+  "discovered_urls_total": 74839,
+  "crawlable_urls_total": 74782,
+  "crawl_cursor": 0,
+  "crawl_cycle": 0,
+  "batch_requested": 12,
+  "batch_success": 12,
   "failures": 0,
-  "history_versions": 41
+  "coverage_pages": 20,
+  "coverage_percent": 0.03,
+  "pages_written": 16,
+  "products_written": 43,
+  "history_versions": 43
 }
