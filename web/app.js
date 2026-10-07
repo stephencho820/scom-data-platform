@@ -119,8 +119,6 @@ function historyChangeList(current, previous) {
     ["Name", current.name || "", previous.name || ""],
     ["Model", current.model || "", previous.model || ""],
     ["SKU", current.sku || "", previous.sku || ""],
-    ["Price", formatPrice(current.offers), formatPrice(previous.offers)],
-    ["Availability", availabilityLabel(current.offers?.availability), availabilityLabel(previous.offers?.availability)],
     ["Source", current.url || "", previous.url || ""]
   ];
 
@@ -265,8 +263,7 @@ async function loadExplorer() {
         const master = masterResponse?.ok ? parseJsonl(await masterResponse.text()) : [];
         const lifecycle = new Map(master.map((product) => [product.market_product_key, product.lifecycle_status]));
         rows = groupHistoryRecords(parsedRows)
-          .map((group) => ({ ...group, lifecycle_status: lifecycle.get(group.key) || "unverified" }))
-          .filter((group) => group.lifecycle_status !== "legacy");
+          .map((group) => ({ ...group, lifecycle_status: lifecycle.get(group.key) || "unverified" }));
       }
 
       explorer.cache.set(key, { rows, meta, versionCount: parsedRows.length });
@@ -354,7 +351,6 @@ function renderExplorer() {
     if (explorer.dataset === "history") {
       const latest = row.latest || {};
       const first = row.first || latest;
-      const price = formatPrice(latest.offers);
       const latestChanges = row.versions.length > 1
         ? historyChangeList(latest, row.versions[row.versions.length - 2]).length
         : 0;
@@ -365,12 +361,11 @@ function renderExplorer() {
       return `
         <button class="result-row" type="button" data-result-index="${index}">
           <div class="result-main">
-            <div class="result-kicker">History · ${escapeHtml(latest.market?.toUpperCase() || explorer.market.toUpperCase())}</div>
+            <div class="result-kicker">History · ${escapeHtml(latest.market?.toUpperCase() || explorer.market.toUpperCase())} · ${escapeHtml((row.lifecycle_status || "unverified").replaceAll("_", " "))}</div>
             <h3 class="result-title">${escapeHtml(latest.name || latest.model || latest.sku || "Unnamed product")}</h3>
             <p class="result-description">${escapeHtml(range)}</p>
           </div>
           <div class="result-side">
-            ${price ? `<span class="result-price">${escapeHtml(price)}</span>` : ""}
             <span class="history-version-count">${row.versions.length} version${row.versions.length === 1 ? "" : "s"}</span>
             <span class="result-meta">${row.versions.length > 1 ? `${latestChanges} latest change${latestChanges === 1 ? "" : "s"}` : "Waiting for next change"}</span>
             <span class="result-arrow">↗</span>
@@ -500,16 +495,12 @@ function openHistoryDetail(group) {
   const timeline = versions.map((version, index) => {
     const previous = index === versions.length - 1 ? null : versions[index + 1];
     const changes = historyChangeList(version, previous);
-    const price = formatPrice(version.offers);
-    const availability = availabilityLabel(version.offers?.availability);
-
     return `
       <div class="history-entry">
         <div class="history-date">${escapeHtml(formatCaptured(version.captured_at))}</div>
         <div class="history-content">
           <div class="history-headline">
-            ${price ? `<span class="history-price">${escapeHtml(price)}</span>` : ""}
-            ${availability ? `<span class="history-status">${escapeHtml(availability)}</span>` : ""}
+            <span class="history-status">Identity / spec version</span>
           </div>
           <div class="change-list">
             ${changes.length
@@ -532,8 +523,8 @@ function openHistoryDetail(group) {
         <span>Change events</span>
       </div>
       <div class="history-stat">
-        <strong>${escapeHtml(formatPrice(latest.offers) || "—")}</strong>
-        <span>Latest price</span>
+        <strong>${escapeHtml((group.lifecycle_status || "unverified").replaceAll("_", " "))}</strong>
+        <span>Lifecycle</span>
       </div>
     </div>
 
@@ -547,7 +538,7 @@ function openHistoryDetail(group) {
     </div>
 
     ${versions.length === 1
-      ? '<div class="history-note">Only the initial version exists right now. A new version will be added automatically when a future crawl detects a changed product fingerprint, such as a price, availability, name, model, SKU, or other normalized product field.</div>'
+      ? '<div class="history-note">Only the initial identity/spec version exists right now. Price and commerce history are kept separate and are exposed only for products verified as currently sellable.</div>'
       : ""}
 
     <div class="history-timeline">${timeline}</div>
