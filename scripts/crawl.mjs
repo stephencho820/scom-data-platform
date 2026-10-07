@@ -24,6 +24,8 @@ const discoverOnly = process.argv.includes("--discover-only") || batchPages === 
 
 const registry = JSON.parse(await readFile(path.join(ROOT, "config/markets.json"), "utf8"));
 const crawlScope = JSON.parse(await readFile(path.join(ROOT, "config/crawl-scope.json"), "utf8"));
+const catalogRegistry = JSON.parse(await readFile(path.join(ROOT, "config/catalog-sources.json"), "utf8"));
+const catalogSourceDefs = catalogRegistry.markets?.[marketCode] || [];
 const market = registry.markets.find((item) => item.code === marketCode);
 if (!market) throw new Error("Unknown market: " + marketCode);
 
@@ -430,6 +432,166 @@ function targetPriority(url) {
   return -score;
 }
 
+function catalogTextLines(html) {
+  return decode(
+    String(html || "")
+      .replace(/<(?:br|hr)\b[^>]*>/gi, "\n")
+      .replace(/<\/(?:div|li|p|section|article|h[1-6]|button|a|span)>/gi, "\n")
+      .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
+      .replace(/<[^>]+>/g, " ")
+  )
+    .split(/\n+/)
+    .map((line) => line.replace(/\s+/g, " ").trim())
+    .filter(Boolean);
+}
+
+function plausibleCatalogName(line) {
+  const value = String(line || "").trim();
+  if (!value || value.length < 3 || value.length > 120) return false;
+  if (/^(?:NEW|Image:|선택됨|블루투스|LTE|자급제|구매하기|더 알아보기|비교하기|혜택가|기준가|최대 혜택가|적립 예정 포인트)$/i.test(value)) return false;
+  if (/^[0-9,.]+\s*(?:원|GB|TB|mm|%|P)?$/i.test(value)) return false;
+  if (/^(?:색상|컬러|스토리지|저장 용량|연결 방식|평점|리뷰수)/i.test(value)) return false;
+  return /[A-Za-z가-힣]/.test(value);
+}
+
+function priceFromCatalogWindow(text) {
+  const patterns = [
+    /(?:최대\s*)?혜택가.{0,80}?([0-9][0-9,]{2,})\s*원/i,
+    /(?:판매가|가격).{0,80}?([0-9][0-9,]{2,})\s*원/i,
+    /([0-9][0-9,]{3,})\s*원/i
+  ];
+  for (const pattern of patterns) {
+    const match = text.match(pattern);
+    if (match) return match[1].replaceAll(",", "");
+  }
+  return "";
+}
+
+function parseCatalogListing(html, source) {
+  const lines = catalogTextLines(html);
+  const pattern = new RegExp(source.model_pattern || "SM-[A-Z0-9-]+", "i");
+  const rows = [];
+  const seen = new Set();
+
+  for (let index = 0; index < lines.length; index++) {
+    const modelMatch = lines[index].match(pattern);
+    if (!modelMatch) continue;
+    const modelCode = modelMatch[0].toUpperCase();
+    if (seen.has(modelCode)) continue;
+
+    let name = "";
+    for (let offset = 1; offset <= 10; offset++) {
+      const candidate = lines[index - offset];
+      if (plausibleCatalogName(candidate)) {
+        name = candidate;
+        break;
+      }
+    }
+    if (!name) name = modelCode;
+
+    const window = lines.slice(Math.max(0, index - 4), Math.min(lines.length, index + 28)).join(" ");
+    const unavailable = /품절|일시품절|재고\s*없음|out of stock|sold out/i.test(window);
+    const hasBuyAction = /구매하기|buy now|add to cart/i.test(window);
+    const lifecycleStatus = hasBuyAction && !unavailable ? "current_sellable" : "current_unavailable";
+    const price = lifecycleStatus === "current_sellable" ? priceFromCatalogWindow(window) : "";
+
+    const key = sha(marketCode + "|" + modelCode.toLowerCase()).slice(0, 24);
+    rows.push({
+      key,
+      market: marketCode,
+      url: source.url,
+      name,
+      sku: modelCode,
+      model: modelCode,
+      brand: "Samsung",
+      offers: {
+        price,
+        currency: marketCode === "kr" ? "KRW" : "",
+        availability: lifecycleStatus === "current_sellable"
+          ? "https://schema.org/InStock"
+          : "https://schema.org/OutOfStock"
+      },
+      specs: [],
+      captured_at: capturedAt,
+      catalog_source_id: source.id,
+      catalog_source_url: source.url,
+      catalog_category: source.category,
+      lifecycle_status: lifecycleStatus,
+      catalog_verified_at: capturedAt
+    });
+    rows[rows.length - 1].fingerprint = sha(JSON.stringify({
+      name: rows[rows.length - 1].name,
+      sku: rows[rows.length - 1].sku,
+      offers: rows[rows.length - 1].offers,
+      lifecycle_status: lifecycleStatus
+    }));
+    seen.add(modelCode);
+  }
+
+  return rows;
+}
+
+function productCatalogCategory(product) {
+  const value = String(product?.url || "").toLowerCase();
+  if (value.includes("/smartphones/")) return "smartphones";
+  if (value.includes("/watches/") || value.includes("/galaxy-watch/")) return "watches";
+  return "";
+}
+
+function buildLifecycleResolver(catalogRows, successfulCatalogSources) {
+  const byIdentity = new Map();
+  for (const row of catalogRows) {
+    for (const identity of [row.sku, row.model]) {
+      const normalized = String(identity || "").trim().toLowerCase();
+      if (normalized) byIdentity.set(normalized, row);
+    }
+  }
+  const coveredCategories = new Set(
+    catalogSourceDefs
+      .filter((source) => successfulCatalogSources.has(source.id))
+      .map((source) => source.category)
+  );
+
+  return (product) => {
+    for (const identity of [product.sku, product.model]) {
+      const normalized = String(identity || "").trim().toLowerCase();
+      if (normalized && byIdentity.has(normalized)) {
+        const catalog = byIdentity.get(normalized);
+        return {
+          lifecycle_status: catalog.lifecycle_status,
+          catalog_current: true,
+          sellable: catalog.lifecycle_status === "current_sellable",
+          catalog_source_id: catalog.catalog_source_id,
+          catalog_source_url: catalog.catalog_source_url,
+          catalog_verified_at: catalog.catalog_verified_at
+        };
+      }
+    }
+
+    const category = productCatalogCategory(product);
+    if (category && coveredCategories.has(category)) {
+      return {
+        lifecycle_status: "legacy",
+        catalog_current: false,
+        sellable: false,
+        catalog_source_id: "",
+        catalog_source_url: "",
+        catalog_verified_at: capturedAt
+      };
+    }
+
+    return {
+      lifecycle_status: "unverified",
+      catalog_current: null,
+      sellable: null,
+      catalog_source_id: "",
+      catalog_source_url: "",
+      catalog_verified_at: null
+    };
+  };
+}
+
 function findProductObjects(value, out = []) {
   if (!value || typeof value !== "object") return out;
   if (Array.isArray(value)) {
@@ -586,7 +748,7 @@ function pageForProduct(product, pages) {
   ) || null;
 }
 
-function buildDataMarts(pages, products) {
+function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
   const productMaster = [];
   const productSpecs = [];
   const marketOffers = [];
@@ -597,10 +759,13 @@ function buildDataMarts(pages, products) {
     const page = pageForProduct(product, pages);
     const sourceUrl = product.url || page?.canonical_url || page?.url || market.baseUrl;
     const categoryPath = categoryPathFromUrl(sourceUrl);
+    const lifecycle = lifecycleFor(product);
     const isDetail = /\/buy\//i.test(sourceUrl) ||
       (!!product.sku && String(sourceUrl).toLowerCase().includes(product.sku.toLowerCase())) ||
       (!!product.model && String(sourceUrl).toLowerCase().includes(product.model.toLowerCase()));
-    const commerce = page && isDetail ? extractCommerce(page, sourceUrl) : {
+    const commerce = page && isDetail && lifecycle.lifecycle_status !== "legacy" && lifecycle.lifecycle_status !== "current_unavailable"
+      ? extractCommerce(page, sourceUrl)
+      : {
       purchase_methods: [],
       subscriptions: [],
       trade_in: [],
@@ -624,6 +789,12 @@ function buildDataMarts(pages, products) {
       category_path: categoryPath,
       product_url: sourceUrl,
       source_urls: [...new Set([sourceUrl, page?.canonical_url, page?.url].filter(Boolean))],
+      lifecycle_status: lifecycle.lifecycle_status,
+      catalog_current: lifecycle.catalog_current,
+      sellable: lifecycle.sellable,
+      catalog_source_id: lifecycle.catalog_source_id,
+      catalog_source_url: lifecycle.catalog_source_url,
+      catalog_verified_at: lifecycle.catalog_verified_at,
       captured_at: product.captured_at || page?.captured_at || capturedAt
     });
 
@@ -637,23 +808,30 @@ function buildDataMarts(pages, products) {
       captured_at: product.captured_at || capturedAt
     });
 
-    const offerCore = {
-      market_product_key: product.key,
-      market: marketCode,
-      price: product.offers?.price ?? "",
-      currency: product.offers?.currency ?? "",
-      availability: product.offers?.availability ?? "",
-      purchase_url: sourceUrl,
-      promotions: commerce.promotions,
-      captured_at: product.captured_at || capturedAt
-    };
-    offerCore.fingerprint = sha(JSON.stringify({
-      price: offerCore.price,
-      currency: offerCore.currency,
-      availability: offerCore.availability,
-      promotions: offerCore.promotions.map(({ type, label, evidence }) => ({ type, label, evidence }))
-    }));
-    marketOffers.push(offerCore);
+    if (lifecycle.lifecycle_status !== "legacy") {
+      const currentUnavailable = lifecycle.lifecycle_status === "current_unavailable";
+      const offerCore = {
+        market_product_key: product.key,
+        market: marketCode,
+        lifecycle_status: lifecycle.lifecycle_status,
+        price: currentUnavailable ? "" : (product.offers?.price ?? ""),
+        currency: currentUnavailable ? (product.offers?.currency ?? "") : (product.offers?.currency ?? ""),
+        availability: currentUnavailable
+          ? "https://schema.org/OutOfStock"
+          : (product.offers?.availability ?? ""),
+        purchase_url: sourceUrl,
+        promotions: currentUnavailable ? [] : commerce.promotions,
+        captured_at: product.captured_at || capturedAt
+      };
+      offerCore.fingerprint = sha(JSON.stringify({
+        lifecycle_status: offerCore.lifecycle_status,
+        price: offerCore.price,
+        currency: offerCore.currency,
+        availability: offerCore.availability,
+        promotions: offerCore.promotions.map(({ type, label, evidence }) => ({ type, label, evidence }))
+      }));
+      marketOffers.push(offerCore);
+    }
 
     const commerceCore = {
       market_product_key: product.key,
@@ -670,6 +848,7 @@ function buildDataMarts(pages, products) {
       source_url: sourceUrl,
       captured_at: page?.captured_at || product.captured_at || capturedAt
     };
+    commerceCore.lifecycle_status = lifecycle.lifecycle_status;
     commerceCore.fingerprint = sha(JSON.stringify({
       purchase_methods: commerceCore.purchase_methods,
       subscriptions: commerceCore.subscriptions,
@@ -681,7 +860,9 @@ function buildDataMarts(pages, products) {
       bundles: commerceCore.bundles,
       membership: commerceCore.membership
     }));
-    commerceOptions.push(commerceCore);
+    if (lifecycle.lifecycle_status !== "legacy" && lifecycle.lifecycle_status !== "current_unavailable") {
+      commerceOptions.push(commerceCore);
+    }
 
     if (categoryPath.length) {
       const key = categoryPath.join(" > ");
@@ -715,7 +896,8 @@ function buildDataMarts(pages, products) {
     marketOffers,
     commerceOptions,
     supportResources,
-    taxonomy: [...taxonomyMap.values()]
+    taxonomy: [...taxonomyMap.values()],
+    currentCatalog: catalogRows
   };
 }
 
@@ -764,6 +946,29 @@ for (const product of existingProducts) {
 }
 const existingMeta = await readJson(metaFile, {});
 const previousManifest = await readJson(manifestFile, { cursor: 0, cycle: 0, visited_urls: [] });
+
+const catalogRows = [];
+const catalogPages = [];
+const successfulCatalogSources = new Set();
+const failedCatalogSources = [];
+
+for (const source of catalogSourceDefs) {
+  try {
+    const { text: html, finalUrl, contentType } = await fetchText(source.url);
+    if (!/html/i.test(contentType) && !/<html[\s>]/i.test(html)) throw new Error("Catalog source was not HTML");
+    const page = extractPage(html, finalUrl, source.url);
+    catalogPages.push(page);
+    const rows = parseCatalogListing(html, source);
+    for (const row of rows) catalogRows.push(row);
+    successfulCatalogSources.add(source.id);
+    console.error("catalog " + source.id + ": " + rows.length + " current products");
+  } catch (error) {
+    failedCatalogSources.push({ id: source.id, url: source.url, error: error.message });
+    console.error("catalog failed: " + source.url + ": " + error.message);
+  }
+}
+
+const lifecycleFor = buildLifecycleResolver(catalogRows, successfulCatalogSources);
 
 const robotsUrl = new URL("/robots.txt", base).href;
 let robots = { sitemaps: [], disallow: [], allow: [] };
@@ -884,8 +1089,8 @@ if (!selected.length) throw new Error("No URLs selected for crawl for " + market
 
 console.error("inventory: " + marketCode + ": " + targetUrls.length + " mart target URLs from " + crawlableUrls.length + " crawlable URLs; crawling batch of " + selected.length);
 
-const crawledPages = [];
-const crawledProducts = new Map();
+const crawledPages = [...catalogPages];
+const crawledProducts = new Map(catalogRows.map((product) => [product.key, product]));
 const successfulUrls = new Set();
 let failures = 0;
 
@@ -940,13 +1145,14 @@ await writeFile(manifestFile, JSON.stringify(manifest, null, 2) + "\n");
 
 const coveragePercent = targetUrls.length ? Math.round((visitedUrls.size / targetUrls.length) * 10000) / 100 : 0;
 
-const marts = buildDataMarts(allPages, allProducts);
+const marts = buildDataMarts(allPages, allProducts, lifecycleFor, catalogRows);
 await writeFile(path.join(martDir, "product_master.jsonl"), toJsonl(marts.productMaster));
 await writeFile(path.join(martDir, "product_specs.jsonl"), toJsonl(marts.productSpecs));
 await writeFile(path.join(martDir, "market_offers.jsonl"), toJsonl(marts.marketOffers));
 await writeFile(path.join(martDir, "commerce_options.jsonl"), toJsonl(marts.commerceOptions));
 await writeFile(path.join(martDir, "support_resources.jsonl"), toJsonl(marts.supportResources));
 await writeFile(path.join(martDir, "taxonomy.jsonl"), toJsonl(marts.taxonomy));
+await writeFile(path.join(martDir, "catalog_current.jsonl"), toJsonl(marts.currentCatalog));
 
 const offerHistoryVersions = await appendChangedHistory(
   path.join(offerHistoryDir, marketCode + ".jsonl"),
@@ -988,6 +1194,15 @@ await writeFile(metaFile, JSON.stringify({
     commerce_options: marts.commerceOptions.length,
     support_resources: marts.supportResources.length,
     taxonomy: marts.taxonomy.length,
+    catalog_current: marts.currentCatalog.length,
+    lifecycle: {
+      current_sellable: marts.productMaster.filter((row) => row.lifecycle_status === "current_sellable").length,
+      current_unavailable: marts.productMaster.filter((row) => row.lifecycle_status === "current_unavailable").length,
+      legacy: marts.productMaster.filter((row) => row.lifecycle_status === "legacy").length,
+      unverified: marts.productMaster.filter((row) => row.lifecycle_status === "unverified").length
+    },
+    catalog_sources_ok: successfulCatalogSources.size,
+    catalog_sources_failed: failedCatalogSources.length,
     offer_history_versions: offerHistoryVersions,
     commerce_history_versions: commerceHistoryVersions
   }
