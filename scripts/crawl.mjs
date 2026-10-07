@@ -265,7 +265,8 @@ let urls = explicitUrl ? [explicitUrl] : await discoverUrls(seeds, Math.max(maxP
 urls = urls
   .filter((url) => {
     try {
-      const u = new URL(url);\n      return u.origin === base.origin && u.pathname.startsWith(marketPrefix) && allowedByRobots(url, robots);
+      const u = new URL(url);
+      return u.origin === base.origin && u.pathname.startsWith(marketPrefix) && allowedByRobots(url, robots);
     } catch {
       return false;
     }
