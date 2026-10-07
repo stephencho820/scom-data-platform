@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "markets": [
+    {
+      "code": "us",
+      "country": "United States",
+      "language": "en-US",
+      "baseUrl": "https://www.samsung.com/us/"
+    },
+    {
+      "code": "uk",
+      "country": "United Kingdom",
+      "language": "en-GB",
+      "baseUrl": "https://www.samsung.com/uk/"
+    },
+    {
+      "code": "kr",
+      "country": "Korea",
+      "language": "ko-KR",
+      "baseUrl": "https://www.samsung.com/sec/"
+    }
+  ]
+}
