@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "description": "Candidate URL rules for data-mart-oriented crawling. Sitemap inventory remains complete, but fetch batches are selected from target URLs only.",
+  "description": "Candidate URL rules for data-mart-oriented crawling. Full sitemap inventory is retained for discovery. Generic legacy support/model pages are excluded; known-product support can be added through product-linked discovery.",
   "includePathPatterns": [
     "/buy/",
     "/smartphones/",
@@ -16,9 +16,6 @@
     "/dishwashers/",
     "/vacuum",
     "/air-condition",
-    "/support/",
-    "/manual",
-    "/download",
     "/trade-in",
     "/samsung-care",
     "/care-plus",
@@ -39,7 +36,8 @@
     "/terms",
     "/login",
     "/account/",
-    "/cart/"
+    "/cart/",
+    "/support/model/"
   ],
   "priorityPatterns": [
     "/buy/",
