@@ -5,96 +5,297 @@
   "$defs": {
     "evidenceOption": {
       "type": "object",
-      "required": ["type", "available", "label", "evidence", "source_url", "captured_at"],
+      "required": [
+        "type",
+        "available",
+        "label",
+        "evidence",
+        "source_url",
+        "captured_at"
+      ],
       "properties": {
-        "type": { "type": "string" },
-        "available": { "type": "boolean" },
-        "label": { "type": "string" },
-        "details": { "type": ["object", "null"], "additionalProperties": true },
-        "evidence": { "type": "string" },
-        "source_url": { "type": "string", "format": "uri" },
-        "captured_at": { "type": "string", "format": "date-time" }
+        "type": {
+          "type": "string"
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "label": {
+          "type": "string"
+        },
+        "details": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": true
+        },
+        "evidence": {
+          "type": "string"
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "captured_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "applicability": {
+          "enum": [
+            "product",
+            "conditional",
+            "page"
+          ]
+        }
       },
       "additionalProperties": false
     },
     "productMaster": {
       "type": "object",
-      "required": ["market_product_key", "market", "name", "brand", "product_url", "source_urls", "captured_at"],
+      "required": [
+        "market_product_key",
+        "market",
+        "name",
+        "brand",
+        "product_url",
+        "source_urls",
+        "captured_at"
+      ],
       "properties": {
-        "market_product_key": { "type": "string" },
-        "market": { "type": "string" },
-        "audience": { "enum": ["consumer", "business", "unknown"] },
-        "name": { "type": "string" },
-        "sku": { "type": "string" },
-        "model": { "type": "string" },
-        "brand": { "type": "string" },
-        "category_path": { "type": "array", "items": { "type": "string" } },
-        "product_url": { "type": "string", "format": "uri" },
-        "source_urls": { "type": "array", "items": { "type": "string", "format": "uri" } },
-        "captured_at": { "type": "string", "format": "date-time" }
+        "market_product_key": {
+          "type": "string"
+        },
+        "market": {
+          "type": "string"
+        },
+        "audience": {
+          "enum": [
+            "consumer",
+            "business",
+            "unknown"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "category_path": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "product_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "source_urls": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "captured_at": {
+          "type": "string",
+          "format": "date-time"
+        }
       },
       "additionalProperties": false
     },
     "productSpecs": {
       "type": "object",
-      "required": ["market_product_key", "market", "specs", "source_url", "captured_at"],
+      "required": [
+        "market_product_key",
+        "market",
+        "specs",
+        "source_url",
+        "captured_at"
+      ],
       "properties": {
-        "market_product_key": { "type": "string" },
-        "market": { "type": "string" },
-        "sku": { "type": "string" },
-        "model": { "type": "string" },
+        "market_product_key": {
+          "type": "string"
+        },
+        "market": {
+          "type": "string"
+        },
+        "sku": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
         "specs": {
           "type": "array",
           "items": {
             "type": "object",
-            "required": ["name", "value"],
+            "required": [
+              "name",
+              "value"
+            ],
             "properties": {
-              "name": { "type": "string" },
+              "name": {
+                "type": "string"
+              },
               "value": {},
-              "unit": { "type": "string" }
+              "unit": {
+                "type": "string"
+              }
             },
             "additionalProperties": false
           }
         },
-        "source_url": { "type": "string", "format": "uri" },
-        "captured_at": { "type": "string", "format": "date-time" }
+        "source_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "captured_at": {
+          "type": "string",
+          "format": "date-time"
+        }
       },
       "additionalProperties": false
     },
     "marketOffer": {
       "type": "object",
-      "required": ["market_product_key", "market", "purchase_url", "captured_at", "fingerprint"],
+      "required": [
+        "market_product_key",
+        "market",
+        "purchase_url",
+        "captured_at",
+        "fingerprint"
+      ],
       "properties": {
-        "market_product_key": { "type": "string" },
-        "market": { "type": "string" },
+        "market_product_key": {
+          "type": "string"
+        },
+        "market": {
+          "type": "string"
+        },
         "price": {},
-        "currency": { "type": "string" },
-        "availability": { "type": "string" },
-        "purchase_url": { "type": "string", "format": "uri" },
-        "promotions": { "type": "array", "items": { "$ref": "#/$defs/evidenceOption" } },
-        "captured_at": { "type": "string", "format": "date-time" },
-        "fingerprint": { "type": "string" }
+        "currency": {
+          "type": "string"
+        },
+        "availability": {
+          "type": "string"
+        },
+        "purchase_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "promotions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceOption"
+          }
+        },
+        "captured_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "fingerprint": {
+          "type": "string"
+        }
       },
       "additionalProperties": false
     },
     "commerceOptions": {
       "type": "object",
-      "required": ["market_product_key", "market", "source_url", "captured_at", "fingerprint"],
+      "required": [
+        "market_product_key",
+        "market",
+        "source_url",
+        "captured_at",
+        "fingerprint"
+      ],
       "properties": {
-        "market_product_key": { "type": "string" },
-        "market": { "type": "string" },
-        "purchase_methods": { "type": "array", "items": { "$ref": "#/$defs/evidenceOption" } },
-        "subscriptions": { "type": "array", "items": { "$ref": "#/$defs/evidenceOption" } },
-        "trade_in": { "type": "array", "items": { "$ref": "#/$defs/evidenceOption" } },
-        "protection": { "type": "array", "items": { "$ref": "#/$defs/evidenceOption" } },
-        "delivery": { "type": "array", "items": { "$ref": "#/$defs/evidenceOption" } },
-        "installation": { "type": "array", "items": { "$ref": "#/$defs/evidenceOption" } },
-        "haul_away": { "type": "array", "items": { "$ref": "#/$defs/evidenceOption" } },
-        "bundles": { "type": "array", "items": { "$ref": "#/$defs/evidenceOption" } },
-        "membership": { "type": "array", "items": { "$ref": "#/$defs/evidenceOption" } },
-        "source_url": { "type": "string", "format": "uri" },
-        "captured_at": { "type": "string", "format": "date-time" },
-        "fingerprint": { "type": "string" }
+        "market_product_key": {
+          "type": "string"
+        },
+        "market": {
+          "type": "string"
+        },
+        "purchase_methods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceOption"
+          }
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceOption"
+          }
+        },
+        "trade_in": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceOption"
+          }
+        },
+        "protection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceOption"
+          }
+        },
+        "delivery": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceOption"
+          }
+        },
+        "installation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceOption"
+          }
+        },
+        "haul_away": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceOption"
+          }
+        },
+        "bundles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceOption"
+          }
+        },
+        "membership": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceOption"
+          }
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "captured_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "fingerprint": {
+          "type": "string"
+        }
       },
       "additionalProperties": false
     }
