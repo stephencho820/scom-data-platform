@@ -70,6 +70,19 @@ function truncate(value = "", max = 210) {
   return text.slice(0, max).trimEnd() + "…";
 }
 
+function formatNumber(value) {
+  const numeric = Number(value);
+  return Number.isFinite(numeric) ? new Intl.NumberFormat().format(numeric) : String(value || 0);
+}
+
+function coverageText(meta) {
+  const total = Number(meta?.crawlable_urls_total || 0);
+  if (!total) return "";
+  const covered = Number(meta?.coverage_pages || meta?.pages_written || 0);
+  const percent = Number(meta?.coverage_percent || ((covered / total) * 100));
+  return formatNumber(covered) + " / " + formatNumber(total) + " pages · " + percent.toFixed(2) + "%";
+}
+
 function productIdentity(row) {
   return row.model || row.sku || row.name || row.key || "Product";
 }
@@ -168,7 +181,7 @@ async function loadMarkets() {
         <strong>${escapeHtml(market.code)}</strong>
         <div>
           <div>${escapeHtml(market.country)}</div>
-          <small>${meta ? `${meta.pages_written} pages · ${meta.products_written} products` : "Configured · awaiting first crawl"}</small>
+          <small>${meta ? `${coverageText(meta) || (formatNumber(meta.pages_written) + " pages")} · ${formatNumber(meta.products_written)} products` : "Configured · awaiting first crawl"}</small>
         </div>
         <span class="badge">${meta ? "current" : "seed"}</span>
       </div>
@@ -283,7 +296,7 @@ function renderExplorer() {
       ? `${rows.length} matching tracked products · ${explorer.rows.length} total`
       : `${explorer.rows.length} tracked products · ${versions} saved versions`;
     captured.textContent = explorer.meta?.captured_at
-      ? `Latest crawl ${formatCaptured(explorer.meta.captured_at)}`
+      ? `Latest crawl ${formatCaptured(explorer.meta.captured_at)}${coverageText(explorer.meta) ? " · " + coverageText(explorer.meta) : ""}`
       : "";
   } else {
     const noun = explorer.dataset === "products" ? "products" : "pages";
@@ -291,7 +304,7 @@ function renderExplorer() {
       ? `${rows.length} matching ${noun} · ${explorer.rows.length} total`
       : `${explorer.rows.length} ${noun} in current snapshot`;
     captured.textContent = explorer.meta?.captured_at
-      ? `Captured ${formatCaptured(explorer.meta.captured_at)}`
+      ? `Captured ${formatCaptured(explorer.meta.captured_at)}${coverageText(explorer.meta) ? " · " + coverageText(explorer.meta) : ""}`
       : "";
   }
 
