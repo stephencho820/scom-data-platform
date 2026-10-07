@@ -1,0 +1,20 @@
+{
+  "name": "scom-data-platform",
+  "version": "0.1.0",
+  "description": "Open, text-first Samsung.com data platform for agents and developers.",
+  "type": "module",
+  "private": false,
+  "scripts": {
+    "crawl": "node scripts/crawl.mjs",
+    "mcp": "node src/mcp/server.mjs",
+    "serve:web": "python3 -m http.server 3000 -d web"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "^2.3.1",
+    "zod": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}
