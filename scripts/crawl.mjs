@@ -299,7 +299,7 @@ function evidenceSnippet(text, regex, max = 320) {
   return String(text).slice(start, start + max).trim();
 }
 
-function evidenceOption(page, type, label, regex, details = null) {
+function evidenceOption(page, type, label, regex, details = null, confidence = "high", applicability = "product") {
   const evidence = evidenceSnippet(page.text, regex);
   if (!evidence) return null;
   return {
@@ -308,6 +308,8 @@ function evidenceOption(page, type, label, regex, details = null) {
     label,
     details,
     evidence,
+    confidence,
+    applicability,
     source_url: page.canonical_url || page.url,
     captured_at: page.captured_at
   };
@@ -320,35 +322,35 @@ function extractCommerce(page) {
   const compact = (values) => values.filter(Boolean);
   return {
     purchase_methods: compact([
-      pick("financing", "Financing / installments", /\b(financ(?:e|ing)|installments?|monthly payments?|pay monthly|net 30|net 60|net 90)\b|할부|금융/i)
+      pick("financing", "Financing / installments", /\b(pay in monthly installments|monthly payments?|installment plan|0% finance|finance from|net 30,? 60,? 90)\b|[0-9]{1,2}개월.{0,12}(무이자|할부)|무이자.{0,12}할부/i)
     ]),
     subscriptions: compact([
-      pick("subscription", "Subscription / rental", /\b(subscription|subscribe|rental|renting|upgrade program)\b|구독|렌탈/i)
+      pick("subscription", "Subscription / rental", /\b(subscribe (?:and|to)|subscription (?:plan|price|payment)|rental plan|upgrade program)\b|구독.{0,20}(월 납부|요금|플랜|가입)|렌탈.{0,20}(요금|가입|플랜)/i)
     ]),
     trade_in: compact([
-      pick("trade_in", "Trade-in", /trade[- ]?in|보상판매|중고.{0,12}보상/i)
+      pick("trade_in", "Trade-in", /(?:trade[- ]?in.{0,80}(?:discount|credit|value|device|applied|yes|no|learn more))|(?:discount|credit|value).{0,40}trade[- ]?in|보상판매.{0,30}(신청|금액|혜택|기기)|중고.{0,12}보상.{0,20}(금액|신청|혜택)/i)
     ]),
     protection: compact([
-      pick("samsung_care_plus", "Samsung Care+", /samsung\s*care\+?|care\+|삼성케어\+?|삼성케어플러스/i),
-      pick("extended_warranty", "Extended warranty", /extended warranty|warranty extension|보증.{0,8}연장/i)
+      pick("samsung_care_plus", "Samsung Care+", /(?:add|select|choose).{0,30}samsung\s*care\+?|samsung\s*care\+?.{0,50}(?:policy|coverage|quantity|add|select|choose)|삼성케어(?:플러스|\+).{0,30}(?:가입|선택|추가|보장|요금)/i),
+      pick("extended_warranty", "Extended warranty", /(?:add|select|choose).{0,30}extended warranty|extended warranty.{0,40}(?:add|coverage|plan)|보증.{0,8}연장.{0,20}(?:가입|선택|요금)/i)
     ]),
     delivery: compact([
-      pick("delivery", "Delivery / shipping", /\b(delivery|shipping|doorstep delivery)\b|배송/i)
+      pick("delivery", "Delivery / shipping", /\b(delivery (?:arrives|to|options?|date)|free shipping|doorstep delivery|shipping (?:available|date|options?))\b|(?:무료배송|배송비|배송일|배송 예정|배송 옵션|제품 배송\/설치)/i)
     ]),
     installation: compact([
-      pick("installation", "Installation", /\b(installation|install service|professional install)\b|설치/i)
+      pick("installation", "Installation", /\b(standard installation charges|installation service|professional installation|add installation)\b|(?:추가 설치비|설치 서비스|설치상품|설치 환경|전문 설치)/i)
     ]),
     haul_away: compact([
-      pick("haul_away", "Haul away / recycling", /haul[- ]?away|old appliance removal|take away your old|recycl(?:e|ing)|폐가전|기존.{0,10}수거|수거/i)
+      pick("haul_away", "Haul away / recycling", /\b(?:add )?haul[- ]?away|old appliance removal (?:available|service|option)|we(?:'|’)ll take away your old\b|폐가전.{0,12}(?:수거 신청|무상 수거|회수 신청|수거 서비스)|기존.{0,10}(?:가전|제품).{0,10}(?:수거 신청|회수 신청)/i)
     ]),
     bundles: compact([
-      pick("bundle", "Bundle / add-on", /\b(bundle|bundle builder|add[- ]?on|accessor(?:y|ies) offer)\b|묶음|패키지.{0,8}할인/i)
+      pick("bundle", "Bundle / add-on", /\b(bundle (?:and save|discount|offer)|bundle builder|add[- ]?on offer|accessor(?:y|ies) offer)\b|묶음.{0,12}(?:할인|혜택)|패키지.{0,8}할인/i)
     ]),
     membership: compact([
-      pick("rewards", "Rewards / membership", /samsung rewards|membership|business account|리워드|멤버십/i)
+      pick("rewards", "Rewards / membership", /(?:earn|redeem|save).{0,30}samsung rewards|get exclusive deals with a samsung business account|멤버십 포인트.{0,30}(?:적립|사용|예상)|리워드.{0,20}(?:적립|사용)/i)
     ]),
     promotions: compact([
-      pick("promotion", "Promotion / discount", /\b(cashback|discount|promotion|special offer|save [0-9]|save up to)\b|쿠폰|할인|혜택/i)
+      pick("promotion", "Promotion / discount", /\b(?:claim )?cashback|save (?:up to )?[£$€]?[0-9]+|[0-9]+% (?:off|discount)|special offer\b|쿠폰.{0,20}(?:적용|할인)|[0-9]+%.{0,8}할인|즉시.{0,8}할인/i)
     ])
   };
 }
