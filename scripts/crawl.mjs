@@ -88,22 +88,50 @@ async function renderCatalogHtml(url) {
     await page.goto(url, { waitUntil: "domcontentloaded", timeout: 45000 });
     await page.waitForTimeout(2500);
 
-    let lastCount = -1;
+    const modelCount = async () => page.locator("body").innerText()
+      .then((text) => new Set(text.match(/SM-[A-Z0-9-]+/gi) || []).size)
+      .catch(() => 0);
+
+    let lastCount = await modelCount();
     let stableRounds = 0;
-    for (let round = 0; round < 12; round++) {
+
+    for (let round = 0; round < 30; round++) {
       await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-      await page.waitForTimeout(900);
+      await page.waitForTimeout(700);
 
-      const count = await page.locator("body").innerText()
-        .then((text) => new Set(text.match(/SM-[A-Z0-9-]+/gi) || []).size)
-        .catch(() => 0);
+      const beforeClick = await modelCount();
+      let expanded = false;
 
-      if (count === lastCount) stableRounds += 1;
+      const buttons = page.locator("button:visible");
+      const buttonCount = await buttons.count();
+
+      for (let index = buttonCount - 1; index >= 0; index--) {
+        const button = buttons.nth(index);
+        const label = (await button.innerText().catch(() => "")).replace(/\s+/g, " ").trim();
+        if (!/^(더\s*보기|load\s*more|view\s*more)(?:\s*\/.*)?$/i.test(label)) continue;
+
+        try {
+          await button.scrollIntoViewIfNeeded();
+          await button.click({ timeout: 2500 });
+          await page.waitForTimeout(900);
+          const afterClick = await modelCount();
+          if (afterClick > beforeClick) {
+            expanded = true;
+            console.error("catalog rendered: clicked load more; models " + beforeClick + " -> " + afterClick);
+            break;
+          }
+        } catch {}
+      }
+
+      const count = await modelCount();
+      if (count === lastCount && !expanded) stableRounds += 1;
       else stableRounds = 0;
+
       lastCount = count;
-      if (stableRounds >= 2) break;
+      if (stableRounds >= 3) break;
     }
 
+    console.error("catalog rendered: final model tokens=" + lastCount);
     return await page.content();
   } finally {
     await page.close();
@@ -600,6 +628,7 @@ function buildLifecycleResolver(catalogRows, successfulCatalogSources) {
       if (normalized) byIdentity.set(normalized, row);
     }
   }
+
   const coveredCategories = new Set(
     catalogSourceDefs
       .filter((source) => successfulCatalogSources.has(source.id))
@@ -607,14 +636,20 @@ function buildLifecycleResolver(catalogRows, successfulCatalogSources) {
   );
 
   return (product) => {
-    for (const identity of [product.sku, product.model]) {
-      const normalized = String(identity || "").trim().toLowerCase();
-      if (normalized && byIdentity.has(normalized)) {
+    const stableIdentities = [product.sku, product.model]
+      .map((identity) => String(identity || "").trim().toLowerCase())
+      .filter(Boolean);
+
+    for (const normalized of stableIdentities) {
+      if (byIdentity.has(normalized)) {
         const catalog = byIdentity.get(normalized);
+        const sellable = catalog.lifecycle_status === "current_sellable";
         return {
           lifecycle_status: catalog.lifecycle_status,
           catalog_current: true,
-          sellable: catalog.lifecycle_status === "current_sellable",
+          sellable,
+          catalog_enforced: true,
+          commerce_eligible: sellable,
           catalog_source_id: catalog.catalog_source_id,
           catalog_source_url: catalog.catalog_source_url,
           catalog_verified_at: catalog.catalog_verified_at
@@ -624,10 +659,25 @@ function buildLifecycleResolver(catalogRows, successfulCatalogSources) {
 
     const category = productCatalogCategory(product);
     if (category && coveredCategories.has(category)) {
+      if (!stableIdentities.length) {
+        return {
+          lifecycle_status: "unverified",
+          catalog_current: null,
+          sellable: null,
+          catalog_enforced: true,
+          commerce_eligible: false,
+          catalog_source_id: "",
+          catalog_source_url: "",
+          catalog_verified_at: capturedAt
+        };
+      }
+
       return {
         lifecycle_status: "legacy",
         catalog_current: false,
         sellable: false,
+        catalog_enforced: true,
+        commerce_eligible: false,
         catalog_source_id: "",
         catalog_source_url: "",
         catalog_verified_at: capturedAt
@@ -638,11 +688,20 @@ function buildLifecycleResolver(catalogRows, successfulCatalogSources) {
       lifecycle_status: "unverified",
       catalog_current: null,
       sellable: null,
+      catalog_enforced: false,
+      commerce_eligible: null,
       catalog_source_id: "",
       catalog_source_url: "",
       catalog_verified_at: null
     };
   };
+}
+
+function normalizeCatalogName(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[\s\p{P}\p{S}]+/gu, "")
+    .trim();
 }
 
 function findProductObjects(value, out = []) {
@@ -807,8 +866,15 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
   const marketOffers = [];
   const commerceOptions = [];
   const taxonomyMap = new Map();
+  const currentCatalogNames = new Set(
+    catalogRows.map((row) => normalizeCatalogName(row.name)).filter(Boolean)
+  );
 
   for (const product of products) {
+    if (!product.sku && !product.model && currentCatalogNames.has(normalizeCatalogName(product.name))) {
+      continue;
+    }
+
     const page = pageForProduct(product, pages);
     const sourceUrl = product.url || page?.canonical_url || page?.url || market.baseUrl;
     const categoryPath = categoryPathFromUrl(sourceUrl);
@@ -816,7 +882,10 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
     const isDetail = /\/buy\//i.test(sourceUrl) ||
       (!!product.sku && String(sourceUrl).toLowerCase().includes(product.sku.toLowerCase())) ||
       (!!product.model && String(sourceUrl).toLowerCase().includes(product.model.toLowerCase()));
-    const commerce = page && isDetail && lifecycle.lifecycle_status !== "legacy" && lifecycle.lifecycle_status !== "current_unavailable"
+    const commerceAllowed = lifecycle.commerce_eligible !== false &&
+      lifecycle.lifecycle_status !== "current_unavailable" &&
+      lifecycle.lifecycle_status !== "legacy";
+    const commerce = page && isDetail && commerceAllowed
       ? extractCommerce(page, sourceUrl)
       : {
       purchase_methods: [],
@@ -845,6 +914,8 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
       lifecycle_status: lifecycle.lifecycle_status,
       catalog_current: lifecycle.catalog_current,
       sellable: lifecycle.sellable,
+      catalog_enforced: lifecycle.catalog_enforced,
+      commerce_eligible: lifecycle.commerce_eligible,
       catalog_source_id: lifecycle.catalog_source_id,
       catalog_source_url: lifecycle.catalog_source_url,
       catalog_verified_at: lifecycle.catalog_verified_at,
@@ -861,7 +932,7 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
       captured_at: product.captured_at || capturedAt
     });
 
-    if (lifecycle.lifecycle_status !== "legacy") {
+    if (lifecycle.lifecycle_status === "current_unavailable" || lifecycle.commerce_eligible !== false) {
       const currentUnavailable = lifecycle.lifecycle_status === "current_unavailable";
       const offerCore = {
         market_product_key: product.key,
@@ -913,7 +984,9 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
       bundles: commerceCore.bundles,
       membership: commerceCore.membership
     }));
-    if (lifecycle.lifecycle_status !== "legacy" && lifecycle.lifecycle_status !== "current_unavailable") {
+    if (lifecycle.commerce_eligible !== false &&
+        lifecycle.lifecycle_status !== "legacy" &&
+        lifecycle.lifecycle_status !== "current_unavailable") {
       commerceOptions.push(commerceCore);
     }
 
@@ -1263,7 +1336,9 @@ await writeFile(metaFile, JSON.stringify({
       current_sellable: marts.productMaster.filter((row) => row.lifecycle_status === "current_sellable").length,
       current_unavailable: marts.productMaster.filter((row) => row.lifecycle_status === "current_unavailable").length,
       legacy: marts.productMaster.filter((row) => row.lifecycle_status === "legacy").length,
-      unverified: marts.productMaster.filter((row) => row.lifecycle_status === "unverified").length
+      unverified: marts.productMaster.filter((row) => row.lifecycle_status === "unverified").length,
+      commerce_eligible: marts.productMaster.filter((row) => row.commerce_eligible === true).length,
+      commerce_suppressed: marts.productMaster.filter((row) => row.commerce_eligible === false).length
     },
     catalog_sources_ok: successfulCatalogSources.size,
     catalog_sources_failed: failedCatalogSources.length,
