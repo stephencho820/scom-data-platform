@@ -25,6 +25,7 @@ const market = registry.markets.find((item) => item.code === marketCode);
 if (!market) throw new Error(`Unknown market: ${marketCode}`);
 
 const base = new URL(market.baseUrl);
+const marketPrefix = base.pathname.endsWith("/") ? base.pathname : `${base.pathname}/`;
 const capturedAt = new Date().toISOString();
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -76,7 +77,7 @@ function parseRobots(text) {
 
 function allowedByRobots(url, rules) {
   const pathname = new URL(url).pathname;
-  return !rules.disallow.some((prefix) => prefix !== "/" && pathname.startsWith(prefix));
+  return !rules.disallow.some((prefix) => pathname.startsWith(prefix));
 }
 
 function xmlLocs(xml) {
@@ -105,7 +106,7 @@ async function discoverUrls(sitemapSeeds, maxWanted) {
         for (const loc of locs) {
           try {
             const u = new URL(loc);
-            if (u.origin === base.origin) urls.add(u.href);
+            if (u.origin === base.origin && u.pathname.startsWith(marketPrefix)) urls.add(u.href);
           } catch {}
           if (urls.size >= maxWanted) break;
         }
@@ -264,7 +265,7 @@ let urls = explicitUrl ? [explicitUrl] : await discoverUrls(seeds, Math.max(maxP
 urls = urls
   .filter((url) => {
     try {
-      return new URL(url).origin === base.origin && allowedByRobots(url, robots);
+      const u = new URL(url);\n      return u.origin === base.origin && u.pathname.startsWith(marketPrefix) && allowedByRobots(url, robots);
     } catch {
       return false;
     }
