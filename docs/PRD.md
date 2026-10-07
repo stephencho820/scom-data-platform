@@ -1,260 +1,135 @@
 # S.com Data Platform — Product Requirements Document
 
-## 1. Product vision
+## Product vision
 
-S.com Data Platform is an open, text-first data layer for Samsung.com.
+S.com Data Platform is an open, text-first, agent-native data layer for Samsung.com.
 
-It continuously discovers and normalizes public Samsung.com content across markets so AI agents and developers can query the latest product, support, campaign, and page information without repeatedly crawling Samsung.com themselves.
+It is not intended to mirror every Samsung.com page. The platform discovers the full public sitemap inventory, then selectively crawls pages that can populate high-value data marts for product, commerce, support, and cross-market questions.
 
-The platform is designed to start at effectively zero infrastructure cost.
+## Core principles
 
-## 2. Core principles
+1. Text first; no image mirroring in the core dataset.
+2. Data-mart first; crawl pages because they populate an agent use case, not merely because a URL exists.
+3. Current by default; retain history only for decision-relevant facts.
+4. Market aware; every fact carries market and source provenance.
+5. Evidence preserving; heuristic commerce extraction keeps a source snippet.
+6. Agent native; MCP tools query normalized marts before raw page text.
+7. Zero-cost first; GitHub repository, Actions, Pages, and local stdio MCP.
+8. Respectful crawling; honor robots rules and bounded request rates.
 
-1. **Text first** — no image mirroring or image processing in the core dataset.
-2. **Current by default** — most page data is overwritten on each successful crawl.
-3. **History only where valuable** — product identity, specifications, price/offer metadata, and other product facts can retain change history.
-4. **Market aware** — every record carries market/country/language context.
-5. **Agent native** — MCP is a first-class interface, not an afterthought.
-6. **Open and portable** — the canonical dataset is ordinary JSON/JSONL files in Git.
-7. **Zero-cost first** — GitHub repository + GitHub Actions + GitHub Pages are the default infrastructure.
-8. **Respectful crawling** — obey robots directives where applicable, use a clear user agent, throttle requests, and keep crawl volume bounded.
+## Primary agent use cases
 
-## 3. Target users
+- Find a Samsung product by name, model, SKU, or category.
+- Compare a product across markets.
+- Compare current price and availability.
+- Ask how a product can be purchased: outright, financing, installments, subscription, rental, or upgrade programs.
+- Ask whether trade-in, Samsung Care+, delivery, installation, recycling, or haul-away is available.
+- Inspect promotions and bundle/add-on evidence.
+- Compare technical specs.
+- Retrieve product support/manual/download/warranty resources.
+- Track price, offer, commerce-option, and important product changes over time.
 
-- AI/agent builders that need Samsung.com facts
-- Samsung.com analysts and product managers
-- Developers comparing content or product information across markets
-- Researchers tracking product/spec changes over time
+## Data marts
 
-## 4. Primary use cases
+The canonical agent-facing marts are defined in [DATA_MART.md](./DATA_MART.md).
 
-### UC-1 Search Samsung.com across markets
-A client asks for a topic or model name and receives relevant Samsung.com pages with source URLs and market metadata.
+Current marts:
+- Product Master
+- Product Specs
+- Market Offer
+- Commerce Options
+- Support Resources
+- Taxonomy
+- History for product identity, offer, and commerce changes
 
-### UC-2 Compare markets
-A client asks how the same product/topic appears in two or more markets.
-
-### UC-3 Retrieve a canonical page
-A client requests the normalized text and metadata for a known Samsung.com URL.
-
-### UC-4 Track product changes
-A client requests historical versions of a product record and sees when normalized product facts changed.
-
-### UC-5 Reuse through MCP
-An AI host connects to the repository's MCP server and uses the dataset as tools.
-
-## 5. Data scope
-
-### In scope for current snapshots
-- product pages
-- product category/listing pages
-- support pages
-- buying guides
-- campaign/editorial pages
-- service/information pages
-- public page title, description, canonical URL, normalized visible text
-
-### History candidates
-- product model/SKU
-- product name
-- structured product facts exposed in public structured data
-- price/currency/availability when publicly exposed
-- canonical product URL
-- future normalized specification fields
-
-### Out of scope for v0
-- images and binaries
-- authenticated/private content
-- cart/account/order data
-- bypassing access controls or anti-bot protections
-- pixel-perfect page snapshots
-
-## 6. Storage model
-
-The repository itself is the first database.
+## Storage model
 
 ```text
 data/
+  manifests/
+    {market}.json
   current/
     {market}/
       pages.jsonl
       products.jsonl
       meta.json
+  marts/
+    {market}/
+      product_master.jsonl
+      product_specs.jsonl
+      market_offers.jsonl
+      commerce_options.jsonl
+      support_resources.jsonl
+      taxonomy.jsonl
   history/
-    products/
-      {market}.jsonl
+    products/{market}.jsonl
+    offers/{market}.jsonl
+    commerce_options/{market}.jsonl
 ```
 
-`current` is replaced by each successful crawl.
+The full sitemap inventory is discovery metadata. Only URLs matching the configured mart scope become crawl candidates.
 
-`history/products/{market}.jsonl` only grows when a product fingerprint changes.
+## Crawl strategy
 
-This avoids paying for a database before the dataset actually needs one.
+1. Read robots.txt and all relevant sitemap indexes.
+2. Build the complete market URL inventory.
+3. Apply `config/crawl-scope.json` to select product, buy, support, and commerce/service candidates.
+4. Prioritize PDP/buy and service-relevant URLs.
+5. Crawl incremental batches, preferring unvisited target URLs.
+6. Merge normalized source records instead of replacing the whole dataset with one batch.
+7. Rebuild current marts from normalized records.
+8. Append history only when normalized fingerprints change.
 
-## 7. Canonical page schema
+## Extraction strategy
 
-```json
-{
-  "id": "sha256-derived-id",
-  "market": "us",
-  "url": "https://www.samsung.com/us/...",
-  "canonical_url": "https://www.samsung.com/us/...",
-  "title": "...",
-  "description": "...",
-  "text": "...",
-  "captured_at": "ISO-8601 timestamp",
-  "content_hash": "sha256"
-}
-```
+Structured sources are preferred:
+- JSON-LD Product identity
+- price, currency, availability
+- structured Product additionalProperty specs when exposed
 
-## 8. Canonical product schema
+Commerce options may also be detected from normalized visible text. These heuristic observations always preserve an evidence snippet and source URL.
 
-```json
-{
-  "key": "stable-product-key",
-  "market": "us",
-  "url": "...",
-  "name": "...",
-  "sku": "...",
-  "model": "...",
-  "brand": "Samsung",
-  "offers": {
-    "price": "...",
-    "currency": "...",
-    "availability": "..."
-  },
-  "captured_at": "...",
-  "fingerprint": "sha256"
-}
-```
+Absence of evidence is represented as no observation, not as a definitive `false`.
 
-The first extractor uses public JSON-LD when a page exposes a Product object. Later extractors may add Samsung-specific specification normalization.
+## MCP interface
 
-## 9. Crawling strategy
-
-### Discovery
-1. Read the market's `robots.txt`.
-2. Collect declared sitemap URLs.
-3. Fall back to `/sitemap.xml` when needed.
-4. Walk sitemap indexes with bounded recursion.
-5. Prioritize likely product/support URLs.
-
-### Fetching
-- Node 20 native `fetch`
-- explicit project user agent
-- same-origin filtering
-- configurable delay
-- configurable maximum page count
-- timeout per request
-- retry can be added in v1
-
-### Normalization
-- remove script/style/noscript/svg/image markup
-- extract title, meta description, canonical URL
-- normalize visible text whitespace
-- parse Product JSON-LD when available
-- store no image payloads
-
-## 10. MCP interface
-
-v0 tools:
-
+Primary:
 - `list_markets`
+- `search_products`
+- `get_product`
+- `get_product_specs`
+- `get_market_offer`
+- `get_commerce_options`
+- `compare_market_offers`
+- `get_product_history`
+- `get_support_resources`
+- `browse_category`
+
+Fallback/diagnostic:
 - `search_scom`
 - `get_page`
-- `compare_markets`
-- `get_product_history`
 
-The MCP server is local/stdio first. This costs nothing to host and lets any compatible desktop/IDE/agent spawn it after cloning the repository.
+## Non-functional requirements
 
-A hosted Streamable HTTP MCP endpoint is a later optional layer. The same data/query core should be reused.
+- Every normalized fact preserves source URL and capture time.
+- Failed crawl batches must not erase previous successful data.
+- History is limited to meaningful changes rather than full page snapshots.
+- The design must remain usable without a paid database while dataset size permits.
+- Storage can later move to SQLite/DuckDB/object storage without changing MCP semantics.
 
-## 11. Frontend
+## Delivery phases
 
-A static public introduction/explorer is hosted on GitHub Pages.
+### Phase 0
+Repository, crawl engine, Git-backed storage, Pages, stdio MCP.
 
-v0 pages/features:
-- product explanation
-- architecture overview
-- current market/crawl status
-- MCP setup instructions
-- simple dataset browser links
+### Phase 1 — Data marts
+Targeted crawl scope, normalized product/offer/commerce/support marts, evidence, and mart-first MCP.
 
-Later:
-- client-side full-text search index
-- market comparison UI
-- product history timeline
-- crawl health dashboard
+### Phase 2 — Product intelligence
+Samsung-specific spec extraction, stronger product identity matching across countries, variant modeling, offer normalization, and market comparison quality.
 
-## 12. Automation
+### Phase 3 — Scale
+Automatic market discovery, prioritized refresh schedules, change-aware sitemap processing, sharding/indexing as required.
 
-GitHub Actions performs:
-
-1. scheduled crawling
-2. data validation
-3. commit of changed snapshots/history
-4. GitHub Pages deployment
-
-No always-on server is required for v0.
-
-## 13. Non-functional requirements
-
-### Cost
-Target recurring infrastructure cost for v0: **$0** using public GitHub repository resources.
-
-### Traceability
-Every result must preserve the Samsung.com source URL.
-
-### Freshness
-Initial target: daily scheduled crawl. Large-scale operation should rotate markets and prioritize changed sitemaps/pages.
-
-### Reliability
-A failed market crawl must not erase its previous successful snapshot.
-
-### Repository growth
-If Git history becomes too large:
-1. reduce retained current text size,
-2. shard data,
-3. move generated snapshots to release artifacts/object storage,
-4. keep schemas/MCP code in Git.
-
-## 14. Success metrics
-
-- number of active markets
-- crawl success rate
-- pages captured per market
-- percentage of records with canonical URLs
-- structured products extracted
-- query latency from MCP
-- history records generated only on meaningful change
-
-## 15. Delivery phases
-
-### Phase 0 — repository MVP
-- PRD
-- market registry
-- sitemap crawler
-- JSONL current storage
-- JSON-LD product extraction
-- product change history
-- stdio MCP
-- static frontend
-- GitHub Actions
-
-### Phase 1 — global coverage
-- automatic market discovery and validation
-- larger market registry
-- Samsung-specific product/spec extractors
-- crawl rotation/incremental fetch
-- validation reports
-
-### Phase 2 — agent quality
-- richer normalized specification schema
-- lexical/full-text index
-- cross-market product identity matching
-- citations/snippet support optimized for agents
-
-### Phase 3 — optional hosted service
-- remote Streamable HTTP MCP
-- cache/search service only if Git-backed querying becomes insufficient
-- usage analytics and public API policy
+### Phase 4 — Optional hosted access
+Remote Streamable HTTP MCP and public usage controls if hosted demand justifies it.
