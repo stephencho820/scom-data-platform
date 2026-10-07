@@ -80,7 +80,7 @@ function coverageText(meta) {
   if (!total) return "";
   const covered = Number(meta?.coverage_pages || meta?.pages_written || 0);
   const percent = Number(meta?.coverage_percent || ((covered / total) * 100));
-  return formatNumber(covered) + " / " + formatNumber(total) + " pages · " + percent.toFixed(2) + "%";
+  return formatNumber(covered) + " / " + formatNumber(total) + " sitemap URLs · " + percent.toFixed(2) + "%";
 }
 
 function productIdentity(row) {
