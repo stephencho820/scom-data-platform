@@ -9,9 +9,6 @@ on:
       - "config/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
-  workflow_run:
-    workflows: ["Crawl Samsung.com"]
-    types: [completed]
 
 permissions:
   contents: read
@@ -24,7 +21,6 @@ concurrency:
 
 jobs:
   deploy:
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
