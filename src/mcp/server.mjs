@@ -107,6 +107,9 @@ async function joinedProduct(market, productKey) {
   if (product.lifecycle_status === "current_unavailable") {
     return { product, specs, offer, commerce_options: null, commerce_note: "Current catalog product is unavailable; price/promotions/commerce are intentionally suppressed." };
   }
+  if (product.commerce_eligible === false) {
+    return { product, specs, offer: null, commerce_options: null, commerce_note: "Lifecycle is not safely resolved to a current sellable catalog item; commerce data is intentionally suppressed." };
+  }
   return { product, specs, offer, commerce_options: commerce };
 }
 
@@ -250,6 +253,9 @@ function buildServer() {
       const product = (await productMasterFor(market)).find((item) => item.market_product_key === product_key);
       if (!product) return asError("Product not found.");
       if (product.lifecycle_status === "legacy") return asError("Legacy product: current price/offer data is intentionally unavailable.");
+      if (product.commerce_eligible === false && product.lifecycle_status !== "current_unavailable") {
+        return asError("Current commerce eligibility is not verified; price/offer data is intentionally unavailable.");
+      }
       const row = await findMartRow(market, "market_offers", product_key);
       return row ? asText(row) : asError("Current market offer not found.");
     }
@@ -267,8 +273,8 @@ function buildServer() {
     async ({ market, product_key }) => {
       const product = (await productMasterFor(market)).find((item) => item.market_product_key === product_key);
       if (!product) return asError("Product not found.");
-      if (product.lifecycle_status === "legacy" || product.lifecycle_status === "current_unavailable") {
-        return asError("Commerce options are only exposed for currently sellable products.");
+      if (product.lifecycle_status === "legacy" || product.lifecycle_status === "current_unavailable" || product.commerce_eligible === false) {
+        return asError("Commerce options are only exposed for products verified as currently sellable.");
       }
       const row = await findMartRow(market, "commerce_options", product_key);
       return row ? asText(row) : asError("Commerce options not found.");
@@ -287,8 +293,12 @@ function buildServer() {
     async ({ query, markets }) => {
       const comparison = {};
       for (const market of markets) {
-        const candidates = await searchProducts(query, market, 8);
-        const match = candidates.find((item) => item.lifecycle_status === "current_sellable" || item.lifecycle_status === "unverified") || candidates[0] || null;
+        const candidates = await searchProducts(query, market, 12);
+        const match =
+          candidates.find((item) => item.lifecycle_status === "current_sellable" && item.commerce_eligible === true) ||
+          candidates.find((item) => item.lifecycle_status === "current_unavailable") ||
+          candidates.find((item) => item.lifecycle_status === "unverified" && item.commerce_eligible !== false) ||
+          null;
         comparison[market] = match
           ? await joinedProduct(market, match.market_product_key)
           : null;
