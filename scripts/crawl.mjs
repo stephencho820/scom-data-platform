@@ -143,7 +143,14 @@ function allowedByRobots(url, rules) {
 }
 
 function xmlLocs(xml) {
-  return [...xml.matchAll(/<loc>([\s\S]*?)<\/loc>/gi)].map((m) => decode(m[1].trim()));
+  return [...xml.matchAll(/<loc>([\s\S]*?)<\/loc>/gi)].map((m) => {
+    const raw = m[1]
+      .trim()
+      .replace(/^<!\[CDATA\[/i, "")
+      .replace(/\]\]>$/i, "")
+      .trim();
+    return decode(raw);
+  });
 }
 
 async function discoverUrls(sitemapSeeds, maxWanted) {
