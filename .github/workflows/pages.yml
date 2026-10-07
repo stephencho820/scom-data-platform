@@ -43,6 +43,8 @@ jobs:
           cp -R config dist/config
           mkdir -p dist/data
           if [ -d data/current ]; then cp -R data/current dist/data/current; fi
+          if [ -d data/history ]; then cp -R data/history dist/data/history; fi
+          if [ -d data/manifests ]; then cp -R data/manifests dist/data/manifests; fi
 
       - uses: actions/upload-pages-artifact@v3
         with:
