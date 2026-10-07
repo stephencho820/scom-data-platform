@@ -43,6 +43,19 @@ jobs:
           git checkout main
           git reset --hard origin/main
 
+      - name: Install crawler dependencies
+        run: npm install --no-audit --no-fund --ignore-scripts
+
+      - name: Locate Chrome
+        run: |
+          chrome="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
+          if [ -n "$chrome" ]; then
+            echo "CHROME_PATH=$chrome" >> "$GITHUB_ENV"
+            echo "Using Chrome: $chrome"
+          else
+            echo "Chrome was not found; static catalog parsing will be used."
+          fi
+
       - name: Discover full inventory and crawl incremental batches
         id: crawl
         continue-on-error: true
