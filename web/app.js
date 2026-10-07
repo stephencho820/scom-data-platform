@@ -76,11 +76,11 @@ function formatNumber(value) {
 }
 
 function coverageText(meta) {
-  const total = Number(meta?.crawlable_urls_total || 0);
+  const total = Number(meta?.target_urls_total || meta?.crawlable_urls_total || 0);
   if (!total) return "";
   const covered = Number(meta?.coverage_pages || meta?.pages_written || 0);
   const percent = Number(meta?.coverage_percent || ((covered / total) * 100));
-  return formatNumber(covered) + " / " + formatNumber(total) + " sitemap URLs · " + percent.toFixed(2) + "%";
+  return formatNumber(covered) + " / " + formatNumber(total) + " mart target URLs · " + percent.toFixed(2) + "%";
 }
 
 function productIdentity(row) {
