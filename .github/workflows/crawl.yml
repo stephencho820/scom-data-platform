@@ -37,16 +37,27 @@ jobs:
           node-version: "20"
 
       - name: Crawl configured markets sequentially
+        id: crawl
+        continue-on-error: true
         env:
           MAX_PAGES: ${{ github.event.inputs.max_pages || '80' }}
         run: |
           node -e "const c=require('./config/markets.json'); for(const m of c.markets) console.log(m.code)" > /tmp/markets.txt
+          failures=0
           while read -r market; do
             echo "=== $market ==="
-            node scripts/crawl.mjs --market="$market" --max="$MAX_PAGES" --delay=700 || echo "Market $market failed; preserving previous files where possible."
+            if ! node scripts/crawl.mjs --market="$market" --max="$MAX_PAGES" --delay=700; then
+              echo "Market $market failed; preserving its previous snapshot."
+              failures=$((failures + 1))
+            fi
           done < /tmp/markets.txt
+          if [ "$failures" -gt 0 ]; then
+            echo "$failures market crawl(s) failed."
+            exit 1
+          fi
 
       - name: Commit changed data
+        if: always()
         run: |
           if git diff --quiet -- data; then
             echo "No data changes."
@@ -57,3 +68,7 @@ jobs:
           git add data
           git commit -m "data: refresh Samsung.com snapshots"
           git push
+
+      - name: Fail workflow when any market crawl failed
+        if: steps.crawl.outcome == 'failure'
+        run: exit 1
