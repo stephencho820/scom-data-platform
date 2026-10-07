@@ -17,5 +17,15 @@
   "coverage_percent": 0.51,
   "pages_written": 23,
   "products_written": 76,
-  "history_versions": 76
+  "history_versions": 76,
+  "marts": {
+    "product_master": 76,
+    "product_specs": 76,
+    "market_offers": 76,
+    "commerce_options": 76,
+    "support_resources": 0,
+    "taxonomy": 0,
+    "offer_history_versions": 76,
+    "commerce_history_versions": 76
+  }
 }
