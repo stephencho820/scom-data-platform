@@ -69,6 +69,7 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add data
           git commit -m "data: refresh Samsung.com snapshots"
+          git pull --rebase origin main
           git push
 
       - name: Fail workflow when any market crawl failed
