@@ -149,6 +149,15 @@
             "null"
           ],
           "format": "date-time"
+        },
+        "catalog_enforced": {
+          "type": "boolean"
+        },
+        "commerce_eligible": {
+          "type": [
+            "boolean",
+            "null"
+          ]
         }
       },
       "additionalProperties": false
