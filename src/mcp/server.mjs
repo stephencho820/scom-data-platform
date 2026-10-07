@@ -105,7 +105,7 @@ async function joinedProduct(market, productKey) {
     return { product, specs, offer: null, commerce_options: null, commerce_note: "Legacy product: current price and commerce data are intentionally suppressed." };
   }
   if (product.lifecycle_status === "current_unavailable") {
-    return { product, specs, offer, commerce_options: null, commerce_note: "Current catalog product is unavailable; price/promotions/commerce are intentionally suppressed." };
+    return { product, specs, offer: null, commerce_options: null, commerce_note: "Current catalog product is not sellable; only product identity and specs are exposed." };
   }
   if (product.commerce_eligible === false) {
     return { product, specs, offer: null, commerce_options: null, commerce_note: "Lifecycle is not safely resolved to a current sellable catalog item; commerce data is intentionally suppressed." };
@@ -252,8 +252,10 @@ function buildServer() {
     async ({ market, product_key }) => {
       const product = (await productMasterFor(market)).find((item) => item.market_product_key === product_key);
       if (!product) return asError("Product not found.");
-      if (product.lifecycle_status === "legacy") return asError("Legacy product: current price/offer data is intentionally unavailable.");
-      if (product.commerce_eligible === false && product.lifecycle_status !== "current_unavailable") {
+      if (product.lifecycle_status === "legacy" || product.lifecycle_status === "current_unavailable") {
+        return asError("This product is not currently sellable; current price/offer data is intentionally unavailable.");
+      }
+      if (product.commerce_eligible === false) {
         return asError("Current commerce eligibility is not verified; price/offer data is intentionally unavailable.");
       }
       const row = await findMartRow(market, "market_offers", product_key);
@@ -324,7 +326,10 @@ function buildServer() {
       ]);
 
       const product = (await productMasterFor(market)).find((item) => item.market_product_key === product_key);
-      const suppressCommerceHistory = product?.lifecycle_status === "legacy";
+      const suppressCommerceHistory =
+        product?.lifecycle_status === "legacy" ||
+        product?.lifecycle_status === "current_unavailable" ||
+        product?.commerce_eligible === false;
       return asText({
         market,
         product_key,
@@ -332,7 +337,7 @@ function buildServer() {
         product_versions: productVersions.filter((item) => item.key === product_key),
         offer_versions: suppressCommerceHistory ? [] : offerVersions.filter((item) => item.market_product_key === product_key),
         commerce_versions: suppressCommerceHistory ? [] : commerceVersions.filter((item) => item.market_product_key === product_key),
-        note: suppressCommerceHistory ? "Legacy product: historical price/commerce is intentionally suppressed from the agent interface." : null
+        note: suppressCommerceHistory ? "Non-sellable or commerce-unverified product: historical price/commerce is intentionally suppressed from the agent interface." : null
       });
     }
   );
