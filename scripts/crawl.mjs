@@ -60,6 +60,59 @@ async function fetchText(url) {
 
 function parseRobots(text) {
   const sitemaps = [];
+  const groups = [];
+  let agents = [];
+  let disallow = [];
+  let allow = [];
+  let directivesStarted = false;
+
+  const flush = () => {
+    if (agents.length) groups.push({ agents, disallow, allow });
+    agents = [];
+    disallow = [];
+    allow = [];
+    directivesStarted = false;
+  };
+
+  for (const raw of text.split(/\r?\n/)) {
+    const line = raw.split("#")[0].trim();
+    if (!line) continue;
+    const [keyRaw, ...rest] = line.split(":");
+    const key = keyRaw.trim().toLowerCase();
+    const value = rest.join(":").trim();
+
+    if (key === "sitemap" && value) {
+      sitemaps.push(value);
+      continue;
+    }
+
+    if (key === "user-agent") {
+      if (directivesStarted) flush();
+      if (value) agents.push(value.toLowerCase());
+      continue;
+    }
+
+    if ((key === "disallow" || key === "allow") && agents.length) {
+      directivesStarted = true;
+      if (!value) continue;
+      if (key === "disallow") disallow.push(value);
+      if (key === "allow") allow.push(value);
+    }
+  }
+
+  flush();
+  const wildcard = groups.find((group) => group.agents.includes("*")) || { disallow: [], allow: [] };
+  return { sitemaps, disallow: wildcard.disallow, allow: wildcard.allow };
+}
+
+function robotPatternMatches(url, pattern) {
+  const parsed = new URL(url);
+  const target = parsed.pathname + parsed.search;
+  const anchored = pattern.endsWith("$");
+  const body = anchored ? pattern.slice(0, -1) : pattern;
+  const escaped = body
+    .replace(/[.+?^${}()|[\]\\]/g, "\\function parseRobots(text) {
+  const sitemaps = [];
   const disallow = [];
   let applies = false;
   for (const raw of text.split(/\r?\n/)) {
@@ -78,6 +131,23 @@ function parseRobots(text) {
 function allowedByRobots(url, rules) {
   const pathname = new URL(url).pathname;
   return !rules.disallow.some((prefix) => pathname.startsWith(prefix));
+}
+")
+    .replace(/\*/g, ".*");
+  return new RegExp(`^${escaped}${anchored ? "$" : ""}`).test(target);
+}
+
+function allowedByRobots(url, rules) {
+  const matches = [];
+  for (const pattern of rules.disallow || []) {
+    if (robotPatternMatches(url, pattern)) matches.push({ type: "disallow", length: pattern.replace(/\*/g, "").length });
+  }
+  for (const pattern of rules.allow || []) {
+    if (robotPatternMatches(url, pattern)) matches.push({ type: "allow", length: pattern.replace(/\*/g, "").length });
+  }
+  if (!matches.length) return true;
+  matches.sort((a, b) => b.length - a.length || (a.type === "allow" ? -1 : 1));
+  return matches[0].type === "allow";
 }
 
 function xmlLocs(xml) {
@@ -253,14 +323,22 @@ async function readJsonl(file) {
 }
 
 const robotsUrl = new URL("/robots.txt", base).href;
-let robots = { sitemaps: [], disallow: [] };
+let robots = { sitemaps: [], disallow: [], allow: [] };
 try {
   robots = parseRobots((await fetchText(robotsUrl)).text);
 } catch (error) {
   console.error(`robots unavailable: ${error.message}`);
 }
 
-const seeds = robots.sitemaps.length ? robots.sitemaps : [new URL("/sitemap.xml", base).href];
+const marketSitemaps = robots.sitemaps.filter((value) => {
+  try {
+    const u = new URL(value);
+    return u.origin === base.origin && u.pathname.startsWith(marketPrefix);
+  } catch {
+    return false;
+  }
+});
+const seeds = marketSitemaps.length ? marketSitemaps : [new URL("sitemap.xml", base).href];
 let urls = explicitUrl ? [explicitUrl] : await discoverUrls(seeds, Math.max(maxPages * 8, maxPages));
 urls = urls
   .filter((url) => {
