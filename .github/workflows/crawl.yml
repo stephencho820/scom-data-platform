@@ -1,6 +1,12 @@
 name: Crawl Samsung.com
 
 on:
+  push:
+    branches: ["main"]
+    paths:
+      - "scripts/**"
+      - "config/**"
+      - ".github/workflows/crawl.yml"
   workflow_dispatch:
     inputs:
       max_pages:
