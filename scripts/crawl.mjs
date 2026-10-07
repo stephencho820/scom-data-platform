@@ -30,6 +30,7 @@ if (!market) throw new Error("Unknown market: " + marketCode);
 const base = new URL(market.baseUrl);
 const marketPrefix = base.pathname.endsWith("/") ? base.pathname : base.pathname + "/";
 const capturedAt = new Date().toISOString();
+const knownProductIdentifiers = new Set();
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const sha = (value) => createHash("sha256").update(value).digest("hex");
@@ -383,6 +384,19 @@ function pathMatchesAny(url, patterns = []) {
 }
 
 function isTargetUrl(url) {
+  let pathname = "";
+  try {
+    pathname = new URL(url).pathname.toLowerCase();
+  } catch {
+    return false;
+  }
+
+  if (pathname.includes("/support/model/")) {
+    return [...knownProductIdentifiers].some((identifier) =>
+      identifier.length >= 5 && pathname.includes(identifier)
+    );
+  }
+
   if (pathMatchesAny(url, crawlScope.excludePathPatterns || [])) return false;
   return pathMatchesAny(url, crawlScope.includePathPatterns || []);
 }
@@ -723,6 +737,12 @@ await mkdir(manifestDir, { recursive: true });
 
 const existingPages = await readJsonl(path.join(currentDir, "pages.jsonl"));
 const existingProducts = await readJsonl(path.join(currentDir, "products.jsonl"));
+for (const product of existingProducts) {
+  for (const identifier of [product.sku, product.model]) {
+    const normalized = String(identifier || "").trim().toLowerCase();
+    if (normalized) knownProductIdentifiers.add(normalized);
+  }
+}
 const existingMeta = await readJson(metaFile, {});
 const previousManifest = await readJson(manifestFile, { cursor: 0, cycle: 0, visited_urls: [] });
 
