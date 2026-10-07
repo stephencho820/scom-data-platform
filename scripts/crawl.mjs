@@ -81,6 +81,110 @@ function findCatalogGoods(value, out = []) {
   return out;
 }
 
+async function fetchCatalogGoodsPages(context, capturedUrl) {
+  if (!capturedUrl) return [];
+
+  const products = new Map();
+  for (let pageNumber = 1; pageNumber <= 30; pageNumber++) {
+    const url = new URL(capturedUrl);
+    url.searchParams.set("page", String(pageNumber));
+    url.searchParams.set("rows", "50");
+    url.searchParams.set("soldOutExceptYn", "N");
+
+    try {
+      const response = await context.request.get(url.href, {
+        timeout: 30000,
+        headers: { "user-agent": USER_AGENT }
+      });
+      if (!response.ok()) break;
+
+      const payload = await response.json();
+      const goods = findCatalogGoods(payload);
+      let added = 0;
+
+      for (const item of goods) {
+        const model = String(item.mdlCode || "").trim().toUpperCase();
+        if (!model || products.has(model)) continue;
+        products.set(model, item);
+        added += 1;
+      }
+
+      console.error(
+        "catalog goodsList page=" + pageNumber +
+        " parsed=" + goods.length +
+        " new=" + added +
+        " total=" + products.size
+      );
+
+      if (!goods.length || added === 0) break;
+    } catch (error) {
+      console.error("catalog goodsList pagination failed: " + error.message);
+      break;
+    }
+  }
+
+  return [...products.values()];
+}
+
+function parseCatalogApiGoods(goods, source) {
+  const rows = [];
+
+  for (const item of goods) {
+    const modelCode = String(item.mdlCode || "").trim().toUpperCase();
+    const name = String(item.goodsNm || "").replace(/\s+/g, " ").trim();
+    if (!/^SM-[A-Z][0-9]{3}[A-Z0-9]{4,12}$/.test(modelCode) || !name) continue;
+
+    const saleStatCd = String(item.saleStatCd ?? "").trim();
+    const stockQty = Number(item.stockQty);
+    const hasStock = !Number.isFinite(stockQty) || stockQty > 0;
+    const sellable = saleStatCd === "12" && hasStock;
+    const lifecycleStatus = sellable ? "current_sellable" : "current_unavailable";
+    const numericPrice = Number(item.salePrice ?? item.curPrice ?? item.maxSalePrice ?? 0);
+    const price = sellable && Number.isFinite(numericPrice) && numericPrice > 0
+      ? String(numericPrice)
+      : "";
+
+    const key = sha(marketCode + "|" + modelCode.toLowerCase()).slice(0, 24);
+    const row = {
+      key,
+      market: marketCode,
+      url: source.url,
+      name,
+      sku: modelCode,
+      model: modelCode,
+      brand: "Samsung",
+      offers: {
+        price,
+        currency: marketCode === "kr" ? "KRW" : "",
+        availability: sellable
+          ? "https://schema.org/InStock"
+          : "https://schema.org/OutOfStock"
+      },
+      specs: [],
+      captured_at: capturedAt,
+      catalog_source_id: source.id,
+      catalog_source_url: source.url,
+      catalog_category: source.category,
+      lifecycle_status: lifecycleStatus,
+      catalog_verified_at: capturedAt,
+      catalog_sale_status: saleStatCd,
+      catalog_stock_qty: Number.isFinite(stockQty) ? stockQty : null
+    };
+
+    row.fingerprint = sha(JSON.stringify({
+      name: row.name,
+      sku: row.sku,
+      offers: row.offers,
+      lifecycle_status: lifecycleStatus,
+      catalog_sale_status: saleStatCd
+    }));
+
+    rows.push(row);
+  }
+
+  return rows;
+}
+
 async function renderCatalogHtml(url) {
   const chromePath = process.env.CHROME_PATH || "";
   if (!chromePath) throw new Error("CHROME_PATH is not configured for rendered catalog fallback");
@@ -114,12 +218,6 @@ async function renderCatalogHtml(url) {
       if (!models.length) return;
 
       catalogPayloads.push({ url: responseUrl, contentType, body, models });
-      if (models.length >= 3) {
-        const firstModel = models[0];
-        const at = body.toUpperCase().indexOf(firstModel);
-        const sample = at >= 0 ? body.slice(Math.max(0, at - 220), at + 520) : body.slice(0, 740);
-        console.error("catalog API candidate: models=" + models.length + " url=" + responseUrl + " sample=" + sample.replace(/\s+/g, " ").slice(0, 700));
-      }
     } catch {}
   });
 
@@ -208,41 +306,28 @@ async function renderCatalogHtml(url) {
       if (didNotMove && stagnant >= 8) break;
     }
 
-    console.error("catalog rendered: accumulated model cards=" + fragmentsByModel.size + "; payloads=" + catalogPayloads.length);
+    console.error("catalog rendered: accumulated visible model cards=" + fragmentsByModel.size + "; payloads=" + catalogPayloads.length);
 
-    for (const payload of catalogPayloads.filter((item) => item.url.includes("/cxhr/pf/goodsList"))) {
-      try {
-        const goods = findCatalogGoods(JSON.parse(payload.body));
-        const unique = [...new Map(goods.map((item) => [String(item.mdlCode).toUpperCase(), item])).values()];
-        const statuses = {};
-        for (const item of unique) {
-          const key = String(item.saleStatCd ?? "null");
-          statuses[key] = (statuses[key] || 0) + 1;
-        }
-        console.error("catalog goodsList debug: unique=" + unique.length + " saleStatCd=" + JSON.stringify(statuses));
-        console.error("catalog goodsList sample=" + JSON.stringify(unique.slice(0, 8).map((item) => ({
-          goodsNm: item.goodsNm,
-          mdlCode: item.mdlCode,
-          saleStatCd: item.saleStatCd,
-          salePrice: item.salePrice,
-          soldOutYn: item.soldOutYn,
-          restockGoodsYn: item.goodsMdlExcpt?.restockGoodsYn,
-          stockQty: item.stockQty,
-          buyNowYn: item.buyNowYn
-        }))));
-      } catch {}
+    const goodsListUrl = catalogPayloads.find((item) => item.url.includes("/cxhr/pf/goodsList"))?.url || "";
+    let apiGoods = await fetchCatalogGoodsPages(page.context(), goodsListUrl);
+
+    if (!apiGoods.length) {
+      const fallback = [];
+      for (const payload of catalogPayloads.filter((item) => item.url.includes("/cxhr/pf/goodsList"))) {
+        try {
+          fallback.push(...findCatalogGoods(JSON.parse(payload.body)));
+        } catch {}
+      }
+      apiGoods = [...new Map(
+        fallback.map((item) => [String(item.mdlCode || "").toUpperCase(), item])
+      ).values()];
     }
 
-    const payloadText = catalogPayloads
-      .map((payload) => {
-        try {
-          return JSON.stringify(JSON.parse(payload.body), null, 2);
-        } catch {
-          return payload.body;
-        }
-      })
-      .join("\n\n");
-    return [...fragmentsByModel.values()].join("\n\n") + "\n\n" + payloadText;
+    console.error("catalog rendered: API catalog goods=" + apiGoods.length);
+    return {
+      visibleText: [...fragmentsByModel.values()].join("\n\n"),
+      apiGoods
+    };
   } finally {
     await page.close();
   }
@@ -642,7 +727,8 @@ function plausibleCatalogName(line) {
   if (/^(?:NEW|Image:|선택됨|블루투스|LTE|자급제|구매하기|더 알아보기|비교하기|혜택가|기준가|최대 혜택가|적립 예정 포인트)$/i.test(value)) return false;
   if (/^[0-9,.]+\s*(?:원|GB|TB|mm|%|P)?$/i.test(value)) return false;
   if (/^(?:색상|컬러|스토리지|저장 용량|연결 방식|평점|리뷰수)/i.test(value)) return false;
-  return /[A-Za-z가-힣]/.test(value);
+  if (/[{}:;]|^\.|"?(?:mdlCode|grpPath|imgChipURL|actvPhonePlanVer)"?/i.test(value)) return false;
+  return /(?:갤럭시|Galaxy|Samsung|삼성)/i.test(value);
 }
 
 function priceFromCatalogWindow(text) {
@@ -660,7 +746,7 @@ function priceFromCatalogWindow(text) {
 
 function parseCatalogListing(html, source) {
   const lines = catalogTextLines(html);
-  const pattern = new RegExp(source.model_pattern || "SM-[A-Z0-9-]+", "i");
+  const pattern = new RegExp(source.model_pattern || "SM-[A-Z][0-9]{3}[A-Z0-9]{4,12}", "i");
   const rows = [];
   const seen = new Set();
 
@@ -1198,9 +1284,11 @@ for (const source of catalogSourceDefs) {
 
     let rows = parseCatalogListing(html, source);
     if (!rows.length) {
-      console.error("catalog " + source.id + ": static HTML has no product cards; using rendered fallback");
-      const renderedHtml = await renderCatalogHtml(source.url);
-      rows = parseCatalogListing(renderedHtml, source);
+      console.error("catalog " + source.id + ": static HTML has no product cards; using rendered/API fallback");
+      const rendered = await renderCatalogHtml(source.url);
+      rows = rendered.apiGoods.length
+        ? parseCatalogApiGoods(rendered.apiGoods, source)
+        : parseCatalogListing(rendered.visibleText, source);
     }
 
     for (const row of rows) catalogRows.push(row);
