@@ -67,7 +67,8 @@
         "brand",
         "product_url",
         "source_urls",
-        "captured_at"
+        "captured_at",
+        "lifecycle_status"
       ],
       "properties": {
         "market_product_key": {
@@ -114,6 +115,39 @@
         },
         "captured_at": {
           "type": "string",
+          "format": "date-time"
+        },
+        "lifecycle_status": {
+          "enum": [
+            "current_sellable",
+            "current_unavailable",
+            "legacy",
+            "unverified"
+          ]
+        },
+        "catalog_current": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "sellable": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "catalog_source_id": {
+          "type": "string"
+        },
+        "catalog_source_url": {
+          "type": "string"
+        },
+        "catalog_verified_at": {
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         }
       },
@@ -211,6 +245,13 @@
         },
         "fingerprint": {
           "type": "string"
+        },
+        "lifecycle_status": {
+          "enum": [
+            "current_sellable",
+            "current_unavailable",
+            "unverified"
+          ]
         }
       },
       "additionalProperties": false
@@ -295,6 +336,12 @@
         },
         "fingerprint": {
           "type": "string"
+        },
+        "lifecycle_status": {
+          "enum": [
+            "current_sellable",
+            "unverified"
+          ]
         }
       },
       "additionalProperties": false
