@@ -70,6 +70,68 @@ function truncate(value = "", max = 210) {
   return text.slice(0, max).trimEnd() + "…";
 }
 
+function productIdentity(row) {
+  return row.model || row.sku || row.name || row.key || "Product";
+}
+
+function groupHistoryRecords(rows) {
+  const groups = new Map();
+
+  for (const row of rows) {
+    const key = row.key || `${row.market}:${productIdentity(row)}`;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(row);
+  }
+
+  return [...groups.entries()].map(([key, versions]) => {
+    versions.sort((a, b) => new Date(a.captured_at || 0) - new Date(b.captured_at || 0));
+    return {
+      key,
+      market: versions[versions.length - 1]?.market || "",
+      latest: versions[versions.length - 1],
+      first: versions[0],
+      versions
+    };
+  }).sort((a, b) => {
+    const aTime = new Date(a.latest?.captured_at || 0).getTime();
+    const bTime = new Date(b.latest?.captured_at || 0).getTime();
+    return bTime - aTime;
+  });
+}
+
+function historyChangeList(current, previous) {
+  if (!previous) return [{ label: "Initial capture", initial: true }];
+
+  const fields = [
+    ["Name", current.name || "", previous.name || ""],
+    ["Model", current.model || "", previous.model || ""],
+    ["SKU", current.sku || "", previous.sku || ""],
+    ["Price", formatPrice(current.offers), formatPrice(previous.offers)],
+    ["Availability", availabilityLabel(current.offers?.availability), availabilityLabel(previous.offers?.availability)],
+    ["Source", current.url || "", previous.url || ""]
+  ];
+
+  return fields
+    .filter(([, now, before]) => String(now) !== String(before))
+    .map(([label, now, before]) => ({
+      label: before && now ? `${label}: ${before} → ${now}` : `${label}: ${now || "removed"}`,
+      initial: false
+    }));
+}
+
+function historySearchText(group) {
+  return group.versions.map((row) => [
+    row.name,
+    row.model,
+    row.sku,
+    row.brand,
+    row.url,
+    row.offers?.price,
+    row.offers?.currency,
+    row.offers?.availability
+  ].filter(Boolean).join(" ")).join(" ").toLowerCase();
+}
+
 async function fetchJson(url) {
   const response = await fetch(url);
   if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
@@ -148,18 +210,24 @@ async function loadExplorer() {
 
   try {
     if (!explorer.cache.has(key)) {
+      const dataUrl = explorer.dataset === "history"
+        ? `./data/history/products/${explorer.market}.jsonl`
+        : `./data/current/${explorer.market}/${explorer.dataset}.jsonl`;
+
       const [dataResponse, meta] = await Promise.all([
-        fetch(`./data/current/${explorer.market}/${explorer.dataset}.jsonl`),
+        fetch(dataUrl),
         fetchJson(`./data/current/${explorer.market}/meta.json`)
       ]);
       if (!dataResponse.ok) throw new Error(`${dataResponse.status} ${dataResponse.statusText}`);
-      const rows = parseJsonl(await dataResponse.text());
-      explorer.cache.set(key, { rows, meta });
+      const parsedRows = parseJsonl(await dataResponse.text());
+      const rows = explorer.dataset === "history" ? groupHistoryRecords(parsedRows) : parsedRows;
+      explorer.cache.set(key, { rows, meta, versionCount: parsedRows.length });
     }
 
     const cached = explorer.cache.get(key);
     explorer.rows = cached.rows;
     explorer.meta = cached.meta;
+    explorer.versionCount = cached.versionCount || null;
     renderExplorer();
   } catch (error) {
     explorer.rows = [];
@@ -187,6 +255,10 @@ function filteredRows() {
       ].some((value) => String(value || "").toLowerCase().includes(q));
     }
 
+    if (explorer.dataset === "history") {
+      return historySearchText(row).includes(q);
+    }
+
     return [
       row.title,
       row.description,
@@ -205,14 +277,23 @@ function renderExplorer() {
   const rows = filteredRows();
   const shown = rows.slice(0, explorer.visible);
 
-  const noun = explorer.dataset === "products" ? "products" : "pages";
-  summary.textContent = explorer.query
-    ? `${rows.length} matching ${noun} · ${explorer.rows.length} total`
-    : `${explorer.rows.length} ${noun} in current snapshot`;
-
-  captured.textContent = explorer.meta?.captured_at
-    ? `Captured ${formatCaptured(explorer.meta.captured_at)}`
-    : "";
+  if (explorer.dataset === "history") {
+    const versions = explorer.versionCount || explorer.rows.reduce((sum, group) => sum + group.versions.length, 0);
+    summary.textContent = explorer.query
+      ? `${rows.length} matching tracked products · ${explorer.rows.length} total`
+      : `${explorer.rows.length} tracked products · ${versions} saved versions`;
+    captured.textContent = explorer.meta?.captured_at
+      ? `Latest crawl ${formatCaptured(explorer.meta.captured_at)}`
+      : "";
+  } else {
+    const noun = explorer.dataset === "products" ? "products" : "pages";
+    summary.textContent = explorer.query
+      ? `${rows.length} matching ${noun} · ${explorer.rows.length} total`
+      : `${explorer.rows.length} ${noun} in current snapshot`;
+    captured.textContent = explorer.meta?.captured_at
+      ? `Captured ${formatCaptured(explorer.meta.captured_at)}`
+      : "";
+  }
 
   if (!rows.length) {
     results.innerHTML = '<div class="empty-state">No matching records. Try another keyword.</div>';
@@ -221,6 +302,34 @@ function renderExplorer() {
   }
 
   results.innerHTML = shown.map((row, index) => {
+    if (explorer.dataset === "history") {
+      const latest = row.latest || {};
+      const first = row.first || latest;
+      const price = formatPrice(latest.offers);
+      const latestChanges = row.versions.length > 1
+        ? historyChangeList(latest, row.versions[row.versions.length - 2]).length
+        : 0;
+      const range = row.versions.length > 1
+        ? `${formatCaptured(first.captured_at)} → ${formatCaptured(latest.captured_at)}`
+        : `First captured ${formatCaptured(latest.captured_at)}`;
+
+      return `
+        <button class="result-row" type="button" data-result-index="${index}">
+          <div class="result-main">
+            <div class="result-kicker">History · ${escapeHtml(latest.market?.toUpperCase() || explorer.market.toUpperCase())}</div>
+            <h3 class="result-title">${escapeHtml(latest.name || latest.model || latest.sku || "Unnamed product")}</h3>
+            <p class="result-description">${escapeHtml(range)}</p>
+          </div>
+          <div class="result-side">
+            ${price ? `<span class="result-price">${escapeHtml(price)}</span>` : ""}
+            <span class="history-version-count">${row.versions.length} version${row.versions.length === 1 ? "" : "s"}</span>
+            <span class="result-meta">${row.versions.length > 1 ? `${latestChanges} latest change${latestChanges === 1 ? "" : "s"}` : "Waiting for next change"}</span>
+            <span class="result-arrow">↗</span>
+          </div>
+        </button>
+      `;
+    }
+
     if (explorer.dataset === "products") {
       const price = formatPrice(row.offers);
       const availability = availabilityLabel(row.offers?.availability);
@@ -277,6 +386,13 @@ function detailRow(label, value) {
 function openDetail(row) {
   const dialog = $("#data-dialog");
   const isProduct = explorer.dataset === "products";
+  const isHistory = explorer.dataset === "history";
+
+  if (isHistory) {
+    openHistoryDetail(row);
+    return;
+  }
+
   $("#dialog-type").textContent = isProduct ? "PRODUCT RECORD" : "PAGE RECORD";
   $("#dialog-title").textContent = isProduct
     ? (row.name || row.model || row.sku || "Product")
@@ -316,6 +432,80 @@ function openDetail(row) {
   dialog.showModal();
 }
 
+function openHistoryDetail(group) {
+  const dialog = $("#data-dialog");
+  const versions = [...group.versions].sort((a, b) => new Date(b.captured_at || 0) - new Date(a.captured_at || 0));
+  const latest = versions[0] || {};
+  const oldest = versions[versions.length - 1] || latest;
+
+  $("#dialog-type").textContent = "PRODUCT HISTORY";
+  $("#dialog-title").textContent = latest.name || latest.model || latest.sku || "Product history";
+  $("#dialog-source").href = latest.url || "#";
+
+  const changedVersions = versions.filter((version, index) => {
+    if (index === versions.length - 1) return false;
+    return historyChangeList(version, versions[index + 1]).length > 0;
+  }).length;
+
+  const timeline = versions.map((version, index) => {
+    const previous = index === versions.length - 1 ? null : versions[index + 1];
+    const changes = historyChangeList(version, previous);
+    const price = formatPrice(version.offers);
+    const availability = availabilityLabel(version.offers?.availability);
+
+    return `
+      <div class="history-entry">
+        <div class="history-date">${escapeHtml(formatCaptured(version.captured_at))}</div>
+        <div class="history-content">
+          <div class="history-headline">
+            ${price ? `<span class="history-price">${escapeHtml(price)}</span>` : ""}
+            ${availability ? `<span class="history-status">${escapeHtml(availability)}</span>` : ""}
+          </div>
+          <div class="change-list">
+            ${changes.length
+              ? changes.map((change) => `<span class="change-chip${change.initial ? " initial" : ""}">${escapeHtml(change.label)}</span>`).join("")
+              : '<span class="change-chip">Fingerprint changed</span>'}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  $("#dialog-body").innerHTML = `
+    <div class="history-summary-grid">
+      <div class="history-stat">
+        <strong>${versions.length}</strong>
+        <span>Saved versions</span>
+      </div>
+      <div class="history-stat">
+        <strong>${changedVersions}</strong>
+        <span>Change events</span>
+      </div>
+      <div class="history-stat">
+        <strong>${escapeHtml(formatPrice(latest.offers) || "—")}</strong>
+        <span>Latest price</span>
+      </div>
+    </div>
+
+    <div class="detail-grid">
+      ${detailRow("Market", latest.market)}
+      ${detailRow("Model", latest.model)}
+      ${detailRow("SKU", latest.sku)}
+      ${detailRow("First captured", formatCaptured(oldest.captured_at))}
+      ${detailRow("Latest captured", formatCaptured(latest.captured_at))}
+      ${detailRow("Product key", group.key)}
+    </div>
+
+    ${versions.length === 1
+      ? '<div class="history-note">Only the initial version exists right now. A new version will be added automatically when a future crawl detects a changed product fingerprint, such as a price, availability, name, model, SKU, or other normalized product field.</div>'
+      : ""}
+
+    <div class="history-timeline">${timeline}</div>
+  `;
+
+  dialog.showModal();
+}
+
 function closeDetail() {
   const dialog = $("#data-dialog");
   if (dialog.open) dialog.close();
@@ -335,7 +525,9 @@ function setupExplorerEvents() {
       $$(".dataset-tab").forEach((tab) => tab.classList.toggle("active", tab === button));
       $("#explorer-search").placeholder = explorer.dataset === "products"
         ? "Search products…"
-        : "Search page titles or text…";
+        : explorer.dataset === "pages"
+          ? "Search page titles or text…"
+          : "Search product history…";
       loadExplorer();
     });
   });
