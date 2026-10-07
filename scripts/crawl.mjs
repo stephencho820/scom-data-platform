@@ -367,19 +367,14 @@ function priority(url) {
   return -score;
 }
 
-function chooseBatch(urls, existingPages, previousCursor, requestedBatch) {
+function chooseBatch(urls, visitedUrls, previousCursor, requestedBatch) {
   if (!urls.length || requestedBatch <= 0) return { selected: [], nextCursor: previousCursor || 0, wrapped: false };
 
   const size = Math.min(requestedBatch, urls.length);
-  const known = new Set();
-  for (const page of existingPages) {
-    for (const candidate of [page.discovered_url, page.url, page.canonical_url]) if (candidate) known.add(candidate);
-  }
-
   const selected = [];
   const chosen = new Set();
   for (const url of urls) {
-    if (!known.has(url)) {
+    if (!visitedUrls.has(url)) {
       selected.push(url);
       chosen.add(url);
       if (selected.length >= size) return { selected, nextCursor: previousCursor || 0, wrapped: false };
@@ -413,7 +408,7 @@ await mkdir(manifestDir, { recursive: true });
 const existingPages = await readJsonl(path.join(currentDir, "pages.jsonl"));
 const existingProducts = await readJsonl(path.join(currentDir, "products.jsonl"));
 const existingMeta = await readJson(metaFile, {});
-const previousManifest = await readJson(manifestFile, { cursor: 0, cycle: 0 });
+const previousManifest = await readJson(manifestFile, { cursor: 0, cycle: 0, visited_urls: [] });
 
 const robotsUrl = new URL("/robots.txt", base).href;
 let robots = { sitemaps: [], disallow: [], allow: [] };
@@ -456,6 +451,14 @@ const cursorBase = previousManifest.url_hash === urlHash
   ? Number(previousManifest.cursor || 0)
   : Math.min(Number(previousManifest.cursor || 0), Math.max(crawlableUrls.length - 1, 0));
 
+const crawlableSet = new Set(crawlableUrls);
+const visitedUrls = new Set(previousManifest.visited_urls || []);
+for (const page of existingPages) {
+  for (const candidate of [page.discovered_url, page.url, page.canonical_url]) {
+    if (candidate && crawlableSet.has(candidate)) visitedUrls.add(candidate);
+  }
+}
+
 let cycle = Number(previousManifest.cycle || 0);
 let selected = [];
 let nextCursor = cursorBase;
@@ -464,7 +467,7 @@ let wrapped = false;
 if (explicitUrl) {
   selected = [explicitUrl];
 } else if (!discoverOnly) {
-  const batch = chooseBatch(crawlableUrls, existingPages, cursorBase, batchPages);
+  const batch = chooseBatch(crawlableUrls, visitedUrls, cursorBase, batchPages);
   selected = batch.selected;
   nextCursor = batch.nextCursor;
   wrapped = batch.wrapped;
@@ -472,7 +475,7 @@ if (explicitUrl) {
 }
 
 const manifest = {
-  version: 2,
+  version: 3,
   market: marketCode,
   base_url: market.baseUrl,
   discovered_at: capturedAt,
@@ -484,21 +487,15 @@ const manifest = {
   url_hash: urlHash,
   cursor: nextCursor,
   cycle,
+  visited_urls_total: visitedUrls.size,
+  visited_urls: [...visitedUrls].sort(),
   urls: crawlableUrls
 };
 
 await writeFile(manifestFile, JSON.stringify(manifest, null, 2) + "\n");
 
 if (discoverOnly) {
-  const coveredSet = new Set();
-  const crawlableSet = new Set(crawlableUrls);
-  for (const page of existingPages) {
-    for (const candidate of [page.discovered_url, page.url, page.canonical_url]) {
-      if (candidate && crawlableSet.has(candidate)) coveredSet.add(candidate);
-    }
-  }
-
-  const coveragePercent = crawlableUrls.length ? Math.round((coveredSet.size / crawlableUrls.length) * 10000) / 100 : 0;
+  const coveragePercent = crawlableUrls.length ? Math.round((visitedUrls.size / crawlableUrls.length) * 10000) / 100 : 0;
 
   await writeFile(metaFile, JSON.stringify({
     ...existingMeta,
@@ -509,7 +506,8 @@ if (discoverOnly) {
     failed_sitemaps: discovery.failedSitemaps.length,
     discovered_urls_total: discoveredUrls.length,
     crawlable_urls_total: crawlableUrls.length,
-    coverage_pages: coveredSet.size,
+    coverage_urls: visitedUrls.size,
+    coverage_pages: visitedUrls.size,
     coverage_percent: coveragePercent,
     crawl_cursor: nextCursor,
     crawl_cycle: cycle
@@ -525,12 +523,14 @@ console.error("inventory: " + marketCode + ": " + crawlableUrls.length + " crawl
 
 const crawledPages = [];
 const crawledProducts = new Map();
+const successfulUrls = new Set();
 let failures = 0;
 
 for (let index = 0; index < selected.length; index++) {
   const discoveredUrl = selected[index];
   try {
     const { text: html, finalUrl, contentType } = await fetchText(discoveredUrl);
+    successfulUrls.add(discoveredUrl);
     if (!/html/i.test(contentType) && !/<html[\s>]/i.test(html)) continue;
     const page = extractPage(html, finalUrl, discoveredUrl);
     if (page.text) crawledPages.push(page);
@@ -569,15 +569,13 @@ for (const product of crawledProducts.values()) {
 const allPages = [...pageMap.values()].sort((a, b) => String(a.canonical_url || a.url || "").localeCompare(String(b.canonical_url || b.url || "")));
 const allProducts = [...productMap.values()].sort((a, b) => String(a.name || a.model || a.sku || "").localeCompare(String(b.name || b.model || b.sku || "")));
 
-const crawlableSet = new Set(crawlableUrls);
-const coveredSet = new Set();
-for (const page of allPages) {
-  for (const candidate of [page.discovered_url, page.url, page.canonical_url]) {
-    if (candidate && crawlableSet.has(candidate)) coveredSet.add(candidate);
-  }
-}
+for (const url of successfulUrls) visitedUrls.add(url);
 
-const coveragePercent = crawlableUrls.length ? Math.round((coveredSet.size / crawlableUrls.length) * 10000) / 100 : 0;
+manifest.visited_urls_total = visitedUrls.size;
+manifest.visited_urls = [...visitedUrls].sort();
+await writeFile(manifestFile, JSON.stringify(manifest, null, 2) + "\n");
+
+const coveragePercent = crawlableUrls.length ? Math.round((visitedUrls.size / crawlableUrls.length) * 10000) / 100 : 0;
 
 await writeFile(path.join(currentDir, "pages.jsonl"), toJsonl(allPages));
 await writeFile(path.join(currentDir, "products.jsonl"), toJsonl(allProducts));
@@ -596,11 +594,12 @@ await writeFile(metaFile, JSON.stringify({
   batch_requested: selected.length,
   batch_success: crawledPages.length,
   failures,
-  coverage_pages: coveredSet.size,
+  coverage_urls: visitedUrls.size,
+  coverage_pages: visitedUrls.size,
   coverage_percent: coveragePercent,
   pages_written: allPages.length,
   products_written: allProducts.length,
   history_versions: history.length
 }, null, 2) + "\n");
 
-console.error("done: " + marketCode + ": " + crawledPages.length + "/" + selected.length + " batch pages ok; " + allPages.length + " total pages stored; " + coveredSet.size + "/" + crawlableUrls.length + " sitemap coverage (" + coveragePercent + "%); " + allProducts.length + " products; " + failures + " failures");
+console.error("done: " + marketCode + ": " + crawledPages.length + "/" + selected.length + " batch pages ok; " + allPages.length + " total unique pages stored; " + visitedUrls.size + "/" + crawlableUrls.length + " sitemap URLs visited (" + coveragePercent + "%); " + allProducts.length + " products; " + failures + " failures");
