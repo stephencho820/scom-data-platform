@@ -1,0 +1,10 @@
+{
+  "market": "uk",
+  "base_url": "https://www.samsung.com/uk/",
+  "captured_at": "2026-10-07T06:46:24.131Z",
+  "requested_urls": 12,
+  "pages_written": 12,
+  "products_written": 41,
+  "failures": 0,
+  "history_versions": 41
+}

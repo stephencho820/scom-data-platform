@@ -1,0 +1,10 @@
+{
+  "market": "us",
+  "base_url": "https://www.samsung.com/us/",
+  "captured_at": "2026-10-07T06:45:57.029Z",
+  "requested_urls": 12,
+  "pages_written": 12,
+  "products_written": 61,
+  "failures": 0,
+  "history_versions": 61
+}
