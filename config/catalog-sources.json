@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "description": "Market-local product finder / product listing pages used as the source of truth for current catalog lifecycle. Presence on a catalog source means current catalog; absence means legacy once the source has been successfully captured.",
+  "markets": {
+    "kr": [
+      {
+        "id": "smartphones",
+        "url": "https://www.samsung.com/sec/smartphones/all-smartphones/",
+        "category": "smartphones",
+        "model_pattern": "SM-[A-Z0-9-]+"
+      },
+      {
+        "id": "watches",
+        "url": "https://www.samsung.com/sec/watches/all-watches/",
+        "category": "watches",
+        "model_pattern": "SM-[A-Z0-9-]+"
+      }
+    ]
+  }
+}
