@@ -225,15 +225,50 @@ async function loadExplorer() {
     if (!explorer.cache.has(key)) {
       const dataUrl = explorer.dataset === "history"
         ? `./data/history/products/${explorer.market}.jsonl`
-        : `./data/current/${explorer.market}/${explorer.dataset}.jsonl`;
+        : explorer.dataset === "products"
+          ? `./data/marts/${explorer.market}/product_master.jsonl`
+          : `./data/current/${explorer.market}/pages.jsonl`;
 
-      const [dataResponse, meta] = await Promise.all([
+      const requests = [
         fetch(dataUrl),
         fetchJson(`./data/current/${explorer.market}/meta.json`)
-      ]);
+      ];
+      if (explorer.dataset === "products") requests.push(fetch(`./data/marts/${explorer.market}/market_offers.jsonl`));
+      if (explorer.dataset === "history") requests.push(fetch(`./data/marts/${explorer.market}/product_master.jsonl`));
+
+      const responses = await Promise.all(requests);
+      const dataResponse = responses[0];
+      const meta = responses[1];
       if (!dataResponse.ok) throw new Error(`${dataResponse.status} ${dataResponse.statusText}`);
       const parsedRows = parseJsonl(await dataResponse.text());
-      const rows = explorer.dataset === "history" ? groupHistoryRecords(parsedRows) : parsedRows;
+
+      let rows = parsedRows;
+      if (explorer.dataset === "products") {
+        const offerResponse = responses[2];
+        const offers = offerResponse?.ok ? parseJsonl(await offerResponse.text()) : [];
+        const offerByKey = new Map(offers.map((offer) => [offer.market_product_key, offer]));
+        rows = parsedRows.map((product) => {
+          const offer = offerByKey.get(product.market_product_key);
+          return {
+            ...product,
+            key: product.market_product_key,
+            url: product.product_url,
+            offers: offer ? { price: offer.price, currency: offer.currency, availability: offer.availability } : null
+          };
+        }).sort((a, b) => {
+          const rank = { current_sellable: 0, current_unavailable: 1, unverified: 2, legacy: 3 };
+          return (rank[a.lifecycle_status] ?? 9) - (rank[b.lifecycle_status] ?? 9) ||
+            String(a.name || "").localeCompare(String(b.name || ""));
+        });
+      } else if (explorer.dataset === "history") {
+        const masterResponse = responses[2];
+        const master = masterResponse?.ok ? parseJsonl(await masterResponse.text()) : [];
+        const lifecycle = new Map(master.map((product) => [product.market_product_key, product.lifecycle_status]));
+        rows = groupHistoryRecords(parsedRows)
+          .map((group) => ({ ...group, lifecycle_status: lifecycle.get(group.key) || "unverified" }))
+          .filter((group) => group.lifecycle_status !== "legacy");
+      }
+
       explorer.cache.set(key, { rows, meta, versionCount: parsedRows.length });
     }
 
@@ -262,6 +297,7 @@ function filteredRows() {
         row.model,
         row.brand,
         row.url,
+        row.lifecycle_status,
         row.offers?.price,
         row.offers?.currency,
         row.offers?.availability
@@ -350,7 +386,7 @@ function renderExplorer() {
       return `
         <button class="result-row" type="button" data-result-index="${index}">
           <div class="result-main">
-            <div class="result-kicker">Product · ${escapeHtml(row.market?.toUpperCase() || explorer.market.toUpperCase())}</div>
+            <div class="result-kicker">Product · ${escapeHtml(row.market?.toUpperCase() || explorer.market.toUpperCase())} · ${escapeHtml((row.lifecycle_status || "unverified").replaceAll("_", " "))}</div>
             <h3 class="result-title">${escapeHtml(row.name || row.model || row.sku || "Unnamed product")}</h3>
             <p class="result-description">${escapeHtml(identity || truncate(row.url, 140))}</p>
           </div>
@@ -419,11 +455,12 @@ function openDetail(row) {
         ${detailRow("Model", row.model)}
         ${detailRow("SKU", row.sku)}
         ${detailRow("Brand", row.brand)}
+        ${detailRow("Lifecycle", (row.lifecycle_status || "unverified").replaceAll("_", " "))}
         ${detailRow("Price", formatPrice(row.offers))}
         ${detailRow("Availability", availabilityLabel(row.offers?.availability))}
         ${detailRow("Captured", formatCaptured(row.captured_at))}
         ${detailRow("Product key", row.key)}
-        ${detailRow("Fingerprint", row.fingerprint)}
+        ${detailRow("Catalog source", row.catalog_source_url)}
         ${detailRow("Source URL", row.url)}
       </div>
     `;
