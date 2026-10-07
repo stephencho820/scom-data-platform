@@ -1,31 +1,33 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { gunzipSync } from "node:zlib";
 import path from "node:path";
 
 const ROOT = process.cwd();
-const USER_AGENT = "ScomDataPlatform/0.1 (+https://github.com/stephencho820/scom-data-platform)";
-const DEFAULT_MAX = 80;
-const DEFAULT_DELAY = 700;
+const USER_AGENT = "ScomDataPlatform/0.2 (+https://github.com/stephencho820/scom-data-platform)";
+const DEFAULT_BATCH = 120;
+const DEFAULT_DELAY = 500;
 const MAX_TEXT_CHARS = 50000;
 const REQUEST_TIMEOUT = 20000;
 
 function arg(name, fallback) {
-  const prefix = `--${name}=`;
+  const prefix = "--" + name + "=";
   const item = process.argv.find((value) => value.startsWith(prefix));
   return item ? item.slice(prefix.length) : fallback;
 }
 
 const marketCode = arg("market", "us");
-const maxPages = Number(arg("max", DEFAULT_MAX));
+const batchPages = Number(arg("batch", DEFAULT_BATCH));
 const delayMs = Number(arg("delay", DEFAULT_DELAY));
 const explicitUrl = arg("url", "");
+const discoverOnly = process.argv.includes("--discover-only") || batchPages === 0;
 
 const registry = JSON.parse(await readFile(path.join(ROOT, "config/markets.json"), "utf8"));
 const market = registry.markets.find((item) => item.code === marketCode);
-if (!market) throw new Error(`Unknown market: ${marketCode}`);
+if (!market) throw new Error("Unknown market: " + marketCode);
 
 const base = new URL(market.baseUrl);
-const marketPrefix = base.pathname.endsWith("/") ? base.pathname : `${base.pathname}/`;
+const marketPrefix = base.pathname.endsWith("/") ? base.pathname : base.pathname + "/";
 const capturedAt = new Date().toISOString();
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -39,6 +41,25 @@ const decode = (value = "") =>
     .replaceAll("&#39;", "'")
     .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)));
 
+async function readJson(file, fallback = null) {
+  try {
+    return JSON.parse(await readFile(file, "utf8"));
+  } catch {
+    return fallback;
+  }
+}
+
+async function readJsonl(file) {
+  try {
+    const text = await readFile(file, "utf8");
+    return text.split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line));
+  } catch {
+    return [];
+  }
+}
+
+const toJsonl = (rows) => rows.map((row) => JSON.stringify(row)).join("\n") + (rows.length ? "\n" : "");
+
 async function fetchText(url) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
@@ -51,8 +72,20 @@ async function fetchText(url) {
       redirect: "follow",
       signal: controller.signal
     });
-    if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
-    return { text: await response.text(), finalUrl: response.url, contentType: response.headers.get("content-type") || "" };
+    if (!response.ok) throw new Error(response.status + " " + response.statusText);
+
+    const contentType = response.headers.get("content-type") || "";
+    const buffer = Buffer.from(await response.arrayBuffer());
+    let body = buffer;
+    if (/gzip/i.test(contentType) || url.toLowerCase().endsWith(".gz")) {
+      try {
+        body = gunzipSync(buffer);
+      } catch {
+        body = buffer;
+      }
+    }
+
+    return { text: body.toString("utf8"), finalUrl: response.url, contentType };
   } finally {
     clearTimeout(timer);
   }
@@ -110,32 +143,24 @@ function robotPatternMatches(url, pattern) {
   const target = parsed.pathname + parsed.search;
   const anchored = pattern.endsWith("$");
   const body = anchored ? pattern.slice(0, -1) : pattern;
-
   let escaped = "";
+
   for (const char of body) {
-    if (char === "*") {
-      escaped += ".*";
-    } else if ("\\^$+?.()|{}[]".includes(char)) {
-      escaped += `\\${char}`;
-    } else {
-      escaped += char;
-    }
+    if (char === "*") escaped += ".*";
+    else if ("\\^$+?.()|{}[]".includes(char)) escaped += "\\" + char;
+    else escaped += char;
   }
 
-  return new RegExp(`^${escaped}${anchored ? "$" : ""}`).test(target);
+  return new RegExp("^" + escaped + (anchored ? "$" : "")).test(target);
 }
 
 function allowedByRobots(url, rules) {
   const matches = [];
   for (const pattern of rules.disallow || []) {
-    if (robotPatternMatches(url, pattern)) {
-      matches.push({ type: "disallow", length: pattern.replace(/\*/g, "").length });
-    }
+    if (robotPatternMatches(url, pattern)) matches.push({ type: "disallow", length: pattern.replace(/\*/g, "").length });
   }
   for (const pattern of rules.allow || []) {
-    if (robotPatternMatches(url, pattern)) {
-      matches.push({ type: "allow", length: pattern.replace(/\*/g, "").length });
-    }
+    if (robotPatternMatches(url, pattern)) matches.push({ type: "allow", length: pattern.replace(/\*/g, "").length });
   }
   if (!matches.length) return true;
   matches.sort((a, b) => b.length - a.length || (a.type === "allow" ? -1 : 1));
@@ -143,57 +168,58 @@ function allowedByRobots(url, rules) {
 }
 
 function xmlLocs(xml) {
-  return [...xml.matchAll(/<loc>([\s\S]*?)<\/loc>/gi)].map((m) => {
-    const raw = m[1]
-      .trim()
-      .replace(/^<!\[CDATA\[/i, "")
-      .replace(/\]\]>$/i, "")
-      .trim();
+  return [...xml.matchAll(/<loc>([\s\S]*?)<\/loc>/gi)].map((match) => {
+    const raw = match[1].trim().replace(/^<!\[CDATA\[/i, "").replace(/\]\]>$/i, "").trim();
     return decode(raw);
   });
 }
 
-async function discoverUrls(sitemapSeeds, maxWanted) {
+async function discoverUrls(sitemapSeeds) {
   const queue = [...new Set(sitemapSeeds)];
   const seenMaps = new Set();
   const urls = new Set();
+  const failedSitemaps = [];
 
-  while (queue.length && urls.size < maxWanted) {
+  while (queue.length) {
     const sitemapUrl = queue.shift();
-    if (seenMaps.has(sitemapUrl) || seenMaps.size >= 40) continue;
+    if (!sitemapUrl || seenMaps.has(sitemapUrl)) continue;
     seenMaps.add(sitemapUrl);
 
     try {
       const { text } = await fetchText(sitemapUrl);
       const locs = xmlLocs(text);
       const isIndex = /<sitemapindex[\s>]/i.test(text);
+
       if (isIndex) {
         for (const loc of locs) {
-          if (queue.length < 80) queue.push(loc);
+          try {
+            const candidate = new URL(loc);
+            if (candidate.origin === base.origin && !seenMaps.has(candidate.href)) queue.push(candidate.href);
+          } catch {}
         }
       } else {
         for (const loc of locs) {
           try {
-            const u = new URL(loc);
-            if (u.origin === base.origin && u.pathname.startsWith(marketPrefix)) urls.add(u.href);
+            const candidate = new URL(loc);
+            if (candidate.origin === base.origin && candidate.pathname.startsWith(marketPrefix)) urls.add(candidate.href);
           } catch {}
-          if (urls.size >= maxWanted) break;
         }
       }
     } catch (error) {
-      console.error(`sitemap failed: ${sitemapUrl}: ${error.message}`);
+      failedSitemaps.push({ url: sitemapUrl, error: error.message });
+      console.error("sitemap failed: " + sitemapUrl + ": " + error.message);
     }
   }
 
-  return [...urls];
+  return { urls: [...urls], sitemapCount: seenMaps.size, failedSitemaps };
 }
 
 function tagAttr(html, tagName, attrName, expected) {
-  const tags = html.match(new RegExp(`<${tagName}\\b[^>]*>`, "gi")) || [];
+  const tags = html.match(new RegExp("<" + tagName + "\\b[^>]*>", "gi")) || [];
   for (const tag of tags) {
     const attrs = Object.fromEntries(
       [...tag.matchAll(/([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/g)]
-        .map((m) => [m[1].toLowerCase(), m[2] ?? m[3] ?? m[4] ?? ""])
+        .map((match) => [match[1].toLowerCase(), match[2] ?? match[3] ?? match[4] ?? ""])
     );
     const actual = (attrs[attrName] || "").toLowerCase();
     if (!expected || actual.split(/\s+/).includes(expected.toLowerCase())) return attrs;
@@ -211,10 +237,7 @@ function visibleText(html) {
       .replace(/<svg\b[\s\S]*?<\/svg>/gi, " ")
       .replace(/<img\b[^>]*>/gi, " ")
       .replace(/<[^>]+>/g, " ")
-  )
-    .replace(/\s+/g, " ")
-    .trim()
-    .slice(0, MAX_TEXT_CHARS);
+  ).replace(/\s+/g, " ").trim().slice(0, MAX_TEXT_CHARS);
 }
 
 function findProductObjects(value, out = []) {
@@ -223,11 +246,9 @@ function findProductObjects(value, out = []) {
     for (const item of value) findProductObjects(item, out);
     return out;
   }
-
   const type = value["@type"];
   const types = Array.isArray(type) ? type : [type];
   if (types.some((item) => String(item).toLowerCase() === "product")) out.push(value);
-
   for (const child of Object.values(value)) findProductObjects(child, out);
   return out;
 }
@@ -235,23 +256,24 @@ function findProductObjects(value, out = []) {
 function parseProducts(html, pageUrl) {
   const products = [];
   const scripts = [...html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
+
   for (const match of scripts) {
     try {
       const parsed = JSON.parse(match[1].trim());
-      for (const p of findProductObjects(parsed)) {
-        const offers = Array.isArray(p.offers) ? p.offers[0] : p.offers;
-        const name = String(p.name || "").trim();
-        const sku = String(p.sku || p.mpn || "").trim();
-        const model = String(p.model || p.productID || "").trim();
+      for (const product of findProductObjects(parsed)) {
+        const offers = Array.isArray(product.offers) ? product.offers[0] : product.offers;
+        const name = String(product.name || "").trim();
+        const sku = String(product.sku || product.mpn || "").trim();
+        const model = String(product.model || product.productID || "").trim();
         const keySeed = sku || model || name || pageUrl;
         const normalized = {
-          key: sha(`${marketCode}|${keySeed.toLowerCase()}`).slice(0, 24),
+          key: sha(marketCode + "|" + keySeed.toLowerCase()).slice(0, 24),
           market: marketCode,
           url: pageUrl,
           name,
           sku,
           model,
-          brand: typeof p.brand === "string" ? p.brand : (p.brand?.name || "Samsung"),
+          brand: typeof product.brand === "string" ? product.brand : (product.brand?.name || "Samsung"),
           offers: offers ? {
             price: offers.price ?? offers.lowPrice ?? "",
             currency: offers.priceCurrency ?? "",
@@ -259,6 +281,7 @@ function parseProducts(html, pageUrl) {
           } : null,
           captured_at: capturedAt
         };
+
         normalized.fingerprint = sha(JSON.stringify({
           name: normalized.name,
           sku: normalized.sku,
@@ -266,6 +289,7 @@ function parseProducts(html, pageUrl) {
           brand: normalized.brand,
           offers: normalized.offers
         }));
+
         products.push(normalized);
       }
     } catch {}
@@ -273,22 +297,25 @@ function parseProducts(html, pageUrl) {
   return products;
 }
 
-function extractPage(html, url) {
+function extractPage(html, finalUrl, discoveredUrl) {
   const title = decode((html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || "").replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();
   const metaDescription = (tagAttr(html, "meta", "name", "description") || {}).content || "";
   const canonicalAttrs = tagAttr(html, "link", "rel", "canonical");
-  const canonical = canonicalAttrs?.href ? new URL(canonicalAttrs.href, url).href : url;
+  const canonical = canonicalAttrs?.href ? new URL(canonicalAttrs.href, finalUrl).href : finalUrl;
   const text = visibleText(html);
+
   const record = {
     id: sha(canonical).slice(0, 24),
     market: marketCode,
-    url,
+    discovered_url: discoveredUrl,
+    url: finalUrl,
     canonical_url: canonical,
     title,
     description: decode(metaDescription),
     text,
     captured_at: capturedAt
   };
+
   record.content_hash = sha(JSON.stringify({
     canonical_url: record.canonical_url,
     title: record.title,
@@ -299,114 +326,253 @@ function extractPage(html, url) {
 }
 
 function priority(url) {
-  const u = url.toLowerCase();
+  const value = url.toLowerCase();
   let score = 0;
-  if (/\/smartphones?\//.test(u)) score += 5;
-  if (/\/tablets?\//.test(u)) score += 5;
-  if (/\/tvs?\//.test(u)) score += 5;
-  if (/\/monitors?\//.test(u)) score += 4;
-  if (/\/refrigerators?\//.test(u)) score += 4;
-  if (/\/washers?|\/washing-machines?\//.test(u)) score += 4;
-  if (/\/support\//.test(u)) score += 2;
-  if (/\/buy\//.test(u)) score += 4;
+  if (/\/smartphones?\//.test(value)) score += 5;
+  if (/\/tablets?\//.test(value)) score += 5;
+  if (/\/tvs?\//.test(value)) score += 5;
+  if (/\/monitors?\//.test(value)) score += 4;
+  if (/\/refrigerators?\//.test(value)) score += 4;
+  if (/\/washers?|\/washing-machines?\//.test(value)) score += 4;
+  if (/\/support\//.test(value)) score += 2;
+  if (/\/buy\//.test(value)) score += 4;
   return -score;
 }
 
-async function readJsonl(file) {
-  try {
-    const text = await readFile(file, "utf8");
-    return text.split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line));
-  } catch {
-    return [];
+function chooseBatch(urls, existingPages, previousCursor, requestedBatch) {
+  if (!urls.length || requestedBatch <= 0) return { selected: [], nextCursor: previousCursor || 0, wrapped: false };
+
+  const size = Math.min(requestedBatch, urls.length);
+  const known = new Set();
+  for (const page of existingPages) {
+    for (const candidate of [page.discovered_url, page.url, page.canonical_url]) if (candidate) known.add(candidate);
   }
+
+  const selected = [];
+  const chosen = new Set();
+  for (const url of urls) {
+    if (!known.has(url)) {
+      selected.push(url);
+      chosen.add(url);
+      if (selected.length >= size) return { selected, nextCursor: previousCursor || 0, wrapped: false };
+    }
+  }
+
+  const cursor = Math.max(0, Number(previousCursor || 0)) % urls.length;
+  let scanned = 0;
+  while (selected.length < size && scanned < urls.length) {
+    const candidate = urls[(cursor + scanned) % urls.length];
+    if (!chosen.has(candidate)) {
+      selected.push(candidate);
+      chosen.add(candidate);
+    }
+    scanned += 1;
+  }
+
+  return { selected, nextCursor: (cursor + scanned) % urls.length, wrapped: cursor + scanned >= urls.length };
 }
+
+const currentDir = path.join(ROOT, "data/current", marketCode);
+const historyDir = path.join(ROOT, "data/history/products");
+const manifestDir = path.join(ROOT, "data/manifests");
+const manifestFile = path.join(manifestDir, marketCode + ".json");
+const metaFile = path.join(currentDir, "meta.json");
+
+await mkdir(currentDir, { recursive: true });
+await mkdir(historyDir, { recursive: true });
+await mkdir(manifestDir, { recursive: true });
+
+const existingPages = await readJsonl(path.join(currentDir, "pages.jsonl"));
+const existingProducts = await readJsonl(path.join(currentDir, "products.jsonl"));
+const existingMeta = await readJson(metaFile, {});
+const previousManifest = await readJson(manifestFile, { cursor: 0, cycle: 0 });
 
 const robotsUrl = new URL("/robots.txt", base).href;
 let robots = { sitemaps: [], disallow: [], allow: [] };
 try {
   robots = parseRobots((await fetchText(robotsUrl)).text);
 } catch (error) {
-  console.error(`robots unavailable: ${error.message}`);
+  console.error("robots unavailable: " + error.message);
 }
 
 const marketSitemaps = robots.sitemaps.filter((value) => {
   try {
-    const u = new URL(value);
-    return u.origin === base.origin && u.pathname.startsWith(marketPrefix);
+    const candidate = new URL(value);
+    return candidate.origin === base.origin && candidate.pathname.startsWith(marketPrefix);
   } catch {
     return false;
   }
 });
+
 const preferredSitemap = new URL("sitemap.xml", base).href;
-const seeds = marketSitemaps.includes(preferredSitemap)
-  ? [preferredSitemap]
-  : (marketSitemaps.length ? marketSitemaps : [preferredSitemap]);
-let urls = explicitUrl ? [explicitUrl] : await discoverUrls(seeds, Math.max(maxPages * 8, maxPages));
-urls = urls
+const seeds = [...new Set(marketSitemaps.length ? [...marketSitemaps, preferredSitemap] : [preferredSitemap])];
+
+console.error("discovering sitemap inventory for " + marketCode + "...");
+const discovery = await discoverUrls(seeds);
+const discoveredUrls = discovery.urls
   .filter((url) => {
     try {
-      const u = new URL(url);
-      return u.origin === base.origin && u.pathname.startsWith(marketPrefix) && allowedByRobots(url, robots);
+      const candidate = new URL(url);
+      return candidate.origin === base.origin && candidate.pathname.startsWith(marketPrefix);
     } catch {
       return false;
     }
   })
-  .sort((a, b) => priority(a) - priority(b))
-  .slice(0, maxPages);
+  .sort((a, b) => priority(a) - priority(b) || a.localeCompare(b));
 
-if (!urls.length) throw new Error(`No crawlable URLs discovered for ${marketCode}`);
+const crawlableUrls = discoveredUrls.filter((url) => allowedByRobots(url, robots));
+if (!crawlableUrls.length && !explicitUrl) throw new Error("No crawlable URLs discovered for " + marketCode);
 
-const pages = [];
-const productMap = new Map();
-let failures = 0;
+const urlHash = sha(crawlableUrls.join("\n"));
+const cursorBase = previousManifest.url_hash === urlHash
+  ? Number(previousManifest.cursor || 0)
+  : Math.min(Number(previousManifest.cursor || 0), Math.max(crawlableUrls.length - 1, 0));
 
-for (let i = 0; i < urls.length; i++) {
-  const url = urls[i];
-  try {
-    const { text: html, finalUrl, contentType } = await fetchText(url);
-    if (!/html/i.test(contentType) && !/<html[\s>]/i.test(html)) continue;
-    const page = extractPage(html, finalUrl);
-    if (page.text) pages.push(page);
-    for (const product of parseProducts(html, page.canonical_url)) productMap.set(product.key, product);
-    console.error(`[${i + 1}/${urls.length}] ok ${url}`);
-  } catch (error) {
-    failures += 1;
-    console.error(`[${i + 1}/${urls.length}] failed ${url}: ${error.message}`);
-  }
-  if (delayMs > 0 && i < urls.length - 1) await sleep(delayMs);
+let cycle = Number(previousManifest.cycle || 0);
+let selected = [];
+let nextCursor = cursorBase;
+let wrapped = false;
+
+if (explicitUrl) {
+  selected = [explicitUrl];
+} else if (!discoverOnly) {
+  const batch = chooseBatch(crawlableUrls, existingPages, cursorBase, batchPages);
+  selected = batch.selected;
+  nextCursor = batch.nextCursor;
+  wrapped = batch.wrapped;
+  if (wrapped) cycle += 1;
 }
 
-if (!pages.length) throw new Error(`Crawl produced zero pages for ${marketCode}; previous data left untouched`);
+const manifest = {
+  version: 2,
+  market: marketCode,
+  base_url: market.baseUrl,
+  discovered_at: capturedAt,
+  sitemap_seed_count: seeds.length,
+  sitemap_count: discovery.sitemapCount,
+  failed_sitemaps: discovery.failedSitemaps,
+  discovered_urls_total: discoveredUrls.length,
+  crawlable_urls_total: crawlableUrls.length,
+  url_hash: urlHash,
+  cursor: nextCursor,
+  cycle,
+  urls: crawlableUrls
+};
 
-const currentDir = path.join(ROOT, "data/current", marketCode);
-const historyDir = path.join(ROOT, "data/history/products");
-await mkdir(currentDir, { recursive: true });
-await mkdir(historyDir, { recursive: true });
+await writeFile(manifestFile, JSON.stringify(manifest, null, 2) + "\n");
 
-const products = [...productMap.values()];
-const historyFile = path.join(historyDir, `${marketCode}.jsonl`);
+if (discoverOnly) {
+  const coveredSet = new Set();
+  const crawlableSet = new Set(crawlableUrls);
+  for (const page of existingPages) {
+    for (const candidate of [page.discovered_url, page.url, page.canonical_url]) {
+      if (candidate && crawlableSet.has(candidate)) coveredSet.add(candidate);
+    }
+  }
+
+  const coveragePercent = crawlableUrls.length ? Math.round((coveredSet.size / crawlableUrls.length) * 10000) / 100 : 0;
+
+  await writeFile(metaFile, JSON.stringify({
+    ...existingMeta,
+    market: marketCode,
+    base_url: market.baseUrl,
+    inventory_updated_at: capturedAt,
+    sitemap_count: discovery.sitemapCount,
+    failed_sitemaps: discovery.failedSitemaps.length,
+    discovered_urls_total: discoveredUrls.length,
+    crawlable_urls_total: crawlableUrls.length,
+    coverage_pages: coveredSet.size,
+    coverage_percent: coveragePercent,
+    crawl_cursor: nextCursor,
+    crawl_cycle: cycle
+  }, null, 2) + "\n");
+
+  console.error("inventory: " + marketCode + ": " + crawlableUrls.length + " crawlable URLs across " + discovery.sitemapCount + " sitemaps");
+  process.exit(0);
+}
+
+if (!selected.length) throw new Error("No URLs selected for crawl for " + marketCode);
+
+console.error("inventory: " + marketCode + ": " + crawlableUrls.length + " crawlable URLs; crawling batch of " + selected.length);
+
+const crawledPages = [];
+const crawledProducts = new Map();
+let failures = 0;
+
+for (let index = 0; index < selected.length; index++) {
+  const discoveredUrl = selected[index];
+  try {
+    const { text: html, finalUrl, contentType } = await fetchText(discoveredUrl);
+    if (!/html/i.test(contentType) && !/<html[\s>]/i.test(html)) continue;
+    const page = extractPage(html, finalUrl, discoveredUrl);
+    if (page.text) crawledPages.push(page);
+    for (const product of parseProducts(html, page.canonical_url)) crawledProducts.set(product.key, product);
+    console.error("[" + (index + 1) + "/" + selected.length + "] ok " + discoveredUrl);
+  } catch (error) {
+    failures += 1;
+    console.error("[" + (index + 1) + "/" + selected.length + "] failed " + discoveredUrl + ": " + error.message);
+  }
+  if (delayMs > 0 && index < selected.length - 1) await sleep(delayMs);
+}
+
+if (!crawledPages.length) throw new Error("Crawl produced zero pages for " + marketCode + "; previous data left untouched");
+
+const pageMap = new Map();
+for (const page of existingPages) {
+  const key = page.id || sha(page.canonical_url || page.url || JSON.stringify(page)).slice(0, 24);
+  pageMap.set(key, page);
+}
+for (const page of crawledPages) pageMap.set(page.id, page);
+
+const productMap = new Map(existingProducts.map((product) => [product.key, product]));
+for (const product of crawledProducts.values()) productMap.set(product.key, product);
+
+const historyFile = path.join(historyDir, marketCode + ".jsonl");
 const history = await readJsonl(historyFile);
 const latestFingerprint = new Map();
 for (const item of history) latestFingerprint.set(item.key, item.fingerprint);
-
-for (const product of products) {
-  if (latestFingerprint.get(product.key) !== product.fingerprint) history.push(product);
+for (const product of crawledProducts.values()) {
+  if (latestFingerprint.get(product.key) !== product.fingerprint) {
+    history.push(product);
+    latestFingerprint.set(product.key, product.fingerprint);
+  }
 }
 
-const toJsonl = (rows) => rows.map((row) => JSON.stringify(row)).join("\n") + (rows.length ? "\n" : "");
+const allPages = [...pageMap.values()].sort((a, b) => String(a.canonical_url || a.url || "").localeCompare(String(b.canonical_url || b.url || "")));
+const allProducts = [...productMap.values()].sort((a, b) => String(a.name || a.model || a.sku || "").localeCompare(String(b.name || b.model || b.sku || "")));
 
-await writeFile(path.join(currentDir, "pages.jsonl"), toJsonl(pages));
-await writeFile(path.join(currentDir, "products.jsonl"), toJsonl(products));
+const crawlableSet = new Set(crawlableUrls);
+const coveredSet = new Set();
+for (const page of allPages) {
+  for (const candidate of [page.discovered_url, page.url, page.canonical_url]) {
+    if (candidate && crawlableSet.has(candidate)) coveredSet.add(candidate);
+  }
+}
+
+const coveragePercent = crawlableUrls.length ? Math.round((coveredSet.size / crawlableUrls.length) * 10000) / 100 : 0;
+
+await writeFile(path.join(currentDir, "pages.jsonl"), toJsonl(allPages));
+await writeFile(path.join(currentDir, "products.jsonl"), toJsonl(allProducts));
 await writeFile(historyFile, toJsonl(history));
-await writeFile(path.join(currentDir, "meta.json"), JSON.stringify({
+await writeFile(metaFile, JSON.stringify({
   market: marketCode,
   base_url: market.baseUrl,
   captured_at: capturedAt,
-  requested_urls: urls.length,
-  pages_written: pages.length,
-  products_written: products.length,
+  inventory_updated_at: capturedAt,
+  sitemap_count: discovery.sitemapCount,
+  failed_sitemaps: discovery.failedSitemaps.length,
+  discovered_urls_total: discoveredUrls.length,
+  crawlable_urls_total: crawlableUrls.length,
+  crawl_cursor: nextCursor,
+  crawl_cycle: cycle,
+  batch_requested: selected.length,
+  batch_success: crawledPages.length,
   failures,
+  coverage_pages: coveredSet.size,
+  coverage_percent: coveragePercent,
+  pages_written: allPages.length,
+  products_written: allProducts.length,
   history_versions: history.length
 }, null, 2) + "\n");
 
-console.error(`done: ${marketCode}: ${pages.length} pages, ${products.length} products, ${failures} failures`);
+console.error("done: " + marketCode + ": " + crawledPages.length + "/" + selected.length + " batch pages ok; " + allPages.length + " total pages stored; " + coveredSet.size + "/" + crawlableUrls.length + " sitemap coverage (" + coveragePercent + "%); " + allProducts.length + " products; " + failures + " failures");
