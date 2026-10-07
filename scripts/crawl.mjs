@@ -110,40 +110,32 @@ function robotPatternMatches(url, pattern) {
   const target = parsed.pathname + parsed.search;
   const anchored = pattern.endsWith("$");
   const body = anchored ? pattern.slice(0, -1) : pattern;
-  const escaped = body
-    .replace(/[.+?^${}()|[\]\\]/g, "\\function parseRobots(text) {
-  const sitemaps = [];
-  const disallow = [];
-  let applies = false;
-  for (const raw of text.split(/\r?\n/)) {
-    const line = raw.split("#")[0].trim();
-    if (!line) continue;
-    const [keyRaw, ...rest] = line.split(":");
-    const key = keyRaw.trim().toLowerCase();
-    const value = rest.join(":").trim();
-    if (key === "user-agent") applies = value === "*";
-    if (key === "sitemap" && value) sitemaps.push(value);
-    if (applies && key === "disallow" && value) disallow.push(value);
-  }
-  return { sitemaps, disallow };
-}
 
-function allowedByRobots(url, rules) {
-  const pathname = new URL(url).pathname;
-  return !rules.disallow.some((prefix) => pathname.startsWith(prefix));
-}
-")
-    .replace(/\*/g, ".*");
+  let escaped = "";
+  for (const char of body) {
+    if (char === "*") {
+      escaped += ".*";
+    } else if ("\\^$+?.()|{}[]".includes(char)) {
+      escaped += `\\${char}`;
+    } else {
+      escaped += char;
+    }
+  }
+
   return new RegExp(`^${escaped}${anchored ? "$" : ""}`).test(target);
 }
 
 function allowedByRobots(url, rules) {
   const matches = [];
   for (const pattern of rules.disallow || []) {
-    if (robotPatternMatches(url, pattern)) matches.push({ type: "disallow", length: pattern.replace(/\*/g, "").length });
+    if (robotPatternMatches(url, pattern)) {
+      matches.push({ type: "disallow", length: pattern.replace(/\*/g, "").length });
+    }
   }
   for (const pattern of rules.allow || []) {
-    if (robotPatternMatches(url, pattern)) matches.push({ type: "allow", length: pattern.replace(/\*/g, "").length });
+    if (robotPatternMatches(url, pattern)) {
+      matches.push({ type: "allow", length: pattern.replace(/\*/g, "").length });
+    }
   }
   if (!matches.length) return true;
   matches.sort((a, b) => b.length - a.length || (a.type === "allow" ? -1 : 1));
