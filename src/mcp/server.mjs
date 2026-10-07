@@ -60,7 +60,7 @@ function textScore(values, terms) {
   return score;
 }
 
-async function searchProducts(query, market, limit = 8, audience) {
+async function searchProducts(query, market, limit = 8, audience, lifecycle) {
   const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
   const markets = market ? [market] : await availableMarketCodes();
   const results = [];
@@ -68,6 +68,7 @@ async function searchProducts(query, market, limit = 8, audience) {
   for (const code of markets) {
     for (const product of await productMasterFor(code)) {
       if (audience && product.audience !== audience) continue;
+      if (lifecycle && product.lifecycle_status !== lifecycle) continue;
       const relevance = textScore([
         product.name,
         product.sku,
@@ -79,7 +80,11 @@ async function searchProducts(query, market, limit = 8, audience) {
     }
   }
 
-  return results.sort((a, b) => b.relevance - a.relevance).slice(0, limit);
+  const lifecycleRank = { current_sellable: 0, current_unavailable: 1, unverified: 2, legacy: 3 };
+  return results.sort((a, b) =>
+    (lifecycleRank[a.lifecycle_status] ?? 9) - (lifecycleRank[b.lifecycle_status] ?? 9) ||
+    b.relevance - a.relevance
+  ).slice(0, limit);
 }
 
 async function findMartRow(market, mart, productKey) {
@@ -96,6 +101,12 @@ async function joinedProduct(market, productKey) {
     findMartRow(market, "commerce_options", productKey)
   ]);
 
+  if (product.lifecycle_status === "legacy") {
+    return { product, specs, offer: null, commerce_options: null, commerce_note: "Legacy product: current price and commerce data are intentionally suppressed." };
+  }
+  if (product.lifecycle_status === "current_unavailable") {
+    return { product, specs, offer, commerce_options: null, commerce_note: "Current catalog product is unavailable; price/promotions/commerce are intentionally suppressed." };
+  }
   return { product, specs, offer, commerce_options: commerce };
 }
 
@@ -188,11 +199,12 @@ function buildServer() {
         query: z.string().min(1),
         market: z.string().optional(),
         audience: z.enum(["consumer", "business", "unknown"]).optional(),
+        lifecycle: z.enum(["current_sellable", "current_unavailable", "legacy", "unverified"]).optional(),
         limit: z.number().int().min(1).max(30).default(8)
       })
     },
-    async ({ query, market, audience, limit }) =>
-      asText(await searchProducts(query, market, limit, audience))
+    async ({ query, market, audience, lifecycle, limit }) =>
+      asText(await searchProducts(query, market, limit, audience, lifecycle))
   );
 
   server.registerTool(
@@ -235,8 +247,11 @@ function buildServer() {
       })
     },
     async ({ market, product_key }) => {
+      const product = (await productMasterFor(market)).find((item) => item.market_product_key === product_key);
+      if (!product) return asError("Product not found.");
+      if (product.lifecycle_status === "legacy") return asError("Legacy product: current price/offer data is intentionally unavailable.");
       const row = await findMartRow(market, "market_offers", product_key);
-      return row ? asText(row) : asError("Market offer not found.");
+      return row ? asText(row) : asError("Current market offer not found.");
     }
   );
 
@@ -250,6 +265,11 @@ function buildServer() {
       })
     },
     async ({ market, product_key }) => {
+      const product = (await productMasterFor(market)).find((item) => item.market_product_key === product_key);
+      if (!product) return asError("Product not found.");
+      if (product.lifecycle_status === "legacy" || product.lifecycle_status === "current_unavailable") {
+        return asError("Commerce options are only exposed for currently sellable products.");
+      }
       const row = await findMartRow(market, "commerce_options", product_key);
       return row ? asText(row) : asError("Commerce options not found.");
     }
@@ -267,7 +287,8 @@ function buildServer() {
     async ({ query, markets }) => {
       const comparison = {};
       for (const market of markets) {
-        const match = (await searchProducts(query, market, 1))[0] || null;
+        const candidates = await searchProducts(query, market, 8);
+        const match = candidates.find((item) => item.lifecycle_status === "current_sellable" || item.lifecycle_status === "unverified") || candidates[0] || null;
         comparison[market] = match
           ? await joinedProduct(market, match.market_product_key)
           : null;
@@ -292,12 +313,16 @@ function buildServer() {
         readJsonl(path.join(ROOT, "data/history/commerce_options", market + ".jsonl"))
       ]);
 
+      const product = (await productMasterFor(market)).find((item) => item.market_product_key === product_key);
+      const suppressCommerceHistory = product?.lifecycle_status === "legacy";
       return asText({
         market,
         product_key,
+        lifecycle_status: product?.lifecycle_status || "unknown",
         product_versions: productVersions.filter((item) => item.key === product_key),
-        offer_versions: offerVersions.filter((item) => item.market_product_key === product_key),
-        commerce_versions: commerceVersions.filter((item) => item.market_product_key === product_key)
+        offer_versions: suppressCommerceHistory ? [] : offerVersions.filter((item) => item.market_product_key === product_key),
+        commerce_versions: suppressCommerceHistory ? [] : commerceVersions.filter((item) => item.market_product_key === product_key),
+        note: suppressCommerceHistory ? "Legacy product: historical price/commerce is intentionally suppressed from the agent interface." : null
       });
     }
   );
