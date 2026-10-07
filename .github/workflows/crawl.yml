@@ -9,10 +9,10 @@ on:
       - ".github/workflows/crawl.yml"
   workflow_dispatch:
     inputs:
-      max_pages:
-        description: Pages per market
+      batch_pages:
+        description: Pages to crawl per market after full sitemap discovery
         required: false
-        default: "80"
+        default: "250"
   schedule:
     - cron: "17 17 * * *"
 
@@ -36,29 +36,31 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Crawl configured markets sequentially
+      - name: Discover full inventory and crawl incremental batches
         id: crawl
         continue-on-error: true
         env:
-          MAX_PAGES: ${{ github.event.inputs.max_pages || '80' }}
+          BATCH_PAGES: ${{ github.event.inputs.batch_pages || '120' }}
         run: |
           node -e "const c=require('./config/markets.json'); for(const m of c.markets) console.log(m.code)" > /tmp/markets.txt
           failures=0
-          pages="$MAX_PAGES"
+          pages="$BATCH_PAGES"
           if [ "$GITHUB_EVENT_NAME" = "push" ]; then pages=12; fi
+
           while read -r market; do
             echo "=== $market ==="
-            if ! node scripts/crawl.mjs --market="$market" --max="$pages" --delay=700; then
-              echo "Market $market failed; preserving its previous snapshot."
+            if ! node scripts/crawl.mjs --market="$market" --batch="$pages" --delay=500; then
+              echo "Market $market failed; preserving its previous successful current records."
               failures=$((failures + 1))
             fi
           done < /tmp/markets.txt
+
           if [ "$failures" -gt 0 ]; then
             echo "$failures market crawl(s) failed."
             exit 1
           fi
 
-      - name: Commit changed data
+      - name: Commit changed data and manifests
         if: always()
         run: |
           if [ -z "$(git status --porcelain -- data)" ]; then
@@ -68,7 +70,7 @@ jobs:
           git config user.name "scom-data-bot"
           git config user.email "actions@users.noreply.github.com"
           git add data
-          git commit -m "data: refresh Samsung.com snapshots"
+          git commit -m "data: advance Samsung.com crawl coverage"
           git pull --rebase origin main
           git push
 
