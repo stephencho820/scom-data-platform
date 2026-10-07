@@ -85,6 +85,28 @@ async function renderCatalogHtml(url) {
   });
 
   const fragmentsByModel = new Map();
+  const catalogPayloads = [];
+
+  page.on("response", async (response) => {
+    try {
+      const contentType = String(response.headers()["content-type"] || "").toLowerCase();
+      if (!/json|javascript|text/.test(contentType)) return;
+      const responseUrl = response.url();
+      if (!responseUrl.includes("samsung.com")) return;
+
+      const body = await response.text();
+      const models = [...new Set((body.match(/SM-[A-Z0-9-]+/gi) || []).map((value) => value.toUpperCase()))];
+      if (!models.length) return;
+
+      catalogPayloads.push({ url: responseUrl, contentType, body, models });
+      if (models.length >= 3) {
+        const firstModel = models[0];
+        const at = body.toUpperCase().indexOf(firstModel);
+        const sample = at >= 0 ? body.slice(Math.max(0, at - 220), at + 520) : body.slice(0, 740);
+        console.error("catalog API candidate: models=" + models.length + " url=" + responseUrl + " sample=" + sample.replace(/\s+/g, " ").slice(0, 700));
+      }
+    } catch {}
+  });
 
   const collectVisibleProducts = async () => {
     const text = await page.locator("body").innerText().catch(() => "");
@@ -171,8 +193,17 @@ async function renderCatalogHtml(url) {
       if (didNotMove && stagnant >= 8) break;
     }
 
-    console.error("catalog rendered: accumulated model cards=" + fragmentsByModel.size);
-    return [...fragmentsByModel.values()].join("\n\n");
+    console.error("catalog rendered: accumulated model cards=" + fragmentsByModel.size + "; payloads=" + catalogPayloads.length);
+    const payloadText = catalogPayloads
+      .map((payload) => {
+        try {
+          return JSON.stringify(JSON.parse(payload.body), null, 2);
+        } catch {
+          return payload.body;
+        }
+      })
+      .join("\n\n");
+    return [...fragmentsByModel.values()].join("\n\n") + "\n\n" + payloadText;
   } finally {
     await page.close();
   }
