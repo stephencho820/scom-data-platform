@@ -315,12 +315,17 @@ function evidenceOption(page, type, label, regex, details = null, confidence = "
   };
 }
 
-function extractCommerce(page) {
+function extractCommerce(page, sourceUrl = "") {
   const pick = (type, label, regex, details = null) =>
     evidenceOption(page, type, label, regex, details);
 
   const compact = (values) => values.filter(Boolean);
-  return {
+  const value = String(sourceUrl || page?.canonical_url || page?.url || "").toLowerCase();
+  const durableEligible = /\/(smartphones?|mobile|tablets?|watches?|galaxy-watch|galaxy-buds|galaxy-ring|galaxy-book|laptops?|computers?|tvs?|televisions?|projectors?|monitors?|refrigerators?|washers?|washing-machines?|dryers?|dishwashers?|ranges?|cooktops?|wall-ovens?|microwaves?|vacuums?|air-conditioners?|air-purifiers?)\//.test(value);
+  const installEligible = /\/(tvs?|televisions?|projectors?|refrigerators?|washers?|washing-machines?|dryers?|dishwashers?|ranges?|cooktops?|wall-ovens?|microwaves?|air-conditioners?)\//.test(value);
+  const subscriptionEligible = /\/(smartphones?|mobile|tablets?|tvs?|televisions?|refrigerators?|washers?|washing-machines?|dryers?|dishwashers?|air-conditioners?)\//.test(value);
+
+  const result = {
     purchase_methods: compact([
       pick("financing", "Financing / installments", /\b(pay in monthly installments|monthly payments?|installment plan|0% finance|finance from|net 30,? 60,? 90)\b|[0-9]{1,2}개월.{0,12}(무이자|할부)|무이자.{0,12}할부/i)
     ]),
@@ -353,6 +358,18 @@ function extractCommerce(page) {
       pick("promotion", "Promotion / discount", /\b(?:claim )?cashback|save (?:up to )?[£$€]?[0-9]+|[0-9]+% (?:off|discount)|special offer\b|쿠폰.{0,20}(?:적용|할인)|[0-9]+%.{0,8}할인|즉시.{0,8}할인/i)
     ])
   };
+
+  if (!durableEligible) {
+    result.trade_in = [];
+    result.protection = [];
+  }
+  if (!subscriptionEligible) result.subscriptions = [];
+  if (!installEligible) {
+    result.installation = [];
+    result.haul_away = [];
+  }
+
+  return result;
 }
 
 function audienceFromUrl(url) {
@@ -583,7 +600,7 @@ function buildDataMarts(pages, products) {
     const isDetail = /\/buy\//i.test(sourceUrl) ||
       (!!product.sku && String(sourceUrl).toLowerCase().includes(product.sku.toLowerCase())) ||
       (!!product.model && String(sourceUrl).toLowerCase().includes(product.model.toLowerCase()));
-    const commerce = page && isDetail ? extractCommerce(page) : {
+    const commerce = page && isDetail ? extractCommerce(page, sourceUrl) : {
       purchase_methods: [],
       subscriptions: [],
       trade_in: [],
