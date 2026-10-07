@@ -18,7 +18,23 @@ Core fields:
 - category_path
 - product_url
 - source_urls
+- lifecycle_status: current_sellable | current_unavailable | legacy | unverified
+- catalog_current
+- sellable
+- catalog_source_id / catalog_source_url
+- catalog_verified_at
 - captured_at
+
+### Product lifecycle policy
+
+Product Finder / Product Listing (PF/PLP) pages are the source of truth for current catalog membership where configured.
+
+- **current_sellable** — present on the current PF/PLP and a buy action is available. Product Profile, Specs, current Price/Offer, and Commerce Options may be exposed.
+- **current_unavailable** — still present on PF/PLP but currently out of stock/unavailable. Product Profile and Specs remain available; current availability may be exposed, but price/promotions/commerce are suppressed.
+- **legacy** — product is in a lifecycle-covered category but no longer appears on the current PF/PLP. Product Profile and Specs remain available. Current Price, Offer, Commerce Options, and historical price comparisons must not be exposed as current shopping data.
+- **unverified** — lifecycle coverage has not yet been configured for that product category/market.
+
+Historical offer files may remain internally for audit/change processing, but agent-facing and public surfaces must suppress commerce/price data for legacy products.
 
 ### 2. Product Specs
 Structured technical facts for comparison.
