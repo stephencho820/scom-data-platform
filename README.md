@@ -2,7 +2,7 @@
 
 Open, text-first Samsung.com data for agents and developers.
 
-S.com Data Platform discovers public Samsung.com pages market by market, normalizes them into compact JSONL records, keeps the latest snapshot for most content, retains meaningful product changes as history, and exposes the result through MCP.
+S.com Data Platform discovers Samsung.com market inventories, selectively crawls product/commerce/support sources, normalizes them into agent-facing data marts, retains meaningful offer and commerce changes as history, and exposes the result through MCP.
 
 ## Why this exists
 
@@ -19,7 +19,7 @@ Samsung.com is global, fragmented by market, and difficult for agents to query c
 - **Agent interface:** local stdio MCP
 - **Images:** not stored
 
-See [PRD](./docs/PRD.md) and [Architecture](./docs/ARCHITECTURE.md).
+See [PRD](./docs/PRD.md), [Data Marts](./docs/DATA_MART.md), and [Architecture](./docs/ARCHITECTURE.md).
 
 ## Quick start
 
@@ -32,7 +32,7 @@ npm install
 Run one market crawl:
 
 ```bash
-npm run crawl -- --market=us --max=30
+npm run crawl -- --market=us --batch=30
 ```
 
 Run the MCP server:
@@ -41,13 +41,20 @@ Run the MCP server:
 npm run mcp
 ```
 
-The MCP currently exposes:
+The MCP is data-mart first. Primary tools include:
 
 - `list_markets`
-- `search_scom`
-- `get_page`
-- `compare_markets`
+- `search_products`
+- `get_product`
+- `get_product_specs`
+- `get_market_offer`
+- `get_commerce_options`
+- `compare_market_offers`
 - `get_product_history`
+- `get_support_resources`
+- `browse_category`
+
+`search_scom` and `get_page` remain as source-evidence fallbacks.
 
 ## Data policy
 
