@@ -337,7 +337,10 @@ const marketSitemaps = robots.sitemaps.filter((value) => {
     return false;
   }
 });
-const seeds = marketSitemaps.length ? marketSitemaps : [new URL("sitemap.xml", base).href];
+const preferredSitemap = new URL("sitemap.xml", base).href;
+const seeds = marketSitemaps.includes(preferredSitemap)
+  ? [preferredSitemap]
+  : (marketSitemaps.length ? marketSitemaps : [preferredSitemap]);
 let urls = explicitUrl ? [explicitUrl] : await discoverUrls(seeds, Math.max(maxPages * 8, maxPages));
 urls = urls
   .filter((url) => {
