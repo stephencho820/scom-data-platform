@@ -44,9 +44,11 @@ jobs:
         run: |
           node -e "const c=require('./config/markets.json'); for(const m of c.markets) console.log(m.code)" > /tmp/markets.txt
           failures=0
+          pages="$MAX_PAGES"
+          if [ "$GITHUB_EVENT_NAME" = "push" ]; then pages=12; fi
           while read -r market; do
             echo "=== $market ==="
-            if ! node scripts/crawl.mjs --market="$market" --max="$MAX_PAGES" --delay=700; then
+            if ! node scripts/crawl.mjs --market="$market" --max="$pages" --delay=700; then
               echo "Market $market failed; preserving its previous snapshot."
               failures=$((failures + 1))
             fi
