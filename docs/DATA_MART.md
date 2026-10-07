@@ -69,10 +69,12 @@ Each option stores:
 - label
 - details when safely extractable
 - evidence snippet
+- confidence: high | medium | low
+- applicability: product | conditional | page
 - source_url
 - captured_at
 
-Evidence is required for heuristic extraction so an agent can distinguish an observed page claim from a fully normalized contractual term.
+Evidence is required for heuristic extraction so an agent can distinguish an observed page claim from a fully normalized contractual term. Navigation/footer mentions alone must not be treated as a product option; the extractor should require transactional or eligibility wording.
 
 ### 5. Support Resources
 Product or category-linked public support information.
