@@ -1,56 +1,69 @@
 # MCP usage
 
-The repository exposes its local dataset as a stdio MCP server.
+S.com Data Platform exposes its local normalized data marts as a stdio MCP server.
 
-## Requirements
-
-- Node.js 20+
-- `npm install`
-
-## Start manually
+## Start
 
 ```bash
+npm install
 npm run mcp
 ```
 
-The process intentionally writes protocol traffic only to stdout. Human-readable startup logging goes to stderr.
-
-## Generic MCP host configuration
-
-Replace `/absolute/path/scom-data-platform` with your clone path.
-
-```json
-{
-  "mcpServers": {
-    "scom": {
-      "command": "node",
-      "args": ["/absolute/path/scom-data-platform/src/mcp/server.mjs"],
-      "cwd": "/absolute/path/scom-data-platform"
-    }
-  }
-}
-```
-
-## Tools
+## Primary tools
 
 ### list_markets
-Returns configured markets plus local crawl metadata when available.
+Configured markets plus targeted crawl coverage and mart counts.
 
-### search_scom
-Searches normalized page text. Inputs:
-- `query`
-- optional `market`
-- optional `limit`
+### search_products
+Search Product Master by name, model, SKU, category, market, and optional consumer/business audience.
 
-### get_page
-Returns a normalized page for an exact Samsung.com URL.
+### get_product
+Returns a joined product object:
+- Product Master
+- Product Specs
+- Market Offer
+- Commerce Options
 
-### compare_markets
-Runs the same query across multiple market datasets.
+### get_product_specs
+Structured technical facts. An empty specs array means the current source did not expose normalized structured specs yet.
+
+### get_market_offer
+Current price, currency, availability, purchase URL, and observed promotion evidence.
+
+### get_commerce_options
+Observed:
+- financing / installments
+- subscription / rental
+- trade-in
+- Samsung Care+ / protection
+- delivery
+- installation
+- haul-away / recycling
+- bundles / add-ons
+- rewards / membership
+
+Heuristic observations include evidence snippets and source URLs.
+
+### compare_market_offers
+Finds the best product match for the same query in multiple markets and returns current offer + commerce options.
 
 ### get_product_history
-Returns retained versions for a product key in a market.
+Returns product, market-offer, and commerce-option versions.
 
-## Hosted MCP later
+### get_support_resources
+Searches support/manual/download/warranty/repair resources.
 
-The repository starts with stdio because it is free, private-by-default on the user's machine, and requires no always-on server. A future remote Streamable HTTP endpoint can reuse the same query layer when public hosted access is needed.
+### browse_category
+Returns matching taxonomy paths and products.
+
+## Fallback tools
+
+### search_scom
+Raw normalized source-page search. Prefer mart tools for product and commerce questions.
+
+### get_page
+Exact normalized source-page retrieval for diagnostics/evidence.
+
+## Important interpretation rule
+
+No observed commerce option does **not** mean the option is definitively unavailable. It means the currently crawled source did not provide evidence that the extractor normalized.
