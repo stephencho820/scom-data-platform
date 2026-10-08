@@ -231,7 +231,10 @@ async function loadExplorer() {
         fetch(dataUrl),
         fetchJson(`./data/current/${explorer.market}/meta.json`)
       ];
-      if (explorer.dataset === "products") requests.push(fetch(`./data/marts/${explorer.market}/market_offers.jsonl`));
+      if (explorer.dataset === "products") {
+        requests.push(fetch(`./data/marts/${explorer.market}/market_offers.jsonl`));
+        requests.push(fetch(`./data/marts/${explorer.market}/product_specs.jsonl`));
+      }
       if (explorer.dataset === "history") requests.push(fetch(`./data/marts/${explorer.market}/product_master.jsonl`));
 
       const responses = await Promise.all(requests);
@@ -243,15 +246,21 @@ async function loadExplorer() {
       let rows = parsedRows;
       if (explorer.dataset === "products") {
         const offerResponse = responses[2];
+        const specResponse = responses[3];
         const offers = offerResponse?.ok ? parseJsonl(await offerResponse.text()) : [];
+        const specs = specResponse?.ok ? parseJsonl(await specResponse.text()) : [];
         const offerByKey = new Map(offers.map((offer) => [offer.market_product_key, offer]));
+        const specsByKey = new Map(specs.map((record) => [record.market_product_key, record]));
         rows = parsedRows.map((product) => {
           const offer = offerByKey.get(product.market_product_key);
+          const specRecord = specsByKey.get(product.market_product_key);
           return {
             ...product,
             key: product.market_product_key,
             url: product.product_url,
-            offers: offer ? { price: offer.price, currency: offer.currency, availability: offer.availability } : null
+            offers: offer ? { price: offer.price, currency: offer.currency, availability: offer.availability } : null,
+            specs: specRecord?.specs || [],
+            spec_source_url: specRecord?.source_url || ""
           };
         }).sort((a, b) => {
           const rank = { current_sellable: 0, current_unavailable: 1, unverified: 2, legacy: 3 };
@@ -297,7 +306,8 @@ function filteredRows() {
         row.lifecycle_status,
         row.offers?.price,
         row.offers?.currency,
-        row.offers?.availability
+        row.offers?.availability,
+        ...(row.specs || []).flatMap((spec) => [spec.name, spec.value, spec.key])
       ].some((value) => String(value || "").toLowerCase().includes(q));
     }
 
@@ -388,6 +398,7 @@ function renderExplorer() {
           <div class="result-side">
             ${price ? `<span class="result-price">${escapeHtml(price)}</span>` : ""}
             ${availability ? `<span class="result-meta">${escapeHtml(availability)}</span>` : ""}
+            ${row.specs?.length ? `<span class="result-meta">${row.specs.length} specs</span>` : ""}
             <span class="result-arrow">↗</span>
           </div>
         </button>
@@ -427,6 +438,25 @@ function detailRow(label, value) {
   `;
 }
 
+function renderSpecDetails(specs = []) {
+  if (!specs.length) {
+    return '<div class="history-note">Structured specs have not been captured for this product yet.</div>';
+  }
+
+  return `
+    <div class="detail-specs">
+      <h3>Specifications</h3>
+      <div class="detail-grid">
+        ${specs.map((spec) => `
+          <div class="detail-label">${escapeHtml(spec.name || spec.key || "Spec")}</div>
+          <div class="detail-value">${escapeHtml(String(spec.value ?? ""))}</div>
+        `).join("")}
+      </div>
+      ${specs[0]?.source ? `<p class="detail-spec-source">Source type: ${escapeHtml(specs[0].source)}</p>` : ""}
+    </div>
+  `;
+}
+
 function openDetail(row) {
   const dialog = $("#data-dialog");
   const isProduct = explorer.dataset === "products";
@@ -457,7 +487,9 @@ function openDetail(row) {
         ${detailRow("Product key", row.key)}
         ${detailRow("Catalog source", row.catalog_source_url)}
         ${detailRow("Source URL", row.url)}
+        ${detailRow("Spec source", row.spec_source_url)}
       </div>
+      ${renderSpecDetails(row.specs)}
     `;
   } else {
     $("#dialog-body").innerHTML = `
