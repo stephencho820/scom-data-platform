@@ -2,7 +2,7 @@
   "version": 3,
   "market": "kr",
   "base_url": "https://www.samsung.com/sec/",
-  "discovered_at": "2026-10-08T04:46:24.734Z",
+  "discovered_at": "2026-10-08T04:51:24.823Z",
   "sitemap_seed_count": 2,
   "sitemap_count": 8,
   "failed_sitemaps": [],
@@ -12,7 +12,7 @@
   "url_hash": "dd0e49b39f7606c18f975c65f111eeb39ff8f3c8a08c9cfefe5e75c1cd64eeef",
   "cursor": 0,
   "cycle": 0,
-  "visited_urls_total": 403,
+  "visited_urls_total": 411,
   "visited_urls": [
     "https://www.samsung.com/sec/8K/buy/",
     "https://www.samsung.com/sec/8k/buy/",
@@ -416,6 +416,14 @@
     "https://www.samsung.com/sec/tvs/fhd-n5000afkr/UN43N5000AFXKR/",
     "https://www.samsung.com/sec/tvs/fhd-n5000afxkr/",
     "https://www.samsung.com/sec/tvs/fhd-n5000afxkr/UN43N5000AFXKR/",
+    "https://www.samsung.com/sec/tvs/fhd-n5010afxkr/UN43N5010AFXKR/",
+    "https://www.samsung.com/sec/tvs/fhd-n5020afxkr/",
+    "https://www.samsung.com/sec/tvs/fhd-n5020afxkr/UN43N5020AFXKR/",
+    "https://www.samsung.com/sec/tvs/fhd-n5020afxkr/UN49N5020AFXKR/",
+    "https://www.samsung.com/sec/tvs/fhd-t5300afxkr/",
+    "https://www.samsung.com/sec/tvs/fhd-tv-n5100afxkr/",
+    "https://www.samsung.com/sec/tvs/frame-ls003afxkr/UN55LS003AFXKR/",
+    "https://www.samsung.com/sec/tvs/frame-ls003afxkr/UN65LS003AFXKR/",
     "https://www.samsung.com/sec/watches/all-watches/"
   ],
   "target_urls": [
