@@ -222,6 +222,9 @@
         "captured_at": {
           "type": "string",
           "format": "date-time"
+        },
+        "source_model": {
+          "type": "string"
         }
       },
       "additionalProperties": false
