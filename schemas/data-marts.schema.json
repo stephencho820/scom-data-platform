@@ -208,7 +208,8 @@
                   "json_ld",
                   "samsung_pdp",
                   "catalog_compare",
-                  "other"
+                  "other",
+                  "samsung_specs"
                 ]
               }
             },
