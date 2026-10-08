@@ -344,30 +344,146 @@ function compareUrlForCatalogRow(row) {
   }
 }
 
+
+function isKnownSpecLabel(value) {
+  const text = normalizeSpecValue(value);
+  return /^(?:무게|크기(?:\([^)]*\))?|접힌 상태의 크기(?:\s*\([^)]*\))?|카메라|광각 카메라|초광각 카메라|망원 카메라|전면 카메라|줌|배터리|배터리 용량|배터리 수명|비디오 재생|AP|프로세서|코어|디스플레이 크기|커버 디스플레이 크기|메인 디스플레이 크기|디스플레이 해상도|커버 디스플레이 해상도|메인 디스플레이 해상도|커버 디스플레이 최대 밝기 \(Peak Brightness\)|메인 디스플레이 최대 밝기 \(Peak Brightness\)|커버 디스플레이 가변주사율|메인 디스플레이 가변주사율|스토리지\(저장 용량\)|메모리|프레임|글래스|방수|연결성|S펜 호환|바디 재질|기본 밴드|베젤)$/i.test(text);
+}
+
+function plausibleCompareValue(value, label) {
+  const text = normalizeSpecValue(value);
+  if (!text || text === normalizeSpecValue(label) || isKnownSpecLabel(text)) return false;
+  if (/^(?:-|—|비교하기|제품별|주요 스펙|스펙 비교|고지사항|전체 스펙)/i.test(text)) return false;
+  if (text.length > 180) return false;
+  return true;
+}
+
+async function renderCompareSpecs(row) {
+  const compareUrl = compareUrlForCatalogRow(row);
+  const chromePath = process.env.CHROME_PATH || "";
+  if (!compareUrl || !chromePath) return { specs: [], sourceUrl: compareUrl };
+
+  const { chromium } = await import("playwright-core");
+  if (!catalogBrowser) {
+    catalogBrowser = await chromium.launch({
+      headless: true,
+      executablePath: chromePath,
+      args: ["--no-sandbox", "--disable-dev-shm-usage"]
+    });
+  }
+
+  const page = await catalogBrowser.newPage({
+    userAgent: USER_AGENT,
+    viewport: { width: 1440, height: 1200 }
+  });
+
+  try {
+    await page.goto(compareUrl, { waitUntil: "domcontentloaded", timeout: 45000 });
+    await page.waitForTimeout(1600);
+
+    const expanders = page.getByText(/전체 스펙 더 보기/i);
+    if (await expanders.count()) {
+      try {
+        await expanders.first().click({ timeout: 1500 });
+        await page.waitForTimeout(500);
+      } catch {}
+    }
+
+    const rawRows = await page.locator("tr").evaluateAll((rows) =>
+      rows.map((row) =>
+        [...row.querySelectorAll("th,td")]
+          .map((cell) => (cell.innerText || cell.textContent || "").replace(/\s+/g, " ").trim())
+          .filter(Boolean)
+      ).filter((cells) => cells.length)
+    );
+
+    const specs = [];
+    const seen = new Set();
+    let pendingLabel = "";
+
+    const push = (label, value) => {
+      const name = normalizeSpecValue(label);
+      const normalizedValue = normalizeSpecValue(value);
+      if (!isKnownSpecLabel(name) || !plausibleCompareValue(normalizedValue, name)) return;
+      const key = specKeyForName(name);
+      const signature = key + "|" + normalizedValue.toLowerCase();
+      if (seen.has(signature)) return;
+      seen.add(signature);
+      const unit = specUnit(normalizedValue);
+      specs.push({
+        key,
+        name,
+        value: normalizedValue,
+        ...(unit ? { unit } : {}),
+        source: "catalog_compare"
+      });
+    };
+
+    for (const cells of rawRows) {
+      const normalized = cells.map(normalizeSpecValue).filter(Boolean);
+      if (!normalized.length) continue;
+
+      const labels = normalized.filter(isKnownSpecLabel);
+      if (labels.length) {
+        const label = labels[0];
+        const values = normalized.filter((cell) => cell !== label && !isKnownSpecLabel(cell));
+        const value = values.find((candidate) => plausibleCompareValue(candidate, label));
+        if (value) {
+          push(label, value);
+          pendingLabel = "";
+        } else {
+          pendingLabel = label;
+        }
+        continue;
+      }
+
+      if (pendingLabel) {
+        const value = normalized.find((candidate) => plausibleCompareValue(candidate, pendingLabel));
+        if (value) push(pendingLabel, value);
+        pendingLabel = "";
+      }
+    }
+
+    console.error("spec compare rendered " + row.sku + ": rows=" + rawRows.length + " specs=" + specs.length + " from " + page.url());
+
+    if (specs.length < 5) {
+      const bodyText = await page.locator("body").innerText().catch(() => "");
+      const at = bodyText.search(/(?:^|\n)스펙(?:\n|$)/m);
+      const sample = at >= 0 ? bodyText.slice(at, at + 4500) : bodyText.slice(0, 3000);
+      console.error("spec compare rendered sample " + row.sku + ": " + sample.replace(/\s+/g, " ").slice(0, 2200));
+    }
+
+    return { specs, sourceUrl: page.url() || compareUrl };
+  } finally {
+    await page.close();
+  }
+}
+
 async function fetchCompareSpecs(row) {
   const compareUrl = compareUrlForCatalogRow(row);
   if (!compareUrl) return { specs: [], sourceUrl: "" };
 
   try {
     const { text: html, finalUrl, contentType } = await fetchText(compareUrl);
-    if (!/html/i.test(contentType) && !/<html[\s>]/i.test(html)) return { specs: [], sourceUrl: finalUrl || compareUrl };
+    if (/html/i.test(contentType) || /<html[\s>]/i.test(html)) {
+      const candidates = parseProducts(html, finalUrl || compareUrl)
+        .map((product) =>
+          normalizeSpecEntries(product.specs, "catalog_compare")
+            .map((item) => ({ ...item, source: "catalog_compare" }))
+        )
+        .sort((a, b) => b.length - a.length);
 
-    const candidates = parseProducts(html, finalUrl || compareUrl)
-      .map((product) => normalizeSpecEntries(product.specs, "catalog_compare"))
-      .sort((a, b) => b.length - a.length);
-
-    const specs = candidates[0] || [];
-    if (specs.length) {
-      console.error("spec compare " + row.sku + ": " + specs.length + " normalized specs from " + (finalUrl || compareUrl));
-    } else {
-      console.error("spec compare empty " + row.sku + ": " + (finalUrl || compareUrl));
+      const staticSpecs = candidates[0] || [];
+      if (staticSpecs.length >= 5) {
+        console.error("spec compare static " + row.sku + ": " + staticSpecs.length + " specs from " + (finalUrl || compareUrl));
+        return { specs: staticSpecs, sourceUrl: finalUrl || compareUrl };
+      }
     }
-
-    return { specs, sourceUrl: finalUrl || compareUrl };
   } catch (error) {
-    console.error("spec compare failed " + row.sku + ": " + error.message);
-    return { specs: [], sourceUrl: compareUrl };
+    console.error("spec compare static failed " + row.sku + ": " + error.message);
   }
+
+  return renderCompareSpecs(row);
 }
 
 function knownSpecPatterns() {
