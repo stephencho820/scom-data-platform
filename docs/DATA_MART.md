@@ -45,9 +45,11 @@ Core fields:
 - market_product_key
 - market
 - sku / model
-- specs: normalized key/value/unit entries
+- specs: normalized entries with stable key, display name, value, optional unit, and source
 - source_url
 - captured_at
+
+Current Samsung-specific enrichment prioritizes products verified as currently sellable, then unavailable/legacy products. PDP-derived facts use `source: samsung_pdp` so agents can distinguish them from generic JSON-LD extraction.
 
 Specs should come from structured data first. Samsung-specific extractors can expand coverage later.
 
