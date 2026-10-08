@@ -333,6 +333,171 @@ function catalogFamilySlug(row) {
     .replace(/-+$/g, "");
 }
 
+
+function specFamilyKey(row) {
+  const name = normalizeSpecValue(row?.name || "");
+  if (row?.catalog_category === "watches") {
+    if (/워치8\s*클래식/i.test(name)) return "watch8-classic";
+    if (/워치8/i.test(name)) return "watch8";
+    if (/워치9/i.test(name)) return "watch9";
+    if (/워치\s*울트라2/i.test(name)) return "watch-ultra2";
+    return "watch:" + catalogFamilySlug(row);
+  }
+  return catalogFamilySlug(row);
+}
+
+function watchSpecsUrlForRow(row) {
+  if (row?.catalog_category !== "watches") return "";
+  const name = normalizeSpecValue(row?.name || "");
+  let slug = "";
+  if (/워치9/i.test(name)) slug = "galaxy-watch9";
+  else if (/워치\s*울트라2/i.test(name)) slug = "galaxy-watch-ultra2";
+  else if (/워치8\s*클래식/i.test(name)) slug = "galaxy-watch8-classic";
+  else if (/워치8/i.test(name)) slug = "galaxy-watch8";
+  if (!slug) return "";
+  return new URL("watches/galaxy-watch/" + slug + "/specs/", base).href;
+}
+
+function stripListPrefix(value) {
+  return normalizeSpecValue(value).replace(/^\d+\.\s*/, "").trim();
+}
+
+function watchSpecDefinition(label) {
+  const text = stripListPrefix(label);
+  const defs = [
+    [/^인프라$/i, "network", "인프라"],
+    [/^위치 기술$/i, "gps", "위치 기술"],
+    [/^Wi-?Fi$/i, "wifi", "Wi-Fi"],
+    [/^NFC$/i, "nfc", "NFC"],
+    [/^블루투스 버전$/i, "bluetooth", "블루투스 버전"],
+    [/^운영체제$/i, "os", "운영체제"],
+    [/^종류 \(Main Display\)$/i, "display_type", "디스플레이 종류"],
+    [/^크기 \(Main Display\)$/i, "main_display_size", "메인 디스플레이 크기"],
+    [/^해상도 \(Main Display\)$/i, "main_display_resolution", "메인 디스플레이 해상도"],
+    [/^CPU 속도$/i, "cpu_speed", "CPU 속도"],
+    [/^CPU 종류$/i, "processor", "CPU 종류"],
+    [/^메모리 \(GB\)$/i, "memory", "메모리"],
+    [/^스토리지\(저장 용량\) \(GB\)$/i, "storage", "스토리지(저장 용량)"],
+    [/^센서$/i, "sensors", "센서"],
+    [/^본체 크기 \(세로x가로x두께, mm\)$/i, "dimensions", "본체 크기"],
+    [/^본체 무게 \(g\)$/i, "weight", "본체 무게"],
+    [/^내구성$/i, "durability", "내구성"],
+    [/^배터리 용량 \(mAh, Typical\)$/i, "battery_capacity", "배터리 용량"],
+    [/^사용 시간 \(AOD 끔, 시간\)$/i, "battery_life_aod_off", "사용 시간 (AOD 끔)"],
+    [/^사용 시간 \(AOD 켬, 시간\)$/i, "battery_life_aod_on", "사용 시간 (AOD 켬)"],
+    [/^보안 업데이트 지원 기한$/i, "security_updates_until", "보안 업데이트 지원 기한"]
+  ];
+  for (const [pattern, key, name] of defs) if (pattern.test(text)) return { key, name, label: text };
+  return null;
+}
+
+function watchSpecValue(def, rawValue) {
+  let value = stripListPrefix(rawValue);
+  if (!value) return "";
+
+  if (def.key === "memory" && /^\d+(?:\.\d+)?$/.test(value)) value += " GB";
+  if (def.key === "storage" && /^\d+(?:\.\d+)?$/.test(value)) value += " GB";
+  if (def.key === "weight" && /^\d+(?:\.\d+)?$/.test(value)) value += " g";
+  if (def.key === "battery_capacity" && /^\d+(?:\.\d+)?$/.test(value)) value += " mAh";
+  if (def.key === "dimensions" && /\d/.test(value) && !/mm/i.test(value)) value += " mm";
+  if (/^battery_life_/.test(def.key) && /^최대\s*\d+(?:\.\d+)?$/.test(value)) value += " 시간";
+
+  return value;
+}
+
+async function renderWatchSpecs(row) {
+  const specsUrl = watchSpecsUrlForRow(row);
+  const chromePath = process.env.CHROME_PATH || "";
+  if (!specsUrl || !chromePath) return { specs: [], sourceUrl: specsUrl };
+
+  const { chromium } = await import("playwright-core");
+  if (!catalogBrowser) {
+    catalogBrowser = await chromium.launch({
+      headless: true,
+      executablePath: chromePath,
+      args: ["--no-sandbox", "--disable-dev-shm-usage"]
+    });
+  }
+
+  const page = await catalogBrowser.newPage({
+    userAgent: USER_AGENT,
+    viewport: { width: 1440, height: 1200 }
+  });
+
+  try {
+    await page.goto(specsUrl, { waitUntil: "domcontentloaded", timeout: 45000 });
+    await page.waitForTimeout(1000);
+    const bodyText = await page.locator("body").innerText().catch(() => "");
+    const lines = bodyText.split(/\n+/).map(stripListPrefix).filter(Boolean);
+
+    const target = normalizeModelLabel(row.name);
+    const candidates = [];
+    for (let index = 0; index < lines.length; index++) {
+      if (normalizeModelLabel(lines[index]) !== target) continue;
+      const next = lines.slice(index + 1, index + 12);
+      if (next.some((line) => /^(?:네트워크|오디오\/비디오|연결|운영체제|디스플레이)$/i.test(line))) {
+        candidates.push(index);
+      }
+    }
+
+    const start = candidates[0] ?? -1;
+    if (start < 0) {
+      console.error("watch specs variant not found " + row.sku + ": " + row.name + " at " + page.url());
+      return { specs: [], sourceUrl: page.url() || specsUrl, modelLabel: row.name };
+    }
+
+    let end = Math.min(lines.length, start + 350);
+    for (let index = start + 8; index < end; index++) {
+      if (/^갤럭시 워치/i.test(lines[index]) &&
+          /\([^)]*(?:블루투스|LTE)[^)]*\)/i.test(lines[index]) &&
+          normalizeModelLabel(lines[index]) !== target) {
+        end = index;
+        break;
+      }
+    }
+
+    const segment = lines.slice(start + 1, end);
+    const specs = [];
+    const seen = new Set();
+
+    for (let index = 0; index < segment.length; index++) {
+      const def = watchSpecDefinition(segment[index]);
+      if (!def) continue;
+
+      let value = "";
+      for (let offset = 1; offset <= 4 && index + offset < segment.length; offset++) {
+        const candidate = segment[index + offset];
+        if (!candidate || watchSpecDefinition(candidate)) break;
+        if (/^(?:네트워크|오디오\/비디오|연결|운영체제|디스플레이|프로세서|메모리\/스토리지|센서|외관 사양|배터리|소프트웨어 지원|상품 기본정보)$/i.test(candidate)) continue;
+        value = watchSpecValue(def, candidate);
+        if (value) break;
+      }
+      if (!value) continue;
+
+      const signature = def.key + "|" + value.toLowerCase();
+      if (seen.has(signature)) continue;
+      seen.add(signature);
+      const unit = specUnit(value);
+      specs.push({
+        key: def.key,
+        name: def.name,
+        value,
+        ...(unit ? { unit } : {}),
+        source: "samsung_specs"
+      });
+    }
+
+    console.error("watch specs " + row.sku + ": " + specs.length + " specs from " + page.url());
+    return {
+      specs,
+      sourceUrl: page.url() || specsUrl,
+      modelLabel: row.name
+    };
+  } finally {
+    await page.close();
+  }
+}
+
 function compareUrlForCatalogRow(row) {
   let family = catalogFamilySlug(row);
   const category = String(row?.catalog_category || "").trim().replace(/^\/+|\/+$/g, "");
@@ -1825,7 +1990,7 @@ if (catalogRows.length && specBatch > 0 && marketCode === "kr") {
   const familyRows = new Map();
 
   for (const row of catalogRows) {
-    const family = catalogFamilySlug(row);
+    const family = specFamilyKey(row);
     if (!family) continue;
     if (!familyRows.has(family)) familyRows.set(family, []);
     familyRows.get(family).push(row);
@@ -1861,9 +2026,11 @@ if (catalogRows.length && specBatch > 0 && marketCode === "kr") {
       group.rows.find((row) => row.lifecycle_status === "current_sellable") ||
       group.rows[0];
 
-    let enriched = await fetchCompareSpecs(representative);
+    let enriched = representative.catalog_category === "watches"
+      ? await renderWatchSpecs(representative)
+      : await fetchCompareSpecs(representative);
 
-    if (enriched.specs.length < 5) {
+    if (enriched.specs.length < 5 && representative.catalog_category !== "watches") {
       const fallback = await renderProductSpecs(representative).catch((error) => {
         console.error("spec PDP failed " + representative.sku + ": " + error.message);
         return { specs: [], sourceUrl: representative.product_detail_url };
