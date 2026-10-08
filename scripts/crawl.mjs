@@ -268,7 +268,7 @@ function normalizeSpecEntries(specs, source = "other") {
     const value = normalizeSpecValue(item?.value);
     if (!name || !value || name === value) continue;
 
-    const key = item.key || specKeyForName(name);
+    const key = specKeyForName(name);
     const signature = key + "|" + value.toLowerCase();
     if (seen.has(signature)) continue;
     seen.add(signature);
@@ -334,9 +334,14 @@ function catalogFamilySlug(row) {
 }
 
 function compareUrlForCatalogRow(row) {
-  const family = catalogFamilySlug(row);
+  let family = catalogFamilySlug(row);
   const category = String(row?.catalog_category || "").trim().replace(/^\/+|\/+$/g, "");
   if (!family || !category) return "";
+
+  // Samsung KR uses one shared comparison page for the base and Plus variants.
+  if (/^galaxy-s26-plus$/i.test(family)) family = "galaxy-s26";
+  if (/^galaxy-s25-plus$/i.test(family)) family = "galaxy-s25";
+
   try {
     return new URL(category + "/" + family + "/compare/", base).href;
   } catch {
@@ -1797,9 +1802,13 @@ for (const source of catalogSourceDefs) {
 
       const family = catalogFamilySlug(row);
       const hasCompareSpecs = row.specs.some((item) => item.source === "catalog_compare");
-      if (hasCompareSpecs && !row.spec_model_label && /^(?:galaxy-s25|galaxy-s26)$/i.test(family)) {
-        row.specs = [];
-        row.spec_source_url = "";
+      if (hasCompareSpecs && !row.spec_model_label) {
+        if (/^(?:galaxy-s25|galaxy-s26)$/i.test(family)) {
+          row.specs = [];
+          row.spec_source_url = "";
+        } else {
+          row.spec_model_label = catalogModelLabel(row);
+        }
       }
 
       catalogRows.push(row);
