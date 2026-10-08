@@ -427,69 +427,70 @@ async function renderWatchSpecs(row) {
   try {
     await page.goto(specsUrl, { waitUntil: "domcontentloaded", timeout: 45000 });
     await page.waitForTimeout(1000);
-    const bodyText = await page.locator("body").innerText().catch(() => "");
-    const lines = bodyText.split(/\n+/).map(stripListPrefix).filter(Boolean);
+    const exactMatches = page.getByText(row.name, { exact: true });
+    const matchCount = await exactMatches.count();
+    let scopedText = "";
 
-    const target = normalizeModelLabel(row.name);
+    for (let index = 0; index < matchCount; index++) {
+      const candidate = exactMatches.nth(index);
+      const text = await candidate.evaluate((element) => {
+        let node = element;
+        let best = "";
 
-    const variantAt = (index) => {
-      const candidates = [
-        lines[index] || "",
-        [lines[index], lines[index + 1]].filter(Boolean).join(" "),
-        [lines[index], lines[index + 1], lines[index + 2]].filter(Boolean).join(" ")
-      ];
-      for (let size = 0; size < candidates.length; size++) {
-        if (normalizeModelLabel(candidates[size]) === target) {
-          return { matched: true, consumed: size + 1, text: candidates[size] };
+        for (let depth = 0; depth < 10 && node; depth++) {
+          const value = String(node.innerText || node.textContent || "")
+            .replace(/\u00a0/g, " ")
+            .replace(/[ \t]+/g, " ")
+            .trim();
+
+          const hasSpecContent =
+            /(?:네트워크|연결)/.test(value) &&
+            /디스플레이/.test(value) &&
+            /배터리/.test(value);
+
+          if (hasSpecContent && value.length >= 120 && value.length <= 25000) {
+            best = value;
+            break;
+          }
+
+          node = node.parentElement;
         }
-      }
-      return { matched: false, consumed: 1, text: "" };
-    };
 
-    let start = -1;
-    let consumed = 1;
-    for (let index = 0; index < lines.length; index++) {
-      const match = variantAt(index);
-      if (!match.matched) continue;
-      const next = lines.slice(index + match.consumed, index + match.consumed + 16);
-      if (next.some((line) => /^(?:네트워크|오디오\/비디오|연결|운영체제|디스플레이)$/i.test(line))) {
-        start = index;
-        consumed = match.consumed;
-        break;
+        return best;
+      }).catch(() => "");
+
+      if (text && (!scopedText || text.length < scopedText.length)) scopedText = text;
+    }
+
+    let segment = scopedText
+      .split(/\n+/)
+      .map(stripListPrefix)
+      .filter(Boolean);
+
+    if (!segment.length) {
+      const bodyText = await page.locator("body").innerText().catch(() => "");
+      const lines = bodyText.split(/\n+/).map(stripListPrefix).filter(Boolean);
+      const target = normalizeModelLabel(row.name);
+
+      const headingIndex = lines.findIndex((line) =>
+        normalizeModelLabel(line).includes(target) ||
+        target.includes(normalizeModelLabel(line))
+      );
+
+      if (headingIndex >= 0) {
+        segment = lines.slice(headingIndex + 1, headingIndex + 350);
       }
     }
 
-    if (start < 0) {
-      const nearby = lines
-        .filter((line, index) =>
-          /^갤럭시 워치/i.test(line) ||
-          (index > 0 && /^갤럭시 워치/i.test(lines[index - 1]) && /^\(/.test(line))
-        )
-        .slice(0, 20);
+    if (!segment.length) {
       console.error(
-        "watch specs variant not found " + row.sku +
+        "watch specs variant container not found " + row.sku +
         ": " + row.name +
-        "; headings=" + JSON.stringify(nearby) +
+        "; exactMatches=" + matchCount +
         " at " + page.url()
       );
       return { specs: [], sourceUrl: page.url() || specsUrl, modelLabel: row.name };
     }
-
-    let end = Math.min(lines.length, start + consumed + 350);
-    for (let index = start + consumed + 8; index < end; index++) {
-      const twoLine = [lines[index], lines[index + 1]].filter(Boolean).join(" ");
-      const threeLine = [lines[index], lines[index + 1], lines[index + 2]].filter(Boolean).join(" ");
-      const candidate = [lines[index], twoLine, threeLine].find((value) =>
-        /^갤럭시 워치/i.test(value) &&
-        /\([^)]*(?:블루투스|LTE)[^)]*\)/i.test(value)
-      );
-      if (candidate && normalizeModelLabel(candidate) !== target) {
-        end = index;
-        break;
-      }
-    }
-
-    const segment = lines.slice(start + consumed, end);
     const specs = [];
     const seen = new Set();
 
