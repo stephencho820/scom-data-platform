@@ -18,7 +18,7 @@ function arg(name, fallback) {
 
 const marketCode = arg("market", "us");
 const batchPages = Number(arg("batch", DEFAULT_BATCH));
-const specBatch = Math.max(0, Number(arg("spec-batch", 4)));
+const specBatch = Math.max(0, Number(arg("spec-batch", 8)));
 const delayMs = Number(arg("delay", DEFAULT_DELAY));
 const explicitUrl = arg("url", "");
 const discoverOnly = process.argv.includes("--discover-only") || batchPages === 0;
@@ -234,8 +234,8 @@ function specKeyForName(name) {
     [/메모리|memory|ram/, "memory"],
     [/프로세서|^ap$|processor|chipset/, "processor"],
     [/코어|core/, "cpu_cores"],
-    [/광각 카메라/, "wide_camera"],
     [/초광각 카메라/, "ultrawide_camera"],
+    [/광각 카메라/, "wide_camera"],
     [/망원 카메라/, "telephoto_camera"],
     [/전면 카메라/, "front_camera"],
     [/^카메라$|camera/, "camera"],
@@ -358,6 +358,32 @@ function plausibleCompareValue(value, label) {
   return true;
 }
 
+
+function catalogModelLabel(row) {
+  return normalizeSpecValue(row?.name || "")
+    .replace(/\s*(?:자급제|통신사폰).*$/i, "")
+    .replace(/\s*\([^)]*(?:블루투스|LTE|mm|삼성닷컴|삼성 강남)[^)]*\)\s*$/i, "")
+    .trim();
+}
+
+function normalizeModelLabel(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/galaxy/g, "갤럭시")
+    .replace(/ultra/g, "울트라")
+    .replace(/edge/g, "엣지")
+    .replace(/classic/g, "클래식")
+    .replace(/plus/g, "+")
+    .replace(/[\s·|ㅣ()\[\]{}_-]+/g, "")
+    .trim();
+}
+
+function compareSelectionMatches(row, selectedModel) {
+  const target = normalizeModelLabel(catalogModelLabel(row));
+  const selected = normalizeModelLabel(selectedModel);
+  return !target || !selected || target === selected;
+}
+
 async function renderCompareSpecs(row) {
   const compareUrl = compareUrlForCatalogRow(row);
   const chromePath = process.env.CHROME_PATH || "";
@@ -387,6 +413,22 @@ async function renderCompareSpecs(row) {
         await expanders.first().click({ timeout: 1500 });
         await page.waitForTimeout(500);
       } catch {}
+    }
+
+    const bodyText = await page.locator("body").innerText().catch(() => "");
+    const selectedModel =
+      bodyText.match(/현재 선택된 모델\s*:\s*([^\n]+)/i)?.[1]?.trim() ||
+      bodyText.match(/currently selected model\s*:\s*([^\n]+)/i)?.[1]?.trim() ||
+      "";
+
+    if (selectedModel && !compareSelectionMatches(row, selectedModel)) {
+      console.error(
+        "spec compare model mismatch " + row.sku +
+        ": target=" + catalogModelLabel(row) +
+        "; selected=" + selectedModel +
+        "; url=" + page.url()
+      );
+      return { specs: [], sourceUrl: page.url() || compareUrl, modelLabel: selectedModel };
     }
 
     const rawRows = await page.locator("tr").evaluateAll((rows) =>
@@ -447,42 +489,18 @@ async function renderCompareSpecs(row) {
     console.error("spec compare rendered " + row.sku + ": rows=" + rawRows.length + " specs=" + specs.length + " from " + page.url());
 
     if (specs.length < 5) {
-      const bodyText = await page.locator("body").innerText().catch(() => "");
       const at = bodyText.search(/(?:^|\n)스펙(?:\n|$)/m);
       const sample = at >= 0 ? bodyText.slice(at, at + 4500) : bodyText.slice(0, 3000);
       console.error("spec compare rendered sample " + row.sku + ": " + sample.replace(/\s+/g, " ").slice(0, 2200));
     }
 
-    return { specs, sourceUrl: page.url() || compareUrl };
+    return { specs, sourceUrl: page.url() || compareUrl, modelLabel: selectedModel || catalogModelLabel(row) };
   } finally {
     await page.close();
   }
 }
 
 async function fetchCompareSpecs(row) {
-  const compareUrl = compareUrlForCatalogRow(row);
-  if (!compareUrl) return { specs: [], sourceUrl: "" };
-
-  try {
-    const { text: html, finalUrl, contentType } = await fetchText(compareUrl);
-    if (/html/i.test(contentType) || /<html[\s>]/i.test(html)) {
-      const candidates = parseProducts(html, finalUrl || compareUrl)
-        .map((product) =>
-          normalizeSpecEntries(product.specs, "catalog_compare")
-            .map((item) => ({ ...item, source: "catalog_compare" }))
-        )
-        .sort((a, b) => b.length - a.length);
-
-      const staticSpecs = candidates[0] || [];
-      if (staticSpecs.length >= 5) {
-        console.error("spec compare static " + row.sku + ": " + staticSpecs.length + " specs from " + (finalUrl || compareUrl));
-        return { specs: staticSpecs, sourceUrl: finalUrl || compareUrl };
-      }
-    }
-  } catch (error) {
-    console.error("spec compare static failed " + row.sku + ": " + error.message);
-  }
-
   return renderCompareSpecs(row);
 }
 
@@ -1551,6 +1569,7 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
       model: product.model || "",
       specs: product.specs || [],
       source_url: product.spec_source_url || product.product_detail_url || sourceUrl,
+      source_model: product.spec_model_label || "",
       captured_at: product.spec_captured_at || product.captured_at || capturedAt
     });
 
@@ -1773,6 +1792,16 @@ for (const source of catalogSourceDefs) {
         (existingSpecRow?.specs?.length ? existingSpecRow.specs : null) ||
         []
       );
+      row.spec_source_url = existingProduct?.spec_source_url || existingSpecRow?.source_url || "";
+      row.spec_model_label = existingProduct?.spec_model_label || existingSpecRow?.source_model || "";
+
+      const family = catalogFamilySlug(row);
+      const hasCompareSpecs = row.specs.some((item) => item.source === "catalog_compare");
+      if (hasCompareSpecs && !row.spec_model_label && /^(?:galaxy-s25|galaxy-s26)$/i.test(family)) {
+        row.specs = [];
+        row.spec_source_url = "";
+      }
+
       catalogRows.push(row);
     }
     successfulCatalogSources.add(source.id);
@@ -1794,15 +1823,23 @@ if (catalogRows.length && specBatch > 0 && marketCode === "kr") {
   }
 
   const families = [...familyRows.entries()]
-    .map(([family, rows]) => ({
-      family,
-      rows,
-      priority:
-        rows.some((row) => row.lifecycle_status === "current_sellable" && sanitizeSpecs(row.specs).length < 5) ? 0 :
-        rows.some((row) => row.lifecycle_status === "current_unavailable" && sanitizeSpecs(row.specs).length < 5) ? 1 : 9
-    }))
+    .map(([family, rows]) => {
+      const specCount = Math.max(0, ...rows.map((row) => sanitizeSpecs(row.specs).length));
+      return {
+        family,
+        rows,
+        specCount,
+        priority:
+          rows.some((row) => row.lifecycle_status === "current_sellable" && sanitizeSpecs(row.specs).length < 5) ? 0 :
+          rows.some((row) => row.lifecycle_status === "current_unavailable" && sanitizeSpecs(row.specs).length < 5) ? 1 : 9
+      };
+    })
     .filter((group) => group.priority < 9)
-    .sort((a, b) => a.priority - b.priority || a.family.localeCompare(b.family))
+    .sort((a, b) =>
+      a.priority - b.priority ||
+      a.specCount - b.specCount ||
+      a.family.localeCompare(b.family)
+    )
     .slice(0, specBatch);
 
   console.error(
@@ -1832,6 +1869,7 @@ if (catalogRows.length && specBatch > 0 && marketCode === "kr") {
       product.specs = trustedSpecs;
       product.spec_captured_at = capturedAt;
       product.spec_source_url = enriched.sourceUrl || compareUrlForCatalogRow(product) || product.product_detail_url;
+      product.spec_model_label = enriched.modelLabel || catalogModelLabel(representative);
       product.fingerprint = sha(JSON.stringify({
         name: product.name,
         sku: product.sku,
