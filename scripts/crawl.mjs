@@ -18,6 +18,7 @@ function arg(name, fallback) {
 
 const marketCode = arg("market", "us");
 const batchPages = Number(arg("batch", DEFAULT_BATCH));
+const specBatch = Math.max(0, Number(arg("spec-batch", 4)));
 const delayMs = Number(arg("delay", DEFAULT_DELAY));
 const explicitUrl = arg("url", "");
 const discoverOnly = process.argv.includes("--discover-only") || batchPages === 0;
@@ -145,10 +146,11 @@ function parseCatalogApiGoods(goods, source) {
       : "";
 
     const key = sha(marketCode + "|" + modelCode.toLowerCase()).slice(0, 24);
+    const detailUrl = productDetailUrl(source, item, modelCode);
     const row = {
       key,
       market: marketCode,
-      url: source.url,
+      url: detailUrl,
       name,
       sku: modelCode,
       model: modelCode,
@@ -165,6 +167,8 @@ function parseCatalogApiGoods(goods, source) {
       catalog_source_id: source.id,
       catalog_source_url: source.url,
       catalog_category: source.category,
+      catalog_group_path: String(item.grpPath || "").trim(),
+      product_detail_url: detailUrl,
       lifecycle_status: lifecycleStatus,
       catalog_verified_at: capturedAt,
       catalog_sale_status: saleStatCd,
@@ -183,6 +187,156 @@ function parseCatalogApiGoods(goods, source) {
   }
 
   return rows;
+}
+
+
+function productDetailUrl(source, item, modelCode) {
+  const groupPath = String(item?.grpPath || "").trim().replace(/^\/+|\/+$/g, "");
+  if (!groupPath) return source.url;
+
+  const category = String(source.category || "").trim().replace(/^\/+|\/+$/g, "");
+  try {
+    return new URL(category + "/" + groupPath + "/" + encodeURIComponent(modelCode) + "/", base).href;
+  } catch {
+    return source.url;
+  }
+}
+
+function normalizeSpecValue(value) {
+  return String(value || "")
+    .replace(/\s+/g, " ")
+    .replace(/\s+([,;])/g, "$1")
+    .trim();
+}
+
+function specUnit(value) {
+  const match = String(value || "").match(/\b(mm|cm|g|kg|mAh|GB|TB|Hz|GHz|MP|nit|nits)\b/i);
+  return match ? match[1] : "";
+}
+
+function knownSpecPatterns() {
+  return [
+    ["weight", "무게", /(?:^|\n)무게\s*[:：]?\s*([^\n]{1,80})/i],
+    ["dimensions", "크기", /(?:^|\n)(?:크기|제품 크기|크기\s*\([^\n]+\))\s*[:：]?\s*([^\n]{1,100})/i],
+    ["display_size", "디스플레이 크기", /(?:^|\n)(?:메인 )?디스플레이 크기\s*[:：]?\s*([^\n]{1,80})/i],
+    ["display_resolution", "디스플레이 해상도", /(?:^|\n)(?:메인 )?디스플레이 해상도\s*[:：]?\s*([^\n]{1,80})/i],
+    ["display_brightness", "디스플레이 최대 밝기", /(?:^|\n)(?:메인 )?디스플레이 최대 밝기[^\n]*\s*[:：]?\s*([^\n]{1,80})/i],
+    ["refresh_rate", "디스플레이 가변주사율", /(?:^|\n)(?:메인 )?디스플레이 가변주사율\s*[:：]?\s*([^\n]{1,80})/i],
+    ["processor", "프로세서", /(?:^|\n)프로세서\s*[:：]?\s*([^\n]{1,100})/i],
+    ["cpu_cores", "코어", /(?:^|\n)코어\s*[:：]?\s*([^\n]{1,80})/i],
+    ["battery", "배터리", /(?:^|\n)배터리\s*[:：]?\s*([^\n]{1,100})/i],
+    ["memory", "메모리", /(?:^|\n)메모리\s*[:：]?\s*([^\n]{1,80})/i],
+    ["storage", "스토리지(저장 용량)", /(?:^|\n)스토리지(?:\(저장 용량\))?\s*[:：]?\s*([^\n]{1,80})/i],
+    ["wide_camera", "광각 카메라", /(?:^|\n)광각 카메라\s*[:：]?\s*([^\n]{1,100})/i],
+    ["ultrawide_camera", "초광각 카메라", /(?:^|\n)초광각 카메라\s*[:：]?\s*([^\n]{1,100})/i],
+    ["telephoto_camera", "망원 카메라", /(?:^|\n)망원 카메라\s*[:：]?\s*([^\n]{1,100})/i],
+    ["front_camera", "전면 카메라", /(?:^|\n)전면 카메라\s*[:：]?\s*([^\n]{1,100})/i],
+    ["water_resistance", "방수", /(?:^|\n)방수\s*[:：]?\s*([^\n]{1,80})/i],
+    ["connectivity", "연결성", /(?:^|\n)연결성\s*[:：]?\s*([^\n]{1,120})/i],
+    ["body_material", "바디 재질", /(?:^|\n)바디 재질\s*[:：]?\s*([^\n]{1,80})/i],
+    ["bezel", "베젤", /(?:^|\n)베젤\s*[:：]?\s*([^\n]{1,80})/i]
+  ];
+}
+
+function extractSamsungSpecsFromText(text) {
+  const normalized = String(text || "")
+    .replace(/\r/g, "")
+    .replace(/[ \t]+/g, " ")
+    .replace(/\n{3,}/g, "\n\n");
+
+  const specs = [];
+  const seen = new Set();
+
+  for (const [key, name, pattern] of knownSpecPatterns()) {
+    const match = normalized.match(pattern);
+    if (!match) continue;
+
+    const value = normalizeSpecValue(match[1]);
+    if (!value || value === name || /^(?:제품별|주요 스펙|스펙 비교하기|비교하기)/i.test(value)) continue;
+    const signature = key + "|" + value.toLowerCase();
+    if (seen.has(signature)) continue;
+    seen.add(signature);
+
+    const unit = specUnit(value);
+    specs.push({
+      key,
+      name,
+      value,
+      ...(unit ? { unit } : {}),
+      source: "samsung_pdp"
+    });
+  }
+
+  const directPatterns = [
+    ["weight", "무게", /(?:Galaxy|갤럭시)[^\n]{0,120}?([0-9]{2,4}(?:\.[0-9]+)?\s*g)\s*무게/i],
+    ["battery", "배터리", /\b([0-9]{3,5}\s*mAh)\b/i],
+    ["memory", "메모리", /(?:^|\n)([0-9]{1,2}\s*GB)\s*(?:메모리|RAM)\b/i],
+    ["display_size", "디스플레이 크기", /(?:^|\n)([0-9]{2,3}(?:\.[0-9]+)?\s*mm)\s*디스플레이\b/i]
+  ];
+
+  for (const [key, name, pattern] of directPatterns) {
+    if (specs.some((item) => item.key === key)) continue;
+    const match = normalized.match(pattern);
+    if (!match) continue;
+    const value = normalizeSpecValue(match[1]);
+    specs.push({ key, name, value, ...(specUnit(value) ? { unit: specUnit(value) } : {}), source: "samsung_pdp" });
+  }
+
+  return specs;
+}
+
+async function renderProductSpecs(product) {
+  const chromePath = process.env.CHROME_PATH || "";
+  if (!chromePath || !product?.product_detail_url || product.product_detail_url === product.catalog_source_url) {
+    return { specs: [], sourceUrl: product?.product_detail_url || product?.url || "" };
+  }
+
+  const { chromium } = await import("playwright-core");
+  if (!catalogBrowser) {
+    catalogBrowser = await chromium.launch({
+      headless: true,
+      executablePath: chromePath,
+      args: ["--no-sandbox", "--disable-dev-shm-usage"]
+    });
+  }
+
+  const page = await catalogBrowser.newPage({
+    userAgent: USER_AGENT,
+    viewport: { width: 1440, height: 1200 }
+  });
+
+  try {
+    await page.goto(product.product_detail_url, { waitUntil: "domcontentloaded", timeout: 45000 });
+    await page.waitForTimeout(1800);
+
+    const bodyText = await page.locator("body").innerText().catch(() => "");
+    let specs = extractSamsungSpecsFromText(bodyText);
+
+    // Product configuration near the top often exposes storage/memory even when the comparison table is lazy.
+    if (!specs.some((item) => item.key === "storage")) {
+      const storage = bodyText.match(/(?:용량|스토리지)[\s\S]{0,160}?([0-9]+\s*(?:GB|TB))/i);
+      if (storage) specs.push({ key: "storage", name: "스토리지(저장 용량)", value: normalizeSpecValue(storage[1]), unit: storage[1].match(/GB|TB/i)?.[0] || "", source: "samsung_pdp" });
+    }
+    if (!specs.some((item) => item.key === "memory")) {
+      const memory = bodyText.match(/([0-9]+\s*GB)\s*(?:\||ㅣ)\s*([0-9]+\s*GB)/);
+      if (memory) specs.push({ key: "memory", name: "메모리", value: normalizeSpecValue(memory[2]), unit: "GB", source: "samsung_pdp" });
+    }
+
+    const sourceUrl = page.url();
+    console.error("spec PDP " + product.sku + ": " + specs.length + " normalized specs from " + sourceUrl);
+
+    if (!specs.length) {
+      const markerIndex = bodyText.search(/(?:^|\n)스펙(?:\n|$)/m);
+      const sample = markerIndex >= 0
+        ? bodyText.slice(markerIndex, markerIndex + 3500)
+        : bodyText.slice(0, 2500);
+      console.error("spec PDP empty sample " + product.sku + ": " + sample.replace(/\s+/g, " ").slice(0, 1800));
+    }
+
+    return { specs, sourceUrl };
+  } finally {
+    await page.close();
+  }
 }
 
 async function renderCatalogHtml(url) {
@@ -1104,8 +1258,8 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
       model: product.model || "",
       brand: product.brand || "Samsung",
       category_path: categoryPath,
-      product_url: sourceUrl,
-      source_urls: [...new Set([sourceUrl, page?.canonical_url, page?.url].filter(Boolean))],
+      product_url: product.product_detail_url || sourceUrl,
+      source_urls: [...new Set([product.product_detail_url, sourceUrl, page?.canonical_url, page?.url].filter(Boolean))],
       lifecycle_status: lifecycle.lifecycle_status,
       catalog_current: lifecycle.catalog_current,
       sellable: lifecycle.sellable,
@@ -1123,8 +1277,8 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
       sku: product.sku || "",
       model: product.model || "",
       specs: product.specs || [],
-      source_url: sourceUrl,
-      captured_at: product.captured_at || capturedAt
+      source_url: product.spec_source_url || product.product_detail_url || sourceUrl,
+      captured_at: product.spec_captured_at || product.captured_at || capturedAt
     });
 
     if (lifecycle.commerce_eligible !== false &&
@@ -1304,6 +1458,8 @@ await mkdir(manifestDir, { recursive: true });
 
 const existingPages = await readJsonl(path.join(currentDir, "pages.jsonl"));
 const existingProducts = await readJsonl(path.join(currentDir, "products.jsonl"));
+const existingSpecRows = await readJsonl(path.join(martDir, "product_specs.jsonl"));
+const existingSpecsByKey = new Map(existingSpecRows.map((row) => [row.market_product_key, row]));
 for (const product of existingProducts) {
   for (const identifier of [product.sku, product.model]) {
     const normalized = String(identifier || "").trim().toLowerCase();
@@ -1336,12 +1492,63 @@ for (const source of catalogSourceDefs) {
         : parseCatalogListing(rendered.visibleText, source);
     }
 
-    for (const row of rows) catalogRows.push(row);
+    for (const row of rows) {
+      const existingProduct = existingProducts.find((item) => item.key === row.key);
+      const existingSpecRow = existingSpecsByKey.get(row.key);
+      row.specs =
+        (existingProduct?.specs?.length ? existingProduct.specs : null) ||
+        (existingSpecRow?.specs?.length ? existingSpecRow.specs : null) ||
+        [];
+      catalogRows.push(row);
+    }
     successfulCatalogSources.add(source.id);
     console.error("catalog " + source.id + ": " + rows.length + " current products");
   } catch (error) {
     failedCatalogSources.push({ id: source.id, url: source.url, error: error.message });
     console.error("catalog failed: " + source.url + ": " + error.message);
+  }
+}
+
+if (catalogRows.length && specBatch > 0 && marketCode === "kr") {
+  const missingSellable = catalogRows.filter((row) =>
+    row.lifecycle_status === "current_sellable" &&
+    !(row.specs || []).length &&
+    row.product_detail_url &&
+    row.product_detail_url !== row.catalog_source_url
+  );
+  const missingUnavailable = catalogRows.filter((row) =>
+    row.lifecycle_status === "current_unavailable" &&
+    !(row.specs || []).length &&
+    row.product_detail_url &&
+    row.product_detail_url !== row.catalog_source_url
+  );
+
+  const specQueue = [...missingSellable, ...missingUnavailable].slice(0, specBatch);
+  console.error(
+    "spec enrichment: " + specQueue.length +
+    " queued; sellable missing=" + missingSellable.length +
+    "; unavailable missing=" + missingUnavailable.length
+  );
+
+  for (const product of specQueue) {
+    try {
+      const enriched = await renderProductSpecs(product);
+      if (enriched.specs.length) {
+        product.specs = enriched.specs;
+        product.url = enriched.sourceUrl || product.product_detail_url;
+        product.spec_captured_at = capturedAt;
+        product.spec_source_url = enriched.sourceUrl || product.product_detail_url;
+        product.fingerprint = sha(JSON.stringify({
+          name: product.name,
+          sku: product.sku,
+          offers: product.offers,
+          specs: product.specs,
+          lifecycle_status: product.lifecycle_status
+        }));
+      }
+    } catch (error) {
+      console.error("spec PDP failed " + product.sku + ": " + error.message);
+    }
   }
 }
 
@@ -1572,6 +1779,7 @@ await writeFile(metaFile, JSON.stringify({
   marts: {
     product_master: marts.productMaster.length,
     product_specs: marts.productSpecs.length,
+    product_specs_with_values: marts.productSpecs.filter((row) => (row.specs || []).length > 0).length,
     market_offers: marts.marketOffers.length,
     commerce_options: marts.commerceOptions.length,
     support_resources: marts.supportResources.length,
