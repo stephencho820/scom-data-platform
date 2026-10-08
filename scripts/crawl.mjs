@@ -214,6 +214,162 @@ function specUnit(value) {
   return match ? match[1] : "";
 }
 
+
+function specKeyForName(name) {
+  const value = String(name || "").toLowerCase().replace(/\s+/g, " ").trim();
+  const rules = [
+    [/배터리 용량|battery capacity/, "battery_capacity"],
+    [/배터리 수명|battery life|비디오 재생/, "battery_life"],
+    [/^배터리$|^battery$/, "battery"],
+    [/커버 디스플레이 크기/, "cover_display_size"],
+    [/메인 디스플레이 크기/, "main_display_size"],
+    [/디스플레이 크기|screen size/, "display_size"],
+    [/커버 디스플레이 해상도/, "cover_display_resolution"],
+    [/메인 디스플레이 해상도/, "main_display_resolution"],
+    [/디스플레이 해상도|resolution/, "display_resolution"],
+    [/커버 디스플레이 최대 밝기/, "cover_display_brightness"],
+    [/메인 디스플레이 최대 밝기/, "main_display_brightness"],
+    [/가변주사율|refresh rate/, "refresh_rate"],
+    [/스토리지|저장 용량|storage/, "storage"],
+    [/메모리|memory|ram/, "memory"],
+    [/프로세서|^ap$|processor|chipset/, "processor"],
+    [/코어|core/, "cpu_cores"],
+    [/광각 카메라/, "wide_camera"],
+    [/초광각 카메라/, "ultrawide_camera"],
+    [/망원 카메라/, "telephoto_camera"],
+    [/전면 카메라/, "front_camera"],
+    [/^카메라$|camera/, "camera"],
+    [/^줌$|zoom/, "zoom"],
+    [/^무게$|weight/, "weight"],
+    [/접힌 상태의 크기/, "folded_dimensions"],
+    [/^크기|dimensions/, "dimensions"],
+    [/글래스|glass/, "glass"],
+    [/프레임|frame/, "frame"],
+    [/방수|water resistance/, "water_resistance"],
+    [/연결성|connectivity/, "connectivity"],
+    [/s펜|s pen/, "s_pen"],
+    [/바디 재질|body material/, "body_material"],
+    [/기본 밴드|band/, "band"],
+    [/베젤|bezel/, "bezel"]
+  ];
+  for (const [pattern, key] of rules) if (pattern.test(value)) return key;
+  return value
+    .replace(/[^a-z0-9가-힣]+/g, "_")
+    .replace(/^_+|_+$/g, "")
+    .slice(0, 80) || "spec";
+}
+
+function normalizeSpecEntries(specs, source = "other") {
+  const rows = [];
+  const seen = new Set();
+
+  for (const item of specs || []) {
+    const name = normalizeSpecValue(item?.name);
+    const value = normalizeSpecValue(item?.value);
+    if (!name || !value || name === value) continue;
+
+    const key = item.key || specKeyForName(name);
+    const signature = key + "|" + value.toLowerCase();
+    if (seen.has(signature)) continue;
+    seen.add(signature);
+
+    const unit = item.unit || specUnit(value);
+    rows.push({
+      key,
+      name,
+      value,
+      ...(unit ? { unit } : {}),
+      source: item.source || source
+    });
+  }
+
+  return rows;
+}
+
+function validPdpSpec(item) {
+  const key = String(item?.key || specKeyForName(item?.name || ""));
+  const value = normalizeSpecValue(item?.value);
+  if (!value) return false;
+
+  const validators = {
+    weight: /\b\d{2,4}(?:\.\d+)?\s*g\b/i,
+    dimensions: /\d+(?:\.\d+)?\s*[x×]\s*\d+/i,
+    folded_dimensions: /\d+(?:\.\d+)?\s*[x×]\s*\d+/i,
+    display_size: /\b\d{2,3}(?:\.\d+)?\s*(?:mm|inch|inches|")\b/i,
+    main_display_size: /\b\d{2,3}(?:\.\d+)?\s*(?:mm|inch|inches|")\b/i,
+    cover_display_size: /\b\d{2,3}(?:\.\d+)?\s*(?:mm|inch|inches|")\b/i,
+    display_resolution: /\d{3,4}\s*[x×]\s*\d{3,4}/i,
+    main_display_resolution: /\d{3,4}\s*[x×]\s*\d{3,4}/i,
+    cover_display_resolution: /\d{3,4}\s*[x×]\s*\d{3,4}/i,
+    battery: /\b\d{3,5}\s*mAh\b/i,
+    battery_capacity: /\b\d{3,5}\s*mAh\b/i,
+    memory: /\b\d{1,2}\s*GB\b/i,
+    storage: /\b\d+(?:\.\d+)?\s*(?:GB|TB)\b/i,
+    refresh_rate: /\b\d+(?:\s*[~\-]\s*\d+)?\s*Hz\b/i,
+    wide_camera: /\b\d+(?:\.\d+)?\s*MP\b/i,
+    ultrawide_camera: /\b\d+(?:\.\d+)?\s*MP\b/i,
+    telephoto_camera: /\b\d+(?:\.\d+)?\s*MP\b/i,
+    front_camera: /\b\d+(?:\.\d+)?\s*MP\b/i,
+    water_resistance: /\bIP\d{2}\b/i
+  };
+
+  const validator = validators[key];
+  return validator ? validator.test(value) : false;
+}
+
+function sanitizeSpecs(specs) {
+  return normalizeSpecEntries(specs, "other").filter((item) => {
+    if (item.source !== "samsung_pdp") return true;
+    return validPdpSpec(item);
+  });
+}
+
+function catalogFamilySlug(row) {
+  const groupPath = String(row?.catalog_group_path || "").trim().replace(/^\/+|\/+$/g, "");
+  if (!groupPath) return "";
+  return groupPath
+    .replace(/-(?:sm-)?[a-z]\d{3,}[a-z0-9-]*$/i, "")
+    .replace(/-cpo$/i, "")
+    .replace(/-+$/g, "");
+}
+
+function compareUrlForCatalogRow(row) {
+  const family = catalogFamilySlug(row);
+  const category = String(row?.catalog_category || "").trim().replace(/^\/+|\/+$/g, "");
+  if (!family || !category) return "";
+  try {
+    return new URL(category + "/" + family + "/compare/", base).href;
+  } catch {
+    return "";
+  }
+}
+
+async function fetchCompareSpecs(row) {
+  const compareUrl = compareUrlForCatalogRow(row);
+  if (!compareUrl) return { specs: [], sourceUrl: "" };
+
+  try {
+    const { text: html, finalUrl, contentType } = await fetchText(compareUrl);
+    if (!/html/i.test(contentType) && !/<html[\s>]/i.test(html)) return { specs: [], sourceUrl: finalUrl || compareUrl };
+
+    const candidates = parseProducts(html, finalUrl || compareUrl)
+      .map((product) => normalizeSpecEntries(product.specs, "catalog_compare"))
+      .sort((a, b) => b.length - a.length);
+
+    const specs = candidates[0] || [];
+    if (specs.length) {
+      console.error("spec compare " + row.sku + ": " + specs.length + " normalized specs from " + (finalUrl || compareUrl));
+    } else {
+      console.error("spec compare empty " + row.sku + ": " + (finalUrl || compareUrl));
+    }
+
+    return { specs, sourceUrl: finalUrl || compareUrl };
+  } catch (error) {
+    console.error("spec compare failed " + row.sku + ": " + error.message);
+    return { specs: [], sourceUrl: compareUrl };
+  }
+}
+
 function knownSpecPatterns() {
   return [
     ["weight", "무게", /(?:^|\n)무게\s*[:：]?\s*([^\n]{1,80})/i],
@@ -282,7 +438,7 @@ function extractSamsungSpecsFromText(text) {
     specs.push({ key, name, value, ...(specUnit(value) ? { unit: specUnit(value) } : {}), source: "samsung_pdp" });
   }
 
-  return specs;
+  return specs.filter(validPdpSpec);
 }
 
 async function renderProductSpecs(product) {
@@ -1078,7 +1234,7 @@ function parseProducts(html, pageUrl) {
         const name = String(product.name || "").trim();
         const sku = String(product.sku || product.mpn || skuFromUrl(pageUrl) || "").trim();
         const model = String(product.model || product.productID || "").trim();
-        const specs = structuredSpecs(product);
+        const specs = normalizeSpecEntries(structuredSpecs(product), "json_ld");
         const keySeed = sku || model || name || pageUrl;
         const normalized = {
           key: sha(marketCode + "|" + keySeed.toLowerCase()).slice(0, 24),
@@ -1220,6 +1376,7 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
   );
 
   for (const product of products) {
+    if (!product.sku && !product.model && !product.name) continue;
     if (!product.sku && !product.model && currentCatalogNames.has(normalizeCatalogName(product.name))) {
       continue;
     }
@@ -1495,10 +1652,11 @@ for (const source of catalogSourceDefs) {
     for (const row of rows) {
       const existingProduct = existingProducts.find((item) => item.key === row.key);
       const existingSpecRow = existingSpecsByKey.get(row.key);
-      row.specs =
+      row.specs = sanitizeSpecs(
         (existingProduct?.specs?.length ? existingProduct.specs : null) ||
         (existingSpecRow?.specs?.length ? existingSpecRow.specs : null) ||
-        [];
+        []
+      );
       catalogRows.push(row);
     }
     successfulCatalogSources.add(source.id);
@@ -1510,44 +1668,61 @@ for (const source of catalogSourceDefs) {
 }
 
 if (catalogRows.length && specBatch > 0 && marketCode === "kr") {
-  const missingSellable = catalogRows.filter((row) =>
-    row.lifecycle_status === "current_sellable" &&
-    !(row.specs || []).length &&
-    row.product_detail_url &&
-    row.product_detail_url !== row.catalog_source_url
-  );
-  const missingUnavailable = catalogRows.filter((row) =>
-    row.lifecycle_status === "current_unavailable" &&
-    !(row.specs || []).length &&
-    row.product_detail_url &&
-    row.product_detail_url !== row.catalog_source_url
-  );
+  const familyRows = new Map();
 
-  const specQueue = [...missingSellable, ...missingUnavailable].slice(0, specBatch);
+  for (const row of catalogRows) {
+    const family = catalogFamilySlug(row);
+    if (!family) continue;
+    if (!familyRows.has(family)) familyRows.set(family, []);
+    familyRows.get(family).push(row);
+  }
+
+  const families = [...familyRows.entries()]
+    .map(([family, rows]) => ({
+      family,
+      rows,
+      priority:
+        rows.some((row) => row.lifecycle_status === "current_sellable" && sanitizeSpecs(row.specs).length < 5) ? 0 :
+        rows.some((row) => row.lifecycle_status === "current_unavailable" && sanitizeSpecs(row.specs).length < 5) ? 1 : 9
+    }))
+    .filter((group) => group.priority < 9)
+    .sort((a, b) => a.priority - b.priority || a.family.localeCompare(b.family))
+    .slice(0, specBatch);
+
   console.error(
-    "spec enrichment: " + specQueue.length +
-    " queued; sellable missing=" + missingSellable.length +
-    "; unavailable missing=" + missingUnavailable.length
+    "spec enrichment: " + families.length +
+    " families queued; total catalog families=" + familyRows.size
   );
 
-  for (const product of specQueue) {
-    try {
-      const enriched = await renderProductSpecs(product);
-      if (enriched.specs.length) {
-        product.specs = enriched.specs;
-        product.url = enriched.sourceUrl || product.product_detail_url;
-        product.spec_captured_at = capturedAt;
-        product.spec_source_url = enriched.sourceUrl || product.product_detail_url;
-        product.fingerprint = sha(JSON.stringify({
-          name: product.name,
-          sku: product.sku,
-          offers: product.offers,
-          specs: product.specs,
-          lifecycle_status: product.lifecycle_status
-        }));
-      }
-    } catch (error) {
-      console.error("spec PDP failed " + product.sku + ": " + error.message);
+  for (const group of families) {
+    const representative =
+      group.rows.find((row) => row.lifecycle_status === "current_sellable") ||
+      group.rows[0];
+
+    let enriched = await fetchCompareSpecs(representative);
+
+    if (enriched.specs.length < 5) {
+      const fallback = await renderProductSpecs(representative).catch((error) => {
+        console.error("spec PDP failed " + representative.sku + ": " + error.message);
+        return { specs: [], sourceUrl: representative.product_detail_url };
+      });
+      if (fallback.specs.length > enriched.specs.length) enriched = fallback;
+    }
+
+    const trustedSpecs = sanitizeSpecs(enriched.specs);
+    if (!trustedSpecs.length) continue;
+
+    for (const product of group.rows) {
+      product.specs = trustedSpecs;
+      product.spec_captured_at = capturedAt;
+      product.spec_source_url = enriched.sourceUrl || compareUrlForCatalogRow(product) || product.product_detail_url;
+      product.fingerprint = sha(JSON.stringify({
+        name: product.name,
+        sku: product.sku,
+        offers: product.offers,
+        specs: product.specs,
+        lifecycle_status: product.lifecycle_status
+      }));
     }
   }
 }
