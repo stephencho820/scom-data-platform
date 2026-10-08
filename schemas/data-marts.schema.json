@@ -193,12 +193,23 @@
               "value"
             ],
             "properties": {
+              "key": {
+                "type": "string"
+              },
               "name": {
                 "type": "string"
               },
               "value": {},
               "unit": {
                 "type": "string"
+              },
+              "source": {
+                "enum": [
+                  "json_ld",
+                  "samsung_pdp",
+                  "catalog_compare",
+                  "other"
+                ]
               }
             },
             "additionalProperties": false
