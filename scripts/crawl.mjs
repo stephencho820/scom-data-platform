@@ -966,7 +966,9 @@ async function renderCatalogHtml(url, catalogSource) {
 
     console.error("catalog rendered: accumulated visible model cards=" + fragmentsByModel.size + "; payloads=" + catalogPayloads.length);
 
-    const goodsListUrl = catalogPayloads.find((item) => item.url.includes("/cxhr/pf/goodsList"))?.url || "";
+    const candidateUrls = catalogPayloads.filter((item) => /\/cxhr\/pf\/goodsList/i.test(item.url)).map((item) => item.url);
+    console.error("catalog " + catalogSource.id + ": captured goodsList responses=" + candidateUrls.length + "; visible models=" + fragmentsByModel.size);
+    const goodsListUrl = candidateUrls[0] || "";
     let apiGoods = await fetchCatalogGoodsPages(page.context(), goodsListUrl, catalogSource);
 
     if (!apiGoods.length) {
@@ -981,6 +983,7 @@ async function renderCatalogHtml(url, catalogSource) {
       ).values()];
     }
 
+    if (!apiGoods.length) console.error("catalog " + catalogSource.id + ": no valid mdlCode/goodsNm pairs in captured goodsList; inspect endpoint payload schema or blocked requests");
     console.error("catalog rendered: API catalog goods=" + apiGoods.length);
     return {
       visibleText: [...fragmentsByModel.values()].join("\n\n"),
