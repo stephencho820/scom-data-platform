@@ -491,3 +491,5 @@ footer {
 /* SKU catalog */
 #bu-control[hidden] { display: none; }
 .result-kicker { letter-spacing: .08em; }
+
+.dashboard-feature{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:36px;margin-bottom:36px;border-radius:22px;background:#e9edfa;border:1px solid #d5ddf2}.dashboard-feature h2{font-size:clamp(28px,4vw,48px);letter-spacing:-.05em;line-height:1.05;margin:12px 0}.dashboard-feature p:not(.eyebrow){max-width:600px;color:#505d79;line-height:1.6}.dashboard-feature .primary{white-space:nowrap}@media(max-width:800px){.dashboard-feature{flex-direction:column;align-items:flex-start}.dashboard-feature .primary{white-space:normal}}
