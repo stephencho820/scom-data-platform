@@ -115,3 +115,15 @@ The KR chatbot catalog treats SKU as the canonical product index and separates d
 Target history windows are approximately 10 years for MX/VD and 15 years for DA. These are coverage goals, not reasons to fabricate dates: legacy records require Samsung-owned evidence and preserve source URLs/capture timestamps.
 
 Current-catalog completeness is measured separately from legacy coverage. A category is not considered complete merely because the crawler returned some SKUs.
+
+
+## Immutable SKU registry
+
+Product identity and hardware specifications are treated as immutable after first capture.
+
+- Current catalog discovery continues on recurring crawls to find new SKUs.
+- A newly discovered SKU is deep-enriched once and persisted in `data/marts/{market}/sku_registry.jsonl`.
+- Known SKUs reuse their stored profile/specs instead of repeating deep specification extraction.
+- Price, stock, sellability, promotions, commerce options, and lifecycle remain dynamic and can be refreshed repeatedly.
+- SKUs are retained in the registry when they leave the current catalog; lifecycle/support pipelines can subsequently classify them as discontinued or legacy.
+- Historical/legacy backfill uses the same registry so a SKU has one durable identity across current and historical sources.
