@@ -147,7 +147,9 @@ function parseCatalogApiGoods(goods, source) {
     const stockQty = Number(item.stockQty);
     const hasStock = !Number.isFinite(stockQty) || stockQty > 0;
     const sellable = saleStatCd === "12" && hasStock;
-    const lifecycleStatus = sellable ? "current_sellable" : "current_unavailable";
+    const lifecycleStatus = sellable
+      ? "current_sellable"
+      : (saleStatCd === "12" && !hasStock ? "current_out_of_stock" : "current_not_directly_sellable");
     const numericPrice = Number(item.salePrice ?? item.curPrice ?? item.maxSalePrice ?? 0);
     const price = sellable && Number.isFinite(numericPrice) && numericPrice > 0
       ? String(numericPrice)
@@ -1425,7 +1427,9 @@ function parseCatalogListing(html, source) {
     const window = lines.slice(Math.max(0, index - 4), Math.min(lines.length, index + 28)).join(" ");
     const unavailable = /품절|일시품절|재고\s*없음|out of stock|sold out/i.test(window);
     const hasBuyAction = /구매하기|buy now|add to cart/i.test(window);
-    const lifecycleStatus = hasBuyAction && !unavailable ? "current_sellable" : "current_unavailable";
+    const lifecycleStatus = hasBuyAction && !unavailable
+      ? "current_sellable"
+      : (unavailable ? "current_out_of_stock" : "current_not_directly_sellable");
     const price = lifecycleStatus === "current_sellable" ? priceFromCatalogWindow(window) : "";
 
     const key = sha(marketCode + "|" + modelCode.toLowerCase()).slice(0, 24);
@@ -1524,7 +1528,7 @@ function buildLifecycleResolver(catalogRows, successfulCatalogSources) {
       }
 
       return {
-        lifecycle_status: "legacy",
+        lifecycle_status: "discontinued",
         catalog_current: false,
         sellable: false,
         catalog_enforced: true,
@@ -1784,8 +1788,7 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
       (!!product.sku && String(sourceUrl).toLowerCase().includes(product.sku.toLowerCase())) ||
       (!!product.model && String(sourceUrl).toLowerCase().includes(product.model.toLowerCase()));
     const commerceAllowed = lifecycle.commerce_eligible !== false &&
-      lifecycle.lifecycle_status !== "current_unavailable" &&
-      lifecycle.lifecycle_status !== "legacy";
+      !["current_out_of_stock", "current_not_directly_sellable", "discontinued", "legacy_supported", "legacy_archived"].includes(lifecycle.lifecycle_status);
     const commerce = page && isDetail && commerceAllowed
       ? extractCommerce(page, sourceUrl)
       : {
@@ -2116,7 +2119,7 @@ if (catalogRows.length && specBatch > 0 && marketCode === "kr") {
         specCount,
         priority:
           rows.some((row) => row.lifecycle_status === "current_sellable" && sanitizeSpecs(row.specs).length < 5) ? 0 :
-          rows.some((row) => row.lifecycle_status === "current_unavailable" && sanitizeSpecs(row.specs).length < 5) ? 1 : 9
+          rows.some((row) => ["current_out_of_stock", "current_not_directly_sellable"].includes(row.lifecycle_status) && sanitizeSpecs(row.specs).length < 5) ? 1 : 9
       };
     })
     .filter((group) => group.priority < 9)
@@ -2403,7 +2406,7 @@ await writeFile(metaFile, JSON.stringify({
     catalog_current: marts.currentCatalog.length,
     lifecycle: {
       current_sellable: marts.productMaster.filter((row) => row.lifecycle_status === "current_sellable").length,
-      current_unavailable: marts.productMaster.filter((row) => row.lifecycle_status === "current_unavailable").length,
+      current_unavailable: marts.productMaster.filter((row) => ["current_out_of_stock", "current_not_directly_sellable"].includes(row.lifecycle_status)).length,
       legacy: marts.productMaster.filter((row) => row.lifecycle_status === "legacy").length,
       unverified: marts.productMaster.filter((row) => row.lifecycle_status === "unverified").length,
       commerce_eligible: marts.productMaster.filter((row) => row.commerce_eligible === true).length,
