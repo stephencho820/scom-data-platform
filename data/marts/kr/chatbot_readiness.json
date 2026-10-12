@@ -1,0 +1,55 @@
+{
+  "market": "kr",
+  "generated_at": "2026-10-12T11:09:38.140Z",
+  "ready": false,
+  "gates": {
+    "current_catalog_coverage": false,
+    "no_failed_catalog_sources": false,
+    "current_specs_complete": false,
+    "support_linkage_complete": false,
+    "legacy_ingestion_present": false,
+    "unresolved_products_zero": false
+  },
+  "counts": {
+    "sku_registry": 918,
+    "current_skus": 748,
+    "current_skus_with_specs": 91,
+    "support_resources": 5,
+    "support_linked_current_skus": 0,
+    "legacy_skus": 0,
+    "unverified_skus": 118,
+    "other_bu_skus": 6
+  },
+  "failed_catalog_sources": [
+    {
+      "id": "projectors",
+      "url": "https://www.samsung.com/sec/projectors/all-projectors/",
+      "error": "No validated SKU records returned; catalog remains unverified"
+    },
+    {
+      "id": "air-conditioners",
+      "url": "https://www.samsung.com/sec/air-conditioners/all-air-conditioners/",
+      "error": "No validated SKU records returned; catalog remains unverified"
+    },
+    {
+      "id": "tablets",
+      "url": "https://www.samsung.com/sec/tablets/all-tablets/",
+      "error": "No validated SKU records returned; catalog remains unverified"
+    },
+    {
+      "id": "buds",
+      "url": "https://www.samsung.com/sec/buds/all-buds/",
+      "error": "No validated SKU records returned; catalog remains unverified"
+    },
+    {
+      "id": "rings",
+      "url": "https://www.samsung.com/sec/rings/all-rings/",
+      "error": "No validated SKU records returned; catalog remains unverified"
+    },
+    {
+      "id": "soundbars",
+      "url": "https://www.samsung.com/sec/audio-devices/all-audio-devices/",
+      "error": "No validated SKU records returned; catalog remains unverified"
+    }
+  ]
+}
