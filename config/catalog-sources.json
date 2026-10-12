@@ -79,6 +79,55 @@
         "category": "microwave-ovens",
         "business_unit": "DA",
         "model_pattern": "[A-Z][A-Z0-9]{5,}(?:[-/][A-Z0-9]{2,})*"
+      },
+      {
+        "id": "tablets",
+        "url": "https://www.samsung.com/sec/tablets/all-tablets/",
+        "category": "tablets",
+        "business_unit": "MX",
+        "model_pattern": "[A-Z][A-Z0-9]{5,}(?:[-/][A-Z0-9]{2,})*"
+      },
+      {
+        "id": "galaxybook",
+        "url": "https://www.samsung.com/sec/galaxybook/all-galaxybook/",
+        "category": "galaxybook",
+        "business_unit": "MX",
+        "model_pattern": "[A-Z][A-Z0-9]{5,}(?:[-/][A-Z0-9]{2,})*"
+      },
+      {
+        "id": "buds",
+        "url": "https://www.samsung.com/sec/buds/all-buds/",
+        "category": "buds",
+        "business_unit": "MX",
+        "model_pattern": "[A-Z][A-Z0-9]{5,}(?:[-/][A-Z0-9]{2,})*"
+      },
+      {
+        "id": "rings",
+        "url": "https://www.samsung.com/sec/rings/all-rings/",
+        "category": "rings",
+        "business_unit": "MX",
+        "model_pattern": "[A-Z][A-Z0-9]{5,}(?:[-/][A-Z0-9]{2,})*"
+      },
+      {
+        "id": "soundbars",
+        "url": "https://www.samsung.com/sec/audio-devices/all-audio-devices/",
+        "category": "soundbars",
+        "business_unit": "VD",
+        "model_pattern": "[A-Z][A-Z0-9]{5,}(?:[-/][A-Z0-9]{2,})*"
+      },
+      {
+        "id": "air-purifiers",
+        "url": "https://www.samsung.com/sec/air-cleaners/all-air-cleaners/",
+        "category": "air-purifiers",
+        "business_unit": "DA",
+        "model_pattern": "[A-Z][A-Z0-9]{5,}(?:[-/][A-Z0-9]{2,})*"
+      },
+      {
+        "id": "cooking-appliances",
+        "url": "https://www.samsung.com/sec/cooking-appliances/all-cooking-appliances/",
+        "category": "cooking-appliances",
+        "business_unit": "DA",
+        "model_pattern": "[A-Z][A-Z0-9]{5,}(?:[-/][A-Z0-9]{2,})*"
       }
     ]
   }
