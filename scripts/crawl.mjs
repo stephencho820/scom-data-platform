@@ -1703,6 +1703,32 @@ function pageForProduct(product, pages) {
   ) || null;
 }
 
+function businessUnitFor(product, sourceUrl = "") {
+  const haystack = [product?.catalog_category, product?.catalog_group_path, product?.name, sourceUrl]
+    .filter(Boolean).join(" ").toLowerCase();
+  if (/jbl|harman|akg|audio|soundbar|speaker|headphone|earbud/.test(haystack) && !/galaxy buds/.test(haystack)) return "HARMAN";
+  if (/tv|television|monitor|projector|the freestyle|the frame|display/.test(haystack)) return "VD";
+  if (/smartphone|mobile|galaxy|tablet|watch|buds|ring|phone|wearable/.test(haystack)) return "MX";
+  if (/refrigerator|fridge|washer|dryer|laundry|vacuum|air.?condition|dishwasher|oven|range|cooktop|microwave|appliance|bespoke/.test(haystack)) return "DA";
+  return "OTHER";
+}
+
+function productFamilyFor(product) {
+  const groupPath = String(product?.catalog_group_path || "").trim().replace(/^\/+|\/+$/g, "");
+  if (groupPath) {
+    const slug = groupPath.split("/").filter(Boolean).pop() || groupPath;
+    return slug
+      .replace(/-(?:sm-)?[a-z]\d{3,}[a-z0-9-]*$/i, "")
+      .replace(/-cpo$/i, "")
+      .replace(/-+$/g, "") || slug;
+  }
+  return String(product?.name || "").replace(/\b(?:\d+\s*(?:GB|TB)|[A-Z]{2,}\s*color)\b/gi, "").replace(/\s+/g, " ").trim();
+}
+
+function canonicalSkuKey(product) {
+  return sha(marketCode + "|" + String(product?.sku || "").trim().toUpperCase()).slice(0, 24);
+}
+
 function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
   const productMaster = [];
   const productSpecs = [];
@@ -1714,10 +1740,9 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
   );
 
   for (const product of products) {
-    if (!product.sku && !product.model && !product.name) continue;
-    if (!product.sku && !product.model && currentCatalogNames.has(normalizeCatalogName(product.name))) {
-      continue;
-    }
+    // SKU is the canonical sellable product profile. A PDP/model without a concrete
+    // SKU is not emitted into the SKU master; it can still remain in source pages/history.
+    if (!String(product.sku || "").trim()) continue;
 
     const page = pageForProduct(product, pages);
     const sourceUrl = product.url || page?.canonical_url || page?.url || market.baseUrl;
@@ -1744,9 +1769,16 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
       promotions: []
     };
 
+    const skuKey = canonicalSkuKey(product);
+    const businessUnit = businessUnitFor(product, sourceUrl);
+    const productFamily = productFamilyFor(product);
+
     productMaster.push({
-      market_product_key: product.key,
+      market_product_key: skuKey,
+      sku_key: skuKey,
       market: marketCode,
+      business_unit: businessUnit,
+      product_family: productFamily,
       audience: audienceFromUrl(sourceUrl),
       name: product.name || "",
       sku: product.sku || "",
@@ -1767,8 +1799,11 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
     });
 
     productSpecs.push({
-      market_product_key: product.key,
+      market_product_key: skuKey,
+      sku_key: skuKey,
       market: marketCode,
+      business_unit: businessUnit,
+      product_family: productFamily,
       sku: product.sku || "",
       model: product.model || "",
       specs: product.specs || [],
@@ -1782,7 +1817,7 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
         lifecycle.lifecycle_status !== "current_unavailable") {
       const currentUnavailable = false;
       const offerCore = {
-        market_product_key: product.key,
+        market_product_key: skuKey,
         market: marketCode,
         lifecycle_status: lifecycle.lifecycle_status,
         price: currentUnavailable ? "" : (product.offers?.price ?? ""),
@@ -1805,7 +1840,7 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
     }
 
     const commerceCore = {
-      market_product_key: product.key,
+      market_product_key: skuKey,
       market: marketCode,
       purchase_methods: commerce.purchase_methods,
       subscriptions: commerce.subscriptions,
