@@ -67,22 +67,27 @@ const toJsonl = (rows) => rows.map((row) => JSON.stringify(row)).join("\n") + (r
 
 let catalogBrowser = null;
 
-function findCatalogGoods(value, out = []) {
+function validCatalogSku(model, source) {
+  const value = String(model || "").trim().toUpperCase();
+  if (!/^[A-Z0-9][A-Z0-9/-]{5,35}$/.test(value) || !/[0-9]/.test(value)) return false;
+  return !source?.model_pattern || new RegExp("^(?:" + source.model_pattern + ")$", "i").test(value);
+}
+function findCatalogGoods(value, out = [], source = null) {
   if (!value || typeof value !== "object") return out;
   if (Array.isArray(value)) {
-    for (const item of value) findCatalogGoods(item, out);
+    for (const item of value) findCatalogGoods(item, out, source);
     return out;
   }
 
   const model = String(value.mdlCode || "").trim().toUpperCase();
   const name = String(value.goodsNm || "").trim();
-  if (/^SM-[A-Z][0-9]{3}[A-Z0-9]{4,12}$/.test(model) && name) out.push(value);
+  if (validCatalogSku(model, source) && name && !/[{}<>]/.test(name)) out.push(value);
 
-  for (const child of Object.values(value)) findCatalogGoods(child, out);
+  for (const child of Object.values(value)) findCatalogGoods(child, out, source);
   return out;
 }
 
-async function fetchCatalogGoodsPages(context, capturedUrl) {
+async function fetchCatalogGoodsPages(context, capturedUrl, source) {
   if (!capturedUrl) return [];
 
   const products = new Map();
@@ -100,7 +105,7 @@ async function fetchCatalogGoodsPages(context, capturedUrl) {
       if (!response.ok()) break;
 
       const payload = await response.json();
-      const goods = findCatalogGoods(payload);
+      const goods = findCatalogGoods(payload, [], source);
       let added = 0;
 
       for (const item of goods) {
@@ -133,7 +138,7 @@ function parseCatalogApiGoods(goods, source) {
   for (const item of goods) {
     const modelCode = String(item.mdlCode || "").trim().toUpperCase();
     const name = String(item.goodsNm || "").replace(/\s+/g, " ").trim();
-    if (!/^SM-[A-Z][0-9]{3}[A-Z0-9]{4,12}$/.test(modelCode) || !name) continue;
+    if (!validCatalogSku(modelCode, source) || !name) continue;
 
     const saleStatCd = String(item.saleStatCd ?? "").trim();
     const stockQty = Number(item.stockQty);
@@ -833,7 +838,7 @@ async function renderProductSpecs(product) {
   }
 }
 
-async function renderCatalogHtml(url) {
+async function renderCatalogHtml(url, catalogSource) {
   const chromePath = process.env.CHROME_PATH || "";
   if (!chromePath) throw new Error("CHROME_PATH is not configured for rendered catalog fallback");
 
@@ -862,7 +867,7 @@ async function renderCatalogHtml(url) {
       if (!responseUrl.includes("samsung.com")) return;
 
       const body = await response.text();
-      const models = [...new Set((body.match(/SM-[A-Z0-9-]+/gi) || []).map((value) => value.toUpperCase()))];
+      const models = /\/cxhr\/pf\/goodsList/i.test(responseUrl) ? ["CATALOG_API"] : [...new Set((body.match(/SM-[A-Z0-9-]+/gi) || []).map((value) => value.toUpperCase()))];
       if (!models.length) return;
 
       catalogPayloads.push({ url: responseUrl, contentType, body, models });
@@ -957,13 +962,13 @@ async function renderCatalogHtml(url) {
     console.error("catalog rendered: accumulated visible model cards=" + fragmentsByModel.size + "; payloads=" + catalogPayloads.length);
 
     const goodsListUrl = catalogPayloads.find((item) => item.url.includes("/cxhr/pf/goodsList"))?.url || "";
-    let apiGoods = await fetchCatalogGoodsPages(page.context(), goodsListUrl);
+    let apiGoods = await fetchCatalogGoodsPages(page.context(), goodsListUrl, catalogSource);
 
     if (!apiGoods.length) {
       const fallback = [];
       for (const payload of catalogPayloads.filter((item) => item.url.includes("/cxhr/pf/goodsList"))) {
         try {
-          fallback.push(...findCatalogGoods(JSON.parse(payload.body)));
+          fallback.push(...findCatalogGoods(JSON.parse(payload.body), [], catalogSource));
         } catch {}
       }
       apiGoods = [...new Map(
@@ -1376,7 +1381,7 @@ function plausibleCatalogName(line) {
   if (/^[0-9,.]+\s*(?:원|GB|TB|mm|%|P)?$/i.test(value)) return false;
   if (/^(?:색상|컬러|스토리지|저장 용량|연결 방식|평점|리뷰수)/i.test(value)) return false;
   if (/[{}:;]|^\.|"?(?:mdlCode|grpPath|imgChipURL|actvPhonePlanVer)"?/i.test(value)) return false;
-  return /(?:갤럭시|Galaxy|Samsung|삼성)/i.test(value);
+  return /(?:갤럭시|Galaxy|Samsung|삼성|Bespoke|비스포크|QLED|OLED|Crystal|무풍|제트|냉장고|세탁기|건조기|에어컨|청소기|식기세척기|모니터|프로젝터|TV|전자레인지)/i.test(value);
 }
 
 function priceFromCatalogWindow(text) {
@@ -1394,14 +1399,14 @@ function priceFromCatalogWindow(text) {
 
 function parseCatalogListing(html, source) {
   const lines = catalogTextLines(html);
-  const pattern = new RegExp(source.model_pattern || "SM-[A-Z][0-9]{3}[A-Z0-9]{4,12}", "i");
+  const pattern = new RegExp("^(?:" + (source.model_pattern || "SM-[A-Z][0-9]{3}[A-Z0-9]{4,12}") + ")$", "i");
   const rows = [];
   const seen = new Set();
 
   for (let index = 0; index < lines.length; index++) {
-    const modelMatch = lines[index].match(pattern);
+    const modelMatch = lines[index].split(/\s+/).map((part) => part.replace(/^[^A-Z0-9]+|[^A-Z0-9/-]+$/gi, "")).find((part) => pattern.test(part));
     if (!modelMatch) continue;
-    const modelCode = modelMatch[0].toUpperCase();
+    const modelCode = String(modelMatch).toUpperCase();
     if (seen.has(modelCode)) continue;
 
     let name = "";
@@ -1709,7 +1714,7 @@ function businessUnitFor(product, sourceUrl = "") {
   if (/\bjbl\b|harman[ -]?kardon|\bakg\b/.test(haystack)) return "HARMAN";
   if (/tv|television|monitor|projector|the freestyle|the frame|display|soundbar/.test(haystack)) return "VD";
   if (/smartphone|mobile|galaxy|tablet|watch|buds|ring|phone|wearable/.test(haystack)) return "MX";
-  if (/refrigerator|fridge|washer|dryer|laundry|vacuum|air.?condition|dishwasher|oven|range|cooktop|microwave|appliance|bespoke/.test(haystack)) return "DA";
+  if (/refrigerator|fridge|washer|dryer|laundry|vacuum|air.?condition|dishwasher|oven|range|cooktop|microwave|micro-wave|appliance|bespoke/.test(haystack)) return "DA";
   return "OTHER";
 }
 
@@ -2041,18 +2046,19 @@ for (const source of catalogSourceDefs) {
     if (!/html/i.test(contentType) && !/<html[\s>]/i.test(html)) throw new Error("Catalog source was not HTML");
     const page = extractPage(html, finalUrl, source.url);
     catalogPages.push(page);
-    const rawModelMatches = [...String(html).matchAll(/SM-[A-Z0-9-]+/gi)];
+    const rawModelMatches = [...String(html).matchAll(new RegExp(source.model_pattern || "SM-[A-Z0-9-]+", "gi"))];
     console.error("catalog " + source.id + ": raw model tokens=" + new Set(rawModelMatches.map((match) => match[0].toUpperCase())).size);
 
     let rows = parseCatalogListing(html, source);
     if (!rows.length) {
       console.error("catalog " + source.id + ": static HTML has no product cards; using rendered/API fallback");
-      const rendered = await renderCatalogHtml(source.url);
+      const rendered = await renderCatalogHtml(source.url, source);
       rows = rendered.apiGoods.length
         ? parseCatalogApiGoods(rendered.apiGoods, source)
         : parseCatalogListing(rendered.visibleText, source);
     }
 
+    if (!rows.length) throw new Error("No validated SKU records returned; catalog remains unverified");
     for (const row of rows) {
       const existingProduct = existingProducts.find((item) => item.key === row.key);
       const existingSpecRow = existingSpecsByKey.get(row.key);
@@ -2089,6 +2095,7 @@ if (catalogRows.length && specBatch > 0 && marketCode === "kr") {
   const familyRows = new Map();
 
   for (const row of catalogRows) {
+    if (!["smartphones", "watches"].includes(row.catalog_category)) continue;
     const family = specFamilyKey(row);
     if (!family) continue;
     if (!familyRows.has(family)) familyRows.set(family, []);
