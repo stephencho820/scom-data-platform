@@ -69,7 +69,10 @@ let catalogBrowser = null;
 
 function validCatalogSku(model, source) {
   const value = String(model || "").trim().toUpperCase();
-  if (!/^[A-Z0-9][A-Z0-9/-]{5,35}$/.test(value) || !/[0-9]/.test(value)) return false;
+  // A Samsung sellable model/SKU must be an identifier, not a marketing word.
+  if (!/^[A-Z0-9][A-Z0-9/-]{5,35}$/.test(value)) return false;
+  if (!/[A-Z]/.test(value) || !/[0-9]/.test(value)) return false;
+  if (/^(?:BESPOKE|GOOGLE|COARSE|CORPORATE|MOVINGSTYLE)$/.test(value)) return false;
   return !source?.model_pattern || new RegExp("^(?:" + source.model_pattern + ")$", "i").test(value);
 }
 function findCatalogGoods(value, out = [], source = null) {
@@ -2049,13 +2052,15 @@ for (const source of catalogSourceDefs) {
     const rawModelMatches = [...String(html).matchAll(new RegExp(source.model_pattern || "SM-[A-Z0-9-]+", "gi"))];
     console.error("catalog " + source.id + ": raw model tokens=" + new Set(rawModelMatches.map((match) => match[0].toUpperCase())).size);
 
-    let rows = parseCatalogListing(html, source);
+    // Static HTML is only a fallback. Product-finder API mdlCode is the preferred
+    // evidence for DA/VD because generic page text contains many non-product tokens.
+    let rows = source.business_unit === "MX" ? parseCatalogListing(html, source) : [];
     if (!rows.length) {
       console.error("catalog " + source.id + ": static HTML has no product cards; using rendered/API fallback");
       const rendered = await renderCatalogHtml(source.url, source);
       rows = rendered.apiGoods.length
         ? parseCatalogApiGoods(rendered.apiGoods, source)
-        : parseCatalogListing(rendered.visibleText, source);
+        : (source.business_unit === "MX" ? parseCatalogListing(rendered.visibleText, source) : []);
     }
 
     if (!rows.length) throw new Error("No validated SKU records returned; catalog remains unverified");
