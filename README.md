@@ -2,11 +2,27 @@
 
 Open, text-first Samsung.com data for agents and developers.
 
-S.com Data Platform discovers Samsung.com market inventories, selectively crawls product/commerce/support sources, normalizes them into agent-facing data marts, retains meaningful offer and commerce changes as history, and exposes the result through MCP.
+S.com Data Platform discovers Samsung.com market inventories, selectively crawls product/commerce/support sources, normalizes them into SKU-first agent-facing data marts, retains meaningful offer and commerce changes as history, and exposes the result through MCP.
 
 ## Why this exists
 
 Samsung.com is global, fragmented by market, and difficult for agents to query consistently. This repository turns public site content into a reusable source-linked data layer without starting with paid infrastructure.
+
+## Product identity
+
+The canonical product profile is a **SKU**, not a PDP URL or marketing product name. A single product family can therefore contain multiple SKU profiles for color, storage/capacity, size, region, or other sellable variants.
+
+Hierarchy: `Market → Business Unit → Category → Product Family → Model → SKU`.
+
+Business units are normalized to:
+
+- `DA` — Digital Appliances
+- `VD` — Visual Display
+- `MX` — Mobile eXperience
+- `HARMAN` — HARMAN portfolio
+- `OTHER` — unresolved items that need taxonomy refinement
+
+SKU master keys are deterministic from `market + SKU`. Pages without a concrete SKU remain available as source evidence/history but are not emitted as canonical SKU profiles.
 
 ## v0 architecture
 
@@ -44,7 +60,8 @@ npm run mcp
 The MCP is data-mart first. Primary tools include:
 
 - `list_markets`
-- `search_products`
+- `search_products` (supports `business_unit` filter)
+- `list_skus`
 - `get_product`
 - `get_product_specs`
 - `get_market_offer`

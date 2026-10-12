@@ -62,7 +62,11 @@
       "type": "object",
       "required": [
         "market_product_key",
+        "sku_key",
         "market",
+        "business_unit",
+        "product_family",
+        "sku",
         "name",
         "brand",
         "product_url",
@@ -158,6 +162,21 @@
             "boolean",
             "null"
           ]
+        },
+        "sku_key": {
+          "type": "string"
+        },
+        "business_unit": {
+          "enum": [
+            "DA",
+            "VD",
+            "MX",
+            "HARMAN",
+            "OTHER"
+          ]
+        },
+        "product_family": {
+          "type": "string"
         }
       },
       "additionalProperties": false
@@ -226,6 +245,21 @@
         },
         "source_model": {
           "type": "string"
+        },
+        "sku_key": {
+          "type": "string"
+        },
+        "business_unit": {
+          "enum": [
+            "DA",
+            "VD",
+            "MX",
+            "HARMAN",
+            "OTHER"
+          ]
+        },
+        "product_family": {
+          "type": "string"
         }
       },
       "additionalProperties": false
@@ -276,6 +310,9 @@
             "current_unavailable",
             "unverified"
           ]
+        },
+        "sku_key": {
+          "type": "string"
         }
       },
       "additionalProperties": false
@@ -366,6 +403,9 @@
             "current_sellable",
             "unverified"
           ]
+        },
+        "sku_key": {
+          "type": "string"
         }
       },
       "additionalProperties": false

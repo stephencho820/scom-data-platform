@@ -60,7 +60,7 @@ function textScore(values, terms) {
   return score;
 }
 
-async function searchProducts(query, market, limit = 8, audience, lifecycle) {
+async function searchProducts(query, market, limit = 8, audience, lifecycle, businessUnit) {
   const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
   const markets = market ? [market] : await availableMarketCodes();
   const results = [];
@@ -69,10 +69,13 @@ async function searchProducts(query, market, limit = 8, audience, lifecycle) {
     for (const product of await productMasterFor(code)) {
       if (audience && product.audience !== audience) continue;
       if (lifecycle && product.lifecycle_status !== lifecycle) continue;
+      if (businessUnit && product.business_unit !== businessUnit) continue;
       const relevance = textScore([
         product.name,
         product.sku,
         product.model,
+        product.product_family,
+        product.business_unit,
         (product.category_path || []).join(" "),
         product.product_url
       ], terms);
@@ -197,17 +200,37 @@ function buildServer() {
   server.registerTool(
     "search_products",
     {
-      description: "Search normalized Samsung product master records by product name, model, SKU, or category.",
+      description: "Search canonical Samsung SKU profiles by name, model, SKU, product family, category, or business unit.",
       inputSchema: z.object({
         query: z.string().min(1),
         market: z.string().optional(),
         audience: z.enum(["consumer", "business", "unknown"]).optional(),
         lifecycle: z.enum(["current_sellable", "current_unavailable", "legacy", "unverified"]).optional(),
+        business_unit: z.enum(["DA", "VD", "MX", "HARMAN", "OTHER"]).optional(),
         limit: z.number().int().min(1).max(30).default(8)
       })
     },
-    async ({ query, market, audience, lifecycle, limit }) =>
-      asText(await searchProducts(query, market, limit, audience, lifecycle))
+    async ({ query, market, audience, lifecycle, business_unit, limit }) =>
+      asText(await searchProducts(query, market, limit, audience, lifecycle, business_unit))
+  );
+
+  server.registerTool(
+    "list_skus",
+    {
+      description: "List canonical SKU profiles for a market, optionally filtered by DA, VD, MX, HARMAN, or OTHER.",
+      inputSchema: z.object({
+        market: z.string().min(1),
+        business_unit: z.enum(["DA", "VD", "MX", "HARMAN", "OTHER"]).optional(),
+        lifecycle: z.enum(["current_sellable", "current_unavailable", "legacy", "unverified"]).optional(),
+        limit: z.number().int().min(1).max(200).default(50)
+      })
+    },
+    async ({ market, business_unit, lifecycle, limit }) => {
+      let rows = await productMasterFor(market);
+      if (business_unit) rows = rows.filter((row) => row.business_unit === business_unit);
+      if (lifecycle) rows = rows.filter((row) => row.lifecycle_status === lifecycle);
+      return asText(rows.slice(0, limit));
+    }
   );
 
   server.registerTool(
@@ -334,7 +357,9 @@ function buildServer() {
         market,
         product_key,
         lifecycle_status: product?.lifecycle_status || "unknown",
-        product_versions: productVersions.filter((item) => item.key === product_key),
+        product_versions: productVersions.filter((item) =>
+          item.key === product_key || (product?.sku && item.sku === product.sku)
+        ),
         offer_versions: suppressCommerceHistory ? [] : offerVersions.filter((item) => item.market_product_key === product_key),
         commerce_versions: suppressCommerceHistory ? [] : commerceVersions.filter((item) => item.market_product_key === product_key),
         note: suppressCommerceHistory ? "Non-sellable or commerce-unverified product: historical price/commerce is intentionally suppressed from the agent interface." : null
