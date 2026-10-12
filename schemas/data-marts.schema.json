@@ -125,8 +125,11 @@
         "lifecycle_status": {
           "enum": [
             "current_sellable",
-            "current_unavailable",
-            "legacy",
+            "current_out_of_stock",
+            "current_not_directly_sellable",
+            "discontinued",
+            "legacy_supported",
+            "legacy_archived",
             "unverified"
           ]
         },
