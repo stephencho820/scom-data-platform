@@ -136,3 +136,8 @@ Product identity and hardware specifications are treated as immutable after firs
 - Never interpret a missing SKU as proof that Samsung never sold it. Never infer current sellability or price from old product records.
 - The catalog source registry is an expanding discovery seed list, **not** a certified inventory of all Samsung Korea categories or SKU variants.
 - Full chatbot readiness additionally requires evidence-backed Support/manual/FAQ ingestion, model-to-SKU reconciliation, variant enumeration, compatibility relationships, and independent category completeness verification.
+
+
+## KR chatbot completion gate
+
+The project must not claim the Korea chatbot dataset is complete until `data/marts/kr/chatbot_readiness.json` reports `ready: true`. The gate requires current-catalog source coverage, zero source failures, specifications for every current SKU, SKU-linked support coverage, legacy ingestion, and zero unresolved/OTHER product records. This deliberately favors an explicit incomplete state over silently presenting partial data as complete.
