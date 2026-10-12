@@ -1412,6 +1412,7 @@ function parseCatalogListing(html, source) {
     const modelMatch = lines[index].split(/\s+/).map((part) => part.replace(/^[^A-Z0-9]+|[^A-Z0-9/-]+$/gi, "")).find((part) => pattern.test(part));
     if (!modelMatch) continue;
     const modelCode = String(modelMatch).toUpperCase();
+    if (!validCatalogSku(modelCode, source)) continue;
     if (seen.has(modelCode)) continue;
 
     let name = "";
@@ -1469,10 +1470,19 @@ function parseCatalogListing(html, source) {
 }
 
 function productCatalogCategory(product) {
-  const value = String(product?.url || "").toLowerCase();
-  if (value.includes("/smartphones/")) return "smartphones";
-  if (value.includes("/watches/") || value.includes("/galaxy-watch/")) return "watches";
-  return "";
+  const value = String(product?.url || product?.product_detail_url || "").toLowerCase();
+  const mappings = [
+    ["smartphones", ["/smartphones/"]], ["watches", ["/watches/", "/galaxy-watch/"]],
+    ["tablets", ["/tablets/"]], ["galaxybook", ["/galaxybook/", "/galaxy-book/"]],
+    ["buds", ["/buds/", "/galaxy-buds/"]], ["rings", ["/rings/", "/galaxy-ring/"]],
+    ["tvs", ["/tvs/"]], ["monitors", ["/monitors/"]], ["projectors", ["/projectors/"]],
+    ["refrigerators", ["/refrigerators/"]], ["laundry", ["/washers-and-dryers/", "/laundry/"]],
+    ["air-conditioners", ["/air-conditioners/"]], ["air-purifiers", ["/air-cleaners/", "/air-purifiers/"]],
+    ["vacuum-cleaners", ["/vacuum-cleaners/", "/vacuums/"]], ["dishwashers", ["/dishwashers/"]],
+    ["microwave-ovens", ["/micro-wave-ovens/", "/microwaves/"]], ["cooking-appliances", ["/cooking-appliances/"]],
+    ["soundbars", ["/audio-devices/", "/soundbars/"]]
+  ];
+  return mappings.find(([, paths]) => paths.some((item) => value.includes(item)))?.[0] || "";
 }
 
 function buildLifecycleResolver(catalogRows, successfulCatalogSources) {
@@ -1852,8 +1862,7 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
     });
 
     if (lifecycle.commerce_eligible !== false &&
-        lifecycle.lifecycle_status !== "legacy" &&
-        lifecycle.lifecycle_status !== "current_unavailable") {
+        !["discontinued", "legacy_supported", "legacy_archived", "current_out_of_stock", "current_not_directly_sellable"].includes(lifecycle.lifecycle_status)) {
       const currentUnavailable = false;
       const offerCore = {
         market_product_key: skuKey,
@@ -1908,8 +1917,7 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
       membership: commerceCore.membership
     }));
     if (lifecycle.commerce_eligible !== false &&
-        lifecycle.lifecycle_status !== "legacy" &&
-        lifecycle.lifecycle_status !== "current_unavailable") {
+        !["discontinued", "legacy_supported", "legacy_archived", "current_out_of_stock", "current_not_directly_sellable"].includes(lifecycle.lifecycle_status)) {
       commerceOptions.push(commerceCore);
     }
 
