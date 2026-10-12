@@ -62,7 +62,7 @@ jobs:
         env:
           BATCH_PAGES: ${{ github.event.inputs.batch_pages || '120' }}
         run: |
-          node -e "const c=require('./config/markets.json'); for(const m of c.markets) console.log(m.code)" > /tmp/markets.txt
+          printf "kr\n" > /tmp/markets.txt
           failures=0
           pages="$BATCH_PAGES"
           if [ "$GITHUB_EVENT_NAME" = "push" ]; then pages=12; fi
