@@ -65,6 +65,7 @@
         "sku_key",
         "market",
         "business_unit",
+        "category",
         "product_family",
         "sku",
         "name",
@@ -177,6 +178,13 @@
         },
         "product_family": {
           "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "variant_attributes": {
+          "type": "object",
+          "additionalProperties": true
         }
       },
       "additionalProperties": false
@@ -260,6 +268,13 @@
         },
         "product_family": {
           "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "variant_attributes": {
+          "type": "object",
+          "additionalProperties": true
         }
       },
       "additionalProperties": false
@@ -268,6 +283,7 @@
       "type": "object",
       "required": [
         "market_product_key",
+        "sku_key",
         "market",
         "purchase_url",
         "captured_at",
@@ -321,6 +337,7 @@
       "type": "object",
       "required": [
         "market_product_key",
+        "sku_key",
         "market",
         "source_url",
         "captured_at",
