@@ -1,6 +1,6 @@
 {
   "market": "kr",
-  "generated_at": "2026-10-12T11:09:38.140Z",
+  "generated_at": "2026-10-12T12:03:31.708Z",
   "ready": false,
   "gates": {
     "current_catalog_coverage": false,
@@ -12,23 +12,18 @@
   },
   "counts": {
     "sku_registry": 918,
-    "current_skus": 748,
-    "current_skus_with_specs": 91,
+    "current_skus": 848,
+    "current_skus_with_specs": 92,
     "support_resources": 5,
     "support_linked_current_skus": 0,
     "legacy_skus": 0,
-    "unverified_skus": 118,
+    "unverified_skus": 18,
     "other_bu_skus": 6
   },
   "failed_catalog_sources": [
     {
       "id": "projectors",
       "url": "https://www.samsung.com/sec/projectors/all-projectors/",
-      "error": "No validated SKU records returned; catalog remains unverified"
-    },
-    {
-      "id": "air-conditioners",
-      "url": "https://www.samsung.com/sec/air-conditioners/all-air-conditioners/",
       "error": "No validated SKU records returned; catalog remains unverified"
     },
     {

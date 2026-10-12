@@ -1,11 +1,11 @@
 {
   "market": "kr",
-  "generated_at": "2026-10-12T12:03:08.279Z",
-  "source_snapshot_at": "2026-10-12T11:09:38.140Z",
+  "generated_at": "2026-10-12T12:08:36.772Z",
+  "source_snapshot_at": "2026-10-12T12:03:31.708Z",
   "ready": false,
   "catalog": {
     "sources_total": 18,
-    "sources_failed": 6,
+    "sources_failed": 5,
     "categories": [
       {
         "business_unit": "MX",
@@ -88,10 +88,10 @@
         "business_unit": "DA",
         "category": "air-conditioners",
         "source_id": "air-conditioners",
-        "status": "failed",
-        "discovered_skus": 0,
-        "db_skus": 0,
-        "complete": false,
+        "status": "ok",
+        "discovered_skus": 100,
+        "db_skus": 100,
+        "complete": true,
         "missing_in_db": [],
         "unexpected_in_db": []
       },
@@ -211,7 +211,7 @@
     "current_products": 918,
     "specs_rows": 918,
     "support_rows": 5,
-    "products_missing_specs_or_support": 748
+    "products_missing_specs_or_support": 848
   },
   "sku_gaps": [
     {
@@ -1995,6 +1995,76 @@
       "has_support": false
     },
     {
+      "sku": "AF60F17D11WRT",
+      "market_product_key": "AF60F17D11WRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI Q9000 56.9/18.7㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af60f17d11wrt-d2c/AF60F17D11WRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF60F17D11BRTA",
+      "market_product_key": "AF60F17D11BRTA",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI Q9000 56.9/18.7㎡+블루스카이 3100 33.1㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af60f17d11brta-d2c/AF60F17D11BRTA/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF60F19D11GRT",
+      "market_product_key": "AF60F19D11GRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI Q9000 62.6/18.7㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af60f19d11wrt-d2c/AF60F19D11GRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF60F19D11GRTA",
+      "market_product_key": "AF60F19D11GRTA",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI Q9000 62.6/18.7㎡+블루스카이 3100 33.1㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af60f19d11grta-d2c/AF60F19D11GRTA/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF60F17D12WRT",
+      "market_product_key": "AF60F17D12WRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI Q9000 청정 56.9/18.7㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af60f17d12wrt-d2c/AF60F17D12WRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF60H17D12BRT1",
+      "market_product_key": "AF60H17D12BRT1",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI Q9000 청정 56.9/18.7㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af60h17d12brt1-d2c/AF60H17D12BRT1/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF60F19D12WRT",
+      "market_product_key": "AF60F19D12WRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI Q9000 청정 62.6/18.7㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af60f19d12wrt-d2c/AF60F19D12WRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "DV21DG8200BV",
       "market_product_key": "DV21DG8200BV",
       "business_unit": "DA",
@@ -2011,6 +2081,146 @@
       "category": "laundry",
       "name": "AI 건조기 21kg",
       "url": "https://www.samsung.com/sec/laundry/dryer-dv21dg8600bvt-d2c/DV21DG8600BV/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AR60F07D12WT",
+      "market_product_key": "AR60F07D12WT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI 무풍콤보 벽걸이 24.4㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-ar60f07d12wt-d2c/AR60F07D12WT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AR60F07D11WT",
+      "market_product_key": "AR60F07D11WT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI 무풍콤보 벽걸이 24.4㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-ar60f07d11wt-d2c/AR60F07D11WT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AR80F07D21WT",
+      "market_product_key": "AR80F07D21WT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI 무풍콤보 벽걸이 24.4㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-ar80f07d21wt-d2c/AR80F07D21WT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AR60F09D11WT",
+      "market_product_key": "AR60F09D11WT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI 무풍콤보 벽걸이 29.3㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-ar60f09d11wt-d2c/AR60F09D11WT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AR60F11D11WT",
+      "market_product_key": "AR60F11D11WT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI 무풍콤보 벽걸이 34.1㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-ar60f11d11wt-d2c/AR60F11D11WT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AR60F13D12WT",
+      "market_product_key": "AR60F13D12WT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI 무풍콤보 벽걸이 42.3㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-ar60f13d12wt-d2c/AR60F13D12WT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AR60F15D12WT",
+      "market_product_key": "AR60F15D12WT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI 무풍콤보 벽걸이 48.8㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-ar60f15d12wt-d2c/AR60F15D12WT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AR60F07C14WT",
+      "market_product_key": "AR60F07C14WT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI 무풍콤보 벽걸이 냉난방 24.4㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-ar60f07c14wt-d2c/AR60F07C14WT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AR60F07C12WT",
+      "market_product_key": "AR60F07C12WT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI 무풍콤보 벽걸이 냉난방 24.4㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-ar60f07c12wt-d2c/AR60F07C12WT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AR60F09C13WT",
+      "market_product_key": "AR60F09C13WT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI 무풍콤보 벽걸이 냉난방 29.3㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-ar60f09c13wt-d2c/AR60F09C13WT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AR60F11C13WT",
+      "market_product_key": "AR60F11C13WT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI 무풍콤보 벽걸이 냉난방 38.2㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-ar60f11c13wt-d2c/AR60F11C13WT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AR60F13C13WT",
+      "market_product_key": "AR60F13C13WT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI 무풍콤보 벽걸이 냉난방 42.3㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-ar60f13c13wt-d2c/AR60F13C13WT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AR60F16C14WT",
+      "market_product_key": "AR60F16C14WT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI 무풍콤보 벽걸이 냉난방 52.8㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-ar60f16c14wt-d2c/AR60F16C14WT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AR80H07D21WT",
+      "market_product_key": "AR80H07D21WT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "AI 무풍콤보 프로 벽걸이 청정 24.4㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-ar80h07d21wt-d2c/AR80H07D21WT/",
       "has_specs": false,
       "has_support": false
     },
@@ -2581,6 +2791,576 @@
       "category": "refrigerators",
       "name": "Bespoke AI 냉장고+냉동고+김치플러스 1도어 키친핏 409/347/347L",
       "url": "https://www.samsung.com/sec/refrigerators/package-rr40c78rzrq79a-d2c/RR40C78RZRQ79A/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF17DX738BZRT",
+      "market_product_key": "AF17DX738BZRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍 갤러리 56.9/18.7㎡ (스탠드형 리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af17dx738bzrt-d2c/AF17DX738BZRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF19DX838BZRT",
+      "market_product_key": "AF19DX838BZRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍 갤러리 62.6/18.7㎡ (스탠드형 리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af19dx838bzrt-d2c/AF19DX838BZRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF17DX738VSRT",
+      "market_product_key": "AF17DX738VSRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍 갤러리 청정 56.9/18.7㎡ (스탠드형 리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af17dx738wsrt-d2c/AF17DX738VSRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF18DX839WSRT",
+      "market_product_key": "AF18DX839WSRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍 갤러리 청정 58.5/18.7㎡ (스탠드형 리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af18dx839wsrt-d2c/AF18DX839WSRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF18DX936WFT",
+      "market_product_key": "AF18DX936WFT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍 갤러리 청정 58.5㎡ (스탠드형 리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af18dx936wfrt-d2c/AF18DX936WFT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF19DX837WFT",
+      "market_product_key": "AF19DX837WFT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍 갤러리 청정 62.6㎡ (스탠드형 리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af19dx837wfrt-d2c/AF19DX837WFT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF70F17D24WRT",
+      "market_product_key": "AF70F17D24WRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍 클래식 56.9/18.7㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af70f17d24wrt-d2c/AF70F17D24WRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF70F17D11WRT",
+      "market_product_key": "AF70F17D11WRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍 클래식 56.9/18.7㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af70f17d11wrt-d2c/AF70F17D11WRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF70F17D24IR1T",
+      "market_product_key": "AF70F17D24IR1T",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍 클래식 56.9/18.7㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af70f17d24ir1t-d2c/AF70F17D24IR1T/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF70F17D24ER1T",
+      "market_product_key": "AF70F17D24ER1T",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍 클래식 56.9/18.7㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af70f17d24er1t-d2c/AF70F17D24ER1T/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF70F17D11GRTM",
+      "market_product_key": "AF70F17D11GRTM",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍 클래식 56.9/18.7㎡ (리모컨 포함)+블루스카이 3100 33.1㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af70f17d11grtm-d2c/AF70F17D11GRTM/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF70F17D11WRTM",
+      "market_product_key": "AF70F17D11WRTM",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍 클래식 56.9/18.7㎡ (리모컨 포함)+블루스카이 3100 33.1㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af70f17d11wrtm-d2c/AF70F17D11WRTM/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF70F17D11GRTL",
+      "market_product_key": "AF70F17D11GRTL",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍 클래식 56.9/18.7㎡ (리모컨 포함)+블루스카이 3100 33.1㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af70f17d11grtl-d2c/AF70F17D11GRTL/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF70F17D11WRTK",
+      "market_product_key": "AF70F17D11WRTK",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍 클래식 56.9/18.7㎡ (리모컨 포함)+블루스카이 3100 33.1㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af70f17d11wrtk-d2c/AF70F17D11WRTK/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF70F17D24WRT2",
+      "market_product_key": "AF70F17D24WRT2",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍 클래식 56.9/18.7㎡+블루스카이 3100 33.1㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af70f17d24wrt2-d2c/AF70F17D24WRT2/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF70F19D24LRT1",
+      "market_product_key": "AF70F19D24LRT1",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍 클래식 62.6/18.7㎡ (리모컨 미포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af70f19d24lrt-d2c/AF70F19D24LRT1/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF70F19D11BRT",
+      "market_product_key": "AF70F19D11BRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍 클래식 62.6/18.7㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af70f19d11wrt-d2c/AF70F19D11BRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF70F19D24IR1T",
+      "market_product_key": "AF70F19D24IR1T",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍 클래식 62.6/18.7㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af70f19d24ir1t-d2c/AF70F19D24IR1T/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF70F19D24ER1T",
+      "market_product_key": "AF70F19D24ER1T",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍 클래식 62.6/18.7㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af70f19d24er1t-d2c/AF70F19D24ER1T/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF70F19D25WRTK",
+      "market_product_key": "AF70F19D25WRTK",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍 클래식 청정 62.6/18.7㎡ (리모컨 포함)+블루스카이 3100 33.1㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af70f19d25wrtk-d2c/AF70F19D25WRTK/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF80F17D22WRTK",
+      "market_product_key": "AF80F17D22WRTK",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 56.9/18.7㎡ (리모컨 포함)+블루스카이 3100 33.1㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af80f17d22wrtk-d2c/AF80F17D22WRTK/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF80F18D24CRT",
+      "market_product_key": "AF80F18D24CRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 58.5/18.7㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af80f18d25wrta-d2c/AF80F18D24CRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF80F18D27CRT",
+      "market_product_key": "AF80F18D27CRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 58.5/18.7㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af80f18d27crt-d2c/AF80F18D27CRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF80F19D25WRTK",
+      "market_product_key": "AF80F19D25WRTK",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 62.6/18.7㎡ (리모컨 포함)+블루스카이 3100 33.1㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af80f19d25wrtk-d2c/AF80F19D25WRTK/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF80F20D27CRT1",
+      "market_product_key": "AF80F20D27CRT1",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 65.9/18.7㎡ (리모컨 미포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af80f20d27crt-d2c/AF80F20D27CRT1/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF80F17D22WRT",
+      "market_product_key": "AF80F17D22WRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 청정 56.9/18.7㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af80f17d22wrt-d2c/AF80F17D22WRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF80F17D23WRT",
+      "market_product_key": "AF80F17D23WRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 청정 56.9/18.7㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af80f17d23wrt-d2c/AF80F17D23WRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF80F18D25WRT",
+      "market_product_key": "AF80F18D25WRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 청정 58.5/18.7㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af80f18d25wrta-d2c/AF80F18D25WRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF80F18D25WRTL",
+      "market_product_key": "AF80F18D25WRTL",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 청정 58.5/18.7㎡ (리모컨 포함)+블루스카이 3100 33.1㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af80f18d25wrtl-d2c/AF80F18D25WRTL/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF80F18D28WRTL",
+      "market_product_key": "AF80F18D28WRTL",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 청정 58.5/18.7㎡ (리모컨 포함)+블루스카이 3100 33.1㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af80f18d28wrtl-d2c/AF80F18D28WRTL/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF80F18D28WT",
+      "market_product_key": "AF80F18D28WT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 청정 58.5㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af80f18d28wrt-d2c/AF80F18D28WT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF80F19D25BRTM",
+      "market_product_key": "AF80F19D25BRTM",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 청정 62.6/18.7㎡ (리모컨 포함)+블루스카이 3100 33.1㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af80f19d25brtm-d2c/AF80F19D25BRTM/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF80F19D25WRTM",
+      "market_product_key": "AF80F19D25WRTM",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 청정 62.6/18.7㎡ (리모컨 포함)+블루스카이 3100 33.1㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af80f19d25wrtm-d2c/AF80F19D25WRTM/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF80F20D28WRT",
+      "market_product_key": "AF80F20D28WRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 청정 65.9/18.7㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af80f20d28wrt-d2c/AF80F20D28WRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF80F25D28BRT",
+      "market_product_key": "AF80F25D28BRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 청정 81.8/18.7㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af80f25d28brt-d2c/AF80F25D28BRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H17D24GRT",
+      "market_product_key": "AF90H17D24GRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 56.9/18.7㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h17d24grt-d2c/AF90H17D24GRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H17D27GRT",
+      "market_product_key": "AF90H17D27GRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 56.9/18.7㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h17d27grt-d2c/AF90H17D27GRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H17D24GRTF",
+      "market_product_key": "AF90H17D24GRTF",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 56.9/18.7㎡+Infinite AI 공기청정기 (33㎡, 리유저블 필터)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h17d24grtf-d2c/AF90H17D24GRTF/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H19D27SRT",
+      "market_product_key": "AF90H19D27SRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 62.6/18.7㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h19d27srt-d2c/AF90H19D27SRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H19D24GRT",
+      "market_product_key": "AF90H19D24GRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 62.6/18.7㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h19d24grt-d2c/AF90H19D24GRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H19D24SRT",
+      "market_product_key": "AF90H19D24SRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 62.6/18.7㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h19d24srt-d2c/AF90H19D24SRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H17D35WRT",
+      "market_product_key": "AF90H17D35WRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 청정 56.9/18.7㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h17d35wrt-d2c/AF90H17D35WRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H17D35ERT",
+      "market_product_key": "AF90H17D35ERT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 청정 56.9/18.7㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h17d35ert-d2c/AF90H17D35ERT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H17D38ERT",
+      "market_product_key": "AF90H17D38ERT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 청정 56.9/18.7㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h17d38ert-d2c/AF90H17D38ERT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H17D38WRT",
+      "market_product_key": "AF90H17D38WRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 청정 56.9/18.7㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h17d38wrt-d2c/AF90H17D38WRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H17D35WRZF",
+      "market_product_key": "AF90H17D35WRZF",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 청정 56.9/18.7㎡ (선매립)+Infinite AI 공기청정기 (33㎡, 리유저블 필터)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h17d35wrtf-d2c/AF90H17D35WRZF/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H19D35WRT",
+      "market_product_key": "AF90H19D35WRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 청정 62.6/18.7㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h19d35wrt-d2c/AF90H19D35WRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H19D35ERT",
+      "market_product_key": "AF90H19D35ERT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 청정 62.6/18.7㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h19d35ert-d2c/AF90H19D35ERT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H19D38WRT",
+      "market_product_key": "AF90H19D38WRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 청정 62.6/18.7㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h19d38wrt-d2c/AF90H19D38WRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H19D35WRTF",
+      "market_product_key": "AF90H19D35WRTF",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 청정 62.6/18.7㎡+Infinite AI 공기청정기 (33㎡, 리유저블 필터)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h19d35wrtf-d2c/AF90H19D35WRTF/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H19D38WRTF",
+      "market_product_key": "AF90H19D38WRTF",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 청정 62.6/18.7㎡+Infinite AI 공기청정기 (33㎡, 리유저블 필터)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h19d38wrtf-d2c/AF90H19D38WRTF/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H19D35WRTA",
+      "market_product_key": "AF90H19D35WRTA",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 청정 62.6/18.7㎡+인버터 제습기 23L",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h19d35wrta-d2c/AF90H19D35WRTA/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H19D38WRTA",
+      "market_product_key": "AF90H19D38WRTA",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 청정 62.6/18.7㎡+인버터 제습기 23L",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h19d38wrta-d2c/AF90H19D38WRTA/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H22D35WRT",
+      "market_product_key": "AF90H22D35WRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 청정 74.5/18.7㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h22d35wrt-d2c/AF90H22D35WRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H25D36WRT",
+      "market_product_key": "AF90H25D36WRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 청정 81.8/18.7㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h25d36wrt-d2c/AF90H25D36WRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H25D36WRTF",
+      "market_product_key": "AF90H25D36WRTF",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 청정 81.8/18.7㎡+Infinite AI 공기청정기 (33㎡, 리유저블 필터)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h25d36wrtf-d2c/AF90H25D36WRTF/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF90H25D36WRTA",
+      "market_product_key": "AF90H25D36WRTA",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke AI 무풍콤보 갤러리 프로 청정 81.8/18.7㎡+인버터 제습기 23L",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h25d36wrta-d2c/AF90H25D36WRTA/",
       "has_specs": false,
       "has_support": false
     },
@@ -3945,6 +4725,176 @@
       "has_support": false
     },
     {
+      "sku": "AF17CX738FZT",
+      "market_product_key": "AF17CX738FZT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke 무풍에어컨 갤러리 56.9㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af17cx738fzr-d2c/AF17CX738FZT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF18BX836NFT",
+      "market_product_key": "AF18BX836NFT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke 무풍에어컨 갤러리 슬림핏 청정 58.5㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af18bx836nf-d2c/AF18BX836NFT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF18BX839WST",
+      "market_product_key": "AF18BX839WST",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke 무풍에어컨 갤러리 슬림핏 청정 58.5㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af18bx839ws-d2c/AF18BX839WST/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF17BX735NFT",
+      "market_product_key": "AF17BX735NFT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke 무풍에어컨 갤러리 청정 56.9㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af17bx735nf-d2c/AF17BX735NFT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF17BX738WST",
+      "market_product_key": "AF17BX738WST",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke 무풍에어컨 갤러리 청정 56.9㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af17bx738ws-d2c/AF17BX738WST/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF17CX735AFT",
+      "market_product_key": "AF17CX735AFT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke 무풍에어컨 갤러리 청정 56.9㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af17cx735afr-d2c/AF17CX735AFT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF17BX737WFT",
+      "market_product_key": "AF17BX737WFT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke 무풍에어컨 갤러리 청정 56.9㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af17bx737wf-d2c/AF17BX737WFT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF18CX836AFT",
+      "market_product_key": "AF18CX836AFT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke 무풍에어컨 갤러리 청정 58.5㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af18cx836af-d2c/AF18CX836AFT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF19BX733EST",
+      "market_product_key": "AF19BX733EST",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke 무풍에어컨 갤러리 청정 62.6㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af19bx733es-d2c/AF19BX733EST/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF19BX735NFT",
+      "market_product_key": "AF19BX735NFT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke 무풍에어컨 갤러리 청정 62.6㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af19bx735nf-d2c/AF19BX735NFT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF20CX936GFT",
+      "market_product_key": "AF20CX936GFT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke 무풍에어컨 갤러리 청정 65.9㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af20cx936gf-d2c/AF20CX936GFT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF20CX939WST",
+      "market_product_key": "AF20CX939WST",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke 무풍에어컨 갤러리 청정 65.9㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af20cx939wsr-d2c/AF20CX939WST/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF19CX890AFRT",
+      "market_product_key": "AF19CX890AFRT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke 무풍에어컨 갤러리 체온풍 청정 62.6/18.7㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af19cx890afr-d2c/AF19CX890AFRT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AW06C7155GWAZ",
+      "market_product_key": "AW06C7155GWAZ",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke 무풍에어컨 윈도우핏 19.2㎡ (매립형)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-aw06c7155gwaz-d2c/AW06C7155GWAZ/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AW06C7155EWAZ",
+      "market_product_key": "AW06C7155EWAZ",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke 무풍에어컨 윈도우핏 19.2㎡ (매립형)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-aw06c7155ewaz-d2c/AW06C7155EWAZ/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AW06C7155TWAZ",
+      "market_product_key": "AW06C7155TWAZ",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke 무풍에어컨 윈도우핏 19.2㎡ (매립형)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-aw06c7155twaz-d2c/AW06C7155TWAZ/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AW06C7155WWAZ",
+      "market_product_key": "AW06C7155WWAZ",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "Bespoke 무풍에어컨 윈도우핏 19.2㎡ (매립형)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-aw06c7155wwaz-d2c/AW06C7155WWAZ/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "RZ24A5660A01FK",
       "market_product_key": "RZ24A5660A01FK",
       "business_unit": "DA",
@@ -4941,7 +5891,7 @@
       "category": "smartphones",
       "name": "갤럭시 Z 트라이폴드 자급제",
       "url": "https://www.samsung.com/sec/smartphones/galaxy-z-trifold-f968/SM-F968NZKAKOO/",
-      "has_specs": false,
+      "has_specs": true,
       "has_support": false
     },
     {
@@ -6415,6 +7365,46 @@
       "has_support": false
     },
     {
+      "sku": "AR07D9181HZT",
+      "market_product_key": "AR07D9181HZT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "무풍에어컨 벽걸이 냉난방 24.4㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-ar07d9181hzt-d2c/AR07D9181HZT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AR13D9150HZT",
+      "market_product_key": "AR13D9150HZT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "무풍에어컨 벽걸이 와이드 42.3㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-ar13d9150hzt-d2c/AR13D9150HZT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AF19B7932RFT",
+      "market_product_key": "AF19B7932RFT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "무풍에어컨 클래식 청정 62.6㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-af19b7932rfr-d2c/AF19B7932RFT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AR50F10D13HT",
+      "market_product_key": "AR50F10D13HT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "벽걸이 에어컨 31.7㎡ (리모컨 포함)",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-ar50f10d13h-d2c/AR50F10D13HT/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS34H550GAKXKR",
       "market_product_key": "LS34H550GAKXKR",
       "business_unit": "VD",
@@ -7021,6 +8011,16 @@
       "category": "monitors",
       "name": "에센셜모니터 S39GD (80.1cm)",
       "url": "https://www.samsung.com/sec/monitors/ls32d392gakxkr-d2c/LS32D392GAKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "AR06D1150HZT",
+      "market_product_key": "AR06D1150HZT",
+      "business_unit": "DA",
+      "category": "air-conditioners",
+      "name": "에어컨 벽걸이 18.7㎡",
+      "url": "https://www.samsung.com/sec/air-conditioners/package-ar06d1150hzt-d2c/AR06D1150HZT/",
       "has_specs": false,
       "has_support": false
     },

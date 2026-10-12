@@ -1,13 +1,13 @@
 {
   "market": "kr",
-  "generated_at": "2026-10-12T11:09:38.140Z",
+  "generated_at": "2026-10-12T12:03:31.708Z",
   "definition": "Current catalog coverage compares SKU identifiers discovered from each configured official Samsung.com KR catalog source with current SKU rows emitted to product_master.",
   "complete": false,
   "catalog_sources_total": 18,
-  "catalog_sources_ok": 12,
-  "catalog_sources_failed": 6,
-  "discovered_unique_skus": 748,
-  "db_current_unique_skus": 748,
+  "catalog_sources_ok": 13,
+  "catalog_sources_failed": 5,
+  "discovered_unique_skus": 848,
+  "db_current_unique_skus": 848,
   "categories": [
     {
       "source_id": "smartphones",
@@ -98,12 +98,12 @@
       "business_unit": "DA",
       "category": "air-conditioners",
       "source_url": "https://www.samsung.com/sec/air-conditioners/all-air-conditioners/",
-      "source_status": "failed",
-      "discovered_unique_skus": 0,
-      "db_current_unique_skus": 0,
+      "source_status": "ok",
+      "discovered_unique_skus": 100,
+      "db_current_unique_skus": 100,
       "missing_in_db": [],
       "unexpected_in_db": [],
-      "complete": false
+      "complete": true
     },
     {
       "source_id": "vacuum-cleaners",
