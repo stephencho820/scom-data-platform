@@ -7,13 +7,78 @@
         "id": "smartphones",
         "url": "https://www.samsung.com/sec/smartphones/all-smartphones/",
         "category": "smartphones",
-        "model_pattern": "SM-[A-Z][0-9]{3}[A-Z0-9]{4,12}"
+        "model_pattern": "SM-[A-Z][0-9]{3}[A-Z0-9]{4,12}",
+        "business_unit": "MX"
       },
       {
         "id": "watches",
         "url": "https://www.samsung.com/sec/watches/all-watches/",
         "category": "watches",
-        "model_pattern": "SM-[A-Z][0-9]{3}[A-Z0-9]{4,12}"
+        "model_pattern": "SM-[A-Z][0-9]{3}[A-Z0-9]{4,12}",
+        "business_unit": "MX"
+      },
+      {
+        "id": "tvs",
+        "url": "https://www.samsung.com/sec/tvs/all-tvs/",
+        "category": "tvs",
+        "business_unit": "VD",
+        "model_pattern": "[A-Z][A-Z0-9]{5,}(?:[-/][A-Z0-9]{2,})*"
+      },
+      {
+        "id": "monitors",
+        "url": "https://www.samsung.com/sec/monitors/all-monitors/",
+        "category": "monitors",
+        "business_unit": "VD",
+        "model_pattern": "[A-Z][A-Z0-9]{5,}(?:[-/][A-Z0-9]{2,})*"
+      },
+      {
+        "id": "projectors",
+        "url": "https://www.samsung.com/sec/projectors/all-projectors/",
+        "category": "projectors",
+        "business_unit": "VD",
+        "model_pattern": "[A-Z][A-Z0-9]{5,}(?:[-/][A-Z0-9]{2,})*"
+      },
+      {
+        "id": "refrigerators",
+        "url": "https://www.samsung.com/sec/refrigerators/all-refrigerators/",
+        "category": "refrigerators",
+        "business_unit": "DA",
+        "model_pattern": "[A-Z][A-Z0-9]{5,}(?:[-/][A-Z0-9]{2,})*"
+      },
+      {
+        "id": "laundry",
+        "url": "https://www.samsung.com/sec/washers-and-dryers/all-washers-and-dryers/",
+        "category": "laundry",
+        "business_unit": "DA",
+        "model_pattern": "[A-Z][A-Z0-9]{5,}(?:[-/][A-Z0-9]{2,})*"
+      },
+      {
+        "id": "air-conditioners",
+        "url": "https://www.samsung.com/sec/air-conditioners/all-air-conditioners/",
+        "category": "air-conditioners",
+        "business_unit": "DA",
+        "model_pattern": "[A-Z][A-Z0-9]{5,}(?:[-/][A-Z0-9]{2,})*"
+      },
+      {
+        "id": "vacuum-cleaners",
+        "url": "https://www.samsung.com/sec/vacuum-cleaners/all-vacuum-cleaners/",
+        "category": "vacuum-cleaners",
+        "business_unit": "DA",
+        "model_pattern": "[A-Z][A-Z0-9]{5,}(?:[-/][A-Z0-9]{2,})*"
+      },
+      {
+        "id": "dishwashers",
+        "url": "https://www.samsung.com/sec/dishwashers/all-dishwashers/",
+        "category": "dishwashers",
+        "business_unit": "DA",
+        "model_pattern": "[A-Z][A-Z0-9]{5,}(?:[-/][A-Z0-9]{2,})*"
+      },
+      {
+        "id": "microwave-ovens",
+        "url": "https://www.samsung.com/sec/micro-wave-ovens/all-micro-wave-ovens/",
+        "category": "microwave-ovens",
+        "business_unit": "DA",
+        "model_pattern": "[A-Z][A-Z0-9]{5,}(?:[-/][A-Z0-9]{2,})*"
       }
     ]
   }
