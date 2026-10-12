@@ -326,7 +326,8 @@
         "lifecycle_status": {
           "enum": [
             "current_sellable",
-            "current_unavailable",
+            "current_out_of_stock",
+            "current_not_directly_sellable",
             "unverified"
           ]
         },

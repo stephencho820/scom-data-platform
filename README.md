@@ -127,3 +127,12 @@ Product identity and hardware specifications are treated as immutable after firs
 - Price, stock, sellability, promotions, commerce options, and lifecycle remain dynamic and can be refreshed repeatedly.
 - SKUs are retained in the registry when they leave the current catalog; lifecycle/support pipelines can subsequently classify them as discontinued or legacy.
 - Historical/legacy backfill uses the same registry so a SKU has one durable identity across current and historical sources.
+
+
+## KR chatbot knowledge API (MCP)
+
+- `get_kr_sku_knowledge({sku})` resolves an exact SKU across immutable registry, current product master, specifications, current offer eligibility, and available support resources.
+- `get_kr_catalog_health({})` returns source-by-source SKU coverage evidence and crawl failures.
+- Never interpret a missing SKU as proof that Samsung never sold it. Never infer current sellability or price from old product records.
+- The catalog source registry is an expanding discovery seed list, **not** a certified inventory of all Samsung Korea categories or SKU variants.
+- Full chatbot readiness additionally requires evidence-backed Support/manual/FAQ ingestion, model-to-SKU reconciliation, variant enumeration, compatibility relationships, and independent category completeness verification.
