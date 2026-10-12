@@ -125,7 +125,10 @@ async function fetchCatalogGoodsPages(context, capturedUrl, source) {
         " total=" + products.size
       );
 
-      if (!goods.length || added === 0) break;
+      if (!goods.length) break;
+      // A duplicate page does not prove pagination is exhausted; some endpoints
+      // ignore the first page parameter or return overlapping pages.
+      if (added === 0 && pageNumber >= 3) break;
     } catch (error) {
       console.error("catalog goodsList pagination failed: " + error.message);
       break;
@@ -902,6 +905,11 @@ async function renderCatalogHtml(url, catalogSource) {
   try {
     await page.goto(url, { waitUntil: "domcontentloaded", timeout: 45000 });
     await page.waitForTimeout(2200);
+    // Some product finders hydrate their goodsList request well after DOM ready.
+    // Give the official API time to respond before relying on visible text.
+    if (!catalogPayloads.some((item) => /\\/cxhr\\/pf\\/goodsList/i.test(item.url))) {
+      await page.waitForResponse((response) => /\\/cxhr\\/pf\\/goodsList/i.test(response.url()), { timeout: 12000 }).catch(() => null);
+    }
     await page.evaluate(() => window.scrollTo(0, 0));
     await collectVisibleProducts();
 
