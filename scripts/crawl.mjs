@@ -2116,10 +2116,11 @@ if (catalogRows.length && specBatch > 0 && marketCode === "kr") {
   for (const row of catalogRows) {
     if (!["smartphones", "watches"].includes(row.catalog_category)) continue;
     const sku = String(row.sku || "").trim().toUpperCase();
-    const registryRow = registryBySku.get(sku);
-    // Immutable product/spec data is deep-crawled only for a newly discovered SKU.
-    // Existing SKU specs are retained; recurring crawls refresh commerce/lifecycle only.
-    if (registryRow) continue;
+    // Registry presence is not proof of complete specifications. Backfill existing
+    // SKUs when their persisted spec record has no verified values.
+    const previousKey = registryBySku.get(sku)?.market_product_key || row.key;
+    const previousSpecs = existingSpecsByKey.get(previousKey)?.specs || [];
+    if (sanitizeSpecs(previousSpecs).length >= 5) continue;
     const family = specFamilyKey(row);
     if (!family) continue;
     if (!familyRows.has(family)) familyRows.set(family, []);
@@ -2128,7 +2129,10 @@ if (catalogRows.length && specBatch > 0 && marketCode === "kr") {
 
   const families = [...familyRows.entries()]
     .map(([family, rows]) => {
-      const specCount = Math.max(0, ...rows.map((row) => sanitizeSpecs(row.specs).length));
+      const specCount = Math.max(0, ...rows.map((row) => {
+        const previousKey = registryBySku.get(String(row.sku || "").trim().toUpperCase())?.market_product_key || row.key;
+        return Math.max(sanitizeSpecs(row.specs).length, sanitizeSpecs(existingSpecsByKey.get(previousKey)?.specs || []).length);
+      }));
       return {
         family,
         rows,
