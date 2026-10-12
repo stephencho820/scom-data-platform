@@ -11,7 +11,7 @@
   <header>
     <a class="brand" href="./">S.com Data Platform</a>
     <nav>
-      <a href="./dashboard.html">KR Dashboard</a>
+      <a href="#dashboard">KR Dashboard</a>
       <a href="#explorer">Data Explorer</a>
       <a href="#architecture">Architecture</a>
       <a href="#markets">Markets</a>
@@ -26,14 +26,25 @@
       <h1>Samsung.com,<br />as usable data.</h1>
       <p class="lede">A zero-cost-first platform that discovers, normalizes, versions, and exposes public Samsung.com information for AI agents and developers.</p>
       <div class="actions">
-        <a class="primary" href="./dashboard.html">Open KR Dashboard</a>
+        <a class="primary" href="#dashboard">Open KR Dashboard</a>
         <a class="secondary" href="#explorer">Explore the data</a>
         <a class="secondary" href="#mcp">Use the MCP</a>
         <a class="secondary" href="https://github.com/stephencho820/scom-data-platform/blob/main/docs/PRD.md">Read the PRD</a>
       </div>
     </section>
 
-    <section class="dashboard-feature" aria-label="KR monitoring dashboard">\n      <div><p class="eyebrow">KR CATALOG MONITORING</p><h2>Know what changed.<br>Know what is missing.</h2><p>Track SKU coverage, crawler failures, readiness gates and new-product discovery from one dashboard.</p></div>\n      <a class="primary" href="./dashboard.html">View live catalog health →</a>\n    </section>\n\n    <section class="explorer-section" id="explorer">
+    <section class="dashboard-section" id="dashboard" aria-labelledby="dashboard-title">
+      <div class="section-heading"><div><p class="eyebrow">KR · CATALOG HEALTH</p><h2 id="dashboard-title">Data dashboard</h2></div><p>Monitor SKU discovery, category coverage, failed sources and chatbot readiness. All figures are loaded from the latest published crawl data.</p></div>
+      <div class="dashboard-content">
+        <div class="dash-top"><div><p id="updated">Loading latest snapshot…</p></div><span id="ready" class="pill">Checking…</span></div>
+        <div class="cards" id="cards" aria-live="polite"></div>
+        <div class="panel"><div class="panel-head"><div><h3>Category coverage</h3><p>Official catalog source → discovered SKU → database SKU</p></div><div class="filters"><select id="bu" aria-label="Business unit"><option value="ALL">All business units</option><option>MX</option><option>VD</option><option>DA</option><option>HARMAN</option></select><select id="status" aria-label="Source status"><option value="ALL">All statuses</option><option value="failed">Failed</option><option value="ok">OK</option></select><input id="search" type="search" placeholder="Search categories" aria-label="Search categories"></div></div><div class="scroll"><table><thead><tr><th>Business unit / Category</th><th>Discovered</th><th>DB</th><th>Missing</th><th>Unexpected</th><th>Status</th><th>Source</th></tr></thead><tbody id="categories"></tbody></table></div></div>
+        <div class="columns"><div class="panel"><h3>Readiness gates</h3><p>Every gate must pass before READY: TRUE.</p><div id="gates"></div></div><div class="panel"><h3>Failed sources</h3><p>Failed categories must not be interpreted as zero products.</p><div id="failures"></div></div></div>
+        <div class="panel"><h3>New product monitoring</h3><p id="history-note">SKU change comparisons require verified previous and current snapshots.</p><div id="changes" class="muted">No comparison history available yet.</div></div>
+      </div>
+    </section>
+
+    <section class="explorer-section" id="explorer">
       <div class="section-heading">
         <div>
           <p class="eyebrow">DATA EXPLORER</p>
@@ -150,5 +161,6 @@ npm run mcp</code></pre>
   </footer>
 
   <script src="./app.js"></script>
+  <script src="./dashboard.js"></script>
 </body>
 </html>
