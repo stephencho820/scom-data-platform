@@ -2415,7 +2415,42 @@ const currentCoverageAudit = buildCurrentCatalogCoverageAudit(
   successfulCatalogSources,
   failedCatalogSources
 );
+
+const currentSkuRows = marts.productMaster.filter((row) => row.catalog_current === true);
+const currentSkuKeys = new Set(currentSkuRows.map((row) => row.market_product_key));
+const currentSpecRows = marts.productSpecs.filter((row) => currentSkuKeys.has(row.market_product_key));
+const currentSpecsComplete = currentSpecRows.filter((row) => (row.specs || []).length > 0);
+const supportLinkedSkus = new Set(
+  marts.supportResources.flatMap((row) => [row.sku, row.model, row.market_product_key])
+    .map((value) => String(value || "").trim().toUpperCase()).filter(Boolean)
+);
+const chatbotReadiness = {
+  market: marketCode,
+  generated_at: capturedAt,
+  ready: false,
+  gates: {
+    current_catalog_coverage: currentCoverageAudit.complete,
+    no_failed_catalog_sources: failedCatalogSources.length === 0,
+    current_specs_complete: currentSkuRows.length > 0 && currentSpecsComplete.length === currentSkuRows.length,
+    support_linkage_complete: currentSkuRows.length > 0 && currentSkuRows.every((row) => supportLinkedSkus.has(String(row.sku || "").toUpperCase())),
+    legacy_ingestion_present: marts.productMaster.some((row) => ["legacy_supported", "legacy_archived"].includes(row.lifecycle_status)),
+    unresolved_products_zero: marts.productMaster.every((row) => row.business_unit !== "OTHER" && row.lifecycle_status !== "unverified")
+  },
+  counts: {
+    sku_registry: marts.productMaster.length,
+    current_skus: currentSkuRows.length,
+    current_skus_with_specs: currentSpecsComplete.length,
+    support_resources: marts.supportResources.length,
+    support_linked_current_skus: currentSkuRows.filter((row) => supportLinkedSkus.has(String(row.sku || "").toUpperCase())).length,
+    legacy_skus: marts.productMaster.filter((row) => ["legacy_supported", "legacy_archived"].includes(row.lifecycle_status)).length,
+    unverified_skus: marts.productMaster.filter((row) => row.lifecycle_status === "unverified").length,
+    other_bu_skus: marts.productMaster.filter((row) => row.business_unit === "OTHER").length
+  },
+  failed_catalog_sources: failedCatalogSources
+};
+chatbotReadiness.ready = Object.values(chatbotReadiness.gates).every(Boolean);
 await writeFile(path.join(martDir, "current_catalog_coverage.json"), JSON.stringify(currentCoverageAudit, null, 2) + "\n");
+await writeFile(path.join(martDir, "chatbot_readiness.json"), JSON.stringify(chatbotReadiness, null, 2) + "\n");
 console.error("current catalog coverage: complete=" + currentCoverageAudit.complete +
   " discovered=" + currentCoverageAudit.discovered_unique_skus +
   " db=" + currentCoverageAudit.db_current_unique_skus +
