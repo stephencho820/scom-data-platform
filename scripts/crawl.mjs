@@ -2352,6 +2352,58 @@ await writeFile(manifestFile, JSON.stringify(manifest, null, 2) + "\n");
 const coveragePercent = targetUrls.length ? Math.round((visitedUrls.size / targetUrls.length) * 10000) / 100 : 0;
 
 const marts = buildDataMarts(allPages, allProducts, lifecycleFor, catalogRows);
+
+function buildCurrentCatalogCoverageAudit(catalogRows, productMaster, successfulSources, failedSources) {
+  const sourceById = new Map(catalogSourceDefs.map((source) => [source.id, source]));
+  const dbCurrent = productMaster.filter((row) => row.catalog_current === true);
+  const categories = catalogSourceDefs.map((source) => {
+    const discovered = catalogRows.filter((row) => row.catalog_source_id === source.id);
+    const discoveredSkus = new Set(discovered.map((row) => String(row.sku || "").trim().toUpperCase()).filter(Boolean));
+    const dbRows = dbCurrent.filter((row) => row.catalog_source_id === source.id);
+    const dbSkus = new Set(dbRows.map((row) => String(row.sku || "").trim().toUpperCase()).filter(Boolean));
+    const missing = [...discoveredSkus].filter((sku) => !dbSkus.has(sku)).sort();
+    const unexpected = [...dbSkus].filter((sku) => !discoveredSkus.has(sku)).sort();
+    const sourceOk = successfulSources.has(source.id);
+    return {
+      source_id: source.id,
+      business_unit: source.business_unit || "OTHER",
+      category: source.category,
+      source_url: source.url,
+      source_status: sourceOk ? "ok" : "failed",
+      discovered_unique_skus: discoveredSkus.size,
+      db_current_unique_skus: dbSkus.size,
+      missing_in_db: missing,
+      unexpected_in_db: unexpected,
+      complete: sourceOk && missing.length === 0 && unexpected.length === 0 && discoveredSkus.size > 0
+    };
+  });
+  const totalDiscovered = new Set(catalogRows.map((row) => String(row.sku || "").trim().toUpperCase()).filter(Boolean));
+  const totalDb = new Set(dbCurrent.map((row) => String(row.sku || "").trim().toUpperCase()).filter(Boolean));
+  return {
+    market: marketCode,
+    generated_at: capturedAt,
+    definition: "Current catalog coverage compares SKU identifiers discovered from each configured official Samsung.com KR catalog source with current SKU rows emitted to product_master.",
+    complete: categories.length > 0 && categories.every((row) => row.complete),
+    catalog_sources_total: catalogSourceDefs.length,
+    catalog_sources_ok: successfulSources.size,
+    catalog_sources_failed: failedSources.length,
+    discovered_unique_skus: totalDiscovered.size,
+    db_current_unique_skus: totalDb.size,
+    categories
+  };
+}
+
+const currentCoverageAudit = buildCurrentCatalogCoverageAudit(
+  catalogRows,
+  marts.productMaster,
+  successfulCatalogSources,
+  failedCatalogSources
+);
+await writeFile(path.join(martDir, "current_catalog_coverage.json"), JSON.stringify(currentCoverageAudit, null, 2) + "\n");
+console.error("current catalog coverage: complete=" + currentCoverageAudit.complete +
+  " discovered=" + currentCoverageAudit.discovered_unique_skus +
+  " db=" + currentCoverageAudit.db_current_unique_skus +
+  " sources=" + currentCoverageAudit.catalog_sources_ok + "/" + currentCoverageAudit.catalog_sources_total);
 await writeFile(path.join(martDir, "product_master.jsonl"), toJsonl(marts.productMaster));
 await writeFile(path.join(martDir, "product_specs.jsonl"), toJsonl(marts.productSpecs));
 await writeFile(path.join(martDir, "market_offers.jsonl"), toJsonl(marts.marketOffers));
@@ -2404,10 +2456,15 @@ await writeFile(metaFile, JSON.stringify({
     support_resources: marts.supportResources.length,
     taxonomy: marts.taxonomy.length,
     catalog_current: marts.currentCatalog.length,
+    current_catalog_coverage_complete: currentCoverageAudit.complete,
+    current_catalog_discovered_unique_skus: currentCoverageAudit.discovered_unique_skus,
+    current_catalog_db_unique_skus: currentCoverageAudit.db_current_unique_skus,
     lifecycle: {
       current_sellable: marts.productMaster.filter((row) => row.lifecycle_status === "current_sellable").length,
       current_unavailable: marts.productMaster.filter((row) => ["current_out_of_stock", "current_not_directly_sellable"].includes(row.lifecycle_status)).length,
-      legacy: marts.productMaster.filter((row) => row.lifecycle_status === "legacy").length,
+      discontinued: marts.productMaster.filter((row) => row.lifecycle_status === "discontinued").length,
+      legacy_supported: marts.productMaster.filter((row) => row.lifecycle_status === "legacy_supported").length,
+      legacy_archived: marts.productMaster.filter((row) => row.lifecycle_status === "legacy_archived").length,
       unverified: marts.productMaster.filter((row) => row.lifecycle_status === "unverified").length,
       commerce_eligible: marts.productMaster.filter((row) => row.commerce_eligible === true).length,
       commerce_suppressed: marts.productMaster.filter((row) => row.commerce_eligible === false).length
