@@ -357,7 +357,9 @@ function buildServer() {
         market,
         product_key,
         lifecycle_status: product?.lifecycle_status || "unknown",
-        product_versions: productVersions.filter((item) => item.key === product_key),
+        product_versions: productVersions.filter((item) =>
+          item.key === product_key || (product?.sku && item.sku === product.sku)
+        ),
         offer_versions: suppressCommerceHistory ? [] : offerVersions.filter((item) => item.market_product_key === product_key),
         commerce_versions: suppressCommerceHistory ? [] : commerceVersions.filter((item) => item.market_product_key === product_key),
         note: suppressCommerceHistory ? "Non-sellable or commerce-unverified product: historical price/commerce is intentionally suppressed from the agent interface." : null
