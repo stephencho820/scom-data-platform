@@ -1706,8 +1706,8 @@ function pageForProduct(product, pages) {
 function businessUnitFor(product, sourceUrl = "") {
   const haystack = [product?.catalog_category, product?.catalog_group_path, product?.name, sourceUrl]
     .filter(Boolean).join(" ").toLowerCase();
-  if (/jbl|harman|akg|audio|soundbar|speaker|headphone|earbud/.test(haystack) && !/galaxy buds/.test(haystack)) return "HARMAN";
-  if (/tv|television|monitor|projector|the freestyle|the frame|display/.test(haystack)) return "VD";
+  if (/\bjbl\b|harman[ -]?kardon|\bakg\b/.test(haystack)) return "HARMAN";
+  if (/tv|television|monitor|projector|the freestyle|the frame|display|soundbar/.test(haystack)) return "VD";
   if (/smartphone|mobile|galaxy|tablet|watch|buds|ring|phone|wearable/.test(haystack)) return "MX";
   if (/refrigerator|fridge|washer|dryer|laundry|vacuum|air.?condition|dishwasher|oven|range|cooktop|microwave|appliance|bespoke/.test(haystack)) return "DA";
   return "OTHER";
