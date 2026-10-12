@@ -98,3 +98,20 @@ The v0 target is effectively **$0 recurring infrastructure cost** for this publi
 ## Disclaimer
 
 This is an independent community data project and is not an official Samsung service. Crawling should respect applicable robots directives, site terms, rate limits, and source attribution.
+
+
+## Korea product universe scope
+
+The KR chatbot catalog treats SKU as the canonical product index and separates discovery evidence from lifecycle state.
+
+- `current_sellable`: present in the current Samsung.com KR catalog and directly purchasable.
+- `current_out_of_stock`: current catalog SKU with a buy path but no current stock.
+- `current_not_directly_sellable`: current catalog SKU that is visible but not directly purchasable online.
+- `discontinued`: previously known SKU absent from a successfully verified current catalog.
+- `legacy_supported`: historical SKU/model with current Samsung Support/manual evidence.
+- `legacy_archived`: historical SKU retained for chatbot/product-history lookup when live support evidence is no longer available.
+- `unverified`: evidence is insufficient to assign a stronger lifecycle state.
+
+Target history windows are approximately 10 years for MX/VD and 15 years for DA. These are coverage goals, not reasons to fabricate dates: legacy records require Samsung-owned evidence and preserve source URLs/capture timestamps.
+
+Current-catalog completeness is measured separately from legacy coverage. A category is not considered complete merely because the crawler returned some SKUs.
