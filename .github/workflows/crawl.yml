@@ -80,6 +80,10 @@ jobs:
             exit 1
           fi
 
+      - name: Generate SKU-level quality backlog
+        if: always()
+        run: node scripts/build-quality-backlog.mjs --market=kr
+
       - name: Commit changed data and manifests
         if: always()
         run: |
