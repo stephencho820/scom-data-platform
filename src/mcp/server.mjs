@@ -181,6 +181,18 @@ function buildServer() {
   });
 
   server.registerTool(
+    "get_kr_chatbot_readiness",
+    {
+      description: "Return strict KR Samsung.com chatbot data readiness gates. ready=true only when catalog, specs, support, legacy and taxonomy quality gates all pass.",
+      inputSchema: z.object({})
+    },
+    async () => {
+      const readiness = await readJson(path.join(ROOT, "data/marts/kr/chatbot_readiness.json"));
+      return readiness ? asText(readiness) : asError("KR chatbot readiness audit has not been generated yet.");
+    }
+  );
+
+  server.registerTool(
     "get_kr_catalog_health",
     {
       description: "Get evidence-based Korea current catalog SKU coverage, source failures, and completeness. A matching count does not prove every Samsung SKU was discovered.",
