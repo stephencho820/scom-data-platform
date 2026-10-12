@@ -181,6 +181,60 @@ function buildServer() {
   });
 
   server.registerTool(
+    "get_kr_catalog_health",
+    {
+      description: "Get evidence-based Korea current catalog SKU coverage, source failures, and completeness. A matching count does not prove every Samsung SKU was discovered.",
+      inputSchema: z.object({})
+    },
+    async () => {
+      const [audit, meta] = await Promise.all([
+        readJson(path.join(ROOT, "data/marts/kr/current_catalog_coverage.json")),
+        readJson(path.join(ROOT, "data/current/kr/meta.json"))
+      ]);
+      return asText({
+        market: "kr",
+        audit_available: Boolean(audit),
+        audit,
+        crawl: meta && {
+          captured_at: meta.captured_at,
+          failures: meta.failures,
+          marts: meta.marts
+        },
+        caveat: "Coverage checks configured sources and observed SKU reconciliation; unconfigured categories, undiscovered variants and external support catalogs require independent auditing."
+      });
+    }
+  );
+
+  server.registerTool(
+    "get_kr_sku_knowledge",
+    {
+      description: "Resolve an exact Korea Samsung SKU to immutable registry profile, specifications, current lifecycle/offer, and support evidence. Never infer a price when unverified.",
+      inputSchema: z.object({ sku: z.string().min(3) })
+    },
+    async ({ sku }) => {
+      const key = sku.trim().toUpperCase();
+      const [registryRows, master, specs, support] = await Promise.all([
+        martFor("kr", "sku_registry"),
+        productMasterFor("kr"),
+        martFor("kr", "product_specs"),
+        martFor("kr", "support_resources")
+      ]);
+      const immutable = registryRows.find((row) => String(row.sku || "").toUpperCase() === key) || null;
+      const current = master.find((row) => String(row.sku || "").toUpperCase() === key) || null;
+      if (!immutable && !current) return asError("SKU not found in the KR knowledge base; absence does not mean Samsung never sold it.");
+      const currentDetail = current ? await joinedProduct("kr", current.market_product_key) : null;
+      return asText({
+        sku: key,
+        immutable_profile: immutable,
+        current: currentDetail,
+        specs: specs.find((row) => String(row.sku || "").toUpperCase() === key) || null,
+        support: support.filter((row) => [row.sku, row.model, row.market_product_key].some((value) => String(value || "").toUpperCase() === key)),
+        evidence_warning: !current ? "SKU retained in registry but not resolved in current master; current availability unknown." : null
+      });
+    }
+  );
+
+  server.registerTool(
     "list_markets",
     {
       description: "List configured Samsung.com markets, data-mart counts, and targeted crawl coverage.",
@@ -205,7 +259,7 @@ function buildServer() {
         query: z.string().min(1),
         market: z.string().optional(),
         audience: z.enum(["consumer", "business", "unknown"]).optional(),
-        lifecycle: z.enum(["current_sellable", "current_unavailable", "legacy", "unverified"]).optional(),
+        lifecycle: z.enum(["current_sellable", "current_out_of_stock", "current_not_directly_sellable", "discontinued", "legacy_supported", "legacy_archived", "unverified"]).optional(),
         business_unit: z.enum(["DA", "VD", "MX", "HARMAN", "OTHER"]).optional(),
         limit: z.number().int().min(1).max(30).default(8)
       })
