@@ -487,3 +487,7 @@ footer {
   font-size: .78rem;
   color: var(--muted);
 }
+
+/* SKU catalog */
+#bu-control[hidden] { display: none; }
+.result-kicker { letter-spacing: .08em; }
