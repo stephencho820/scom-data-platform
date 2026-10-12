@@ -37,7 +37,7 @@
           <p class="eyebrow">DATA EXPLORER</p>
           <h2>See what was crawled.</h2>
         </div>
-        <p>Browse the current Samsung.com snapshot by market, search normalized products or page text, and inspect product change history over time.</p>
+        <p>Browse Samsung.com as canonical SKU profiles. Filter by business unit, inspect each market SKU, and drill into specs and source evidence.</p>
       </div>
 
       <div class="explorer-shell">
@@ -55,6 +55,17 @@
               <button class="dataset-tab" type="button" data-dataset="history">History</button>
             </div>
           </div>
+
+          <label class="control" id="bu-control">
+            <span>Business Unit</span>
+            <select id="explorer-bu" aria-label="Select business unit">
+              <option value="ALL">All BU</option>
+              <option value="DA">DA · Digital Appliances</option>
+              <option value="VD">VD · Visual Display</option>
+              <option value="MX">MX · Mobile eXperience</option>
+              <option value="HARMAN">HARMAN</option>
+            </select>
+          </label>
 
           <label class="control search-control">
             <span>Search</span>
