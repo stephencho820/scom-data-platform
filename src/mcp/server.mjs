@@ -83,7 +83,7 @@ async function searchProducts(query, market, limit = 8, audience, lifecycle, bus
     }
   }
 
-  const lifecycleRank = { current_sellable: 0, current_unavailable: 1, unverified: 2, legacy: 3 };
+  const lifecycleRank = { current_sellable: 0, current_out_of_stock: 1, current_not_directly_sellable: 2, unverified: 3, discontinued: 4, legacy_supported: 5, legacy_archived: 6 };
   return results.sort((a, b) =>
     (lifecycleRank[a.lifecycle_status] ?? 9) - (lifecycleRank[b.lifecycle_status] ?? 9) ||
     b.relevance - a.relevance
@@ -104,10 +104,10 @@ async function joinedProduct(market, productKey) {
     findMartRow(market, "commerce_options", productKey)
   ]);
 
-  if (product.lifecycle_status === "legacy") {
+  if (["discontinued", "legacy_supported", "legacy_archived"].includes(product.lifecycle_status)) {
     return { product, specs, offer: null, commerce_options: null, commerce_note: "Legacy product: current price and commerce data are intentionally suppressed." };
   }
-  if (product.lifecycle_status === "current_unavailable") {
+  if (["current_out_of_stock", "current_not_directly_sellable"].includes(product.lifecycle_status)) {
     return { product, specs, offer: null, commerce_options: null, commerce_note: "Current catalog product is not sellable; only product identity and specs are exposed." };
   }
   if (product.commerce_eligible === false) {
@@ -275,7 +275,7 @@ function buildServer() {
     async ({ market, product_key }) => {
       const product = (await productMasterFor(market)).find((item) => item.market_product_key === product_key);
       if (!product) return asError("Product not found.");
-      if (product.lifecycle_status === "legacy" || product.lifecycle_status === "current_unavailable") {
+      if (["discontinued", "legacy_supported", "legacy_archived"].includes(product.lifecycle_status) || ["current_out_of_stock", "current_not_directly_sellable"].includes(product.lifecycle_status)) {
         return asError("This product is not currently sellable; current price/offer data is intentionally unavailable.");
       }
       if (product.commerce_eligible === false) {
@@ -298,7 +298,7 @@ function buildServer() {
     async ({ market, product_key }) => {
       const product = (await productMasterFor(market)).find((item) => item.market_product_key === product_key);
       if (!product) return asError("Product not found.");
-      if (product.lifecycle_status === "legacy" || product.lifecycle_status === "current_unavailable" || product.commerce_eligible === false) {
+      if (["discontinued", "legacy_supported", "legacy_archived"].includes(product.lifecycle_status) || ["current_out_of_stock", "current_not_directly_sellable"].includes(product.lifecycle_status) || product.commerce_eligible === false) {
         return asError("Commerce options are only exposed for products verified as currently sellable.");
       }
       const row = await findMartRow(market, "commerce_options", product_key);
@@ -321,7 +321,7 @@ function buildServer() {
         const candidates = await searchProducts(query, market, 12);
         const match =
           candidates.find((item) => item.lifecycle_status === "current_sellable" && item.commerce_eligible === true) ||
-          candidates.find((item) => item.lifecycle_status === "current_unavailable") ||
+          candidates.find((item) => ["current_out_of_stock", "current_not_directly_sellable"].includes(item.lifecycle_status)) ||
           candidates.find((item) => item.lifecycle_status === "unverified" && item.commerce_eligible !== false) ||
           null;
         comparison[market] = match
@@ -350,8 +350,8 @@ function buildServer() {
 
       const product = (await productMasterFor(market)).find((item) => item.market_product_key === product_key);
       const suppressCommerceHistory =
-        product?.lifecycle_status === "legacy" ||
-        product?.lifecycle_status === "current_unavailable" ||
+        ["discontinued", "legacy_supported", "legacy_archived"].includes(product?.lifecycle_status) ||
+        ["current_out_of_stock", "current_not_directly_sellable"].includes(product?.lifecycle_status) ||
         product?.commerce_eligible === false;
       return asText({
         market,
