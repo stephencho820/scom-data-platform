@@ -3,6 +3,7 @@ const explorer = {
   market: "us",
   dataset: "products",
   query: "",
+  businessUnit: "ALL",
   rows: [],
   meta: null,
   visible: 20,
@@ -293,10 +294,14 @@ async function loadExplorer() {
 
 function filteredRows() {
   const q = explorer.query.trim().toLowerCase();
-  if (!q) return explorer.rows;
 
   return explorer.rows.filter((row) => {
     if (explorer.dataset === "products") {
+      if (explorer.businessUnit !== "ALL" && row.business_unit !== explorer.businessUnit) return false;
+      if (!["DA", "VD", "MX", "HARMAN"].includes(row.business_unit)) return false;
+      if (!row.sku || row.lifecycle_status === "legacy") return false;
+      if (/^["'{[]/.test(String(row.name || "").trim())) return false;
+      if (!q) return true;
       return [
         row.name,
         row.sku,
@@ -312,9 +317,10 @@ function filteredRows() {
     }
 
     if (explorer.dataset === "history") {
-      return historySearchText(row).includes(q);
+      return !q || historySearchText(row).includes(q);
     }
 
+    if (!q) return true;
     return [
       row.title,
       row.description,
@@ -387,11 +393,15 @@ function renderExplorer() {
     if (explorer.dataset === "products") {
       const price = formatPrice(row.offers);
       const availability = availabilityLabel(row.offers?.availability);
-      const identity = [row.model, row.sku].filter(Boolean).join(" · ");
+      const identity = [
+        row.sku ? "SKU " + row.sku : "",
+        row.product_family ? "Family " + row.product_family : "",
+        row.model && row.model !== row.sku ? "Model " + row.model : ""
+      ].filter(Boolean).join(" · ");
       return `
         <button class="result-row" type="button" data-result-index="${index}">
           <div class="result-main">
-            <div class="result-kicker">Product · ${escapeHtml(row.market?.toUpperCase() || explorer.market.toUpperCase())} · ${escapeHtml((row.lifecycle_status || "unverified").replaceAll("_", " "))}</div>
+            <div class="result-kicker">SKU · ${escapeHtml(row.business_unit || "OTHER")} · ${escapeHtml(row.market?.toUpperCase() || explorer.market.toUpperCase())} · ${escapeHtml((row.lifecycle_status || "unverified").replaceAll("_", " "))}</div>
             <h3 class="result-title">${escapeHtml(row.name || row.model || row.sku || "Unnamed product")}</h3>
             <p class="result-description">${escapeHtml(identity || truncate(row.url, 140))}</p>
           </div>
@@ -477,8 +487,10 @@ function openDetail(row) {
     $("#dialog-body").innerHTML = `
       <div class="detail-grid">
         ${detailRow("Market", row.market)}
-        ${detailRow("Model", row.model)}
+        ${detailRow("Business Unit", row.business_unit)}
+        ${detailRow("Product Family", row.product_family)}
         ${detailRow("SKU", row.sku)}
+        ${detailRow("Model", row.model)}
         ${detailRow("Brand", row.brand)}
         ${detailRow("Lifecycle", (row.lifecycle_status || "unverified").replaceAll("_", " "))}
         ${detailRow("Price", formatPrice(row.offers))}
@@ -596,6 +608,7 @@ function setupExplorerEvents() {
       explorer.dataset = button.dataset.dataset;
       explorer.visible = 20;
       $$(".dataset-tab").forEach((tab) => tab.classList.toggle("active", tab === button));
+      $("#bu-control").hidden = explorer.dataset !== "products";
       $("#explorer-search").placeholder = explorer.dataset === "products"
         ? "Search products…"
         : explorer.dataset === "pages"
@@ -603,6 +616,12 @@ function setupExplorerEvents() {
           : "Search product history…";
       loadExplorer();
     });
+  });
+
+  $("#explorer-bu").addEventListener("change", (event) => {
+    explorer.businessUnit = event.target.value;
+    explorer.visible = 20;
+    renderExplorer();
   });
 
   $("#explorer-search").addEventListener("input", (event) => {
