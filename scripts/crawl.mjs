@@ -1412,6 +1412,7 @@ function parseCatalogListing(html, source) {
     const modelMatch = lines[index].split(/\s+/).map((part) => part.replace(/^[^A-Z0-9]+|[^A-Z0-9/-]+$/gi, "")).find((part) => pattern.test(part));
     if (!modelMatch) continue;
     const modelCode = String(modelMatch).toUpperCase();
+    if (!validCatalogSku(modelCode, source)) continue;
     if (seen.has(modelCode)) continue;
 
     let name = "";
@@ -1469,10 +1470,19 @@ function parseCatalogListing(html, source) {
 }
 
 function productCatalogCategory(product) {
-  const value = String(product?.url || "").toLowerCase();
-  if (value.includes("/smartphones/")) return "smartphones";
-  if (value.includes("/watches/") || value.includes("/galaxy-watch/")) return "watches";
-  return "";
+  const value = String(product?.url || product?.product_detail_url || "").toLowerCase();
+  const mappings = [
+    ["smartphones", ["/smartphones/"]], ["watches", ["/watches/", "/galaxy-watch/"]],
+    ["tablets", ["/tablets/"]], ["galaxybook", ["/galaxybook/", "/galaxy-book/"]],
+    ["buds", ["/buds/", "/galaxy-buds/"]], ["rings", ["/rings/", "/galaxy-ring/"]],
+    ["tvs", ["/tvs/"]], ["monitors", ["/monitors/"]], ["projectors", ["/projectors/"]],
+    ["refrigerators", ["/refrigerators/"]], ["laundry", ["/washers-and-dryers/", "/laundry/"]],
+    ["air-conditioners", ["/air-conditioners/"]], ["air-purifiers", ["/air-cleaners/", "/air-purifiers/"]],
+    ["vacuum-cleaners", ["/vacuum-cleaners/", "/vacuums/"]], ["dishwashers", ["/dishwashers/"]],
+    ["microwave-ovens", ["/micro-wave-ovens/", "/microwaves/"]], ["cooking-appliances", ["/cooking-appliances/"]],
+    ["soundbars", ["/audio-devices/", "/soundbars/"]]
+  ];
+  return mappings.find(([, paths]) => paths.some((item) => value.includes(item)))?.[0] || "";
 }
 
 function buildLifecycleResolver(catalogRows, successfulCatalogSources) {
@@ -1852,8 +1862,7 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
     });
 
     if (lifecycle.commerce_eligible !== false &&
-        lifecycle.lifecycle_status !== "legacy" &&
-        lifecycle.lifecycle_status !== "current_unavailable") {
+        !["discontinued", "legacy_supported", "legacy_archived", "current_out_of_stock", "current_not_directly_sellable"].includes(lifecycle.lifecycle_status)) {
       const currentUnavailable = false;
       const offerCore = {
         market_product_key: skuKey,
@@ -1908,8 +1917,7 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
       membership: commerceCore.membership
     }));
     if (lifecycle.commerce_eligible !== false &&
-        lifecycle.lifecycle_status !== "legacy" &&
-        lifecycle.lifecycle_status !== "current_unavailable") {
+        !["discontinued", "legacy_supported", "legacy_archived", "current_out_of_stock", "current_not_directly_sellable"].includes(lifecycle.lifecycle_status)) {
       commerceOptions.push(commerceCore);
     }
 
@@ -2407,7 +2415,42 @@ const currentCoverageAudit = buildCurrentCatalogCoverageAudit(
   successfulCatalogSources,
   failedCatalogSources
 );
+
+const currentSkuRows = marts.productMaster.filter((row) => row.catalog_current === true);
+const currentSkuKeys = new Set(currentSkuRows.map((row) => row.market_product_key));
+const currentSpecRows = marts.productSpecs.filter((row) => currentSkuKeys.has(row.market_product_key));
+const currentSpecsComplete = currentSpecRows.filter((row) => (row.specs || []).length > 0);
+const supportLinkedSkus = new Set(
+  marts.supportResources.flatMap((row) => [row.sku, row.model, row.market_product_key])
+    .map((value) => String(value || "").trim().toUpperCase()).filter(Boolean)
+);
+const chatbotReadiness = {
+  market: marketCode,
+  generated_at: capturedAt,
+  ready: false,
+  gates: {
+    current_catalog_coverage: currentCoverageAudit.complete,
+    no_failed_catalog_sources: failedCatalogSources.length === 0,
+    current_specs_complete: currentSkuRows.length > 0 && currentSpecsComplete.length === currentSkuRows.length,
+    support_linkage_complete: currentSkuRows.length > 0 && currentSkuRows.every((row) => supportLinkedSkus.has(String(row.sku || "").toUpperCase())),
+    legacy_ingestion_present: marts.productMaster.some((row) => ["legacy_supported", "legacy_archived"].includes(row.lifecycle_status)),
+    unresolved_products_zero: marts.productMaster.every((row) => row.business_unit !== "OTHER" && row.lifecycle_status !== "unverified")
+  },
+  counts: {
+    sku_registry: marts.productMaster.length,
+    current_skus: currentSkuRows.length,
+    current_skus_with_specs: currentSpecsComplete.length,
+    support_resources: marts.supportResources.length,
+    support_linked_current_skus: currentSkuRows.filter((row) => supportLinkedSkus.has(String(row.sku || "").toUpperCase())).length,
+    legacy_skus: marts.productMaster.filter((row) => ["legacy_supported", "legacy_archived"].includes(row.lifecycle_status)).length,
+    unverified_skus: marts.productMaster.filter((row) => row.lifecycle_status === "unverified").length,
+    other_bu_skus: marts.productMaster.filter((row) => row.business_unit === "OTHER").length
+  },
+  failed_catalog_sources: failedCatalogSources
+};
+chatbotReadiness.ready = Object.values(chatbotReadiness.gates).every(Boolean);
 await writeFile(path.join(martDir, "current_catalog_coverage.json"), JSON.stringify(currentCoverageAudit, null, 2) + "\n");
+await writeFile(path.join(martDir, "chatbot_readiness.json"), JSON.stringify(chatbotReadiness, null, 2) + "\n");
 console.error("current catalog coverage: complete=" + currentCoverageAudit.complete +
   " discovered=" + currentCoverageAudit.discovered_unique_skus +
   " db=" + currentCoverageAudit.db_current_unique_skus +
