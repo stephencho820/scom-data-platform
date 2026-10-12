@@ -1726,7 +1726,31 @@ function productFamilyFor(product) {
 }
 
 function canonicalSkuKey(product) {
-  return sha(marketCode + "|" + String(product?.sku || "").trim().toUpperCase()).slice(0, 24);
+  // SKU is the public/canonical product index. Market is stored separately.
+  return String(product?.sku || "").trim().toUpperCase();
+}
+
+function variantAttributesFor(product) {
+  const attrs = {};
+  for (const spec of product?.specs || []) {
+    const key = String(spec?.key || "").toLowerCase();
+    const name = String(spec?.name || "").toLowerCase();
+    const value = spec?.value;
+    if (value === undefined || value === null || value === "") continue;
+    if (/color|colour|색상/.test(key + " " + name)) attrs.color = value;
+    else if (/storage|저장 용량|스토리지/.test(key + " " + name)) attrs.storage = value;
+    else if (/capacity|용량/.test(key + " " + name)) attrs.capacity = value;
+    else if (/screen.?size|display.?size|화면.*크기|인치/.test(key + " " + name)) attrs.screen_size = value;
+    else if (/connectivity|연결 방식|lte|wifi/.test(key + " " + name)) attrs.connectivity = value;
+    else if (/finish|마감/.test(key + " " + name)) attrs.finish = value;
+  }
+  return attrs;
+}
+
+function categoryFor(product, sourceUrl = "") {
+  const category = String(product?.catalog_category || "").trim();
+  if (category) return category;
+  return categoryPathFromUrl(sourceUrl)[0] || "uncategorized";
 }
 
 function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
@@ -1778,7 +1802,9 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
       sku_key: skuKey,
       market: marketCode,
       business_unit: businessUnit,
+      category: categoryFor(product, sourceUrl),
       product_family: productFamily,
+      variant_attributes: variantAttributesFor(product),
       audience: audienceFromUrl(sourceUrl),
       name: product.name || "",
       sku: product.sku || "",
@@ -1803,7 +1829,9 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
       sku_key: skuKey,
       market: marketCode,
       business_unit: businessUnit,
+      category: categoryFor(product, sourceUrl),
       product_family: productFamily,
+      variant_attributes: variantAttributesFor(product),
       sku: product.sku || "",
       model: product.model || "",
       specs: product.specs || [],
@@ -1818,6 +1846,7 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
       const currentUnavailable = false;
       const offerCore = {
         market_product_key: skuKey,
+        sku_key: skuKey,
         market: marketCode,
         lifecycle_status: lifecycle.lifecycle_status,
         price: currentUnavailable ? "" : (product.offers?.price ?? ""),
@@ -1841,6 +1870,7 @@ function buildDataMarts(pages, products, lifecycleFor, catalogRows) {
 
     const commerceCore = {
       market_product_key: skuKey,
+      sku_key: skuKey,
       market: marketCode,
       purchase_methods: commerce.purchase_methods,
       subscriptions: commerce.subscriptions,
