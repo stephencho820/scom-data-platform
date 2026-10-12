@@ -2032,6 +2032,9 @@ const existingPages = await readJsonl(path.join(currentDir, "pages.jsonl"));
 const existingProducts = await readJsonl(path.join(currentDir, "products.jsonl"));
 const existingSpecRows = await readJsonl(path.join(martDir, "product_specs.jsonl"));
 const existingSpecsByKey = new Map(existingSpecRows.map((row) => [row.market_product_key, row]));
+const registryFile = path.join(martDir, "sku_registry.jsonl");
+const existingRegistryRows = await readJsonl(registryFile);
+const registryBySku = new Map(existingRegistryRows.map((row) => [String(row.sku || "").trim().toUpperCase(), row]));
 for (const product of existingProducts) {
   for (const identifier of [product.sku, product.model]) {
     const normalized = String(identifier || "").trim().toLowerCase();
@@ -2104,6 +2107,11 @@ if (catalogRows.length && specBatch > 0 && marketCode === "kr") {
 
   for (const row of catalogRows) {
     if (!["smartphones", "watches"].includes(row.catalog_category)) continue;
+    const sku = String(row.sku || "").trim().toUpperCase();
+    const registryRow = registryBySku.get(sku);
+    // Immutable product/spec data is deep-crawled only for a newly discovered SKU.
+    // Existing SKU specs are retained; recurring crawls refresh commerce/lifecycle only.
+    if (registryRow) continue;
     const family = specFamilyKey(row);
     if (!family) continue;
     if (!familyRows.has(family)) familyRows.set(family, []);
@@ -2412,6 +2420,34 @@ await writeFile(path.join(martDir, "support_resources.jsonl"), toJsonl(marts.sup
 await writeFile(path.join(martDir, "taxonomy.jsonl"), toJsonl(marts.taxonomy));
 await writeFile(path.join(martDir, "catalog_current.jsonl"), toJsonl(marts.currentCatalog));
 
+const registryNow = new Map(registryBySku);
+for (const row of marts.productMaster) {
+  const sku = String(row.sku || "").trim().toUpperCase();
+  if (!sku) continue;
+  const previous = registryNow.get(sku);
+  const specs = existingSpecsByKey.get(row.market_product_key)?.specs ||
+    marts.productSpecs.find((specRow) => specRow.market_product_key === row.market_product_key)?.specs || [];
+  if (!previous) {
+    registryNow.set(sku, {
+      sku,
+      market: row.market,
+      business_unit: row.business_unit,
+      category: row.category,
+      product_family: row.product_family,
+      model: row.model,
+      name: row.name,
+      brand: row.brand,
+      variant_attributes: row.variant_attributes || {},
+      product_url: row.product_url,
+      source_urls: row.source_urls || [],
+      specs,
+      first_seen_at: capturedAt,
+      immutable_profile_captured_at: capturedAt
+    });
+  }
+}
+await writeFile(registryFile, toJsonl([...registryNow.values()].sort((a, b) => a.sku.localeCompare(b.sku))));
+
 const offerHistoryVersions = await appendChangedHistory(
   path.join(offerHistoryDir, marketCode + ".jsonl"),
   marts.marketOffers,
@@ -2456,6 +2492,8 @@ await writeFile(metaFile, JSON.stringify({
     support_resources: marts.supportResources.length,
     taxonomy: marts.taxonomy.length,
     catalog_current: marts.currentCatalog.length,
+    sku_registry: registryNow.size,
+    new_skus_this_run: [...registryNow.keys()].filter((sku) => !registryBySku.has(sku)).length,
     current_catalog_coverage_complete: currentCoverageAudit.complete,
     current_catalog_discovered_unique_skus: currentCoverageAudit.discovered_unique_skus,
     current_catalog_db_unique_skus: currentCoverageAudit.db_current_unique_skus,
