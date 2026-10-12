@@ -156,15 +156,7 @@ async function loadMarkets() {
     const registry = await fetchJson("./config/markets.json");
     explorer.registry = registry;
 
-    const marketSelect = $("#explorer-market");
-    marketSelect.innerHTML = registry.markets
-      .map((market) => `<option value="${escapeHtml(market.code)}">${escapeHtml(market.country)} · ${escapeHtml(market.code.toUpperCase())}</option>`)
-      .join("");
-
-    if (!registry.markets.some((market) => market.code === explorer.market)) {
-      explorer.market = registry.markets[0]?.code || "";
-    }
-    marketSelect.value = explorer.market;
+    explorer.market = "kr";
 
     const rows = await Promise.all(registry.markets.map(async (market) => {
       try {
@@ -189,7 +181,6 @@ async function loadMarkets() {
     $$(".market[data-market]").forEach((row) => {
       const activate = () => {
         explorer.market = row.dataset.market;
-        marketSelect.value = explorer.market;
         explorer.visible = 20;
         loadExplorer();
         $("#explorer").scrollIntoView({ behavior: "smooth", block: "start" });
@@ -307,6 +298,9 @@ function filteredRows() {
         row.sku,
         row.model,
         row.brand,
+        row.category,
+        row.product_family,
+        JSON.stringify(row.variant_attributes || {}),
         row.url,
         row.lifecycle_status,
         row.offers?.price,
@@ -395,6 +389,7 @@ function renderExplorer() {
       const availability = availabilityLabel(row.offers?.availability);
       const identity = [
         row.sku ? "SKU " + row.sku : "",
+        row.category ? row.category : "",
         row.product_family ? "Family " + row.product_family : "",
         row.model && row.model !== row.sku ? "Model " + row.model : ""
       ].filter(Boolean).join(" · ");
@@ -488,8 +483,10 @@ function openDetail(row) {
       <div class="detail-grid">
         ${detailRow("Market", row.market)}
         ${detailRow("Business Unit", row.business_unit)}
+        ${detailRow("Category", row.category)}
         ${detailRow("Product Family", row.product_family)}
         ${detailRow("SKU", row.sku)}
+        ${detailRow("Variants", Object.entries(row.variant_attributes || {}).map(([key, value]) => key + ": " + value).join(" · "))}
         ${detailRow("Model", row.model)}
         ${detailRow("Brand", row.brand)}
         ${detailRow("Lifecycle", (row.lifecycle_status || "unverified").replaceAll("_", " "))}
@@ -597,12 +594,6 @@ function closeDetail() {
 }
 
 function setupExplorerEvents() {
-  $("#explorer-market").addEventListener("change", (event) => {
-    explorer.market = event.target.value;
-    explorer.visible = 20;
-    loadExplorer();
-  });
-
   $$(".dataset-tab").forEach((button) => {
     button.addEventListener("click", () => {
       explorer.dataset = button.dataset.dataset;
