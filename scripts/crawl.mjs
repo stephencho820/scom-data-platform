@@ -885,11 +885,11 @@ async function renderCrossBuSpecs(product) {
         catch{}
       }
     }
-    const pairs=await page.evaluate(()=>{
+    const pairs=await page.evaluate((expectedSku)=>{
       const clean=v=>String(v||"").replace(/\s+/g," ").trim();
       const visible=el=>Boolean(el && el.getClientRects().length);
       const selectors=[
-        '[role="tabpanel"]',
+        '[role="tabpanel"][aria-labelledby*="spec" i]',
         '[id*="spec" i]',
         '[class*="specification" i]',
         '[class*="spec-detail" i]',
@@ -944,7 +944,7 @@ async function renderCrossBuSpecs(product) {
             if(node["@graph"])stack.push(node["@graph"]);
             if(!String(node["@type"]||"").toLowerCase().includes("product"))continue;
             const declared=String(node.sku||node.mpn||"").toUpperCase();
-            if(!declared||declared!==String(document.querySelector('meta[itemprop="sku"]')?.content||"").toUpperCase())continue;
+            if(!declared||declared!==expectedSku)continue;
             for(const item of node.additionalProperty||[]){
               if(item?.name&&item?.value)push(item.name,item.value);
             }
@@ -952,7 +952,7 @@ async function renderCrossBuSpecs(product) {
         }catch{}
       }
       return out.slice(0,200);
-    });
+    },String(product.sku).toUpperCase());
     const evidence=sanitizePdpPairs(pairs,product.sku,url,header);
     console.error("cross-bu PDP "+product.sku+": "+evidence.specs.length+" specs; candidates="+pairs.length+"; verified="+evidence.verified+"; "+evidence.reason);
     return {...evidence,sourceUrl:url};
