@@ -2249,6 +2249,7 @@ for (const source of catalogSourceDefs) {
         }
       }
 
+      row.business_unit = source.business_unit || businessUnitFor(row,source.url);
       catalogRows.push(row);
     }
     successfulCatalogSources.add(source.id);
