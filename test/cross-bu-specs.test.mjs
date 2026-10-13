@@ -46,10 +46,13 @@ test("cross-BU queue provides fair DA/VD/MX/HARMAN coverage and skips recent fai
   const first=selectCrossBuSpecTargets(rows,{},Date.parse("2026-10-13T10:00:00Z"),12);
   assert.equal(first.length,12);
   assert.deepEqual([...new Set(first.map(row=>row.business_unit))].sort(),["DA","HARMAN","MX","VD"]);
-  const attempts=Object.fromEntries(first.map(row=>[row.sku,{checked_at:"2026-10-13T09:00:00Z",status:"empty"}]));
+  const attempts=Object.fromEntries(first.map(row=>[row.sku,{checked_at:"2026-10-13T09:00:00Z",status:"empty",support_checked:true}]));
   const second=selectCrossBuSpecTargets(rows,attempts,Date.parse("2026-10-13T10:00:00Z"),12);
   assert.equal(second.length,12);
   assert.ok(second.every(row=>!attempts[row.sku]));
+  const oldPdpOnly=Object.fromEntries(first.map(row=>[row.sku,{checked_at:"2026-10-13T09:00:00Z",status:"empty"}]));
+  const upgraded=selectCrossBuSpecTargets(rows,oldPdpOnly,Date.parse("2026-10-13T10:00:00Z"),12);
+  assert.ok(upgraded.some(row=>oldPdpOnly[row.sku]),"Old failed PDP-only targets should get support fallback");
   const third=selectCrossBuSpecTargets(rows,attempts,Date.parse("2026-10-15T12:00:00Z"),12);
   assert.equal(third.length,12);
   const withoutSpecs=selectCrossBuSpecTargets([{...base,specs:[{name:"전체 용량",value:"602L"}]}],{},Date.now(),10);
