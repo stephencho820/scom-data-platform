@@ -910,8 +910,8 @@ async function renderCatalogHtml(url, catalogSource) {
     await page.waitForTimeout(2200);
     // Some product finders hydrate their goodsList request well after DOM ready.
     // Give the official API time to respond before relying on visible text.
-    if (!catalogPayloads.some((item) => /\\/cxhr\\/pf\\/goodsList/i.test(item.url))) {
-      await page.waitForResponse((response) => /\\/cxhr\\/pf\\/goodsList/i.test(response.url()), { timeout: 12000 }).catch(() => null);
+    if (!catalogPayloads.some((item) => /\/cxhr\/pf\/goodsList/i.test(item.url))) {
+      await page.waitForResponse((response) => /\/cxhr\/pf\/goodsList/i.test(response.url()), { timeout: 12000 }).catch(() => null);
     }
     await page.evaluate(() => window.scrollTo(0, 0));
     await collectVisibleProducts();
