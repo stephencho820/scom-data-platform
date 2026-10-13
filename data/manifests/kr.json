@@ -2,7 +2,7 @@
   "version": 3,
   "market": "kr",
   "base_url": "https://www.samsung.com/sec/",
-  "discovered_at": "2026-10-13T10:20:55.371Z",
+  "discovered_at": "2026-10-13T10:51:02.262Z",
   "sitemap_seed_count": 2,
   "sitemap_count": 8,
   "failed_sitemaps": [],
@@ -12,7 +12,7 @@
   "url_hash": "02a5afe4459a9ae3d7caddffd891e03b9eea8ddfca2dac0befdc0a4a64705a02",
   "cursor": 0,
   "cycle": 0,
-  "visited_urls_total": 866,
+  "visited_urls_total": 867,
   "visited_urls": [
     "https://www.samsung.com/sec/8K/buy/",
     "https://www.samsung.com/sec/8k/buy/",
@@ -878,6 +878,7 @@
     "https://www.samsung.com/sec/tvs/uhd-ru7150fxkr/UN43RU7150FXKR/",
     "https://www.samsung.com/sec/tvs/uhd-ru7150fxkr/UN55RU7150FXKR/",
     "https://www.samsung.com/sec/tvs/uhd-ru7150fxkr/UN65RU7150FXKR/",
+    "https://www.samsung.com/sec/tvs/uhd-ru7190fxkr/",
     "https://www.samsung.com/sec/vacuum-cleaners/all-vacuum-cleaners/",
     "https://www.samsung.com/sec/watches/all-watches/"
   ],

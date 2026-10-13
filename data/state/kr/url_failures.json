@@ -40,38 +40,38 @@
     "last_failed_at": "2026-10-13T10:20:55.371Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-nu7150fxkr/": {
-    "failure_count": 1,
-    "retry_after": "2026-10-13T10:41:38.892Z",
-    "last_failed_at": "2026-10-13T09:41:38.892Z"
+    "failure_count": 2,
+    "retry_after": "2026-10-13T12:51:02.262Z",
+    "last_failed_at": "2026-10-13T10:51:02.262Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-nu7150fxkr/UN43NU7150FXKR/": {
-    "failure_count": 1,
-    "retry_after": "2026-10-13T10:41:38.892Z",
-    "last_failed_at": "2026-10-13T09:41:38.892Z"
+    "failure_count": 2,
+    "retry_after": "2026-10-13T12:51:02.262Z",
+    "last_failed_at": "2026-10-13T10:51:02.262Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru6990fxkr/UN49RU6990FXKR/": {
-    "failure_count": 1,
-    "retry_after": "2026-10-13T10:41:38.892Z",
-    "last_failed_at": "2026-10-13T09:41:38.892Z"
+    "failure_count": 2,
+    "retry_after": "2026-10-13T12:51:02.262Z",
+    "last_failed_at": "2026-10-13T10:51:02.262Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7100fxkr/": {
-    "failure_count": 1,
-    "retry_after": "2026-10-13T10:41:38.892Z",
-    "last_failed_at": "2026-10-13T09:41:38.892Z"
+    "failure_count": 2,
+    "retry_after": "2026-10-13T12:51:02.262Z",
+    "last_failed_at": "2026-10-13T10:51:02.262Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7100fxkr/UN49RU7100FXKR/": {
-    "failure_count": 1,
-    "retry_after": "2026-10-13T10:41:38.892Z",
-    "last_failed_at": "2026-10-13T09:41:38.892Z"
+    "failure_count": 2,
+    "retry_after": "2026-10-13T12:51:02.262Z",
+    "last_failed_at": "2026-10-13T10:51:02.262Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7100fxkr/UN70RU7100FXKR/": {
-    "failure_count": 1,
-    "retry_after": "2026-10-13T10:41:38.892Z",
-    "last_failed_at": "2026-10-13T09:41:38.892Z"
+    "failure_count": 2,
+    "retry_after": "2026-10-13T12:51:02.262Z",
+    "last_failed_at": "2026-10-13T10:51:02.262Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7150fxkr/UN49RU7150FXKR/": {
-    "failure_count": 1,
-    "retry_after": "2026-10-13T10:41:38.892Z",
-    "last_failed_at": "2026-10-13T09:41:38.892Z"
+    "failure_count": 2,
+    "retry_after": "2026-10-13T12:51:02.262Z",
+    "last_failed_at": "2026-10-13T10:51:02.262Z"
   }
 }

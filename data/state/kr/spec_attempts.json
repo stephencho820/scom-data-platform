@@ -1,0 +1,86 @@
+{
+  "PC1BWSK1NRR": {
+    "checked_at": "2026-10-13T10:51:02.262Z",
+    "status": "empty",
+    "reason": "sku_not_declared_on_pdp",
+    "source_url": "https://www.samsung.com/sec/air-purifiers/accessory-pc1bwsk1nrr-d2c/PC1BWSK1NRR/",
+    "category": "air-purifiers"
+  },
+  "SP-LFCF3-FB": {
+    "checked_at": "2026-10-13T10:51:02.262Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs",
+    "source_url": "https://www.samsung.com/sec/projectors/packge-sp-lfcf3-fb-d2c/SP-LFCF3-FB/",
+    "category": "projectors"
+  },
+  "SM-Q505NZDAKOO": {
+    "checked_at": "2026-10-13T10:51:02.262Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs",
+    "source_url": "https://www.samsung.com/sec/rings/galaxyring-q505/SM-Q505NZDAKOO/",
+    "category": "rings"
+  },
+  "AKGN5HYBRIDBLK": {
+    "checked_at": "2026-10-13T10:51:02.262Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/akg-earphone-akgn5hybrid-d2c/AKGN5HYBRIDBLK/",
+    "category": "harman-lifestyle-audio"
+  },
+  "MG23A5378CE": {
+    "checked_at": "2026-10-13T10:51:02.262Z",
+    "status": "empty",
+    "reason": "sku_not_declared_on_pdp",
+    "source_url": "https://www.samsung.com/sec/microwave-ovens/MG23A5378CU-d2c/MG23A5378CE/",
+    "category": "microwave-ovens"
+  },
+  "HW-LS51H/KR": {
+    "checked_at": "2026-10-13T10:51:02.262Z",
+    "status": "empty",
+    "reason": "sku_not_declared_on_pdp",
+    "source_url": "https://www.samsung.com/sec/soundbars/wifi-speaker-hw-ls50h-d2c/HW-LS51H%2FKR/",
+    "category": "soundbars"
+  },
+  "NT740VJK-KC38G": {
+    "checked_at": "2026-10-13T10:51:02.262Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs",
+    "source_url": "https://www.samsung.com/sec/galaxybook/galaxy-book6-nt740vjk-kc58g/NT740VJK-KC38G/",
+    "category": "galaxybook"
+  },
+  "AKGN9HYBRIDBLK": {
+    "checked_at": "2026-10-13T10:51:02.262Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/akg-headphone-akgn9hybrid-d2c/AKGN9HYBRIDBLK/",
+    "category": "harman-lifestyle-audio"
+  },
+  "CC80F63X1Z": {
+    "checked_at": "2026-10-13T10:51:02.262Z",
+    "status": "empty",
+    "reason": "sku_not_declared_on_pdp",
+    "source_url": "https://www.samsung.com/sec/cooking-appliances/cooktop-cc80f63x1z-d2c/CC80F63X1Z/",
+    "category": "cooking-appliances"
+  },
+  "LS27C900PAKXKR": {
+    "checked_at": "2026-10-13T10:51:02.262Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs",
+    "source_url": "https://www.samsung.com/sec/monitors/high-resolution-ls27c900pakxkr-d2c/LS27C900PAKXKR/",
+    "category": "monitors"
+  },
+  "SM-R420NZKAKOO": {
+    "checked_at": "2026-10-13T10:51:02.262Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs",
+    "source_url": "https://www.samsung.com/sec/buds/galaxy-buds3-r420/SM-R420NZKAKOO/",
+    "category": "buds"
+  },
+  "HKAURAS5BLKAS": {
+    "checked_at": "2026-10-13T10:51:02.262Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/hk-speaker-auras5-d2c/HKAURAS5BLKAS/",
+    "category": "harman-lifestyle-audio"
+  }
+}
