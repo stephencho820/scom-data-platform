@@ -4,6 +4,7 @@ import { gunzipSync } from "node:zlib";
 import path from "node:path";
 import { reconcileDataMarts, updateImmutableSkuRegistry, hasCommerceEvidence } from "../src/pipeline/incremental.mjs";
 import { selectDueUrls, recordAttempt } from "../src/pipeline/scheduler.mjs";
+import { sanitizePdpPairs, selectCrossBuSpecTargets } from "../src/pipeline/spec-pdp.mjs";
 
 const ROOT = process.cwd();
 const USER_AGENT = "ScomDataPlatform/0.2 (+https://github.com/stephencho820/scom-data-platform)";
@@ -21,6 +22,7 @@ function arg(name, fallback) {
 const marketCode = arg("market", "us");
 const batchPages = Number(arg("batch", DEFAULT_BATCH));
 const specBatch = Math.max(0, Number(arg("spec-batch", 8)));
+const crossBuSpecBatch = Math.min(48, Math.max(0, Number(arg("cross-bu-spec-batch", 12))));
 const delayMs = Number(arg("delay", DEFAULT_DELAY));
 const explicitUrl = arg("url", "");
 const discoverOnly = process.argv.includes("--discover-only") || batchPages === 0;
@@ -847,6 +849,114 @@ async function renderProductSpecs(product) {
   } finally {
     await page.close();
   }
+}
+
+/**
+ * Single-SKU specification backfill for DA/VD/HARMAN and MX devices other
+ * than phone/watch. Only extracts inside an explicitly identified specs pane.
+ * No inferred family-level propagation or unverified marketing text.
+ */
+async function renderCrossBuSpecs(product) {
+  const chromePath = process.env.CHROME_PATH || "";
+  if(!chromePath)throw new Error("CHROME_PATH missing");
+  const { chromium } = await import("playwright-core");
+  if(!catalogBrowser)catalogBrowser=await chromium.launch({
+    headless:true,executablePath:chromePath,args:["--no-sandbox","--disable-dev-shm-usage"]
+  });
+  const page=await catalogBrowser.newPage({userAgent:USER_AGENT,viewport:{width:1440,height:1200}});
+  try {
+    await page.goto(product.product_detail_url,{waitUntil:"domcontentloaded",timeout:45000});
+    await page.waitForTimeout(1400);
+    const url=page.url();
+    let header=await page.locator("body").innerText({timeout:8000}).catch(()=>"");
+    const identity=sanitizePdpPairs([],product.sku,url,header);
+    if(!identity.verified){
+      console.error("cross-bu PDP rejected "+product.sku+": "+identity.reason+" url="+url);
+      return {...identity,sourceUrl:url};
+    }
+    // Samsung uses lazy content for the product "스펙" tab.
+    const tabs=[
+      page.getByRole("tab",{name:/^(?:스펙|제품 스펙|Specifications|Specs)$/i}),
+      page.getByText(/^(?:스펙|제품 스펙|Specifications|Specs)$/i,{exact:true})
+    ];
+    for(const tab of tabs){
+      if(await tab.count().catch(()=>0)){
+        try{await tab.first().click({timeout:1600});await page.waitForTimeout(650);break;}
+        catch{}
+      }
+    }
+    const pairs=await page.evaluate(()=>{
+      const clean=v=>String(v||"").replace(/\s+/g," ").trim();
+      const visible=el=>Boolean(el && el.getClientRects().length);
+      const selectors=[
+        '[role="tabpanel"]',
+        '[id*="spec" i]',
+        '[class*="specification" i]',
+        '[class*="spec-detail" i]',
+        '[class*="spec-list" i]',
+        '[class*="specs" i]',
+        '[data-tab*="spec" i]'
+      ];
+      const roots=[...new Set(selectors.flatMap(sel=>[...document.querySelectorAll(sel)]))]
+        .filter(el=>visible(el) && (el.innerText||"").length<32000)
+        .sort((a,b)=>(a.innerText||"").length-(b.innerText||"").length);
+      const out=[],seen=new Set();
+      const push=(name,value)=>{
+        name=clean(name);value=clean(value);
+        const key=name+"|"+value;
+        if(name&&value&&!seen.has(key)){seen.add(key);out.push({name,value});}
+      };
+      for(const root of roots){
+        for(const tr of root.querySelectorAll("tr")){
+          if(!visible(tr))continue;
+          const cells=[...tr.querySelectorAll(":scope > th,:scope > td")].filter(visible);
+          // Reject multi-product comparison grids; they silently cross-contaminate SKU specs.
+          if(cells.length!==2)continue;
+          push(cells[0].innerText||cells[0].textContent,cells[1].innerText||cells[1].textContent);
+        }
+        for(const dl of root.querySelectorAll("dl")){
+          if(!visible(dl))continue;
+          const children=[...dl.children].filter(visible);
+          for(let i=0;i<children.length-1;i++){
+            if(children[i].tagName==="DT"&&children[i+1].tagName==="DD")
+              push(children[i].innerText,children[i+1].innerText);
+          }
+        }
+        // Many PDP technical specs use <li><strong>Label</strong><span>Value</span></li>.
+        for(const li of root.querySelectorAll("li,[class*='spec-item' i]")){
+          if(!visible(li))continue;
+          const children=[...li.children].filter(visible);
+          if(children.length!==2)continue;
+          if(children.some(el=>(el.innerText||"").length>210))continue;
+          push(children[0].innerText,children[1].innerText);
+        }
+      }
+      // Structured product schema can be trusted only when model SKU matches
+      // the page's verified SKU. The extractor checks the exact identity separately.
+      for(const script of document.querySelectorAll('script[type="application/ld+json"]')){
+        try{
+          const parsed=JSON.parse(script.textContent||"null");
+          const stack=[parsed];
+          while(stack.length){
+            const node=stack.pop();
+            if(Array.isArray(node)){stack.push(...node);continue;}
+            if(!node||typeof node!=="object")continue;
+            if(node["@graph"])stack.push(node["@graph"]);
+            if(!String(node["@type"]||"").toLowerCase().includes("product"))continue;
+            const declared=String(node.sku||node.mpn||"").toUpperCase();
+            if(!declared||declared!==String(document.querySelector('meta[itemprop="sku"]')?.content||"").toUpperCase())continue;
+            for(const item of node.additionalProperty||[]){
+              if(item?.name&&item?.value)push(item.name,item.value);
+            }
+          }
+        }catch{}
+      }
+      return out.slice(0,200);
+    });
+    const evidence=sanitizePdpPairs(pairs,product.sku,url,header);
+    console.error("cross-bu PDP "+product.sku+": "+evidence.specs.length+" specs; candidates="+pairs.length+"; verified="+evidence.verified+"; "+evidence.reason);
+    return {...evidence,sourceUrl:url};
+  }finally{await page.close();}
 }
 
 async function renderCatalogHtml(url, catalogSource) {
@@ -2070,6 +2180,8 @@ const previousMarts = {
   supportResources: await readJsonl(path.join(martDir, "support_resources.jsonl"))
 };
 const previousFreshness = await readJsonl(path.join(martDir, "refresh_state.jsonl"));
+const specAttemptsFile = path.join(ROOT, "data/state", marketCode, "spec_attempts.json");
+const specAttempts = await readJson(specAttemptsFile, {});
 const urlAttemptsFile = path.join(ROOT, "data/state", marketCode, "url_failures.json");
 await mkdir(path.dirname(urlAttemptsFile), { recursive: true });
 const urlAttempts = await readJson(urlAttemptsFile, {});
@@ -2226,6 +2338,41 @@ if (catalogRows.length && specBatch > 0 && marketCode === "kr") {
       }));
     }
   }
+}
+
+// Backfill actual per-SKU PDP specs across every BU; unlike MX comparison
+// pages these specs may NOT be copied to a sibling SKU without evidence.
+if(catalogRows.length && crossBuSpecBatch>0 && marketCode==="kr" && !discoverOnly){
+  const candidates=selectCrossBuSpecTargets(catalogRows,specAttempts,Date.now(),crossBuSpecBatch);
+  console.error("cross-bu spec enrichment: "+candidates.length+" individual SKUs queued across "+
+    [...new Set(candidates.map(row=>row.catalog_category))].join(", "));
+  for(const product of candidates){
+    let status="empty",reason="no_valid_pdp_pairs";
+    try{
+      const result=await renderCrossBuSpecs(product);
+      reason=result.reason||"unknown";
+      if(result.verified && result.specs.length){
+        const validated=sanitizeSpecs(result.specs);
+        if(validated.length){
+          product.specs=validated;
+          product.spec_captured_at=capturedAt;
+          product.spec_source_url=result.sourceUrl;
+          product.spec_model_label=product.sku; // exact SKU, never family
+          product.fingerprint=sha(JSON.stringify({
+            name:product.name,sku:product.sku,offers:product.offers,
+            specs:product.specs,lifecycle_status:product.lifecycle_status
+          }));
+          status="enriched";
+        }
+      }
+    }catch(error){
+      status="failed";reason=String(error?.message||error).slice(0,220);
+      console.error("cross-bu spec failed "+product.sku+": "+reason);
+    }
+    specAttempts[product.sku]={checked_at:capturedAt,status,reason,source_url:product.product_detail_url,category:product.catalog_category};
+  }
+  await mkdir(path.dirname(specAttemptsFile),{recursive:true});
+  await writeFile(specAttemptsFile,JSON.stringify(specAttempts,null,2)+"\n");
 }
 
 await closeCatalogBrowser();
