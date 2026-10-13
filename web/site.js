@@ -81,6 +81,8 @@ const copy = {
     passed:"PASS",pending:"PENDING",notRun:"Not yet run"
   }
 };
+Object.assign(copy.kr, {explorerEyebrow:"SKU-FIRST DATA EXPLORER",explorerTitle:"SKU 데이터 탐색",explorerLead:"수집된 제품 데이터를 조회합니다. 일부 SKU나 스펙은 아직 누락될 수 있습니다.",explorerMarket:"국가",explorerDataset:"데이터 유형",explorerProducts:"제품",explorerPages:"페이지",explorerHistory:"변경 이력",explorerBu:"사업부",explorerAllBu:"전체",explorerSearch:"검색",explorerCaveat:"가격은 최근 검증된 경우에만 표시됩니다. 최종 결제 가격은 아닙니다."});
+Object.assign(copy.us, {explorerEyebrow:"SKU-FIRST DATA EXPLORER",explorerTitle:"Explore SKU data",explorerLead:"Browse collected product data. Some SKUs or specs may still be missing.",explorerMarket:"Market",explorerDataset:"Dataset",explorerProducts:"Products",explorerPages:"Pages",explorerHistory:"History",explorerBu:"Business unit",explorerAllBu:"All",explorerSearch:"Search",explorerCaveat:"Prices appear only with recent verification; they are not checkout quotes."});
 let currentLanguage = "kr";
 try { const saved = localStorage.getItem("scom_lang"); if (saved === "us" || saved === "kr") currentLanguage = saved; } catch {}
 const listeners = new Set();
