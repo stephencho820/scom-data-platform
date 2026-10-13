@@ -24,6 +24,9 @@ function render(){
   metric(cards,"metricCurrent",fmt(counts.current_skus));
   metric(cards,"metricSpecs",fmt(counts.current_skus_with_specs));
   metric(cards,"metricSources",fmt(meta.catalog_sources_ok)+" / "+fmt(meta.catalog_sources_total));
+  const harman = (meta.categories || []).filter(row => row.business_unit === "HARMAN");
+  const harmanVerified = harman.length > 0 && harman.every(row => row.source_status === "ok");
+  metric(cards,"metricHarman",harmanVerified ? fmt(harman.reduce((sum, row) => sum + (row.discovered_unique_skus || 0), 0)) : t("harmanNotCollected"));
 
   const gates=document.getElementById("status-gates");gates.replaceChildren();
   for(const [key,passed] of Object.entries(readiness.gates||{}))line(gates,t("gate_"+key),t(passed?"passed":"pending"),passed);
