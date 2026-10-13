@@ -5,6 +5,7 @@ import path from "node:path";
 import { reconcileDataMarts, updateImmutableSkuRegistry, hasCommerceEvidence } from "../src/pipeline/incremental.mjs";
 import { selectDueUrls, recordAttempt } from "../src/pipeline/scheduler.mjs";
 import { sanitizePdpPairs, selectCrossBuSpecTargets } from "../src/pipeline/spec-pdp.mjs";
+import { supportModelUrl, supportSpecEvidence } from "../src/pipeline/support-specs.mjs";
 
 const ROOT = process.cwd();
 const USER_AGENT = "ScomDataPlatform/0.2 (+https://github.com/stephencho820/scom-data-platform)";
@@ -956,6 +957,37 @@ async function renderCrossBuSpecs(product) {
     const evidence=sanitizePdpPairs(pairs,product.sku,url,header);
     console.error("cross-bu PDP "+product.sku+": "+evidence.specs.length+" specs; candidates="+pairs.length+"; verified="+evidence.verified+"; "+evidence.reason);
     return {...evidence,sourceUrl:url};
+  }finally{await page.close();}
+}
+
+/** Official Samsung model support is a separate technical-spec source.
+ * Exact SKU support URL + verified on-page product model alias are mandatory.
+ * Do not use general support pages, product recommendations, or a 404 response.
+ */
+async function renderOfficialSupportSpecs(product){
+  const url=supportModelUrl(product.sku);
+  if(!url)return {verified:false,specs:[],reason:"invalid_support_sku"};
+  const chromePath=process.env.CHROME_PATH||"";
+  if(!chromePath)return {verified:false,specs:[],reason:"chrome_unavailable"};
+  const {chromium}=await import("playwright-core");
+  if(!catalogBrowser)catalogBrowser=await chromium.launch({
+    headless:true,executablePath:chromePath,args:["--no-sandbox","--disable-dev-shm-usage"]
+  });
+  const page=await catalogBrowser.newPage({userAgent:USER_AGENT,viewport:{width:1440,height:1200}});
+  try{
+    const response=await page.goto(url,{waitUntil:"domcontentloaded",timeout:40000});
+    if(!response?.ok())return {verified:false,specs:[],reason:"support_http_"+(response?.status()||"unknown")};
+    await page.waitForTimeout(1050);
+    // Specs may be behind a collapsed tab but must be in an official model page.
+    const buttons=page.getByRole("button",{name:/^스펙$/i});
+    if(await buttons.count().catch(()=>0)){
+      try{await buttons.first().click({timeout:1500});await page.waitForTimeout(450);}catch{}
+    }
+    const text=await page.locator("body").innerText({timeout:8000}).catch(()=>"");
+    const evidence=supportSpecEvidence({sku:product.sku,url:page.url(),text});
+    console.error("support specs "+product.sku+": "+evidence.specs.length+" specs, "+evidence.reason+
+      (evidence.source_model?"; model="+evidence.source_model:"")+" from "+page.url());
+    return {...evidence,sourceUrl:page.url()};
   }finally{await page.close();}
 }
 
@@ -2348,29 +2380,47 @@ if(catalogRows.length && crossBuSpecBatch>0 && marketCode==="kr" && !discoverOnl
   console.error("cross-bu spec enrichment: "+candidates.length+" individual SKUs queued across "+
     [...new Set(candidates.map(row=>row.catalog_category))].join(", "));
   for(const product of candidates){
-    let status="empty",reason="no_valid_pdp_pairs";
+    let status="empty",reason="no_valid_specs",sourceUrl=product.product_detail_url,sourceModel="";
+    let fallbackChecked=false;
     try{
-      const result=await renderCrossBuSpecs(product);
+      let result=await renderCrossBuSpecs(product).catch(error=>({
+        verified:false,specs:[],reason:"pdp_error_"+String(error?.message||error).slice(0,100)
+      }));
+      if(!result.verified||!result.specs.length){
+        const pdpReason=result.reason||"no_pdp_specs";
+        // Retry the same SKU against its official support/model/{SKU}/ URL.
+        // This never copies a different SKU's family specs.
+        fallbackChecked=true;
+        const support=await renderOfficialSupportSpecs(product).catch(error=>({
+          verified:false,specs:[],reason:"support_error_"+String(error?.message||error).slice(0,100)
+        }));
+        result=support.verified&&support.specs.length ? support : {
+          verified:false,specs:[],reason:pdpReason+"; "+support.reason
+        };
+      }
       reason=result.reason||"unknown";
-      if(result.verified && result.specs.length){
+      if(result.verified&&result.specs.length){
         const validated=sanitizeSpecs(result.specs);
         if(validated.length){
           product.specs=validated;
           product.spec_captured_at=capturedAt;
           product.spec_source_url=result.sourceUrl;
-          product.spec_model_label=product.sku; // exact SKU, never family
+          // A suffix-stripped family label is evidence only for this queried SKU.
+          // Never fan this profile out to another color/storage SKU.
+          product.spec_model_label=result.source_model||product.sku;
           product.fingerprint=sha(JSON.stringify({
             name:product.name,sku:product.sku,offers:product.offers,
             specs:product.specs,lifecycle_status:product.lifecycle_status
           }));
-          status="enriched";
+          status="enriched";sourceUrl=result.sourceUrl;sourceModel=result.source_model||product.sku;
         }
       }
     }catch(error){
       status="failed";reason=String(error?.message||error).slice(0,220);
       console.error("cross-bu spec failed "+product.sku+": "+reason);
     }
-    specAttempts[product.sku]={checked_at:capturedAt,status,reason,source_url:product.product_detail_url,category:product.catalog_category};
+    specAttempts[product.sku]={checked_at:capturedAt,status,reason,source_url:sourceUrl,source_model:sourceModel,
+      support_checked:fallbackChecked,category:product.catalog_category};
   }
   await mkdir(path.dirname(specAttemptsFile),{recursive:true});
   await writeFile(specAttemptsFile,JSON.stringify(specAttempts,null,2)+"\n");
