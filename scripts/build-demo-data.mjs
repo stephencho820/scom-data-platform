@@ -49,7 +49,10 @@ export function buildDemoData({ master, specs, offers, refresh, support, readine
       const canQuote = p.lifecycle_status === "current_sellable" &&
         p.commerce_eligible === true && Boolean(offer?.price) &&
         Boolean(state?.offer_checked_at) &&
-        Number.isFinite(Date.parse(state.offer_checked_at));
+        Number.isFinite(Date.parse(state.offer_checked_at)) &&
+        officialUrl(offer.purchase_url) &&
+        Number.isFinite(Number(offer.price)) &&
+        Number(offer.price) > 0;
       const linked = (supportBySku.get(String(p.sku).toUpperCase()) || []).filter(x => officialUrl(x.source_url));
       return {
         key: p.market_product_key,
