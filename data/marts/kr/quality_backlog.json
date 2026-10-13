@@ -1,7 +1,7 @@
 {
   "market": "kr",
-  "generated_at": "2026-10-13T11:26:53.427Z",
-  "source_snapshot_at": "2026-10-13T11:15:50.180Z",
+  "generated_at": "2026-10-13T11:50:15.563Z",
+  "source_snapshot_at": "2026-10-13T11:43:44.368Z",
   "ready": false,
   "catalog": {
     "sources_total": 19,
@@ -1342,7 +1342,7 @@
       "category": "cooking-appliances",
       "name": "Bespoke AI 인덕션 (플렉스존)",
       "url": "https://www.samsung.com/sec/cooking-appliances/cooktop-cc80h63e1hs-d2c/CC80H63E1HS/",
-      "has_specs": false,
+      "has_specs": true,
       "has_support": false
     },
     {
@@ -5492,7 +5492,7 @@
       "category": "monitors",
       "name": "에센셜 모니터 S3 S30GD FHD 100Hz (LS27D306)",
       "url": "https://www.samsung.com/sec/monitors/ls27d306gakxkr-d2c/LS27D306GAKXKR/",
-      "has_specs": false,
+      "has_specs": true,
       "has_support": false
     },
     {
@@ -6642,7 +6642,7 @@
       "category": "microwave-ovens",
       "name": "Bespoke 전자레인지 23L (그릴 프라이)",
       "url": "https://www.samsung.com/sec/microwave-ovens/microwave-oven-grill-MG23T5018CC-d2c/MG23T5018CC/",
-      "has_specs": false,
+      "has_specs": true,
       "has_support": false
     },
     {
@@ -6842,7 +6842,7 @@
       "category": "air-purifiers",
       "name": "인테리어핏 판넬 (중)",
       "url": "https://www.samsung.com/sec/air-purifiers/accessory-pc1nwsk1nrr-d2c/PC1NWSK1NRR/",
-      "has_specs": false,
+      "has_specs": true,
       "has_support": false
     },
     {
@@ -9442,7 +9442,7 @@
       "category": "projectors",
       "name": "The Freestyle 2세대",
       "url": "https://www.samsung.com/sec/projectors/the-freestyle-sp-lfcf3laxxkr-d2c/SP-LFCF3LAXXKR/",
-      "has_specs": false,
+      "has_specs": true,
       "has_support": false
     },
     {

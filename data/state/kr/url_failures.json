@@ -78,5 +78,15 @@
     "failure_count": 1,
     "retry_after": "2026-10-13T12:15:50.180Z",
     "last_failed_at": "2026-10-13T11:15:50.180Z"
+  },
+  "https://www.samsung.com/sec/tvs/uhd-ru7470fxkr/": {
+    "failure_count": 1,
+    "retry_after": "2026-10-13T12:43:44.368Z",
+    "last_failed_at": "2026-10-13T11:43:44.368Z"
+  },
+  "https://www.samsung.com/sec/tvs/uhd-ru7470fxkr/UN49RU7470FXKR/": {
+    "failure_count": 1,
+    "retry_after": "2026-10-13T12:43:44.368Z",
+    "last_failed_at": "2026-10-13T11:43:44.368Z"
   }
 }

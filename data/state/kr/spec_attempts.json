@@ -106,5 +106,113 @@
     "source_model": "",
     "support_checked": true,
     "category": "harman-lifestyle-audio"
+  },
+  "PC1NWSK1NRR": {
+    "checked_at": "2026-10-13T11:43:44.368Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/PC1NWSK1NRR/",
+    "source_model": "PC1NWSK1NRR",
+    "support_checked": true,
+    "category": "air-purifiers"
+  },
+  "SP-LFCF3LAXXKR": {
+    "checked_at": "2026-10-13T11:43:44.368Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/SP-LFCF3LAXXKR/",
+    "source_model": "SPLFCF3LAX",
+    "support_checked": true,
+    "category": "projectors"
+  },
+  "SM-Q505NZKAKOO": {
+    "checked_at": "2026-10-13T11:43:44.368Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/rings/galaxyring-q505/SM-Q505NZKAKOO/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "rings"
+  },
+  "HKENCH1100BLKAS": {
+    "checked_at": "2026-10-13T11:43:44.368Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/hk-soundbar-ench1100-d2c/HKENCH1100BLKAS/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
+  },
+  "MG23T5018CC": {
+    "checked_at": "2026-10-13T11:43:44.368Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/MG23T5018CC/",
+    "source_model": "MG23T5018CC",
+    "support_checked": true,
+    "category": "microwave-ovens"
+  },
+  "HW-LS70H/KR": {
+    "checked_at": "2026-10-13T11:43:44.368Z",
+    "status": "empty",
+    "reason": "sku_not_declared_on_pdp; support_http_404",
+    "source_url": "https://www.samsung.com/sec/soundbars/wifi-speaker-hw-ls70h-d2c/HW-LS70H%2FKR/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "soundbars"
+  },
+  "NT740VJK-KC51G": {
+    "checked_at": "2026-10-13T11:43:44.368Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/galaxybook/galaxy-book6-nt740vjk-kc51g/NT740VJK-KC51G/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "galaxybook"
+  },
+  "HKENCH900BLKAS": {
+    "checked_at": "2026-10-13T11:43:44.368Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/hk-soundbar-enchant900-d2c/HKENCH900BLKAS/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
+  },
+  "CC80H63E1HS": {
+    "checked_at": "2026-10-13T11:43:44.368Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/CC80H63E1HS/",
+    "source_model": "CC80H63E1HS",
+    "support_checked": true,
+    "category": "cooking-appliances"
+  },
+  "LS27D306GAKXKR": {
+    "checked_at": "2026-10-13T11:43:44.368Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/LS27D306GAKXKR/",
+    "source_model": "S27D306GAK",
+    "support_checked": true,
+    "category": "monitors"
+  },
+  "SM-R540NZWAKOO": {
+    "checked_at": "2026-10-13T11:43:44.368Z",
+    "status": "empty",
+    "reason": "pdp_sku_mismatch; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/buds/galaxy-buds4-r540/SM-R540NZWAKOO/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "buds"
+  },
+  "HKENCHSUB2BLKAS": {
+    "checked_at": "2026-10-13T11:43:44.368Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/hk-speaker-enchantsub-d2c/HKENCHSUB2BLKAS/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
   }
 }
