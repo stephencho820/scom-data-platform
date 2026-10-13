@@ -7,6 +7,7 @@ on:
       - "web/**"
       - "data/**"
       - "config/**"
+      - "schemas/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
   workflow_run:
@@ -41,6 +42,7 @@ jobs:
           mkdir -p dist
           cp -R web/. dist/
           cp -R config dist/config
+          cp -R schemas dist/schemas
           mkdir -p dist/data
           if [ -d data/current ]; then cp -R data/current dist/data/current; fi
           if [ -d data/history ]; then cp -R data/history dist/data/history; fi
@@ -49,6 +51,9 @@ jobs:
 
       - name: Build data mart dictionary and embed fallback snapshot
         run: node scripts/build-data-catalog.mjs dist/data/catalog/kr.json dist/catalog.html
+
+      - name: Build AI-ready mart gap analysis
+        run: node scripts/build-mart-gap.mjs dist/data/catalog/kr.json dist/data/gaps/kr.json
 
       - name: Build real SKU-based MCP POC dataset
         run: node scripts/build-demo-data.mjs dist/data/demo/kr.json
