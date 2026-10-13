@@ -9,6 +9,7 @@ on:
       - "src/**"
       - "config/**"
       - ".github/workflows/validate.yml"
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -28,8 +29,13 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           node --check scripts/crawl.mjs
+          node --check src/pipeline/incremental.mjs
+          node --check src/pipeline/scheduler.mjs
           node --check src/mcp/server.mjs
           node -e "JSON.parse(require('fs').readFileSync('config/markets.json','utf8')); console.log('markets.json ok')"
+
+      - name: Test incremental lifecycle and retry logic
+        run: node --test test/*.test.mjs
 
       - name: Install MCP dependencies
         run: npm install --ignore-scripts --no-audit --no-fund
