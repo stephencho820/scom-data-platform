@@ -69,7 +69,10 @@ export function selectCrossBuSpecTargets(rows,attempts={},now=Date.now(),limit=1
     if(Array.isArray(row.specs) && row.specs.length)continue;
     if(!["current_sellable","current_out_of_stock","current_not_directly_sellable"].includes(row.lifecycle_status))continue;
     const recent=attempts[sku];
-    if(recent?.checked_at && Number.isFinite(Date.parse(recent.checked_at)) &&
+    // Upgrade path: an earlier PDP-only failure must get a chance at the new
+    // official support fallback, without waiting out the old 24-hour cooldown.
+    if(recent?.checked_at && (recent.status==="enriched"||recent.support_checked===true) &&
+      Number.isFinite(Date.parse(recent.checked_at)) &&
       now-Date.parse(recent.checked_at) < (recent.status==="enriched"?7:24)*3600000)continue;
     const bu=row.catalog_category==="harman-lifestyle-audio"?"HARMAN":String(row.business_unit||"");
     const bucketKey=String(row.catalog_source_id||row.catalog_category||"other");
