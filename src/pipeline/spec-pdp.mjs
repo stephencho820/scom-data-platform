@@ -36,7 +36,7 @@ export function sanitizePdpPairs(pairs, sku, pageUrl, pageText) {
   try {
     const url=new URL(pageUrl);
     if(url.hostname!=="www.samsung.com"||url.protocol!=="https:")return {verified:false,specs:[],reason:"non_official_pdp"};
-    actual=decodeURIComponent(url.pathname).split("/").filter(Boolean).at(-1)?.toUpperCase()||"";
+    actual=decodeURIComponent(url.pathname.split("/").filter(Boolean).at(-1)||"").toUpperCase();
   } catch {return {verified:false,specs:[],reason:"invalid_pdp_url"};}
   if(actual!==expected)return {verified:false,specs:[],reason:"pdp_sku_mismatch"};
   // Require first-screen "SKU <exact-model>" evidence, not mere recommendations.
