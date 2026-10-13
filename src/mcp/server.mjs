@@ -52,9 +52,15 @@ async function productMasterFor(market) {
 async function recentlyVerified(market, productKey, field, maxAgeHours) {
   const evidence = (await martFor(market, "refresh_state"))
     .find((row) => row.market_product_key === productKey);
+  const policy = await readJson(path.join(ROOT, "config/refresh-policy.json"), {});
+  const configuredHours = field === "offer_checked_at"
+    ? policy.max_offer_age_hours_for_mcp
+    : policy.max_commerce_options_age_hours_for_mcp;
+  const allowedHours = Number.isFinite(configuredHours) && configuredHours > 0
+    ? configuredHours : maxAgeHours;
   const stamp = Date.parse(evidence?.[field] || "");
   return Number.isFinite(stamp) && Date.now() >= stamp &&
-    Date.now() - stamp <= maxAgeHours * 3600000;
+    Date.now() - stamp <= allowedHours * 3600000;
 }
 
 function textScore(values, terms) {
