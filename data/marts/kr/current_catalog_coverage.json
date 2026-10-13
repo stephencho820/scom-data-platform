@@ -1,13 +1,13 @@
 {
   "market": "kr",
-  "generated_at": "2026-10-12T12:03:31.708Z",
+  "generated_at": "2026-10-13T09:04:25.442Z",
   "definition": "Current catalog coverage compares SKU identifiers discovered from each configured official Samsung.com KR catalog source with current SKU rows emitted to product_master.",
-  "complete": false,
+  "complete": true,
   "catalog_sources_total": 18,
-  "catalog_sources_ok": 13,
-  "catalog_sources_failed": 5,
-  "discovered_unique_skus": 848,
-  "db_current_unique_skus": 848,
+  "catalog_sources_ok": 18,
+  "catalog_sources_failed": 0,
+  "discovered_unique_skus": 860,
+  "db_current_unique_skus": 860,
   "categories": [
     {
       "source_id": "smartphones",
@@ -39,8 +39,8 @@
       "category": "tvs",
       "source_url": "https://www.samsung.com/sec/tvs/all-tvs/",
       "source_status": "ok",
-      "discovered_unique_skus": 197,
-      "db_current_unique_skus": 197,
+      "discovered_unique_skus": 124,
+      "db_current_unique_skus": 124,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -51,8 +51,8 @@
       "category": "monitors",
       "source_url": "https://www.samsung.com/sec/monitors/all-monitors/",
       "source_status": "ok",
-      "discovered_unique_skus": 133,
-      "db_current_unique_skus": 133,
+      "discovered_unique_skus": 134,
+      "db_current_unique_skus": 134,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -62,12 +62,12 @@
       "business_unit": "VD",
       "category": "projectors",
       "source_url": "https://www.samsung.com/sec/projectors/all-projectors/",
-      "source_status": "failed",
-      "discovered_unique_skus": 0,
-      "db_current_unique_skus": 0,
+      "source_status": "ok",
+      "discovered_unique_skus": 11,
+      "db_current_unique_skus": 11,
       "missing_in_db": [],
       "unexpected_in_db": [],
-      "complete": false
+      "complete": true
     },
     {
       "source_id": "refrigerators",
@@ -87,8 +87,8 @@
       "category": "laundry",
       "source_url": "https://www.samsung.com/sec/washers-and-dryers/all-washers-and-dryers/",
       "source_status": "ok",
-      "discovered_unique_skus": 107,
-      "db_current_unique_skus": 107,
+      "discovered_unique_skus": 100,
+      "db_current_unique_skus": 100,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -99,8 +99,8 @@
       "category": "air-conditioners",
       "source_url": "https://www.samsung.com/sec/air-conditioners/all-air-conditioners/",
       "source_status": "ok",
-      "discovered_unique_skus": 100,
-      "db_current_unique_skus": 100,
+      "discovered_unique_skus": 89,
+      "db_current_unique_skus": 89,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -146,12 +146,12 @@
       "business_unit": "MX",
       "category": "tablets",
       "source_url": "https://www.samsung.com/sec/tablets/all-tablets/",
-      "source_status": "failed",
-      "discovered_unique_skus": 0,
-      "db_current_unique_skus": 0,
+      "source_status": "ok",
+      "discovered_unique_skus": 32,
+      "db_current_unique_skus": 32,
       "missing_in_db": [],
       "unexpected_in_db": [],
-      "complete": false
+      "complete": true
     },
     {
       "source_id": "galaxybook",
@@ -170,36 +170,36 @@
       "business_unit": "MX",
       "category": "buds",
       "source_url": "https://www.samsung.com/sec/buds/all-buds/",
-      "source_status": "failed",
-      "discovered_unique_skus": 0,
-      "db_current_unique_skus": 0,
+      "source_status": "ok",
+      "discovered_unique_skus": 20,
+      "db_current_unique_skus": 20,
       "missing_in_db": [],
       "unexpected_in_db": [],
-      "complete": false
+      "complete": true
     },
     {
       "source_id": "rings",
       "business_unit": "MX",
       "category": "rings",
       "source_url": "https://www.samsung.com/sec/rings/all-rings/",
-      "source_status": "failed",
-      "discovered_unique_skus": 0,
-      "db_current_unique_skus": 0,
+      "source_status": "ok",
+      "discovered_unique_skus": 3,
+      "db_current_unique_skus": 3,
       "missing_in_db": [],
       "unexpected_in_db": [],
-      "complete": false
+      "complete": true
     },
     {
       "source_id": "soundbars",
       "business_unit": "VD",
       "category": "soundbars",
       "source_url": "https://www.samsung.com/sec/audio-devices/all-audio-devices/",
-      "source_status": "failed",
-      "discovered_unique_skus": 0,
-      "db_current_unique_skus": 0,
+      "source_status": "ok",
+      "discovered_unique_skus": 36,
+      "db_current_unique_skus": 36,
       "missing_in_db": [],
       "unexpected_in_db": [],
-      "complete": false
+      "complete": true
     },
     {
       "source_id": "air-purifiers",
