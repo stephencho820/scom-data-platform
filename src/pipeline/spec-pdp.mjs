@@ -71,22 +71,37 @@ export function selectCrossBuSpecTargets(rows,attempts={},now=Date.now(),limit=1
     const recent=attempts[sku];
     if(recent?.checked_at && Number.isFinite(Date.parse(recent.checked_at)) &&
       now-Date.parse(recent.checked_at) < (recent.status==="enriched"?7:24)*3600000)continue;
+    const bu=row.catalog_category==="harman-lifestyle-audio"?"HARMAN":String(row.business_unit||"");
     const bucketKey=String(row.catalog_source_id||row.catalog_category||"other");
-    if(!buckets.has(bucketKey))buckets.set(bucketKey,[]);
-    buckets.get(bucketKey).push(row);
+    const key=bu==="HARMAN"?"HARMAN":(["DA","VD","MX"].includes(row.business_unit)?row.business_unit:"OTHER");
+    if(!buckets.has(key))buckets.set(key,new Map());
+    const groups=buckets.get(key);
+    if(!groups.has(bucketKey))groups.set(bucketKey,[]);
+    groups.get(bucketKey).push(row);
   }
-  for(const bucket of buckets.values()) bucket.sort((a,b)=>{
-    const ap=a.lifecycle_status==="current_sellable"?0:1,bp=b.lifecycle_status==="current_sellable"?0:1;
-    return ap-bp || String(a.sku).localeCompare(String(b.sku));
-  });
-  const groups=[...buckets.values()].sort((a,b)=>a.length-b.length);
-  const selected=[],seen=new Set();
-  while(selected.length<limit && groups.some(g=>g.length)){
-    for(const group of groups){
+  const queues=new Map();
+  for(const [bu,groups] of buckets){
+    for(const bucket of groups.values())bucket.sort((a,b)=>{
+      const ap=a.lifecycle_status==="current_sellable"?0:1,bp=b.lifecycle_status==="current_sellable"?0:1;
+      return ap-bp || String(a.sku).localeCompare(String(b.sku));
+    });
+    queues.set(bu,[...groups.values()].sort((a,b)=>a.length-b.length));
+  }
+  const selected=[],seen=new Set(),orderedBus=["DA","VD","MX","HARMAN","OTHER"];
+  while(selected.length<limit && [...queues.values()].some(groups=>groups.some(g=>g.length))){
+    for(const bu of orderedBus){
       if(selected.length>=limit)break;
-      const row=group.shift();
-      if(!row)continue;
-      if(seen.has(row.sku))continue;
+      const groups=queues.get(bu)||[];
+      if(!groups.length)continue;
+      let row;
+      for(let i=0;i<groups.length;i++){
+        const group=groups.shift();
+        if(!group.length){groups.push(group);continue;}
+        row=group.shift();
+        groups.push(group);
+        break;
+      }
+      if(!row||seen.has(row.sku))continue;
       seen.add(row.sku);selected.push(row);
     }
   }
