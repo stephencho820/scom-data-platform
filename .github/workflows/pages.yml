@@ -7,6 +7,7 @@ on:
       - "web/**"
       - "data/**"
       - "config/**"
+      - "schemas/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
   workflow_run:
@@ -41,6 +42,7 @@ jobs:
           mkdir -p dist
           cp -R web/. dist/
           cp -R config dist/config
+          cp -R schemas dist/schemas
           mkdir -p dist/data
           if [ -d data/current ]; then cp -R data/current dist/data/current; fi
           if [ -d data/history ]; then cp -R data/history dist/data/history; fi
