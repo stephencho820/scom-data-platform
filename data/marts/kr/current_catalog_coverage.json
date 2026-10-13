@@ -1,13 +1,13 @@
 {
   "market": "kr",
-  "generated_at": "2026-10-13T09:04:25.442Z",
+  "generated_at": "2026-10-13T09:41:38.892Z",
   "definition": "Current catalog coverage compares SKU identifiers discovered from each configured official Samsung.com KR catalog source with current SKU rows emitted to product_master.",
-  "complete": true,
-  "catalog_sources_total": 18,
+  "complete": false,
+  "catalog_sources_total": 19,
   "catalog_sources_ok": 18,
-  "catalog_sources_failed": 0,
-  "discovered_unique_skus": 860,
-  "db_current_unique_skus": 860,
+  "catalog_sources_failed": 1,
+  "discovered_unique_skus": 861,
+  "db_current_unique_skus": 861,
   "categories": [
     {
       "source_id": "smartphones",
@@ -15,8 +15,8 @@
       "category": "smartphones",
       "source_url": "https://www.samsung.com/sec/smartphones/all-smartphones/",
       "source_status": "ok",
-      "discovered_unique_skus": 90,
-      "db_current_unique_skus": 90,
+      "discovered_unique_skus": 50,
+      "db_current_unique_skus": 50,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -51,8 +51,8 @@
       "category": "monitors",
       "source_url": "https://www.samsung.com/sec/monitors/all-monitors/",
       "source_status": "ok",
-      "discovered_unique_skus": 134,
-      "db_current_unique_skus": 134,
+      "discovered_unique_skus": 82,
+      "db_current_unique_skus": 82,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -75,8 +75,8 @@
       "category": "refrigerators",
       "source_url": "https://www.samsung.com/sec/refrigerators/all-refrigerators/",
       "source_status": "ok",
-      "discovered_unique_skus": 116,
-      "db_current_unique_skus": 116,
+      "discovered_unique_skus": 70,
+      "db_current_unique_skus": 70,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -87,8 +87,8 @@
       "category": "laundry",
       "source_url": "https://www.samsung.com/sec/washers-and-dryers/all-washers-and-dryers/",
       "source_status": "ok",
-      "discovered_unique_skus": 100,
-      "db_current_unique_skus": 100,
+      "discovered_unique_skus": 107,
+      "db_current_unique_skus": 107,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -99,8 +99,8 @@
       "category": "air-conditioners",
       "source_url": "https://www.samsung.com/sec/air-conditioners/all-air-conditioners/",
       "source_status": "ok",
-      "discovered_unique_skus": 89,
-      "db_current_unique_skus": 89,
+      "discovered_unique_skus": 139,
+      "db_current_unique_skus": 139,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -182,12 +182,12 @@
       "business_unit": "MX",
       "category": "rings",
       "source_url": "https://www.samsung.com/sec/rings/all-rings/",
-      "source_status": "ok",
-      "discovered_unique_skus": 3,
-      "db_current_unique_skus": 3,
+      "source_status": "failed",
+      "discovered_unique_skus": 0,
+      "db_current_unique_skus": 0,
       "missing_in_db": [],
       "unexpected_in_db": [],
-      "complete": true
+      "complete": false
     },
     {
       "source_id": "soundbars",
@@ -221,6 +221,18 @@
       "source_status": "ok",
       "discovered_unique_skus": 16,
       "db_current_unique_skus": 16,
+      "missing_in_db": [],
+      "unexpected_in_db": [],
+      "complete": true
+    },
+    {
+      "source_id": "harman-lifestyle-audio",
+      "business_unit": "HARMAN",
+      "category": "harman-lifestyle-audio",
+      "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/all-harman-lifestyle-audio/",
+      "source_status": "ok",
+      "discovered_unique_skus": 85,
+      "db_current_unique_skus": 85,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
