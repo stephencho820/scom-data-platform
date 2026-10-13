@@ -23,6 +23,7 @@ test("DA/VD/HARMAN source-backed spec pairs require exact SKU evidence",()=>{
   assert.ok(result.specs.every(s=>s.source==="samsung_pdp_verified"));
   assert.equal(sanitizePdpPairs(sample,base.sku,"https://www.samsung.com/sec/refrigerators/rf90/OTHER/",declared).verified,false);
   assert.equal(sanitizePdpPairs(sample,base.sku,url,"SKU OTHER").verified,false);
+  assert.equal(sanitizePdpPairs([{name:"채널",value:"2.1 ch"}],"HW-B450F/KR","https://www.samsung.com/sec/soundbars/a/HW-B450F%2FKR/","SKU HW-B450F/KR").verified,true);
   assert.equal(sanitizePdpPairs(sample,base.sku,"https://fakesamsung.com/sec/refrigerators/rf90/RF90DB9000APKR/",declared).verified,false);
   assert.equal(sanitizePdpPairs(sample,base.sku,url,"Another product mentions RF90DB9000APKR somewhere").verified,false);
 });
