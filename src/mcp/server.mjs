@@ -49,6 +49,20 @@ async function productMasterFor(market) {
   return martFor(market, "product_master");
 }
 
+async function recentlyVerified(market, productKey, field, maxAgeHours) {
+  const evidence = (await martFor(market, "refresh_state"))
+    .find((row) => row.market_product_key === productKey);
+  const policy = await readJson(path.join(ROOT, "config/refresh-policy.json"), {});
+  const configuredHours = field === "offer_checked_at"
+    ? policy.max_offer_age_hours_for_mcp
+    : policy.max_commerce_options_age_hours_for_mcp;
+  const allowedHours = Number.isFinite(configuredHours) && configuredHours > 0
+    ? configuredHours : maxAgeHours;
+  const stamp = Date.parse(evidence?.[field] || "");
+  return Number.isFinite(stamp) && Date.now() >= stamp &&
+    Date.now() - stamp <= allowedHours * 3600000;
+}
+
 function textScore(values, terms) {
   const haystacks = values.map((value) => String(value || "").toLowerCase());
   let score = 0;
@@ -110,10 +124,20 @@ async function joinedProduct(market, productKey) {
   if (["current_out_of_stock", "current_not_directly_sellable"].includes(product.lifecycle_status)) {
     return { product, specs, offer: null, commerce_options: null, commerce_note: "Current catalog product is not sellable; only product identity and specs are exposed." };
   }
-  if (product.commerce_eligible === false) {
-    return { product, specs, offer: null, commerce_options: null, commerce_note: "Lifecycle is not safely resolved to a current sellable catalog item; commerce data is intentionally suppressed." };
+  if (product.commerce_eligible !== true || product.lifecycle_status !== "current_sellable") {
+    return { product, specs, offer: null, commerce_options: null, commerce_note: "Only current, verified sellable SKUs can expose commerce." };
   }
-  return { product, specs, offer, commerce_options: commerce };
+  const [offerFresh, commerceFresh] = await Promise.all([
+    recentlyVerified(market, productKey, "offer_checked_at", 36),
+    recentlyVerified(market, productKey, "commerce_checked_at", 336)
+  ]);
+  return {
+    product, specs,
+    offer: offerFresh ? offer : null,
+    commerce_options: commerceFresh ? commerce : null,
+    commerce_note: !offerFresh ? "Current price is not freshly verified; do not quote cached prices." : null,
+    freshness: { offer_verified: offerFresh, commerce_verified: commerceFresh }
+  };
 }
 
 function pageScore(record, terms) {
@@ -179,6 +203,18 @@ function buildServer() {
     name: "scom-data-platform",
     version: "0.2.0"
   });
+
+  server.registerTool(
+    "get_incremental_sync_status",
+    {
+      description: "Report last crawl reconciliation: newly discovered SKU profiles, stable specs, changed offers, and verification counts. A successful sync does not imply chatbot READY.",
+      inputSchema: z.object({ market: z.string().min(2).default("kr") })
+    },
+    async ({ market }) => {
+      const report = await readJson(path.join(ROOT, "data/marts", market, "incremental_report.json"));
+      return report ? asText(report) : asError("Incremental sync has not run for this market.");
+    }
+  );
 
   server.registerTool(
     "get_kr_chatbot_readiness",
@@ -344,11 +380,14 @@ function buildServer() {
       if (["discontinued", "legacy_supported", "legacy_archived"].includes(product.lifecycle_status) || ["current_out_of_stock", "current_not_directly_sellable"].includes(product.lifecycle_status)) {
         return asError("This product is not currently sellable; current price/offer data is intentionally unavailable.");
       }
-      if (product.commerce_eligible === false) {
+      if (product.commerce_eligible !== true || product.lifecycle_status !== "current_sellable") {
         return asError("Current commerce eligibility is not verified; price/offer data is intentionally unavailable.");
       }
+      if (!(await recentlyVerified(market, product_key, "offer_checked_at", 36))) {
+        return asError("Price is stale or was not verified by a recent official source; please check Samsung.com directly.");
+      }
       const row = await findMartRow(market, "market_offers", product_key);
-      return row ? asText(row) : asError("Current market offer not found.");
+      return row && row.price ? asText(row) : asError("No currently verified product price is available.");
     }
   );
 
@@ -364,8 +403,11 @@ function buildServer() {
     async ({ market, product_key }) => {
       const product = (await productMasterFor(market)).find((item) => item.market_product_key === product_key);
       if (!product) return asError("Product not found.");
-      if (["discontinued", "legacy_supported", "legacy_archived"].includes(product.lifecycle_status) || ["current_out_of_stock", "current_not_directly_sellable"].includes(product.lifecycle_status) || product.commerce_eligible === false) {
+      if (product.commerce_eligible !== true || product.lifecycle_status !== "current_sellable") {
         return asError("Commerce options are only exposed for products verified as currently sellable.");
+      }
+      if (!(await recentlyVerified(market, product_key, "commerce_checked_at", 336))) {
+        return asError("Commerce options are stale or were not verified on a recent product detail page.");
       }
       const row = await findMartRow(market, "commerce_options", product_key);
       return row ? asText(row) : asError("Commerce options not found.");
@@ -418,7 +460,7 @@ function buildServer() {
       const suppressCommerceHistory =
         ["discontinued", "legacy_supported", "legacy_archived"].includes(product?.lifecycle_status) ||
         ["current_out_of_stock", "current_not_directly_sellable"].includes(product?.lifecycle_status) ||
-        product?.commerce_eligible === false;
+        product?.commerce_eligible !== true;
       return asText({
         market,
         product_key,

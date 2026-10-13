@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "description": "Hours between re-checks of already-visited, successfully captured URLs. Discovery and the official KR catalog sources run each crawl separately. Known immutable SKU specs are not overwritten by a shorter/empty extraction.",
+  "hours": {
+    "commerce": 24,
+    "knowledge": 168,
+    "product": 2160,
+    "other": 720
+  },
+  "max_offer_age_hours_for_mcp": 36,
+  "max_commerce_options_age_hours_for_mcp": 336
+}
