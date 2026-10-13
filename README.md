@@ -39,9 +39,9 @@ See [PRD](./docs/PRD.md), [Data Marts](./docs/DATA_MART.md), [Architecture](./do
 
 ## POC website: four data lifecycles
 
-The public GitHub Pages landing is a simple, **KR / US** language-switchable introduction to why agents benefit from S.com Data Platform. It intentionally separates the user-facing pitch from diagnostic tools:
+The public GitHub Pages landing is a **KR / US** introduction with a **real collected-SKU POC**: choose a DA/VD/MX/HARMAN product and inspect a published source-linked specification/offer snapshot. The displayed commands illustrate local MCP tool calls; the static website does not execute remote MCP tools. It intentionally separates the user-facing pitch from diagnostic tools:
 
-- [Landing](https://stephencho820.github.io/scom-data-platform/) — interactive four-type POC: **A Immutable**, **B Versioned**, **C Dynamic**, **D Real-time**. A product stays in the SKU registry; FAQs update on change; prices refresh on a schedule; personalized availability needs an authorized live API. The question-to-tool walkthrough is illustrative; it does not make live requests.
+- [Landing](https://stephencho820.github.io/scom-data-platform/) — four-type real-data POC: **A Immutable** shows SKU/spec facts, **B Versioned** shows exact-SKU support linkage (or missing data), **C Dynamic** shows only fresh verified offers, and **D Real-time** explicitly requires a separate authorized API. A product stays in the SKU registry; FAQs update on change; prices refresh on a schedule; personalized availability needs an authorized live API. A compact `data/demo/kr.json` file is regenerated from existing marts on each Pages deployment. Its browser rendering checks that collected offers are under 36 hours old before quoting them. The displayed MCP commands are illustrative, not executed by GitHub Pages.
 - [Data health](https://stephencho820.github.io/scom-data-platform/status.html) — actual KR readiness gates, source completeness and incremental crawl health. It never claims READY when required checks have not passed.
 - [SKU Explorer](https://stephencho820.github.io/scom-data-platform/explorer.html) — optional deeper view of captured product/source records, behind the simple landing. Prices display only if official offer freshness was verified within the configured TTL.
 
