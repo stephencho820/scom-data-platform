@@ -2090,14 +2090,7 @@ for (const source of catalogSourceDefs) {
       console.error("catalog " + source.id + ": render/API unavailable: " + renderError.message);
     }
     if (!rows.length) rows = parseCatalogListing(html, source);
-    if (!rows.length) {
-      console.error("catalog " + source.id + ": static HTML has no product cards; using rendered/API fallback");
-      const rendered = await renderCatalogHtml(source.url, source);
-      rows = rendered.apiGoods.length
-        ? parseCatalogApiGoods(rendered.apiGoods, source)
-        : parseCatalogListing(rendered.visibleText, source);
-    }
-
+    if (!rows.length) console.error("catalog " + source.id + ": no validated SKU rows from API/rendered/static evidence");
     if (!rows.length) throw new Error("No validated SKU records returned; catalog remains unverified");
     for (const row of rows) {
       const existingProduct = existingProducts.find((item) => item.key === row.key);
