@@ -2,6 +2,8 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { gunzipSync } from "node:zlib";
 import path from "node:path";
+import { reconcileDataMarts, updateImmutableSkuRegistry, hasCommerceEvidence } from "../src/pipeline/incremental.mjs";
+import { selectDueUrls, recordAttempt } from "../src/pipeline/scheduler.mjs";
 
 const ROOT = process.cwd();
 const USER_AGENT = "ScomDataPlatform/0.2 (+https://github.com/stephencho820/scom-data-platform)";
@@ -2050,6 +2052,17 @@ await mkdir(manifestDir, { recursive: true });
 const existingPages = await readJsonl(path.join(currentDir, "pages.jsonl"));
 const existingProducts = await readJsonl(path.join(currentDir, "products.jsonl"));
 const existingSpecRows = await readJsonl(path.join(martDir, "product_specs.jsonl"));
+const previousMarts = {
+  productMaster: await readJsonl(path.join(martDir, "product_master.jsonl")),
+  productSpecs: existingSpecRows,
+  marketOffers: await readJsonl(path.join(martDir, "market_offers.jsonl")),
+  commerceOptions: await readJsonl(path.join(martDir, "commerce_options.jsonl")),
+  supportResources: await readJsonl(path.join(martDir, "support_resources.jsonl"))
+};
+const previousFreshness = await readJsonl(path.join(martDir, "refresh_state.jsonl"));
+const urlAttemptsFile = path.join(ROOT, "data/state", marketCode, "url_failures.json");
+await mkdir(path.dirname(urlAttemptsFile), { recursive: true });
+const urlAttempts = await readJson(urlAttemptsFile, {});
 const existingSpecsByKey = new Map(existingSpecRows.map((row) => [row.market_product_key, row]));
 const registryFile = path.join(martDir, "sku_registry.jsonl");
 const existingRegistryRows = await readJsonl(registryFile);
@@ -2271,11 +2284,13 @@ let wrapped = false;
 if (explicitUrl) {
   selected = [explicitUrl];
 } else if (!discoverOnly) {
-  const batch = chooseBatch(targetUrls, visitedUrls, cursorBase, batchPages);
+  const batch = selectDueUrls(targetUrls, visitedUrls, existingPages, urlAttempts, {
+    at: capturedAt, batchSize: batchPages
+  });
   selected = batch.selected;
-  nextCursor = batch.nextCursor;
-  wrapped = batch.wrapped;
-  if (wrapped) cycle += 1;
+  console.error("incremental queue: " + JSON.stringify(batch.outstanding));
+  nextCursor = cursorBase;
+  wrapped = false;
 }
 
 const manifest = {
@@ -2324,7 +2339,7 @@ if (discoverOnly) {
   process.exit(0);
 }
 
-if (!selected.length) throw new Error("No URLs selected for crawl for " + marketCode);
+if (!selected.length && !catalogRows.length) throw new Error("No due URLs or verified catalog data for " + marketCode);
 
 console.error("inventory: " + marketCode + ": " + targetUrls.length + " mart target URLs from " + crawlableUrls.length + " crawlable URLs; crawling batch of " + selected.length);
 
@@ -2338,6 +2353,7 @@ for (let index = 0; index < selected.length; index++) {
   try {
     const { text: html, finalUrl, contentType } = await fetchText(discoveredUrl);
     successfulUrls.add(discoveredUrl);
+    recordAttempt(urlAttempts, discoveredUrl, true, capturedAt);
     if (!/html/i.test(contentType) && !/<html[\s>]/i.test(html)) continue;
     const page = extractPage(html, finalUrl, discoveredUrl);
     if (page.text) crawledPages.push(page);
@@ -2345,6 +2361,7 @@ for (let index = 0; index < selected.length; index++) {
     console.error("[" + (index + 1) + "/" + selected.length + "] ok " + discoveredUrl);
   } catch (error) {
     failures += 1;
+    recordAttempt(urlAttempts, discoveredUrl, false, capturedAt);
     console.error("[" + (index + 1) + "/" + selected.length + "] failed " + discoveredUrl + ": " + error.message);
   }
   if (delayMs > 0 && index < selected.length - 1) await sleep(delayMs);
@@ -2386,6 +2403,19 @@ await writeFile(manifestFile, JSON.stringify(manifest, null, 2) + "\n");
 const coveragePercent = targetUrls.length ? Math.round((visitedUrls.size / targetUrls.length) * 10000) / 100 : 0;
 
 const marts = buildDataMarts(allPages, allProducts, lifecycleFor, catalogRows);
+// Source freshness is separate from unchanged content. Reusing a cached PDP
+// never constitutes a fresh price/commerce verification.
+const freshOfferKeys = new Set([...crawledProducts.values()].map((row) => canonicalSkuKey(row)));
+const freshDetailUrls = new Set(crawledPages
+  .filter((page) => !catalogPages.includes(page))
+  .flatMap((page) => [page.url, page.canonical_url]).filter(Boolean));
+const freshCommerceKeys = new Set(marts.commerceOptions
+  .filter((row) => hasCommerceEvidence(row) && freshDetailUrls.has(row.source_url))
+  .map((row) => row.market_product_key));
+const reconciled = reconcileDataMarts(previousMarts, marts, {
+  capturedAt, freshOfferKeys, freshCommerceKeys, previousFreshness
+});
+Object.assign(marts, reconciled.marts);
 
 function buildCurrentCatalogCoverageAudit(catalogRows, productMaster, successfulSources, failedSources) {
   const sourceById = new Map(catalogSourceDefs.map((source) => [source.id, source]));
@@ -2481,33 +2511,15 @@ await writeFile(path.join(martDir, "support_resources.jsonl"), toJsonl(marts.sup
 await writeFile(path.join(martDir, "taxonomy.jsonl"), toJsonl(marts.taxonomy));
 await writeFile(path.join(martDir, "catalog_current.jsonl"), toJsonl(marts.currentCatalog));
 
-const registryNow = new Map(registryBySku);
-for (const row of marts.productMaster) {
-  const sku = String(row.sku || "").trim().toUpperCase();
-  if (!sku) continue;
-  const previous = registryNow.get(sku);
-  const specs = existingSpecsByKey.get(row.market_product_key)?.specs ||
-    marts.productSpecs.find((specRow) => specRow.market_product_key === row.market_product_key)?.specs || [];
-  if (!previous) {
-    registryNow.set(sku, {
-      sku,
-      market: row.market,
-      business_unit: row.business_unit,
-      category: row.category,
-      product_family: row.product_family,
-      model: row.model,
-      name: row.name,
-      brand: row.brand,
-      variant_attributes: row.variant_attributes || {},
-      product_url: row.product_url,
-      source_urls: row.source_urls || [],
-      specs,
-      first_seen_at: capturedAt,
-      immutable_profile_captured_at: capturedAt
-    });
-  }
-}
-await writeFile(registryFile, toJsonl([...registryNow.values()].sort((a, b) => a.sku.localeCompare(b.sku))));
+const updatedRegistry = updateImmutableSkuRegistry(
+  existingRegistryRows, marts.productMaster, marts.productSpecs, capturedAt
+);
+const registryNow = new Map(updatedRegistry.map((row) => [row.sku, row]));
+await writeFile(registryFile, toJsonl(updatedRegistry));
+await writeFile(path.join(martDir, "refresh_state.jsonl"), toJsonl(reconciled.freshness));
+await writeFile(path.join(martDir, "incremental_report.json"),
+  JSON.stringify({ ...reconciled.report, urls_attempted: selected.length, crawl_failures: failures }, null, 2) + "\n");
+await writeFile(urlAttemptsFile, JSON.stringify(urlAttempts, null, 2) + "\n");
 
 const offerHistoryVersions = await appendChangedHistory(
   path.join(offerHistoryDir, marketCode + ".jsonl"),
@@ -2554,6 +2566,8 @@ await writeFile(metaFile, JSON.stringify({
     taxonomy: marts.taxonomy.length,
     catalog_current: marts.currentCatalog.length,
     sku_registry: registryNow.size,
+    incremental: reconciled.stats,
+    urls_waiting_retry: Object.keys(urlAttempts).length,
     new_skus_this_run: [...registryNow.keys()].filter((sku) => !registryBySku.has(sku)).length,
     current_catalog_coverage_complete: currentCoverageAudit.complete,
     current_catalog_discovered_unique_skus: currentCoverageAudit.discovered_unique_skus,
