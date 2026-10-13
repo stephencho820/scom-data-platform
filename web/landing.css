@@ -32,3 +32,22 @@
 .demo-record-actions a{font-size:11px;color:#b8d2ff;font-weight:850;text-decoration:underline;text-underline-offset:2px}
 #demo-snapshot-age{font-size:10px;color:#8ea1c3}
 @media(max-width:650px){.demo-product-picker{padding:13px}.demo-screen{min-height:0}.demo-evidence{padding:13px}.poc-field{grid-template-columns:minmax(85px,36%) minmax(0,1fr)}.bu-filter{padding:6px 9px;font-size:9px}}
+
+/* Shared navigation is discoverable on every screen, including mobile.
+   Old mobile rule hid .main-nav entirely; now expose a swipeable second row. */
+@media(max-width:1100px){
+  .header-inner{gap:16px}
+  .main-nav{gap:15px;font-size:11px}
+  .header-actions .header-cta{display:none}
+}
+@media(max-width:680px){
+  .site-header{height:auto;min-height:99px}
+  .header-inner{width:calc(100% - 32px);height:auto;min-height:99px;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:52px 44px;gap:0;align-items:center}
+  .brand{grid-area:1 / 1;min-width:0;font-size:15px}
+  .header-actions{grid-area:1 / 2;justify-self:end;gap:0}
+  .main-nav{grid-area:2 / 1 / 3 / 3;display:flex!important;gap:19px;overflow-x:auto;overscroll-behavior-inline:contain;white-space:nowrap;width:100%;max-width:100%;min-width:0;margin:0;padding:3px 0 10px;font-size:11px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+  .main-nav a{flex:none;min-height:30px;display:inline-flex;align-items:center}
+  .main-nav a[aria-current=page]{border-bottom:2px solid var(--blue)}
+  .status-page-next{display:flex;flex-direction:column;gap:10px}
+}
+.status-page-next{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 75px}
