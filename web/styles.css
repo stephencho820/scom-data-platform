@@ -639,3 +639,28 @@ nav a:hover, .mcp-link:hover { color: var(--accent); }
   .brand { font-size: 12px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* KR/US interface language switch: it changes UI copy, not the selected data market. */
+.language-switch { display: inline-flex; gap: 3px; align-items: center; flex-shrink: 0; border: 1px solid var(--line); padding: 3px; border-radius: 999px; background: var(--card); margin-left: 12px; }
+.language-switch button { padding: 7px 10px; min-width: 38px; border: 0; border-radius: 999px; color: var(--muted); background: transparent; font-size: 12px; font-weight: 800; cursor: pointer; }
+.language-switch button.active { color: #fff; background: var(--accent); }
+.language-switch button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+html[lang="ko"] .hero h1 { font-size: clamp(50px, 8.5vw, 112px); line-height: 1.04; }
+html[lang="ko"] .hero .lede { line-height: 1.65; }
+html[lang="ko"] .story-heading h2 { line-height: 1.18; word-break: keep-all; }
+html[lang="ko"] .value-card h3,
+html[lang="ko"] .life-card h3,
+html[lang="ko"] .agent-question,
+html[lang="ko"] .scenario-title h3 { word-break: keep-all; }
+@media (max-width: 1250px) { nav .nav-optional { display: none; } }
+@media (max-width: 1050px) { nav a[href="#why"],nav a[href="#lifecycle"],nav a[href="#explorer"] { display: none; } }
+@media (max-width: 800px) {
+  nav a[href="#why"],nav a[href="#lifecycle"],nav a[href="#explorer"] { display: none !important; }
+  .language-switch { margin-left: 0; }
+}
+@media (max-width: 580px) { nav .nav-github { display: none !important; } }
+@media (max-width: 430px) {
+  nav .nav-primary { display: none !important; }
+  header { justify-content: space-between; }
+  .language-switch { margin-left: auto; }
+}
