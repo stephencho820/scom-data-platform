@@ -5,15 +5,19 @@ import { readFile, access } from "node:fs/promises";
 const index = await readFile("web/index.html", "utf8");
 const status = await readFile("web/status.html", "utf8");
 const explorer = await readFile("web/explorer.html", "utf8");
+const catalog = await readFile("web/catalog.html", "utf8");
 const site = await readFile("web/site.js", "utf8");
 const poc = await readFile("web/poc.js", "utf8");
 const app = await readFile("web/app.js", "utf8");
 
-test("POC home keeps navigation short and lifecycle-first", () => {
+test("POC home keeps four data lifecycles and exposes health, catalog, and explorer navigation", () => {
   assert.equal((index.match(/class="type-card /g) || []).length, 4);
   assert.equal((index.match(/<button class="demo-option/g) || []).length, 4);
   const nav = index.match(/<nav class="main-nav"[\s\S]*?<\/nav>/)?.[0] || "";
-  assert.equal((nav.match(/<a\s/g) || []).length, 3);
+  assert.equal((nav.match(/<a\s/g) || []).length, 5);
+  assert.ok(nav.includes('href="./status.html"'));
+  assert.ok(nav.includes('href="./catalog.html"'));
+  assert.ok(nav.includes('href="./explorer.html"'));
   assert.ok(index.indexOf('id="lifecycle"') < index.indexOf('id="demo"'));
   assert.ok(index.indexOf('id="demo"') < index.indexOf('id="connect"'));
   assert.ok(index.includes("status.html"));
@@ -21,7 +25,7 @@ test("POC home keeps navigation short and lifecycle-first", () => {
 });
 
 test("KR/US translations exist for all shared page labels", () => {
-  const keys = new Set([...index, ...status, ...explorer].join("").matchAll(/data-i18n="([A-Za-z0-9_]+)"/g));
+  const keys = new Set([index, status, explorer, catalog].join("").matchAll(/data-i18n="([A-Za-z0-9_]+)"/g));
   for (const match of keys) {
     assert.ok(site.includes(match[1]+":"), "Missing translation: "+match[1]);
   }
@@ -41,5 +45,5 @@ test("explorer price requires fresh verified, sellable source evidence", () => {
 });
 
 test("all published POC assets exist", async () => {
-  await Promise.all(["web/landing.css","web/site.js","web/poc.js","scripts/build-demo-data.mjs","web/status.html","web/status.js","web/explorer.html","web/explorer.css"].map(file=>access(file)));
+  await Promise.all(["web/landing.css","web/site.js","web/poc.js","scripts/build-demo-data.mjs","web/status.html","web/status.js","web/explorer.html","web/explorer.css","web/catalog.html","web/catalog.css","web/catalog.js"].map(file=>access(file)));
 });
