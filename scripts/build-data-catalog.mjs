@@ -244,5 +244,13 @@ if(process.argv[1] && path.resolve(process.argv[1])===path.resolve(new URL(impor
  const result=await buildCatalog();
  await mkdir(path.dirname(output),{recursive:true});
  await writeFile(output,JSON.stringify(result));
+ if(process.argv[3]){
+  const htmlPath=path.resolve(process.argv[3]);
+  const html=await readFile(htmlPath,"utf8");
+  const script='<script src="./site.js"></script>';
+  if(!html.includes(script))throw new Error("Catalog HTML mount marker is missing");
+  const safe=JSON.stringify(result).replace(/</g,"\\u003c").replace(/>/g,"\\u003e").replace(/&/g,"\\u0026");
+  await writeFile(htmlPath,html.replace(script,'<script type="application/json" id="catalog-bootstrap">'+safe+'</script>\n'+script));
+ }
  console.log("catalog manifest:"+result.tables.length+" marts / "+result.tables.reduce((n,x)=>n+x.row_count,0)+" total rows; snapshot "+result.snapshot_at);
 }
