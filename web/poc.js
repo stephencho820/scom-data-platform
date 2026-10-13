@@ -194,11 +194,15 @@ async function fetchPocData(){
     if(data?.schema_version!==1||data.market!=="kr"||!Array.isArray(data.products))throw Error("Unexpected schema");
     poc.data=data;poc.products=data.products;
     poc.error=false;
+    const retry=byId("demo-retry");if(retry)retry.hidden=true;
     renderOptions();renderPoc();
   }catch{
-    poc.error=true;renderOptions();renderPoc();
+    poc.error=true;
+    const retry=byId("demo-retry");if(retry){retry.hidden=false;retry.textContent=word("retry")+" ↻";}
+    renderOptions();renderPoc();
   }finally{clearTimeout(timer);}
 }
+const retry=byId("demo-retry");if(retry)retry.addEventListener("click",()=>{retry.hidden=true;poc.error=false;fetchPocData();});
 const search=byId("demo-sku-search");
 if(search)search.addEventListener("input",()=>{poc.query=search.value;renderOptions();renderPoc();});
 const picker=byId("demo-sku-select");
