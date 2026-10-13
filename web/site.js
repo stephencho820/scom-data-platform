@@ -19,10 +19,10 @@ const copy = {
     dHeading:"그때 바로",dDesc:"지역별 재고, 배송 예정일, 개인 혜택, 주문 상태처럼 고객마다 다른 정보",dStrategy:"질문 시 공식 API 조회",dExample:"예: 내일 배송 가능할까?",
     typeCaveat:"A도 정정 가능성을 확인합니다. D는 크롤링 데이터가 아닌 별도 공식 API 연동이 필요하며, 현재 공개 MCP에는 포함되지 않습니다.",
     demoEyebrow:"INTERACTIVE POC",demoTitle1:"질문 하나로 이해하는",demoTitle2:"데이터의 흐름.",
-    demoDescription:"아래 시나리오를 선택해 보세요. 챗봇이 어떤 데이터 계층을 사용할지, MCP에서는 무엇을 호출할지 보여드립니다.",
-    demoChoose:"질문을 선택하세요",demoOptionA:"이 제품의 스펙은?",demoOptionB:"사용법이 바뀌었나요?",demoOptionC:"지금 할인 중인가요?",demoOptionD:"내일 배송되나요?",
-    demoDisclaimer:"작동 방식을 설명하는 시뮬레이션입니다. 실제 데이터 조회나 실시간 API 호출은 수행하지 않습니다.",
-    screenTitle:"AGENT DATA ROUTE · SIMULATION",screenDemo:"DEMO",screenQuestion:"CUSTOMER QUESTION",screenRoute:"DATA ROUTE",screenOutput:"MCP / NEXT ACTION",
+    demoDescription:"실제 수집된 삼성 제품을 선택해 보세요. SKU별 스펙, 연결된 지원 자료, 검증된 가격을 보여줍니다. 실시간 서비스는 연동 범위를 안내합니다.",
+    demoChoose:"질문을 선택하세요",demoOptionA:"이 제품의 스펙은?",demoOptionB:"이 제품의 지원 자료는?",demoOptionC:"지금 할인 중인가요?",demoOptionD:"내일 배송되나요?",
+    demoDisclaimer:"제품 정보는 실제 수집 마트의 정적 스냅샷입니다. 표시된 MCP 명령은 호출 예시이며 실시간 재고·배송 API는 연결되지 않았습니다.",
+    screenTitle:"AGENT DATA ROUTE · ACTUAL SNAPSHOT",screenDemo:"SNAPSHOT",screenQuestion:"CUSTOMER QUESTION",screenRoute:"DATA ROUTE",screenOutput:"MCP / NEXT ACTION",
     connectEyebrow:"READY FOR AI AGENTS",connectTitle1:"데이터를 모으는 대신,",connectTitle2:"MCP로 사용하세요.",
     connectDescription:"SKU 검색, 제품 스펙, 수집된 가격, 지원 자료를 하나의 인터페이스로 조회할 수 있습니다. 현재는 오픈소스 기반 로컬 stdio MCP입니다.",
     connectGuide:"MCP 연결 가이드",connectStatus:"현재 데이터 상태 확인",connectCaveat:"※ 수집 범위와 완성도는 국가별로 다릅니다. 인증이 필요한 실시간 재고·배송·주문 조회는 아직 제공하지 않습니다.",
@@ -59,9 +59,9 @@ const copy = {
     dHeading:"Query live",dDesc:"Local stock, delivery estimates, personal benefits and order status",dStrategy:"Query official APIs on demand",dExample:"e.g. delivery tomorrow?",
     typeCaveat:"Even type A can need corrections. Type D needs separate authorized real-time APIs and is not part of the current public static-data MCP.",
     demoEyebrow:"INTERACTIVE POC",demoTitle1:"One question.",demoTitle2:"The right data route.",
-    demoDescription:"Try a scenario to see which data layer an agent would use, and which MCP tool (if any) could provide the answer.",
-    demoChoose:"CHOOSE A QUESTION",demoOptionA:"What are the specs?",demoOptionB:"Did the guidance change?",demoOptionC:"Is there a discount?",demoOptionD:"Can it arrive tomorrow?",
-    demoDisclaimer:"Conceptual simulation only. This does not call the live Samsung.com website or an MCP service.",
+    demoDescription:"Select a real collected SKU. Explore its stored specifications, linked support resources and verified offers, plus the limits of live APIs.",
+    demoChoose:"CHOOSE A QUESTION",demoOptionA:"What are the specs?",demoOptionB:"Are support resources linked?",demoOptionC:"Is there a discount?",demoOptionD:"Can it arrive tomorrow?",
+    demoDisclaimer:"Product data is a published mart snapshot. MCP commands are examples, not live invocations; authorized real-time APIs are not connected.",
     screenTitle:"AGENT DATA ROUTE · SIMULATION",screenDemo:"DEMO",screenQuestion:"CUSTOMER QUESTION",screenRoute:"DATA ROUTE",screenOutput:"MCP / NEXT ACTION",
     connectEyebrow:"READY FOR AI AGENTS",connectTitle1:"Stop building scrapers.",connectTitle2:"Start using the data.",
     connectDescription:"Access SKU search, specifications, collected offers and support resources through one interface. The open-source MCP currently runs locally over stdio.",
@@ -81,8 +81,8 @@ const copy = {
     passed:"PASS",pending:"PENDING",notRun:"Not yet run"
   }
 };
-Object.assign(copy.kr, {metricHarman:"하만 SKU",harmanNotCollected:"수집 전",explorerEyebrow:"SKU-FIRST DATA EXPLORER",explorerTitle:"SKU 데이터 탐색",explorerLead:"수집된 제품 데이터를 조회합니다. 일부 SKU나 스펙은 아직 누락될 수 있습니다.",explorerMarket:"국가",explorerDataset:"데이터 유형",explorerProducts:"제품",explorerPages:"페이지",explorerHistory:"변경 이력",explorerBu:"사업부",explorerAllBu:"전체",explorerSearch:"검색",explorerCaveat:"가격은 최근 검증된 경우에만 표시됩니다. 최종 결제 가격은 아닙니다."});
-Object.assign(copy.us, {metricHarman:"HARMAN SKUs",harmanNotCollected:"Not collected",explorerEyebrow:"SKU-FIRST DATA EXPLORER",explorerTitle:"Explore SKU data",explorerLead:"Browse collected product data. Some SKUs or specs may still be missing.",explorerMarket:"Market",explorerDataset:"Dataset",explorerProducts:"Products",explorerPages:"Pages",explorerHistory:"History",explorerBu:"Business unit",explorerAllBu:"All",explorerSearch:"Search",explorerCaveat:"Prices appear only with recent verification; they are not checkout quotes."});
+Object.assign(copy.kr, {demoSkuTitle:"01 · 실제 삼성 제품 선택",demoOriginalSource:"삼성닷컴 원본 보기",metricHarman:"하만 SKU",harmanNotCollected:"수집 전",explorerEyebrow:"SKU-FIRST DATA EXPLORER",explorerTitle:"SKU 데이터 탐색",explorerLead:"수집된 제품 데이터를 조회합니다. 일부 SKU나 스펙은 아직 누락될 수 있습니다.",explorerMarket:"국가",explorerDataset:"데이터 유형",explorerProducts:"제품",explorerPages:"페이지",explorerHistory:"변경 이력",explorerBu:"사업부",explorerAllBu:"전체",explorerSearch:"검색",explorerCaveat:"가격은 최근 검증된 경우에만 표시됩니다. 최종 결제 가격은 아닙니다."});
+Object.assign(copy.us, {demoSkuTitle:"01 · SELECT A REAL SAMSUNG SKU",demoOriginalSource:"Official Samsung.com source",metricHarman:"HARMAN SKUs",harmanNotCollected:"Not collected",explorerEyebrow:"SKU-FIRST DATA EXPLORER",explorerTitle:"Explore SKU data",explorerLead:"Browse collected product data. Some SKUs or specs may still be missing.",explorerMarket:"Market",explorerDataset:"Dataset",explorerProducts:"Products",explorerPages:"Pages",explorerHistory:"History",explorerBu:"Business unit",explorerAllBu:"All",explorerSearch:"Search",explorerCaveat:"Prices appear only with recent verification; they are not checkout quotes."});
 let currentLanguage = "kr";
 try { const saved = localStorage.getItem("scom_lang"); if (saved === "us" || saved === "kr") currentLanguage = saved; } catch {}
 const listeners = new Set();
@@ -98,37 +98,6 @@ function applyLanguage(lang) {
 window.ScomSite = { t, language: () => currentLanguage, onLanguageChange(fn) { listeners.add(fn); } };
 document.querySelectorAll("[data-lang]").forEach(el => el.addEventListener("click", () => applyLanguage(el.dataset.lang)));
 
-const simulations = {
-  a: { route:"Immutable · Product Master", question:{kr:"“이 제품의 스펙은?”",us:"“What are the specifications?”"},
-    explanation:{kr:"최초 수집한 SKU별 사양을 다시 크롤링하지 않고 재사용합니다.",us:"Reuse the SKU's stored specification profile without another full crawl."},
-    tool:'get_product_specs({ market: "kr", product_key: "<SKU>" })',
-    note:{kr:"제품 사양과 원본 출처를 제공하며, 누락된 스펙은 누락으로 표시합니다.",us:"Return captured specifications with evidence; missing values remain unknown."}},
-  b: { route:"Versioned · Knowledge", question:{kr:"“사용 방법이 변경됐나요?”",us:"“Has the usage guidance changed?”"},
-    explanation:{kr:"FAQ와 매뉴얼의 변경분만 갱신한 지식 데이터에서 확인합니다.",us:"Use knowledge records updated only when FAQs or manuals change."},
-    tool:'get_support_resources({ market: "kr", query: "<model>" })',
-    note:{kr:"현재 MCP는 수집된 지원 자료를 조회합니다. SKU별 연결 범위는 아직 미완성입니다.",us:"The current MCP searches collected support resources; SKU linkage is incomplete."}},
-  c: { route:"Dynamic · Commerce", question:{kr:"“지금 할인 중인가요?”",us:"“Is this product on sale?”"},
-    explanation:{kr:"주기적으로 확인한 최신 가격·프로모션만 사용합니다.",us:"Use recently verified price and promotion records."},
-    tool:'get_market_offer({ market: "kr", product_key: "<SKU>" })',
-    note:{kr:"최신성 확인에 실패했다면 가격을 임의로 답하지 않습니다.",us:"If the offer isn't verified recently, do not quote an unverified price."}},
-  d: { route:"Real-time · Live service", question:{kr:"“내일 배송받을 수 있나요?”",us:"“Can I receive it tomorrow?”"},
-    explanation:{kr:"배송지와 실시간 재고가 필요해 공식 서비스 연동이 선행되어야 합니다.",us:"A verified live service must check location, stock and delivery estimates."},
-    tool:"Integration required: authorized inventory / delivery API",
-    note:{kr:"현재 공개 MCP는 실시간 배송 약속을 제공하지 않습니다.",us:"The public MCP does not currently provide real-time delivery guarantees."}}
-};
-let selectedScenario = "a";
-function renderScenario() {
-  const item = simulations[selectedScenario], lang = currentLanguage;
-  const put = (id,text) => { const el=document.getElementById(id); if (el) el.textContent=text; };
-  put("demo-question",item.question[lang]);put("demo-symbol",selectedScenario.toUpperCase());
-  put("demo-route",item.route);put("demo-explanation",item.explanation[lang]);put("demo-code",item.tool);put("demo-note",item.note[lang]);
-  document.querySelectorAll("[data-type]").forEach(el=>{ const active=el.dataset.type===selectedScenario;el.classList.toggle("is-active",active);el.setAttribute("aria-pressed",String(active)); });
-  document.querySelectorAll("[data-scenario]").forEach(el=>{const active=el.dataset.scenario===selectedScenario;el.classList.toggle("is-active",active);el.setAttribute("aria-pressed",String(active)); });
-}
-document.querySelectorAll("[data-scenario]").forEach(el=>el.addEventListener("click",()=>{selectedScenario=el.dataset.scenario;renderScenario();}));
-document.querySelectorAll("[data-type]").forEach(el=>el.addEventListener("click",()=>{selectedScenario=el.dataset.type;renderScenario();document.getElementById("demo")?.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});}));
-const copyButton=document.getElementById("copy-install");
+// The real-record POC has its own controller in poc.js.\nconst copyButton=document.getElementById("copy-install");
 if(copyButton)copyButton.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(document.getElementById("install-code").textContent.trim());copyButton.textContent=t("copied");setTimeout(()=>{copyButton.textContent=t("copyCode");},1800);}catch{copyButton.textContent=t("copyFailed");}});
-window.ScomSite.onLanguageChange(renderScenario);
 applyLanguage(currentLanguage);
-renderScenario();
