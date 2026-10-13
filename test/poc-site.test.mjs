@@ -6,6 +6,7 @@ const index = await readFile("web/index.html", "utf8");
 const status = await readFile("web/status.html", "utf8");
 const explorer = await readFile("web/explorer.html", "utf8");
 const site = await readFile("web/site.js", "utf8");
+const poc = await readFile("web/poc.js", "utf8");
 const app = await readFile("web/app.js", "utf8");
 
 test("POC home keeps navigation short and lifecycle-first", () => {
@@ -28,8 +29,8 @@ test("KR/US translations exist for all shared page labels", () => {
 });
 
 test("D route is described as an integration requirement, not a live MCP tool", () => {
-  assert.ok(site.includes("Integration required: authorized inventory / delivery API"));
-  assert.ok(index.includes("시뮬레이션"));
+  assert.ok(poc.includes("Integration required: authorized inventory / delivery API"));
+  assert.ok(index.includes("실제 수집 마트"));
   assert.ok(index.includes("MCP"));
 });
 
@@ -40,5 +41,5 @@ test("explorer price requires fresh verified, sellable source evidence", () => {
 });
 
 test("all published POC assets exist", async () => {
-  await Promise.all(["web/landing.css","web/site.js","web/status.html","web/status.js","web/explorer.html","web/explorer.css"].map(file=>access(file)));
+  await Promise.all(["web/landing.css","web/site.js","web/poc.js","scripts/build-demo-data.mjs","web/status.html","web/status.js","web/explorer.html","web/explorer.css"].map(file=>access(file)));
 });

@@ -131,17 +131,33 @@
       </div>
       <div class="demo-shell">
         <div class="demo-left">
-          <p class="demo-section-label" data-i18n="demoChoose">질문을 선택하세요</p>
+          <div class="demo-product-picker">
+            <label for="demo-sku-search" class="demo-section-label" data-i18n="demoSkuTitle">01 · 실제 삼성 제품 선택</label>
+            <div class="demo-bu-filters" role="group" aria-label="Filter business units">
+              <button class="bu-filter is-active" type="button" data-demo-bu="ALL" aria-pressed="true">ALL</button>
+              <button class="bu-filter" type="button" data-demo-bu="MX" aria-pressed="false">MX</button>
+              <button class="bu-filter" type="button" data-demo-bu="DA" aria-pressed="false">DA</button>
+              <button class="bu-filter" type="button" data-demo-bu="VD" aria-pressed="false">VD</button>
+              <button class="bu-filter" type="button" data-demo-bu="HARMAN" aria-pressed="false">HARMAN</button>
+            </div>
+            <input type="search" id="demo-sku-search" autocomplete="off" placeholder="제품명 또는 SKU 검색" aria-label="Search collected products">
+            <button id="demo-retry" type="button" class="poc-retry" hidden>다시 불러오기 ↻</button>
+            <select id="demo-sku-select" aria-label="Select a collected Samsung SKU" disabled>
+              <option>수집된 제품 데이터 로딩 중…</option>
+            </select>
+            <div class="demo-selected-product" id="demo-product-summary" aria-live="polite">SKU · —</div>
+          </div>
+          <p class="demo-section-label" data-i18n="demoChoose">02 · 질문 선택</p>
           <div class="demo-options" role="group" aria-label="Example questions">
             <button class="demo-option is-active" data-scenario="a" type="button" aria-pressed="true"><span>A</span><span data-i18n="demoOptionA">이 제품의 스펙은?</span><b aria-hidden="true">↗</b></button>
             <button class="demo-option" data-scenario="b" type="button" aria-pressed="false"><span>B</span><span data-i18n="demoOptionB">사용법이 바뀌었나요?</span><b aria-hidden="true">↗</b></button>
             <button class="demo-option" data-scenario="c" type="button" aria-pressed="false"><span>C</span><span data-i18n="demoOptionC">지금 할인 중인가요?</span><b aria-hidden="true">↗</b></button>
             <button class="demo-option" data-scenario="d" type="button" aria-pressed="false"><span>D</span><span data-i18n="demoOptionD">내일 배송되나요?</span><b aria-hidden="true">↗</b></button>
           </div>
-          <div class="demo-notice"><span class="demo-notice-icon">✦</span><p data-i18n="demoDisclaimer">작동 방식을 설명하는 시뮬레이션입니다. 실제 데이터 조회나 실시간 API 호출은 수행하지 않습니다.</p></div>
+          <div class="demo-notice"><span class="demo-notice-icon">✦</span><p data-i18n="demoDisclaimer">제품 정보는 실제 수집 마트의 정적 스냅샷입니다. 표시된 MCP 명령은 호출 예시이며 실시간 재고·배송 API는 연결되지 않았습니다.</p></div>
         </div>
         <div class="demo-right">
-          <div class="demo-screen-top"><span class="screen-dots"><i></i><i></i><i></i></span><span data-i18n="screenTitle">AGENT DATA ROUTE · SIMULATION</span><span class="demo-mode" data-i18n="screenDemo">DEMO</span></div>
+          <div class="demo-screen-top"><span class="screen-dots"><i></i><i></i><i></i></span><span data-i18n="screenTitle">AGENT DATA ROUTE · ACTUAL SNAPSHOT</span><span class="demo-mode" data-i18n="screenDemo">SNAPSHOT</span></div>
           <div class="demo-screen">
             <div class="screen-step-label">01 <span data-i18n="screenQuestion">CUSTOMER QUESTION</span></div>
             <div class="question-bubble" id="demo-question">“이 제품의 스펙은?”</div>
@@ -151,7 +167,12 @@
             <div class="routing-arrow" aria-hidden="true">↓</div>
             <div class="screen-step-label">03 <span data-i18n="screenOutput">MCP / NEXT ACTION</span></div>
             <div class="code-response"><code id="demo-code">get_product_specs({ market: "kr", product_key: "&lt;SKU&gt;" })</code></div>
-            <p class="response-foot" id="demo-note">수집된 제품 사양과 삼성닷컴 원본 출처를 함께 제공합니다.</p>
+            <p class="response-foot" id="demo-note">제품을 선택하면 수집된 실제 레코드가 표시됩니다.</p>
+            <div class="demo-evidence" id="demo-evidence" aria-live="polite"><p>SKU 데이터를 확인 중…</p></div>
+            <div class="demo-record-actions">
+              <a id="demo-source" href="https://www.samsung.com/sec/" target="_blank" rel="noopener noreferrer" hidden><span data-i18n="demoOriginalSource">삼성닷컴 원본 보기</span> ↗</a>
+              <span id="demo-snapshot-age"></span>
+            </div>
           </div>
         </div>
       </div>
@@ -184,5 +205,6 @@ npm run mcp</code></pre>
   </main>
   <footer class="site-footer"><div class="wrap footer-inner"><span class="footer-brand">S.com Data Platform</span><p data-i18n="footerDisclaimer">독립적인 커뮤니티 프로젝트이며 삼성 공식 서비스가 아닙니다.</p><a href="https://github.com/stephencho820/scom-data-platform" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></footer>
   <script src="./site.js"></script>
+  <script src="./poc.js"></script>
 </body>
 </html>
