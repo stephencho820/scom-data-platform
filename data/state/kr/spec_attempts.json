@@ -322,5 +322,113 @@
     "source_model": "",
     "support_checked": true,
     "category": "harman-lifestyle-audio"
+  },
+  "WE912NR-INST": {
+    "checked_at": "2026-10-13T21:52:37.411Z",
+    "status": "empty",
+    "reason": "sku_not_declared_on_pdp; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/air-purifiers/package-we912nr-inst-d2c/WE912NR-INST/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "air-purifiers"
+  },
+  "SP-LPDF5S-LS": {
+    "checked_at": "2026-10-13T21:52:37.411Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/projectors/packge-sp-lpdf5s-ls-d2c/SP-LPDF5S-LS/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "projectors"
+  },
+  "NT750XHD-KC58G": {
+    "checked_at": "2026-10-13T21:52:37.411Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/galaxybook/galaxy-book5-nt750xhd-kc58g/NT750XHD-KC58G/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "galaxybook"
+  },
+  "HKSOUNDSTK5WAS1": {
+    "checked_at": "2026-10-13T21:52:37.411Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/hk-speaker-soundsticks5-d2c/HKSOUNDSTK5WAS1/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
+  },
+  "MS23C3535AW": {
+    "checked_at": "2026-10-13T21:52:37.411Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/MS23C3535AW/",
+    "source_model": "MS23C3535AW",
+    "support_checked": true,
+    "category": "microwave-ovens"
+  },
+  "HW-Q800H/KR": {
+    "checked_at": "2026-10-13T21:52:37.411Z",
+    "status": "empty",
+    "reason": "sku_not_declared_on_pdp; support_http_404",
+    "source_url": "https://www.samsung.com/sec/soundbars/soundbar-hw-q800h-d2c/HW-Q800H%2FKR/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "soundbars"
+  },
+  "SM-R640NZWAKOO": {
+    "checked_at": "2026-10-13T21:52:37.411Z",
+    "status": "empty",
+    "reason": "pdp_sku_mismatch; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/buds/galaxy-buds4-pro-r640/SM-R640NZWAKOO/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "buds"
+  },
+  "JBLAUTH200BLKAS": {
+    "checked_at": "2026-10-13T21:52:37.411Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-auth200blkas-d2c/JBLAUTH200BLKAS/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
+  },
+  "CC80H63S1HS": {
+    "checked_at": "2026-10-13T21:52:37.411Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/CC80H63S1HS/",
+    "source_model": "CC80H63S1HS",
+    "support_checked": true,
+    "category": "cooking-appliances"
+  },
+  "KMR100RH85-93": {
+    "checked_at": "2026-10-13T21:52:37.411Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/tvs/package-kmr85rh85-93-d2c/KMR100RH85-93/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "tvs"
+  },
+  "SM-X230NZALKOO": {
+    "checked_at": "2026-10-13T21:52:37.411Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/tablets/galaxy-tab-a11-wifi-x230n/SM-X230NZALKOO/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "tablets"
+  },
+  "JBLAUTH300BLKAS": {
+    "checked_at": "2026-10-13T21:52:37.411Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-auth300blkas-d2c/JBLAUTH300BLKAS/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
   }
 }

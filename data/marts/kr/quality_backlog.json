@@ -1,7 +1,7 @@
 {
   "market": "kr",
-  "generated_at": "2026-10-13T12:38:10.054Z",
-  "source_snapshot_at": "2026-10-13T12:31:12.990Z",
+  "generated_at": "2026-10-13T22:04:22.706Z",
+  "source_snapshot_at": "2026-10-13T21:52:37.411Z",
   "ready": false,
   "catalog": {
     "sources_total": 19,
@@ -34,8 +34,8 @@
         "category": "tvs",
         "source_id": "tvs",
         "status": "ok",
-        "discovered_skus": 197,
-        "db_skus": 197,
+        "discovered_skus": 45,
+        "db_skus": 45,
         "complete": true,
         "missing_in_db": [],
         "unexpected_in_db": []
@@ -67,8 +67,8 @@
         "category": "refrigerators",
         "source_id": "refrigerators",
         "status": "ok",
-        "discovered_skus": 96,
-        "db_skus": 96,
+        "discovered_skus": 116,
+        "db_skus": 116,
         "complete": true,
         "missing_in_db": [],
         "unexpected_in_db": []
@@ -210,8 +210,8 @@
         "category": "harman-lifestyle-audio",
         "source_id": "harman-lifestyle-audio",
         "status": "ok",
-        "discovered_skus": 121,
-        "db_skus": 121,
+        "discovered_skus": 85,
+        "db_skus": 85,
         "complete": true,
         "missing_in_db": [],
         "unexpected_in_db": []
@@ -219,10 +219,10 @@
     ]
   },
   "counts": {
-    "current_products": 1187,
-    "specs_rows": 1187,
+    "current_products": 1188,
+    "specs_rows": 1188,
     "support_rows": 5,
-    "products_missing_specs_or_support": 1052
+    "products_missing_specs_or_support": 884
   },
   "sku_gaps": [
     {
@@ -1206,36 +1206,6 @@
       "has_support": false
     },
     {
-      "sku": "ARCAVR11EU",
-      "market_product_key": "ARCAVR11EU",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "ARCAM AVR11 AV 리시버",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/arcam-avreciever-avr11-d2c/ARCAVR11EU/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "ARCSA35EU",
-      "market_product_key": "ARCSA35EU",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "ARCAM SA35 스트리밍 인티앰프",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/arcam-avreciever-sa35-d2c/ARCSA35EU/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "ARCSA45EU",
-      "market_product_key": "ARCSA45EU",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "ARCAM SA45 스트리밍 인티앰프",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/arcam-avreciever-sa45-d2c/ARCSA45EU/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "AW06C7155EWAZ",
       "market_product_key": "AW06C7155EWAZ",
       "business_unit": "DA",
@@ -1292,6 +1262,16 @@
       "category": "refrigerators",
       "name": "빌트인 냉장고 256L",
       "url": "https://www.samsung.com/sec/refrigerators/bottom-mount-freezer-brb80f26a2f0-d2c/BRB80F26A2F0/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "BRF425220AP",
+      "market_product_key": "BRF425220AP",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "셰프컬렉션 T-Type 냉장고 621L",
+      "url": "https://www.samsung.com/sec/refrigerators/brf425220ap-d2c/BRF425220AP/",
       "has_specs": false,
       "has_support": false
     },
@@ -1362,7 +1342,7 @@
       "category": "cooking-appliances",
       "name": "Bespoke AI 인덕션",
       "url": "https://www.samsung.com/sec/cooking-appliances/cooktop-cc80h63e1hs-d2c/CC80H63S1HS/",
-      "has_specs": false,
+      "has_specs": true,
       "has_support": false
     },
     {
@@ -1812,46 +1792,6 @@
       "category": "harman-lifestyle-audio",
       "name": "하만카돈 AURA STUDIO 5 블루투스 스피커",
       "url": "https://www.samsung.com/sec/harman-lifestyle-audio/hk-speaker-auras5-d2c/HKAURAS5BLKAS/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "HKCITA1100-SUB",
-      "market_product_key": "HKCITA1100-SUB",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "하만카돈 CITATION 멀티빔 1100 + 우퍼 패키지",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/package-hkcita1100-sub-d2c/HKCITA1100-SUB/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "HKCITA1100-SUB-SUR",
-      "market_product_key": "HKCITA1100-SUB-SUR",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "하만카돈 CITATION 멀티빔 1100 홈시네마 패키지",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/package-hkcita1100-sub-surr-d2c/HKCITA1100-SUB-SUR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "HKCITAB1100-SUB",
-      "market_product_key": "HKCITAB1100-SUB",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "하만카돈 CITATION 멀티빔 1100 + 우퍼 패키지",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/package-hkcitamb1100-sub-d2c/HKCITAB1100-SUB/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "HKCITAB1100-SUB-SR",
-      "market_product_key": "HKCITAB1100-SUB-SR",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "하만카돈 CITATION 멀티빔 1100 홈시네마 패키지",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/package-hkcitamb1100-sub-surr-d2c/HKCITAB1100-SUB-SR/",
       "has_specs": false,
       "has_support": false
     },
@@ -2336,26 +2276,6 @@
       "has_support": false
     },
     {
-      "sku": "JBL4312GBLK",
-      "market_product_key": "JBL4312GBLK",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL 4312G 프리미엄 스피커",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-4312g-d2c/JBL4312GBLK/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBL4329PWALAS",
-      "market_product_key": "JBL4329PWALAS",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL 4329P 올인원 뮤직 시스템",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-4329p-d2c/JBL4329PWALAS/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "JBLAUTH200BLKAS",
       "market_product_key": "JBLAUTH200BLKAS",
       "business_unit": "HARMAN",
@@ -2636,16 +2556,6 @@
       "has_support": false
     },
     {
-      "sku": "JBLJR310BLU",
-      "market_product_key": "JBLJR310BLU",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL JR310 키즈 헤드폰",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-headphone-jr310-d2c/JBLJR310BLU/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "JBLJR320BLU",
       "market_product_key": "JBLJR320BLU",
       "business_unit": "HARMAN",
@@ -2666,42 +2576,12 @@
       "has_support": false
     },
     {
-      "sku": "JBLJR470NCBLU",
-      "market_product_key": "JBLJR470NCBLU",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL JR470NC 노이즈 캔슬링 무선 키즈 헤드폰",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-headphone-jr470nc-d2c/JBLJR470NCBLU/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "JBLL100ANNIV80BRN",
       "market_product_key": "JBLL100ANNIV80BRN",
       "business_unit": "HARMAN",
       "category": "harman-lifestyle-audio",
       "name": "JBL L100 80주년 기념 프리미엄 스피커",
       "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-l100-80-d2c/JBLL100ANNIV80BRN/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBLL100MK2BLK",
-      "market_product_key": "JBLL100MK2BLK",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL L100 MK2 프리미엄 스피커",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-jbll100mk2-d2c/JBLL100MK2BLK/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBLL42MSBLKAS",
-      "market_product_key": "JBLL42MSBLKAS",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL L42ms 올인원 뮤직 시스템",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-l42ms-d2c/JBLL42MSBLKAS/",
       "has_specs": false,
       "has_support": false
     },
@@ -2766,16 +2646,6 @@
       "has_support": false
     },
     {
-      "sku": "JBLLIVEBEAM3BLK",
-      "market_product_key": "JBLLIVEBEAM3BLK",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL LIVE BEAM 3 프리미엄 노이즈 캔슬링 무선 이어폰",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-earphone-livebeam3-d2c/JBLLIVEBEAM3BLK/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "JBLLIVEBEAM4BLK",
       "market_product_key": "JBLLIVEBEAM4BLK",
       "business_unit": "HARMAN",
@@ -2802,46 +2672,6 @@
       "category": "harman-lifestyle-audio",
       "name": "JBL LIVE BUDS4 프리미엄 노이즈 캔슬링 무선 이어폰",
       "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-earphone-livebuds4-d2c/JBLLIVEBUDS4BLK/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBLPARTYBOX1000AS",
-      "market_product_key": "JBLPARTYBOX1000AS",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL PARTYBOX 1000 파티 스피커",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-party-box-1000AS/JBLPARTYBOX1000AS/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBLPARTYBOX520AS1",
-      "market_product_key": "JBLPARTYBOX520AS1",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL PARTYBOX 520 파티 스피커",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-partybox520-d2c/JBLPARTYBOX520AS1/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBLPARTYBOX710AS",
-      "market_product_key": "JBLPARTYBOX710AS",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL PARTYBOX 710 파티 스피커",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-party-box-710-d2c/JBLPARTYBOX710AS/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBLPARTYBOX710AS1",
-      "market_product_key": "JBLPARTYBOX710AS1",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL PARTYBOX 710 파티 스피커",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-partybox710as1-d2c/JBLPARTYBOX710AS1/",
       "has_specs": false,
       "has_support": false
     },
@@ -2886,16 +2716,6 @@
       "has_support": false
     },
     {
-      "sku": "JBLPBCLUB120AS",
-      "market_product_key": "JBLPBCLUB120AS",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL PARTYBOX CLUB 120 파티 스피커",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-pbclub120-d2c/JBLPBCLUB120AS/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "JBLPBENCORE22MICAS",
       "market_product_key": "JBLPBENCORE22MICAS",
       "business_unit": "HARMAN",
@@ -2906,32 +2726,12 @@
       "has_support": false
     },
     {
-      "sku": "JBLPBENCORE2MICAS",
-      "market_product_key": "JBLPBENCORE2MICAS",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL PARTYBOX 앙코르 블루투스 스피커",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-party-box-encore2-mic-d2c/JBLPBENCORE2MICAS/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "JBLPBENCORE2PL2MAS",
       "market_product_key": "JBLPBENCORE2PL2MAS",
       "business_unit": "HARMAN",
       "category": "harman-lifestyle-audio",
       "name": "JBL PARTYBOX 앙코르2 플러스 파티 스피커",
       "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-partybox-encore2-plus-d2c/JBLPBENCORE2PL2MAS/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBLPBENCOREESS2AS",
-      "market_product_key": "JBLPBENCOREESS2AS",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL PARTYBOX 앙코르 에센셜2 파티스피커",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-pbencoreess2-d2c/JBLPBENCOREESS2AS/",
       "has_specs": false,
       "has_support": false
     },
@@ -2952,36 +2752,6 @@
       "category": "harman-lifestyle-audio",
       "name": "JBL PULSE 6 포터블 블루투스 스피커",
       "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-pulse6-d2c/JBLPULSE6BLK/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBLQ350WLBLK",
-      "market_product_key": "JBLQ350WLBLK",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL QUANTUM 350 무선 게이밍 헤드셋",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-headphone-quantum350-d2c/JBLQ350WLBLK/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBLQ810WLBLK",
-      "market_product_key": "JBLQ810WLBLK",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL QUANTUM 810 무선 게이밍 헤드셋",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-headphone-quantum810-d2c/JBLQ810WLBLK/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBLQ910WLBLK",
-      "market_product_key": "JBLQ910WLBLK",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL QUANTUM 910 무선 게이밍 헤드셋",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-headphone-quantum910-d2c/JBLQ910WLBLK/",
       "has_specs": false,
       "has_support": false
     },
@@ -3046,56 +2816,6 @@
       "has_support": false
     },
     {
-      "sku": "JBLQUANTUM50BLKAS",
-      "market_product_key": "JBLQUANTUM50BLKAS",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL QUANTUM 50 게이밍 유선 이어폰",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-earphone-quantum-50-d2c/JBLQUANTUM50BLKAS/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBLQUANTUM610BLK",
-      "market_product_key": "JBLQUANTUM610BLK",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL QUANTUM 610 무선 게이밍 헤드셋",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-headphone-quantum610-d2c/JBLQUANTUM610BLK/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBLSPINNG-A200",
-      "market_product_key": "JBLSPINNG-A200",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL Spinner + Authentics 200 패키지",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/packge-jblspinng-a200-d2c/JBLSPINNG-A200/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBLSPINNG-A300",
-      "market_product_key": "JBLSPINNG-A300",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL Spinner + Authentics 300 패키지",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/packge-jblspinng-a300-d2c/JBLSPINNG-A300/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBLSPINNG-A500",
-      "market_product_key": "JBLSPINNG-A500",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL Spinner + Authentics 500 패키지",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/packge-jblspinng-a500-d2c/JBLSPINNG-A500/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "JBLT215BTBLKAS",
       "market_product_key": "JBLT215BTBLKAS",
       "business_unit": "HARMAN",
@@ -3116,16 +2836,6 @@
       "has_support": false
     },
     {
-      "sku": "JBLT520BTBLK",
-      "market_product_key": "JBLT520BTBLK",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL TUNE 520BT 무선 온이어 헤드폰",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-headphone-tune520bt-d2c/JBLT520BTBLK/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "JBLT530BTBEG",
       "market_product_key": "JBLT530BTBEG",
       "business_unit": "HARMAN",
@@ -3142,16 +2852,6 @@
       "category": "harman-lifestyle-audio",
       "name": "JBL TUNE 670NC 무선 온이어 헤드폰",
       "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-headphone-t670nc-d2c/JBLT670NCBLK/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBLT710BTWHT",
-      "market_product_key": "JBLT710BTWHT",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL TUNE 710BT 무선 오버이어 헤드폰",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-headphone-tune710bt-d2c/JBLT710BTWHT/",
       "has_specs": false,
       "has_support": false
     },
@@ -3226,16 +2926,6 @@
       "has_support": false
     },
     {
-      "sku": "JBLTT350WALEU",
-      "market_product_key": "JBLTT350WALEU",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL TT350 프리미엄 턴테이블",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-turntable-tt350-d2c/JBLTT350WALEU/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "JBLTUNER3BLK",
       "market_product_key": "JBLTUNER3BLK",
       "business_unit": "HARMAN",
@@ -3262,36 +2952,6 @@
       "category": "harman-lifestyle-audio",
       "name": "JBL WAVE BUDS 2 액티브 노이즈 캔슬링 무선 이어폰",
       "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-earphone-wavebuds2-d2c/JBLWBUDS2BLK/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBLWIND3S",
-      "market_product_key": "JBLWIND3S",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL WIND3S 블루투스 스피커",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-wind3s-d2c/JBLWIND3S/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBLWIRELESSMICAS3",
-      "market_product_key": "JBLWIRELESSMICAS3",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL 무선 마이크",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-microphone-wirelessmic-d2c/JBLWIRELESSMICAS3/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBLXTREME4BLKAS",
-      "market_product_key": "JBLXTREME4BLKAS",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL XTREME 4 블루투스 스피커",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-xtreme4-d2c/JBLXTREME4BLKAS/",
       "has_specs": false,
       "has_support": false
     },
@@ -3332,16 +2992,6 @@
       "category": "tvs",
       "name": "2026 Micro RGB RH85 (252cm)",
       "url": "https://www.samsung.com/sec/tvs/micro-rgb-rh85-d2c/KMR100RH85FXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KMR115MRF95XKR",
-      "market_product_key": "KMR115MRF95XKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 MICRO RGB (290cm)",
-      "url": "https://www.samsung.com/sec/tvs/micro-rgb-mrf95-d2c/KMR115MRF95XKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -3396,56 +3046,6 @@
       "has_support": false
     },
     {
-      "sku": "KQ100QNF8-Q8",
-      "market_product_key": "KQ100QNF8-Q8",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF80 (252cm)+5.1.2ch 사운드바 Q800F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq100qnf8-q8-d2c/KQ100QNF8-Q8/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ100QNF80-55Q",
-      "market_product_key": "KQ100QNF80-55Q",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF80 (252cm)+무빙스타일 QLED 4K (QF7A) (138cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq100qnf80-55q-d2c/KQ100QNF80-55Q/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ100QNF80-9P",
-      "market_product_key": "KQ100QNF80-9P",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF80 (252cm)+11.1.4ch 사운드바 Q9PEC",
-      "url": "https://www.samsung.com/sec/tvs/package-kq100qnf80-9p-d2c/KQ100QNF80-9P/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ100QNF80-F9",
-      "market_product_key": "KQ100QNF80-F9",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF80 (252cm)+The Freestyle 2세대+9.1.4ch 사운드바 Q930F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq100qnf80-f9-d2c/KQ100QNF80-F9/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ100QNF80-W1",
-      "market_product_key": "KQ100QNF80-W1",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF80 (252cm) 슬림핏 벽걸이형",
-      "url": "https://www.samsung.com/sec/tvs/neo-qled-4k-qnf80-d2c/KQ100QNF80-W1/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "KQ100QNH80-93",
       "market_product_key": "KQ100QNH80-93",
       "business_unit": "VD",
@@ -3476,86 +3076,6 @@
       "has_support": false
     },
     {
-      "sku": "KQ115QNF90-VG",
-      "market_product_key": "KQ115QNF90-VG",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF90 (290cm)+플로어 스탠드",
-      "url": "https://www.samsung.com/sec/tvs/package-kq115qnf90-vg-d2c/KQ115QNF90-VG/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ115QNF909F",
-      "market_product_key": "KQ115QNF909F",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF90 (290cm)+11.1.4ch 사운드바 Q990F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq98qnf90-9f9-d2c/KQ115QNF909F/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ115QNF90FXKR",
-      "market_product_key": "KQ115QNF90FXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF90 (290cm)",
-      "url": "https://www.samsung.com/sec/tvs/neo-qled-4k-qnf90-d2c/KQ115QNF90FXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ42SF90-N1W",
-      "market_product_key": "KQ42SF90-N1W",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 OLED (SF90) (105cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq42sf90-n1w-d2c/KQ42SF90-N1W/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ42SF90-NSWL",
-      "market_product_key": "KQ42SF90-NSWL",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 무빙스타일 OLED (SF90) 화이트 (105cm)+뮤직 프레임 LS60D",
-      "url": "https://www.samsung.com/sec/tvs/packge-kq42sf90-nswl-d2c/KQ42SF90-NSWL/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ42SF9E-N1W",
-      "market_product_key": "KQ42SF9E-N1W",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 OLED (SF9E) (105cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq42sf9e-n1w-d2c/KQ42SF9E-N1W/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ42SF9E-N1W6",
-      "market_product_key": "KQ42SF9E-N1W6",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 OLED (SF9E) (105cm) 라이트+뮤직 프레임 LS60D",
-      "url": "https://www.samsung.com/sec/tvs/package-kq42sf9e-n1w6-d2c/KQ42SF9E-N1W6/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ42SF9EAEXKR",
-      "market_product_key": "KQ42SF9EAEXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 OLED SF9E (105cm)",
-      "url": "https://www.samsung.com/sec/tvs/oled-sf9e-d2c/KQ42SF9EAEXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "KQ42SH90-1W",
       "market_product_key": "KQ42SH90-1W",
       "business_unit": "VD",
@@ -3566,122 +3086,12 @@
       "has_support": false
     },
     {
-      "sku": "KQ43LSB03AFXKR",
-      "market_product_key": "KQ43LSB03AFXKR",
+      "sku": "KQ42SH90AEXKR",
+      "market_product_key": "KQ42SH90AEXKR",
       "business_unit": "VD",
       "category": "tvs",
-      "name": "The Frame 108 cm",
-      "url": "https://www.samsung.com/sec/tvs/the-frame-lsb03a-d2c/KQ43LSB03AFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ43LSB05A-MS",
-      "market_product_key": "KQ43LSB05A-MS",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "The Sero (108 cm) 네이비 블루 + 이지무빙키트",
-      "url": "https://www.samsung.com/sec/tvs/package-lsb05a-ms-d2c/KQ43LSB05A-MS/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ43LSF03-W1W",
-      "market_product_key": "KQ43LSF03-W1W",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 The Frame 플랫 화이트 베젤 (108cm) 라이트 (전용 트레이 포함)",
-      "url": "https://www.samsung.com/sec/tvs/package-kq43lsf03-w1w-d2c/KQ43LSF03-W1W/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ43LSF03LWTNW",
-      "market_product_key": "KQ43LSF03LWTNW",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 무빙스타일 The Frame 플랫 화이트 베젤 화이트 (108cm)+뮤직 프레임 LS60D",
-      "url": "https://www.samsung.com/sec/tvs/packge-kq43lsf03lwtnw-d2c/KQ43LSF03LWTNW/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ43QD67AFXKR",
-      "market_product_key": "KQ43QD67AFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2024 QLED 4K QD67 (108 cm)",
-      "url": "https://www.samsung.com/sec/tvs/qled-qd67afxkr-d2c/KQ43QD67AFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ43QF7A-N1W",
-      "market_product_key": "KQ43QF7A-N1W",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 QLED 4K (QF7A) (108cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq43qf7a-n1w-d2c/KQ43QF7A-N1W/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ43QF7A-NSW6",
-      "market_product_key": "KQ43QF7A-NSW6",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 무빙스타일 QLED 4K (QF7A) 화이트 (108cm)+뮤직 프레임 LS60D",
-      "url": "https://www.samsung.com/sec/tvs/package-kq43qf7a-nsw6-d2c/KQ43QF7A-NSW6/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ43QF8A-N1W",
-      "market_product_key": "KQ43QF8A-N1W",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 QLED 4K (QF8A) (108cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq43qf8a-n1w-d2c/KQ43QF8A-N1W/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ43QNF90-N1W",
-      "market_product_key": "KQ43QNF90-N1W",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 Neo QLED (QNF90) (108cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq43qnf90-n1w-d2c/KQ43QNF90-N1W/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ48SF90-N1B",
-      "market_product_key": "KQ48SF90-N1B",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 OLED (SF90) (120cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq48sf90-n1b-d2c/KQ48SF90-N1B/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ48SF9E-N1B",
-      "market_product_key": "KQ48SF9E-N1B",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 OLED (SF9E) (120cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq48sf9e-n1b-d2c/KQ48SF9E-N1B/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ48SF9E-N1B6",
-      "market_product_key": "KQ48SF9E-N1B6",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 OLED (SF9E) (120cm) 라이트+뮤직 프레임 LS60D",
-      "url": "https://www.samsung.com/sec/tvs/package-kq48sf9e-n1b6-d2c/KQ48SF9E-N1B6/",
+      "name": "2026 OLED SH90 (105cm)",
+      "url": "https://www.samsung.com/sec/tvs/oled-sh90-d2c/KQ42SH90AEXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -3696,212 +3106,12 @@
       "has_support": false
     },
     {
-      "sku": "KQ48SH90-1B",
-      "market_product_key": "KQ48SH90-1B",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 OLED (SH90) (120cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq48sh90-1b-d2c/KQ48SH90-1B/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ48SH90-1BL5",
-      "market_product_key": "KQ48SH90-1BL5",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 OLED (SH90) (120cm) 라이트+뮤직 스튜디오 5 LS50H",
-      "url": "https://www.samsung.com/sec/tvs/package-kq48sh90-1bl5-d2c/KQ48SH90-1BL5/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ50LSF03-W1W",
-      "market_product_key": "KQ50LSF03-W1W",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 The Frame 플랫 화이트 베젤 (125cm) 라이트 (전용 트레이 포함)",
-      "url": "https://www.samsung.com/sec/tvs/package-kq50lsf03-w1w-d2c/KQ50LSF03-W1W/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ50QF7A-N1W",
-      "market_product_key": "KQ50QF7A-N1W",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 QLED 4K (QF7A) (125cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq50qf7a-n1w-d2c/KQ50QF7A-N1W/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ50QF8A-N1W",
-      "market_product_key": "KQ50QF8A-N1W",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 QLED 4K (QF8A) (125cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq50qf8a-n1w-d2c/KQ50QF8A-N1W/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ50QNF80-N1W",
-      "market_product_key": "KQ50QNF80-N1W",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 Neo QLED (QNF80) (125cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq50qnf80-n1w-d2c/KQ50QNF80-N1W/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ50QNF90-N1W",
-      "market_product_key": "KQ50QNF90-N1W",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 Neo QLED (QNF90) (125cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq50qnf90-n1w-d2c/KQ50QNF90-N1W/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "KQ55LSD01AFXKR",
       "market_product_key": "KQ55LSD01AFXKR",
       "business_unit": "VD",
       "category": "tvs",
       "name": "2024 The Serif (138 cm)",
       "url": "https://www.samsung.com/sec/tvs/the-serif-lsd01afxkr-d2c/KQ55LSD01AFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ55LSF03-SG",
-      "market_product_key": "KQ55LSF03-SG",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 The Frame (138cm) 챔퍼 샌드골드 베젤",
-      "url": "https://www.samsung.com/sec/tvs/packge-kq55lsf03-sg-d2c/KQ55LSF03-SG/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ55LSF03-SGM",
-      "market_product_key": "KQ55LSF03-SGM",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 The Frame (138cm) 챔퍼 샌드골드 베젤+뮤직 프레임 LS60D",
-      "url": "https://www.samsung.com/sec/tvs/packge-kq55lsf03-sgm-d2c/KQ55LSF03-SGM/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ55LSF03-WT",
-      "market_product_key": "KQ55LSF03-WT",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 The Frame (138cm) 플랫 화이트 베젤",
-      "url": "https://www.samsung.com/sec/tvs/packge-kq55lsf03-wt-d2c/KQ55LSF03-WT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ55LSF03-WTM",
-      "market_product_key": "KQ55LSF03-WTM",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 The Frame (138cm) 플랫 화이트 베젤+뮤직 프레임 LS60D",
-      "url": "https://www.samsung.com/sec/tvs/packge-kq55lsf03-wtm-d2c/KQ55LSF03-WTM/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ55LSF03AFXKR",
-      "market_product_key": "KQ55LSF03AFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 The Frame (138cm)",
-      "url": "https://www.samsung.com/sec/tvs/the-frame-lsf03-d2c/KQ55LSF03AFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ55QF7A-N1W",
-      "market_product_key": "KQ55QF7A-N1W",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 QLED 4K (QF7A) (138cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq55qf7a-n1w-d2c/KQ55QF7A-N1W/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ55QF8A-N1W",
-      "market_product_key": "KQ55QF8A-N1W",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 QLED 4K (QF8A) (138cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq55qf8a-n1w-d2c/KQ55QF8A-N1W/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ55QFE1-N1W",
-      "market_product_key": "KQ55QFE1-N1W",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 QLED 4K (QFE1) (138cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq55qfe1-n1w-d2c/KQ55QFE1-N1W/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ55QFE1-N1W6",
-      "market_product_key": "KQ55QFE1-N1W6",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 QLED 4K (QFE1) (138cm) 라이트+뮤직 프레임 LS60D",
-      "url": "https://www.samsung.com/sec/tvs/package-kq55qfe1-n1w6-d2c/KQ55QFE1-N1W6/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ55QNF70-N1W",
-      "market_product_key": "KQ55QNF70-N1W",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 Neo QLED (QNF70) (138cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq55qnf70-n1w-d2c/KQ55QNF70-N1W/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ55QNF70AFXKR",
-      "market_product_key": "KQ55QNF70AFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF70 (138cm)",
-      "url": "https://www.samsung.com/sec/tvs/neo-qled-4k-qnf70-d2c/KQ55QNF70AFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ55QNF80-6D",
-      "market_product_key": "KQ55QNF80-6D",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF80 (138cm)+3.1ch 사운드바 B650D",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qnf80-65-d2c/KQ55QNF80-6D/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ55QNF85-N1W",
-      "market_product_key": "KQ55QNF85-N1W",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 Neo QLED (QNF85) (138cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq55qnf85-n1w-d2c/KQ55QNF85-N1W/",
       "has_specs": false,
       "has_support": false
     },
@@ -3916,102 +3126,12 @@
       "has_support": false
     },
     {
-      "sku": "KQ55SF85-N1B",
-      "market_product_key": "KQ55SF85-N1B",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 OLED (SF85) (138cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq55sf85-n1b-d2c/KQ55SF85-N1B/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ55SF85AEXKR",
-      "market_product_key": "KQ55SF85AEXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 OLED SF85 (138cm)",
-      "url": "https://www.samsung.com/sec/tvs/oled-sf85aex-d2c/KQ55SF85AEXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ55SF8E-N1B",
-      "market_product_key": "KQ55SF8E-N1B",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 OLED (SF8E) (138cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq55sf8e-n1b-d2c/KQ55SF8E-N1B/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ55SF8E-N1B6",
-      "market_product_key": "KQ55SF8E-N1B6",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 OLED (SF8E) (138cm) 라이트+뮤직 프레임 LS60D",
-      "url": "https://www.samsung.com/sec/tvs/package-kq55sf8e-n1b6-d2c/KQ55SF8E-N1B6/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ55SF8E-N2B",
-      "market_product_key": "KQ55SF8E-N2B",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 OLED (SF8E) (138cm) 스탠다드",
-      "url": "https://www.samsung.com/sec/tvs/package-kq55sf8e-n2b-d2c/KQ55SF8E-N2B/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "KQ55SH85-1B",
       "market_product_key": "KQ55SH85-1B",
       "business_unit": "VD",
       "category": "tvs",
       "name": "무빙스타일 OLED (SH85) (138cm) 라이트",
       "url": "https://www.samsung.com/sec/tvs/package-kq55sh85-1b-d2c/KQ55SH85-1B/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ65LSD01-MF",
-      "market_product_key": "KQ65LSD01-MF",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2024 The Serif (163 cm) + 뮤직 프레임 LS60D",
-      "url": "https://www.samsung.com/sec/tvs/package-kq65lsd01-mf-d2c/KQ65LSD01-MF/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ65QF8AA-B6",
-      "market_product_key": "KQ65QF8AA-B6",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 QLED 4K QF8A (163cm)+3.1ch 사운드바 B650F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qf8aa-b6-d2c/KQ65QF8AA-B6/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ65QF8AAFXKR",
-      "market_product_key": "KQ65QF8AAFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 QLED 4K QF8A (163cm)",
-      "url": "https://www.samsung.com/sec/tvs/qled-qf8a-d2c/KQ65QF8AAFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ65QNF75AFXKR",
-      "market_product_key": "KQ65QNF75AFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF75 (163cm)",
-      "url": "https://www.samsung.com/sec/tvs/neo-qled-4k-qnf75-d2c/KQ65QNF75AFXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -4026,176 +3146,6 @@
       "has_support": false
     },
     {
-      "sku": "KQ65SF8EAEXKR",
-      "market_product_key": "KQ65SF8EAEXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 OLED SF8E (163cm)",
-      "url": "https://www.samsung.com/sec/tvs/oled-sf8e-d2c/KQ65SF8EAEXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ65SF90-8F",
-      "market_product_key": "KQ65SF90-8F",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 OLED SF90 (163cm)+5.1.2ch 사운드바 Q800F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq65sf90-8f-d2c/KQ65SF90-8F/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ65SF95-8F",
-      "market_product_key": "KQ65SF95-8F",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 OLED SF95 (163cm)+5.1.2ch 사운드바 Q800F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq65sf95-8f-d2c/KQ65SF95-8F/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ65SF95-9F",
-      "market_product_key": "KQ65SF95-9F",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 OLED SF95 (163cm)+9.1.4ch 사운드바 Q930F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq83sf95-9f-d2c/KQ65SF95-9F/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ65SH90-L5",
-      "market_product_key": "KQ65SH90-L5",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 OLED SH90 (163cm)+뮤직 스튜디오 5 LS50H",
-      "url": "https://www.samsung.com/sec/tvs/package-kq65sh90-l5-d2c/KQ65SH90-L5/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ65SH93-L5",
-      "market_product_key": "KQ65SH93-L5",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 OLED SH93 (163cm)+뮤직 스튜디오 5 LS50H",
-      "url": "https://www.samsung.com/sec/tvs/package-kq65sh93-l5-d2c/KQ65SH93-L5/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ65SH95-L5",
-      "market_product_key": "KQ65SH95-L5",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 OLED SH95 (163cm)+뮤직 스튜디오 5 LS50H",
-      "url": "https://www.samsung.com/sec/tvs/package-kq65sh95-l5-d2c/KQ65SH95-L5/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ75QDE1-B6",
-      "market_product_key": "KQ75QDE1-B6",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2024 QLED 4K QDE1 (189 cm) + 3.1 ch 사운드바 B650D",
-      "url": "https://www.samsung.com/sec/tvs/packge-kq85qde1-b6-d2c/KQ75QDE1-B6/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ75QF7SAFXKR",
-      "market_product_key": "KQ75QF7SAFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 QLED 4K QF7S (189cm)",
-      "url": "https://www.samsung.com/sec/tvs/qled-qf7s-d2c/KQ75QF7SAFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ75QF8A-43Q",
-      "market_product_key": "KQ75QF8A-43Q",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 QLED 4K QF8A (189cm) 풀 모션 슬림핏 벽걸이형+무빙스타일 QLED 4K (QF8A) (108cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qf8aw-43q-d2c/KQ75QF8A-43Q/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ75QNC700-E7",
-      "market_product_key": "KQ75QNC700-E7",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2023 Neo QLED 8K QNC700 (189cm)+3.1.2ch 사운드바 Q700D",
-      "url": "https://www.samsung.com/sec/tvs/packge-kq75qnc700-e7-d2c/KQ75QNC700-E7/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ75QNC700EXKR",
-      "market_product_key": "KQ75QNC700EXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2023 Neo QLED 8K QNC700 (189 cm)",
-      "url": "https://www.samsung.com/sec/tvs/neo-qled-8k-qnc700-d2c/KQ75QNC700EXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ75QNDX1-B7",
-      "market_product_key": "KQ75QNDX1-B7",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2024 Neo QLED QNDX1 (189cm)+5.1ch 사운드바 B750D",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qndx1-b7-d2c/KQ75QNDX1-B7/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ75QNDX1AFXKR",
-      "market_product_key": "KQ75QNDX1AFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2024 Neo QLED QNDX1 (189 cm)",
-      "url": "https://www.samsung.com/sec/tvs/neo-qled-4k-qndx1afxkr-d2c/KQ75QNDX1AFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ77SF951F2E",
-      "market_product_key": "KQ77SF951F2E",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 OLED SF95 (195cm)+2025 OLED SF9E (105cm)+9.1.4ch 사운드바 Q930F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq83sf951f2e-d2c/KQ77SF951F2E/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ77SH90-L7",
-      "market_product_key": "KQ77SH90-L7",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 OLED SH90 (195cm)+뮤직 스튜디오 7 LS70H",
-      "url": "https://www.samsung.com/sec/tvs/package-kq77sh90-l7-d2c/KQ77SH90-L7/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ77SH93-L7",
-      "market_product_key": "KQ77SH93-L7",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 OLED SH93 (195cm)+뮤직 스튜디오 7 LS70H",
-      "url": "https://www.samsung.com/sec/tvs/package-kq77sh93-l7-d2c/KQ77SH93-L7/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "KQ77SH95-27L7",
       "market_product_key": "KQ77SH95-27L7",
       "business_unit": "VD",
@@ -4206,52 +3156,12 @@
       "has_support": false
     },
     {
-      "sku": "KQ83SF90-9F",
-      "market_product_key": "KQ83SF90-9F",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 OLED SF90 (209cm)+9.1.4ch 사운드바 Q930F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq83sf90-9f-d2c/KQ83SF90-9F/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ83SF90AEXKR",
-      "market_product_key": "KQ83SF90AEXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 OLED SF90 (209cm)",
-      "url": "https://www.samsung.com/sec/tvs/oled-sf90-d2c/KQ83SF90AEXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ83SF95AEXKR",
-      "market_product_key": "KQ83SF95AEXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 OLED SF95 (209cm)",
-      "url": "https://www.samsung.com/sec/tvs/oled-sf95-d2c/KQ83SF95AEXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "KQ83SH85AEXKR",
       "market_product_key": "KQ83SH85AEXKR",
       "business_unit": "VD",
       "category": "tvs",
       "name": "2026 OLED SH85 (209cm)",
       "url": "https://www.samsung.com/sec/tvs/oled-sh85-d2c/KQ83SH85AEXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ83SH90AEXKR",
-      "market_product_key": "KQ83SH90AEXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 OLED SH90 (209cm)",
-      "url": "https://www.samsung.com/sec/tvs/oled-sh90-d2c/KQ83SH90AEXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -4282,86 +3192,6 @@
       "category": "tvs",
       "name": "2026 OLED SH93 (209cm)",
       "url": "https://www.samsung.com/sec/tvs/oled-sh93-d2c/KQ83SH93AEXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ83SH95AEXKR",
-      "market_product_key": "KQ83SH95AEXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 OLED SH95 (209cm)",
-      "url": "https://www.samsung.com/sec/tvs/oled-sh95-d2c/KQ83SH95AEXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85LSF03-SG",
-      "market_product_key": "KQ85LSF03-SG",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 The Frame Pro (214cm) 챔퍼 샌드골드 베젤",
-      "url": "https://www.samsung.com/sec/tvs/packge-kq85lsf03-sg-d2c/KQ85LSF03-SG/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85LSF03-SGF",
-      "market_product_key": "KQ85LSF03-SGF",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 The Frame Pro (214cm) 챔퍼 샌드골드 베젤+The Freestyle 2세대",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85lsf03-sgf-d2c/KQ85LSF03-SGF/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85LSF03-SGM",
-      "market_product_key": "KQ85LSF03-SGM",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 The Frame Pro (214cm) 챔퍼 샌드골드 베젤+뮤직 프레임 LS60D",
-      "url": "https://www.samsung.com/sec/tvs/packge-kq85lsf03-sgm-d2c/KQ85LSF03-SGM/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85LSF03-WT",
-      "market_product_key": "KQ85LSF03-WT",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 The Frame Pro (214cm) 플랫 화이트 베젤",
-      "url": "https://www.samsung.com/sec/tvs/packge-kq85lsf03-wt-d2c/KQ85LSF03-WT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85LSF03-WTF",
-      "market_product_key": "KQ85LSF03-WTF",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 The Frame Pro (214cm) 플랫 화이트 베젤+The Freestyle 2세대",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85lsf03-wtf-d2c/KQ85LSF03-WTF/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85LSF03-WTM",
-      "market_product_key": "KQ85LSF03-WTM",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 The Frame Pro (214cm) 플랫 화이트 베젤+뮤직 프레임 LS60D",
-      "url": "https://www.samsung.com/sec/tvs/packge-kq65lsf03-wtm-d2c/KQ85LSF03-WTM/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85LSF03WFXKR",
-      "market_product_key": "KQ85LSF03WFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 The Frame Pro (214cm)",
-      "url": "https://www.samsung.com/sec/tvs/the-frame-lsf03-d2c/KQ85LSF03WFXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -4406,446 +3236,6 @@
       "has_support": false
     },
     {
-      "sku": "KQ85LSH03WFXKR",
-      "market_product_key": "KQ85LSH03WFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 The Frame Pro (214cm)",
-      "url": "https://www.samsung.com/sec/tvs/the-frame-pro-lsh03w-d2c/KQ85LSH03WFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QDE1-43A",
-      "market_product_key": "KQ85QDE1-43A",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2024 QLED 4K QDE1 (214cm)+2025 무빙스타일 QLED 4K (QF7A) 화이트 (108cm)",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qde1-43a-d2c/KQ85QDE1-43A/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QDE1-43U7",
-      "market_product_key": "KQ85QDE1-43U7",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2024 QLED 4K QDE1 (214cm)+2024 Crystal UHD UD7000 (108cm)",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qde1-43u7-d2c/KQ85QDE1-43U7/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QDE1-55U7",
-      "market_product_key": "KQ85QDE1-55U7",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2024 QLED 4K QDE1 (214cm)+2024 Crystal UHD UD7000 (138cm)",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qde1-55u7-d2c/KQ85QDE1-55U7/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QF6AAFXKR",
-      "market_product_key": "KQ85QF6AAFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 QLED 4K QF6A (214cm)",
-      "url": "https://www.samsung.com/sec/tvs/qled-qf6a-d2c/KQ85QF6AAFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QF7GAFXKR",
-      "market_product_key": "KQ85QF7GAFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 QLED 4K QF7G (214cm)",
-      "url": "https://www.samsung.com/sec/tvs/qled-qf7g-d2c/KQ85QF7GAFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QF8A-43Q1",
-      "market_product_key": "KQ85QF8A-43Q1",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 QLED 4K QF8A (214cm)+무빙스타일 QLED 4K (QF7A) (108cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qf8a-43q1-d2c/KQ85QF8A-43Q1/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QF8A-55U7",
-      "market_product_key": "KQ85QF8A-55U7",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 QLED 4K QF8A (214cm)+2024 Crystal UHD UD7000 (138cm)",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qf8a-55u7-d2c/KQ85QF8A-55U7/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QF8A-F6",
-      "market_product_key": "KQ85QF8A-F6",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 QLED 4K QF8A (214cm)+The Freestyle 2세대+3.1ch 사운드바 B650F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qf8a-f6-d2c/KQ85QF8A-F6/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QF8GAFXKR",
-      "market_product_key": "KQ85QF8GAFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 QLED 4K QF8G (214cm)",
-      "url": "https://www.samsung.com/sec/tvs/qled-qf8g-d2c/KQ85QF8GAFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QFE1-43Q1",
-      "market_product_key": "KQ85QFE1-43Q1",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 QLED 4K QFE1 (214cm)+무빙스타일 QLED 4K (QF7A) (108cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qfe1-43q1-d2c/KQ85QFE1-43Q1/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QFE1-B6",
-      "market_product_key": "KQ85QFE1-B6",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 QLED 4K QFE1 (214cm)+3.1ch 사운드바 B650F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qfe1-b6-d2c/KQ85QFE1-B6/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QFE1-F6",
-      "market_product_key": "KQ85QFE1-F6",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 QLED 4K QFE1 (214cm)+The Freestyle 2세대+3.1ch 사운드바 B650F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qfe1-f6-d2c/KQ85QFE1-F6/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QFE1-WF",
-      "market_product_key": "KQ85QFE1-WF",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 QLED 4K QFE1 (214cm) 풀 모션 슬림핏 벽걸이형+The Freestyle 2세대",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qfe1-f-d2c/KQ85QFE1-WF/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF70B-F7",
-      "market_product_key": "KQ85QNF70B-F7",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF70 (214cm)+The Freestyle 2세대+5.1ch 사운드바 B750F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qnf70b-f7-d2c/KQ85QNF70B-F7/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF70BFXKR",
-      "market_product_key": "KQ85QNF70BFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF70 (214cm)",
-      "url": "https://www.samsung.com/sec/tvs/neo-qled-4k-qnf70bfxkr-d2c/KQ85QNF70BFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF80-43Q1",
-      "market_product_key": "KQ85QNF80-43Q1",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF80 (214cm)+무빙스타일 QLED 4K (QF7A) (108cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qnf80-43q1-d2c/KQ85QNF80-43Q1/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF80-75",
-      "market_product_key": "KQ85QNF80-75",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF80 (214cm)+5.1ch 사운드바 B750F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qnf80-75-d2c/KQ85QNF80-75/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF80-B6",
-      "market_product_key": "KQ85QNF80-B6",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF80 (214cm)+3.1ch 사운드바 B650F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qnf80-b6-d2c/KQ85QNF80-B6/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF80-F7",
-      "market_product_key": "KQ85QNF80-F7",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF80 (214cm)+The Freestyle 2세대+5.1ch 사운드바 B750F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qnf80-f7-d2c/KQ85QNF80-F7/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF83AFXKR",
-      "market_product_key": "KQ85QNF83AFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF83 (214cm)",
-      "url": "https://www.samsung.com/sec/tvs/neo-qled-4k-qnf83-d2c/KQ85QNF83AFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF85AFXKR",
-      "market_product_key": "KQ85QNF85AFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF85 (214cm)",
-      "url": "https://www.samsung.com/sec/tvs/neo-qled-4k-qnf85-d2c/KQ85QNF85AFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF85BFXKR",
-      "market_product_key": "KQ85QNF85BFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF85 (214cm)",
-      "url": "https://www.samsung.com/sec/tvs/neo-qled-4k-qnf85b-d2c/KQ85QNF85BFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF87AFXKR",
-      "market_product_key": "KQ85QNF87AFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF87 (214cm)",
-      "url": "https://www.samsung.com/sec/tvs/neo-qled-4k-qnf87-d2c/KQ85QNF87AFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF900-9F",
-      "market_product_key": "KQ85QNF900-9F",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED 8K QNF900 (214cm) (솔라셀 리모트 미포함)+9.1.4ch 사운드바 Q930F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qnf900-9f-d2c/KQ85QNF900-9F/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF900-9F9",
-      "market_product_key": "KQ85QNF900-9F9",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED 8K QNF900 (214cm) (솔라셀 리모트 미포함)+11.1.4ch 사운드바 Q990F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qnf900-9f9-d2c/KQ85QNF900-9F9/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF900-R9",
-      "market_product_key": "KQ85QNF900-R9",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED 8K QNF900 (214cm) (솔라셀 리모트 포함)+9.1.4ch 사운드바 Q930F",
-      "url": "https://www.samsung.com/sec/tvs/packge-kq85qnf900-r9-d2c/KQ85QNF900-R9/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF900-RF",
-      "market_product_key": "KQ85QNF900-RF",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED 8K QNF900 (214cm) (솔라셀 리모트 포함)+The Freestyle 2세대",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qnf900-rf-d2c/KQ85QNF900-RF/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF900FXKR",
-      "market_product_key": "KQ85QNF900FXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED 8K QNF900 (214cm) (솔라셀 리모트 미포함)",
-      "url": "https://www.samsung.com/sec/tvs/neo-qled-8k-qnf900-d2c/KQ85QNF900FXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF90B1F2E",
-      "market_product_key": "KQ85QNF90B1F2E",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF90 (214cm)+2025 OLED SF9E (105cm)+9.1.4ch 사운드바 Q930F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qnf90b1f2e-d2c/KQ85QNF90B1F2E/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF90B9F",
-      "market_product_key": "KQ85QNF90B9F",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF90 (214cm)+9.1.4ch 사운드바 Q930F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qnf90b9f-d2c/KQ85QNF90B9F/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF90BFXKR",
-      "market_product_key": "KQ85QNF90BFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF90 (214cm)",
-      "url": "https://www.samsung.com/sec/tvs/neo-qled-4k-qnf90b-d2c/KQ85QNF90BFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF95AFXKR",
-      "market_product_key": "KQ85QNF95AFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF95 (214cm)",
-      "url": "https://www.samsung.com/sec/tvs/neo-qled-4k-qnf95-d2c/KQ85QNF95AFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF95B1F2E",
-      "market_product_key": "KQ85QNF95B1F2E",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF95 (214cm)+2025 OLED SF9E (105cm)+9.1.4ch 사운드바 Q930F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qnf95b1f2e-d2c/KQ85QNF95B1F2E/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF95B9F",
-      "market_product_key": "KQ85QNF95B9F",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF95 (214cm)+9.1.4ch 사운드바 Q930F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qnf95b9f-d2c/KQ85QNF95B9F/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF990-9F",
-      "market_product_key": "KQ85QNF990-9F",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED 8K QNF990 (214cm) (솔라셀 리모트 미포함)+9.1.4ch 사운드바 Q930F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qnf990-9f-d2c/KQ85QNF990-9F/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF990-9F9",
-      "market_product_key": "KQ85QNF990-9F9",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED 8K QNF990 (214cm) (솔라셀 리모트 미포함)+11.1.4ch 사운드바 Q990F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq98qnf990-9f-d2c/KQ85QNF990-9F9/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF990-R9",
-      "market_product_key": "KQ85QNF990-R9",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED 8K QNF990 (214cm) (솔라셀 리모트 포함)+9.1.4ch 사운드바 Q930F",
-      "url": "https://www.samsung.com/sec/tvs/packge-kq85qnf990-r9-d2c/KQ85QNF990-R9/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF990-RF",
-      "market_product_key": "KQ85QNF990-RF",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED 8K QNF990 (214cm) (솔라셀 리모트 포함)+The Freestyle 2세대",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qnf990-rf-d2c/KQ85QNF990-RF/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNF9XAFXKR",
-      "market_product_key": "KQ85QNF9XAFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF9X (214cm)",
-      "url": "https://www.samsung.com/sec/tvs/neo-qled-4k-qnf9x-d2c/KQ85QNF9XAFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNFE1-43Q1",
-      "market_product_key": "KQ85QNFE1-43Q1",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNFE1 (214cm)+무빙스타일 QLED 4K (QF7A) (108cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qnfe1-43q1-d2c/KQ85QNFE1-43Q1/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNFE1-B6",
-      "market_product_key": "KQ85QNFE1-B6",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNFE1 (214cm)+3.1ch 사운드바 B650F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qnfe1-b6-d2c/KQ85QNFE1-B6/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNFE1-F7",
-      "market_product_key": "KQ85QNFE1-F7",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNFE1 (214cm)+The Freestyle 2세대+5.1ch 사운드바 B750F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq85qnfe1-f7-d2c/KQ85QNFE1-F7/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNFE1AFXKR",
-      "market_product_key": "KQ85QNFE1AFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNFE1 (214cm)",
-      "url": "https://www.samsung.com/sec/tvs/neo-qled-4k-qnfe1-d2c/KQ85QNFE1AFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "KQ85QNH70-27L",
       "market_product_key": "KQ85QNH70-27L",
       "business_unit": "VD",
@@ -4876,42 +3266,12 @@
       "has_support": false
     },
     {
-      "sku": "KQ85QNH80-L7",
-      "market_product_key": "KQ85QNH80-L7",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 Neo QLED QNH80 (214cm)+뮤직 스튜디오 7 LS70H",
-      "url": "https://www.samsung.com/sec/tvs/package-kq100qnh80-l7-d2c/KQ85QNH80-L7/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ85QNH990FXKR",
-      "market_product_key": "KQ85QNH990FXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 Neo QLED 8K QNH990 (214cm)",
-      "url": "https://www.samsung.com/sec/tvs/neo-qled-8k-qnh990-d2c/KQ85QNH990FXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "KQ98LSH03EFXKR",
       "market_product_key": "KQ98LSH03EFXKR",
       "business_unit": "VD",
       "category": "tvs",
       "name": "2026 The Frame (247cm)",
       "url": "https://www.samsung.com/sec/tvs/the-frame-lsh03-d2c/KQ98LSH03EFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ98QC88AFXKR",
-      "market_product_key": "KQ98QC88AFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2023 QLED 4K QC88 (247 cm)",
-      "url": "https://www.samsung.com/sec/tvs/qled-kq98qc88afxkr-d2c/KQ98QC88AFXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -4926,82 +3286,12 @@
       "has_support": false
     },
     {
-      "sku": "KQ98QNF90-9F",
-      "market_product_key": "KQ98QNF90-9F",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF90 (247cm)+9.1.4ch 사운드바 Q930F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq98qnf90-9f-d2c/KQ98QNF90-9F/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ98QNF909F2E",
-      "market_product_key": "KQ98QNF909F2E",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED QNF90 (247cm)+2025 OLED SF9E (105cm)+11.1.4ch 사운드바 Q990F",
-      "url": "https://www.samsung.com/sec/tvs/package-kq98qnf909f2e-d2c/KQ98QNF909F2E/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ98QNF990-99",
-      "market_product_key": "KQ98QNF990-99",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED 8K QNF990 (247cm) (솔라셀 리모트 미포함)+11.1.4ch 사운드바 Q990F",
-      "url": "https://www.samsung.com/sec/tvs/packge-kq98qnf990-99-d2c/KQ98QNF990-99/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ98QNF990-R99",
-      "market_product_key": "KQ98QNF990-R99",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED 8K QNF990 (247cm) (솔라셀 리모트 포함)+11.1.4ch 사운드바 Q990F",
-      "url": "https://www.samsung.com/sec/tvs/packge-kq98qnf990-r99-d2c/KQ98QNF990-R99/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ98QNF990FXKR",
-      "market_product_key": "KQ98QNF990FXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Neo QLED 8K QNF990 (247cm) (솔라셀 리모트 미포함)",
-      "url": "https://www.samsung.com/sec/tvs/neo-qled-8k-qnf990-d2c/KQ98QNF990FXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KU100MH90-93",
-      "market_product_key": "KU100MH90-93",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 Mini LED MH90 (252cm)+9.1.4ch 사운드바 Q930H",
-      "url": "https://www.samsung.com/sec/tvs/package-ku100mh90-93-d2c/KU100MH90-93/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "KU100MH90FXKR",
       "market_product_key": "KU100MH90FXKR",
       "business_unit": "VD",
       "category": "tvs",
       "name": "2026 Mini LED MH90 (252cm)",
       "url": "https://www.samsung.com/sec/tvs/mini-led-mh90-d2c/KU100MH90FXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KU27LSFM7-E2",
-      "market_product_key": "KU27LSFM7-E2",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "2025 The Movingstyle+JBL CHARGE ESSENTIAL 2 블루투스 스피커",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/the-movingstyle-lsfm7-d2c/KU27LSFM7-E2/",
       "has_specs": false,
       "has_support": false
     },
@@ -5026,16 +3316,6 @@
       "has_support": false
     },
     {
-      "sku": "KU43F6310FFXKR",
-      "market_product_key": "KU43F6310FFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Full HD (108cm)",
-      "url": "https://www.samsung.com/sec/tvs/fhd-f6310f-d2c/KU43F6310FFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "KU43MH70-1W",
       "market_product_key": "KU43MH70-1W",
       "business_unit": "VD",
@@ -5046,72 +3326,12 @@
       "has_support": false
     },
     {
-      "sku": "KU43UF8500-N1W",
-      "market_product_key": "KU43UF8500-N1W",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 Crystal UHD (UF8500) (108cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-ku43uf8500-n1w-d2c/KU43UF8500-N1W/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KU43UF8500FXKR",
-      "market_product_key": "KU43UF8500FXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Crystal UHD UF8500 (108cm)",
-      "url": "https://www.samsung.com/sec/tvs/uhd-uf8500-d2c/KU43UF8500FXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KU50MH60-1W",
-      "market_product_key": "KU50MH60-1W",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 Mini LED (MH60) (125cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-ku50mh60-1w-d2c/KU50MH60-1W/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KU50MH60AFXKR",
-      "market_product_key": "KU50MH60AFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 Mini LED MH60 (125cm)",
-      "url": "https://www.samsung.com/sec/tvs/mini-led-mh60-d2c/KU50MH60AFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "KU50MH70-1W",
       "market_product_key": "KU50MH70-1W",
       "business_unit": "VD",
       "category": "tvs",
       "name": "무빙스타일 Mini LED (MH70) (125cm) 라이트",
       "url": "https://www.samsung.com/sec/tvs/package-ku50mh70-1w-d2c/KU50MH70-1W/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KU50MH70AFXKR",
-      "market_product_key": "KU50MH70AFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 Mini LED MH70 (125cm)",
-      "url": "https://www.samsung.com/sec/tvs/mini-led-mh70-d2c/KU50MH70AFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KU50UF8500-N1W",
-      "market_product_key": "KU50UF8500-N1W",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 Crystal UHD (UF8500) (125cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-ku50uf8500-n1w-d2c/KU50UF8500-N1W/",
       "has_specs": false,
       "has_support": false
     },
@@ -5136,52 +3356,12 @@
       "has_support": false
     },
     {
-      "sku": "KU55UF8500-N1W",
-      "market_product_key": "KU55UF8500-N1W",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "무빙스타일 Crystal UHD (UF8500) (138cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-ku55uf8500-n1w-d2c/KU55UF8500-N1W/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KU75UD7050FXKR",
-      "market_product_key": "KU75UD7050FXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2024 Crystal UHD UD7050 (189 cm)",
-      "url": "https://www.samsung.com/sec/tvs/uhd-ku85ud7050fxkr-d2c/KU75UD7050FXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KU75UF8030FXKR",
-      "market_product_key": "KU75UF8030FXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2025 Crystal UHD UF8030 (189cm)",
-      "url": "https://www.samsung.com/sec/tvs/uhd-uf8030-d2c/KU75UF8030FXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "KU85MH75-27L",
       "market_product_key": "KU85MH75-27L",
       "business_unit": "VD",
       "category": "tvs",
       "name": "2026 Mini LED MH75 (214cm)+2025 The Movingstyle",
       "url": "https://www.samsung.com/sec/tvs/package-ku85mh75-27l-d2c/KU85MH75-27L/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KU85MH75-L5",
-      "market_product_key": "KU85MH75-L5",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 Mini LED MH75 (214cm)+뮤직 스튜디오 5 LS50H",
-      "url": "https://www.samsung.com/sec/tvs/package-ku85mh75-l5-d2c/KU85MH75-L5/",
       "has_specs": false,
       "has_support": false
     },
@@ -5196,32 +3376,12 @@
       "has_support": false
     },
     {
-      "sku": "KU85MH79AFXKR",
-      "market_product_key": "KU85MH79AFXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 Mini LED MH79 (214cm)",
-      "url": "https://www.samsung.com/sec/tvs/mini-led-mh79-d2c/KU85MH79AFXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "KU85MH80-27L",
       "market_product_key": "KU85MH80-27L",
       "business_unit": "VD",
       "category": "tvs",
       "name": "2026 Mini LED MH80 (214cm)+2025 The Movingstyle",
       "url": "https://www.samsung.com/sec/tvs/package-ku85mh80-27l-d2c/KU85MH80-27L/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KU85MH80-L7",
-      "market_product_key": "KU85MH80-L7",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 Mini LED MH80 (214cm)+뮤직 스튜디오 7 LS70H",
-      "url": "https://www.samsung.com/sec/tvs/package-ku85mh80-l7-d2c/KU85MH80-L7/",
       "has_specs": false,
       "has_support": false
     },
@@ -5236,42 +3396,12 @@
       "has_support": false
     },
     {
-      "sku": "KU85UD7000FXKR",
-      "market_product_key": "KU85UD7000FXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2024 Crystal UHD UD7000 (214 cm)",
-      "url": "https://www.samsung.com/sec/tvs/uhd-ud7000fxkr-d2c/KU85UD7000FXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "KU85UH8500FXKR",
       "market_product_key": "KU85UH8500FXKR",
       "business_unit": "VD",
       "category": "tvs",
       "name": "2026 Crystal UHD UH8500 (214cm)",
       "url": "https://www.samsung.com/sec/tvs/uhd-uh8500-d2c/KU85UH8500FXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KU98UD9000-55Q",
-      "market_product_key": "KU98UD9000-55Q",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2024 Crystal UHD UD9000 (247cm)+무빙스타일 QLED 4K (QF7A) (138cm) 라이트",
-      "url": "https://www.samsung.com/sec/tvs/package-ku98ud9000-55q-d2c/KU98UD9000-55Q/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KU98UD9000FXKR",
-      "market_product_key": "KU98UD9000FXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2024 Crystal UHD UD9000 (247 cm)",
-      "url": "https://www.samsung.com/sec/tvs/uhd-ud9000fxkr-d2c/KU98UD9000FXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -6662,7 +4792,7 @@
       "category": "microwave-ovens",
       "name": "세라믹 전자레인지 23L",
       "url": "https://www.samsung.com/sec/microwave-ovens/MS23C3535AW-d2c/MS23C3535AW/",
-      "has_specs": false,
+      "has_specs": true,
       "has_support": false
     },
     {
@@ -6866,6 +4996,96 @@
       "has_support": false
     },
     {
+      "sku": "RB33R8798SR",
+      "market_product_key": "RB33R8798SR",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "냉장고 343L",
+      "url": "https://www.samsung.com/sec/refrigerators/bottom-mount-freezer-rb33r8798sr-d2c/RB33R8798SR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RF60DB9A62APG",
+      "market_product_key": "RF60DB9A62APG",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Infinite AI 정수기 냉장고 4도어 키친핏 585L (오토 아이스/위스키볼)",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rf60db9a62apg-d2c/RF60DB9A62APG/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RF84R9203S8",
+      "market_product_key": "RF84R9203S8",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "T9000 2.0 푸드쇼케이스 848L",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rf84r9203s8-d2c/RF84R9203S8/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RF85A95E1APN",
+      "market_product_key": "RF85A95E1APN",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 패밀리허브 4도어 838L (빅아이스/큐브)",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rf85a95e1apw-d2c/RF85A95E1APN/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RF85DB90F1AP",
+      "market_product_key": "RF85DB90F1AP",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 냉장고 4도어 874L (UV탈취)",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rf85db90f1ap-d2c/RF85DB90F1AP/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RF85DB91F1AP",
+      "market_product_key": "RF85DB91F1AP",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 냉장고 4도어 869L (UV탈취)",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rf85db91f1ap-d2c/RF85DB91F1AP/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RF90DG90124E",
+      "market_product_key": "RF90DG90124E",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 냉장고 4도어 905L",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rf90dg90124e-d2c/RF90DG90124E/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RF91DB90LEW6",
+      "market_product_key": "RF91DB90LEW6",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 하이브리드 4도어 900L (에너지 1등급 최저기준 대비 -30%)",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rf91db90le01-d2c/RF91DB90LEW6/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RF91DB98J1AP",
+      "market_product_key": "RF91DB98J1AP",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 하이브리드 4도어 868L (빅아이스/위스키볼)",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rf91db98j1ap-d2c/RF91DB98J1AP/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "RM70F33B1AA",
       "market_product_key": "RM70F33B1AA",
       "business_unit": "DA",
@@ -7042,6 +5262,16 @@
       "category": "refrigerators",
       "name": "Bespoke AI 하이브리드 냉장고 4도어+냉동고 1도어 키친핏 901/347L",
       "url": "https://www.samsung.com/sec/refrigerators/package-rm70f91rm7955a-d2c/RM70F91RM7955A/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RM70F91RM94U1A",
+      "market_product_key": "RM70F91RM94U1A",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 하이브리드 4도어+김치플러스 4도어 901/583L",
+      "url": "https://www.samsung.com/sec/refrigerators/package-rm70f91rm94u1a-d2c/RM70F91RM94U1A/",
       "has_specs": false,
       "has_support": false
     },
@@ -7266,6 +5496,16 @@
       "has_support": false
     },
     {
+      "sku": "RM90R294U1ZDRQ",
+      "market_product_key": "RM90R294U1ZDRQ",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 냉장고 4도어+김치플러스 4도어 905/583L",
+      "url": "https://www.samsung.com/sec/refrigerators/package-rm90r294u1zdrq-d2c/RM90R294U1ZDRQ/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "RR09BG014WW",
       "market_product_key": "RR09BG014WW",
       "business_unit": "DA",
@@ -7286,6 +5526,26 @@
       "has_support": false
     },
     {
+      "sku": "RR40B9971APK",
+      "market_product_key": "RR40B9971APK",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Infinite Line 냉장고 1도어 키친핏 396L (좌열림, 냉장전용)",
+      "url": "https://www.samsung.com/sec/refrigerators/one-door-rr40b9971apk-d2c/RR40B9971APK/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RR40C7895AP",
+      "market_product_key": "RR40C7895AP",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 냉장고 1도어 키친핏 408L (우열림, 냉장전용)",
+      "url": "https://www.samsung.com/sec/refrigerators/one-door-rr40c7895ap-d2c/RR40C7895AP/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "RR40C78RZRQ79A",
       "market_product_key": "RR40C78RZRQ79A",
       "business_unit": "DA",
@@ -7302,6 +5562,16 @@
       "category": "refrigerators",
       "name": "Bespoke AI 냉동고+냉장고+김치플러스 1도어 키친핏 347/409/348L",
       "url": "https://www.samsung.com/sec/refrigerators/package-rr40c79057801-d2c/RR40C79057801/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RR40C79057915A",
+      "market_product_key": "RR40C79057915A",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 냉장고+김치플러스 1도어 키친핏 409/348L",
+      "url": "https://www.samsung.com/sec/refrigerators/package-rr40c79057915a-d2c/RR40C79057915A/",
       "has_specs": false,
       "has_support": false
     },
@@ -7456,6 +5726,26 @@
       "has_support": false
     },
     {
+      "sku": "RS80F64J3F01",
+      "market_product_key": "RS80F64J3F01",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "양문형 냉장고 623L+교체형 정수필터 2개",
+      "url": "https://www.samsung.com/sec/refrigerators/package-rs80f64j3f01-d2c/RS80F64J3F01/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RS82M6000S8",
+      "market_product_key": "RS82M6000S8",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "양문형 냉장고 815 L",
+      "url": "https://www.samsung.com/sec/refrigerators/side-by-side-rs82m6000s8-d2c/RS82M6000S8/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "RS84DB5002CW",
       "market_product_key": "RS84DB5002CW",
       "business_unit": "DA",
@@ -7546,12 +5836,32 @@
       "has_support": false
     },
     {
+      "sku": "RT25BAR41WW",
+      "market_product_key": "RT25BAR41WW",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "냉장고 255L",
+      "url": "https://www.samsung.com/sec/refrigerators/top-freezer-rt25bar41ww-d2c/RT25BAR41WW/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "RT25DARAHS9",
       "market_product_key": "RT25DARAHS9",
       "business_unit": "DA",
       "category": "refrigerators",
       "name": "냉장고 255L",
       "url": "https://www.samsung.com/sec/refrigerators/top-mount-freezer-rt25darahs9-d2c/RT25DARAHS9/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RT25FARA2S9",
+      "market_product_key": "RT25FARA2S9",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "냉장고 255L",
+      "url": "https://www.samsung.com/sec/refrigerators/top-mount-freezer-rt25fara2s9-d2c/RT25FARA2S9/",
       "has_specs": false,
       "has_support": false
     },
@@ -7712,6 +6022,16 @@
       "category": "refrigerators",
       "name": "Infinite AI 냉동고 1도어 키친핏 347L (우열림, 냉동전용)",
       "url": "https://www.samsung.com/sec/refrigerators/one-door-rz34c8865apg-d2c/RZ34C8865APG/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RZ38B9871APG",
+      "market_product_key": "RZ38B9871APG",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Infinite Line 냉동고 1도어 키친핏 404L (우열림, 냉동전용)",
+      "url": "https://www.samsung.com/sec/refrigerators/one-door-rz38b9871apg-d2c/RZ38B9871APG/",
       "has_specs": false,
       "has_support": false
     },
