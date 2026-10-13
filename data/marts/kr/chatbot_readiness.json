@@ -1,10 +1,10 @@
 {
   "market": "kr",
-  "generated_at": "2026-10-13T09:41:38.892Z",
+  "generated_at": "2026-10-13T10:20:55.371Z",
   "ready": false,
   "gates": {
-    "current_catalog_coverage": false,
-    "no_failed_catalog_sources": false,
+    "current_catalog_coverage": true,
+    "no_failed_catalog_sources": true,
     "current_specs_complete": false,
     "support_linkage_complete": false,
     "legacy_ingestion_present": false,
@@ -12,19 +12,13 @@
   },
   "counts": {
     "sku_registry": 1151,
-    "current_skus": 861,
-    "current_skus_with_specs": 57,
+    "current_skus": 904,
+    "current_skus_with_specs": 92,
     "support_resources": 5,
     "support_linked_current_skus": 0,
     "legacy_skus": 0,
-    "unverified_skus": 17,
+    "unverified_skus": 3,
     "other_bu_skus": 3
   },
-  "failed_catalog_sources": [
-    {
-      "id": "rings",
-      "url": "https://www.samsung.com/sec/rings/all-rings/",
-      "error": "504 Gateway Time-out"
-    }
-  ]
+  "failed_catalog_sources": []
 }

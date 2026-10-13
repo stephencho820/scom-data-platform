@@ -1,13 +1,13 @@
 {
   "market": "kr",
-  "generated_at": "2026-10-13T09:41:38.892Z",
+  "generated_at": "2026-10-13T10:20:55.371Z",
   "definition": "Current catalog coverage compares SKU identifiers discovered from each configured official Samsung.com KR catalog source with current SKU rows emitted to product_master.",
-  "complete": false,
+  "complete": true,
   "catalog_sources_total": 19,
-  "catalog_sources_ok": 18,
-  "catalog_sources_failed": 1,
-  "discovered_unique_skus": 861,
-  "db_current_unique_skus": 861,
+  "catalog_sources_ok": 19,
+  "catalog_sources_failed": 0,
+  "discovered_unique_skus": 904,
+  "db_current_unique_skus": 904,
   "categories": [
     {
       "source_id": "smartphones",
@@ -15,8 +15,8 @@
       "category": "smartphones",
       "source_url": "https://www.samsung.com/sec/smartphones/all-smartphones/",
       "source_status": "ok",
-      "discovered_unique_skus": 50,
-      "db_current_unique_skus": 50,
+      "discovered_unique_skus": 90,
+      "db_current_unique_skus": 90,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -182,12 +182,12 @@
       "business_unit": "MX",
       "category": "rings",
       "source_url": "https://www.samsung.com/sec/rings/all-rings/",
-      "source_status": "failed",
-      "discovered_unique_skus": 0,
-      "db_current_unique_skus": 0,
+      "source_status": "ok",
+      "discovered_unique_skus": 3,
+      "db_current_unique_skus": 3,
       "missing_in_db": [],
       "unexpected_in_db": [],
-      "complete": false
+      "complete": true
     },
     {
       "source_id": "soundbars",

@@ -1,19 +1,19 @@
 {
   "market": "kr",
-  "generated_at": "2026-10-13T09:50:13.746Z",
-  "source_snapshot_at": "2026-10-13T09:41:38.892Z",
+  "generated_at": "2026-10-13T10:27:21.798Z",
+  "source_snapshot_at": "2026-10-13T10:20:55.371Z",
   "ready": false,
   "catalog": {
     "sources_total": 19,
-    "sources_failed": 1,
+    "sources_failed": 0,
     "categories": [
       {
         "business_unit": "MX",
         "category": "smartphones",
         "source_id": "smartphones",
         "status": "ok",
-        "discovered_skus": 50,
-        "db_skus": 50,
+        "discovered_skus": 90,
+        "db_skus": 90,
         "complete": true,
         "missing_in_db": [],
         "unexpected_in_db": []
@@ -165,10 +165,10 @@
         "business_unit": "MX",
         "category": "rings",
         "source_id": "rings",
-        "status": "failed",
-        "discovered_skus": 0,
-        "db_skus": 0,
-        "complete": false,
+        "status": "ok",
+        "discovered_skus": 3,
+        "db_skus": 3,
+        "complete": true,
         "missing_in_db": [],
         "unexpected_in_db": []
       },
@@ -222,7 +222,7 @@
     "current_products": 1151,
     "specs_rows": 1151,
     "support_rows": 5,
-    "products_missing_specs_or_support": 861
+    "products_missing_specs_or_support": 904
   },
   "sku_gaps": [
     {
@@ -6286,12 +6286,52 @@
       "has_support": false
     },
     {
+      "sku": "SM-A155NLBEKOO",
+      "market_product_key": "SM-A155NLBEKOO",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 A15 자급제",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-a15-lte-a155/SM-A155NLBEKOO/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-A156LZKALUC",
+      "market_product_key": "SM-A156LZKALUC",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 버디3 사업자향 (LG U+)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-a15-5g-a156-co/SM-A156LZKALUC/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-A165NZKEKOD",
+      "market_product_key": "SM-A165NZKEKOD",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 A16 통신사폰 (SKT/KT/LG U+)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-a16-lte-sm-a165/SM-A165NZKEKOD/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
       "sku": "SM-A165NZKEKOO",
       "market_product_key": "SM-A165NZKEKOO",
       "business_unit": "MX",
       "category": "smartphones",
       "name": "갤럭시 A16 자급제",
       "url": "https://www.samsung.com/sec/smartphones/galaxy-a16-lte-a165/SM-A165NZKEKOO/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-A166LZKELUC",
+      "market_product_key": "SM-A166LZKELUC",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 버디4 사업자향 (LG U+)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-a16-5g-a166-co/SM-A166LZKELUC/",
       "has_specs": true,
       "has_support": false
     },
@@ -6326,12 +6366,52 @@
       "has_support": false
     },
     {
+      "sku": "SM-A256NLBAKOD",
+      "market_product_key": "SM-A256NLBAKOD",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 A25 5G 통신사폰 (SKT/KT/LG U+)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-a25-5g-sm-a256/SM-A256NLBAKOD/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-A256NLBAKOO",
+      "market_product_key": "SM-A256NLBAKOO",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 A25 5G 자급제",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-a25-5g-a256/SM-A256NLBAKOO/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
       "sku": "SM-A276KZKAKTC",
       "market_product_key": "SM-A276KZKAKTC",
       "business_unit": "MX",
       "category": "smartphones",
       "name": "갤럭시 점프5 사업자향 (KT)",
       "url": "https://www.samsung.com/sec/smartphones/galaxy-a27-5g-a276-co/SM-A276KZKAKTC/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-A356NZKWKOD",
+      "market_product_key": "SM-A356NZKWKOD",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 A35 5G 통신사폰 (SKT/KT/LG U+)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-a35-5g-sm-a356/SM-A356NZKWKOD/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-A356NZKWKOO",
+      "market_product_key": "SM-A356NZKWKOO",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 A35 5G 자급제",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-a35-5g-a356/SM-A356NZKWKOO/",
       "has_specs": true,
       "has_support": false
     },
@@ -6376,6 +6456,16 @@
       "has_support": false
     },
     {
+      "sku": "SM-A556SZKBSKC",
+      "market_product_key": "SM-A556SZKBSKC",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 퀀텀5 사업자향 (SKT)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-a55-5g-a556-co/SM-A556SZKBSKC/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
       "sku": "SM-A566SZABSKC",
       "market_product_key": "SM-A566SZABSKC",
       "business_unit": "MX",
@@ -6396,6 +6486,76 @@
       "has_support": false
     },
     {
+      "sku": "SM-F731NDBDKOO",
+      "market_product_key": "SM-F731NDBDKOO",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 Z 플립5 레트로",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-flip5-retro-sm-f731/SM-F731NDBDKOO/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-F731NLGAKOD",
+      "market_product_key": "SM-F731NLGAKOD",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 Z 플립5 통신사폰 (SKT/KT/LG U+)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-flip5-5g-f731/SM-F731NLGAKOD/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-F731NZSZKOO",
+      "market_product_key": "SM-F731NZSZKOO",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 Z 플립5 메종 마르지엘라 에디션",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-flip5-maison-margiela-sm-f731/SM-F731NZSZKOO/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "SM-F741NLBAKOD",
+      "market_product_key": "SM-F741NLBAKOD",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 Z 플립6 통신사폰 (SKT/KT/LG U+)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-flip6-sm-f741/SM-F741NLBAKOD/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-F741NLBAKOO",
+      "market_product_key": "SM-F741NLBAKOO",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 Z 플립6 자급제",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-flip6-f741/SM-F741NLBAKOO/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-F741NZWAKOO",
+      "market_product_key": "SM-F741NZWAKOO",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 Z 플립6 자급제 (삼성닷컴/삼성 강남 전용컬러)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-flip6-f741-cpo/SM-F741NZWAKOO/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-F761NZKVKOD",
+      "market_product_key": "SM-F761NZKVKOD",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 Z 플립7 FE 통신사폰 (SKT/KT/LG U+)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-flip7fe-sm-f761v/SM-F761NZKVKOD/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
       "sku": "SM-F761NZKVKOO",
       "market_product_key": "SM-F761NZKVKOO",
       "business_unit": "MX",
@@ -6403,6 +6563,16 @@
       "name": "갤럭시 Z 플립7 FE 자급제",
       "url": "https://www.samsung.com/sec/smartphones/galaxy-z-flip7fe-f761v/SM-F761NZKVKOO/",
       "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-F766NDBAKOD",
+      "market_product_key": "SM-F766NDBAKOD",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 Z 플립7 통신사폰 (SKT/KT/LG U+)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-flip7-sm-f766/SM-F766NDBAKOD/",
+      "has_specs": false,
       "has_support": false
     },
     {
@@ -6456,6 +6626,76 @@
       "has_support": false
     },
     {
+      "sku": "SM-F946NAKZKOO",
+      "market_product_key": "SM-F946NAKZKOO",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 Z 폴드5 톰브라운 에디션",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-fold5-tb-sm-f946/SM-F946NAKZKOO/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "SM-F946NLBAKOD",
+      "market_product_key": "SM-F946NLBAKOD",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 Z 폴드5 통신사폰 (SKT/KT/LG U+)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-fold5-5g-f946/SM-F946NLBAKOD/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-F956NAKAKOO",
+      "market_product_key": "SM-F956NAKAKOO",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 Z 폴드6 자급제 (삼성닷컴/삼성 강남 전용컬러)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-fold6-f956-cpo/SM-F956NAKAKOO/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-F956NZSAKOD",
+      "market_product_key": "SM-F956NZSAKOD",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 Z 폴드6 통신사폰 (SKT/KT/LG U+)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-fold6-sm-f956/SM-F956NZSAKOD/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-F956NZSAKOO",
+      "market_product_key": "SM-F956NZSAKOO",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 Z 폴드6 자급제",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-fold6-f956/SM-F956NZSAKOO/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-F958NZKAKOO",
+      "market_product_key": "SM-F958NZKAKOO",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 Z 폴드 스페셜 에디션 자급제",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-fold6-se-f958/SM-F958NZKAKOO/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-F966NDBAKOD",
+      "market_product_key": "SM-F966NDBAKOD",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 Z 폴드7 통신사폰 (SKT/KT/LG U+)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-fold7-sm-f966/SM-F966NDBAKOD/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "SM-F966NDBPKOO",
       "market_product_key": "SM-F966NDBPKOO",
       "business_unit": "MX",
@@ -6472,6 +6712,16 @@
       "category": "smartphones",
       "name": "갤럭시 Z 폴드7 자급제 (삼성닷컴/삼성 강남 전용컬러)",
       "url": "https://www.samsung.com/sec/smartphones/galaxy-z-fold7-f966v-cpo/SM-F966NLGPKOO/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-F968NZKAKOO",
+      "market_product_key": "SM-F968NZKAKOO",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 Z 트라이폴드 자급제",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-trifold-f968/SM-F968NZKAKOO/",
       "has_specs": true,
       "has_support": false
     },
@@ -6646,6 +6896,26 @@
       "has_support": false
     },
     {
+      "sku": "SM-M156SDBASKC",
+      "market_product_key": "SM-M156SDBASKC",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 와이드7 사업자향 (SKT)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-m15-5g-m156-co/SM-M156SDBASKC/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-M166SZKASKC",
+      "market_product_key": "SM-M166SZKASKC",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 와이드8 사업자향 (SKT)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-m16-5g-m166-co/SM-M166SZKASKC/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
       "sku": "SM-M176SZKASKC",
       "market_product_key": "SM-M176SZKASKC",
       "business_unit": "MX",
@@ -6663,6 +6933,36 @@
       "name": "갤럭시 점프4 사업자향 (KT)",
       "url": "https://www.samsung.com/sec/smartphones/galaxy-m36-5g-sm-m366/SM-M366KZKCKTC/",
       "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-Q505NZDAKOO",
+      "market_product_key": "SM-Q505NZDAKOO",
+      "business_unit": "MX",
+      "category": "rings",
+      "name": "갤럭시 링",
+      "url": "https://www.samsung.com/sec/rings/galaxyring-q505/SM-Q505NZDAKOO/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "SM-Q505NZKAKOO",
+      "market_product_key": "SM-Q505NZKAKOO",
+      "business_unit": "MX",
+      "category": "rings",
+      "name": "갤럭시 링",
+      "url": "https://www.samsung.com/sec/rings/galaxyring-q505/SM-Q505NZKAKOO/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "SM-Q505NZSAKOO",
+      "market_product_key": "SM-Q505NZSAKOO",
+      "business_unit": "MX",
+      "category": "rings",
+      "name": "갤럭시 링",
+      "url": "https://www.samsung.com/sec/rings/galaxyring-q505/SM-Q505NZSAKOO/",
+      "has_specs": false,
       "has_support": false
     },
     {
@@ -6966,6 +7266,36 @@
       "has_support": false
     },
     {
+      "sku": "SM-S711NZPWKOD",
+      "market_product_key": "SM-S711NZPWKOD",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 S23 FE 통신사폰 (SKT/KT/LG U+)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-s23-fe-5g-s711/SM-S711NZPWKOD/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-S721NLBWKOD",
+      "market_product_key": "SM-S721NLBWKOD",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 S24 FE 통신사폰 (SKT/KT/LG U+)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-fe-sm-s721/SM-S721NLBWKOD/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-S721NLBWKOO",
+      "market_product_key": "SM-S721NLBWKOO",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 S24 FE 자급제",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-fe-s721/SM-S721NLBWKOO/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
       "sku": "SM-S731NDBWKOD",
       "market_product_key": "SM-S731NDBWKOD",
       "business_unit": "MX",
@@ -7002,6 +7332,96 @@
       "category": "smartphones",
       "name": "갤럭시 S26 FE 자급제",
       "url": "https://www.samsung.com/sec/smartphones/galaxy-s26-fe-s741/SM-S741NLGWKOO/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-S921NLBFKOO",
+      "market_product_key": "SM-S921NLBFKOO",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 S24 자급제 (삼성닷컴/삼성 강남 전용컬러)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-s921-cpo/SM-S921NLBFKOO/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-S921NZYFKOD",
+      "market_product_key": "SM-S921NZYFKOD",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 S24 통신사폰 (SKT/KT/LG U+)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-sm-s921/SM-S921NZYFKOD/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-S921NZYFKOO",
+      "market_product_key": "SM-S921NZYFKOO",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 S24 자급제",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-s921/SM-S921NZYFKOO/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-S926NLBEKOO",
+      "market_product_key": "SM-S926NLBEKOO",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 S24+ 자급제 (삼성닷컴/삼성 강남 전용컬러)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-plus-s926-cpo/SM-S926NLBEKOO/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-S926NZVEKOD",
+      "market_product_key": "SM-S926NZVEKOD",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 S24+ 통신사폰 (SKT/KT/LG U+)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-plus-sm-s926/SM-S926NZVEKOD/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-S926NZVEKOO",
+      "market_product_key": "SM-S926NZVEKOO",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 S24+ 자급제",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-plus-s926/SM-S926NZVEKOO/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-S928NLBNKOO",
+      "market_product_key": "SM-S928NLBNKOO",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 S24 울트라 자급제 (삼성닷컴/삼성 강남 전용컬러)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-ultra-s928-cpo/SM-S928NLBNKOO/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-S928NZTFKOD",
+      "market_product_key": "SM-S928NZTFKOD",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 S24 울트라 통신사폰 (SKT/KT/LG U+)",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-ultra-sm-s928/SM-S928NZTFKOD/",
+      "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-S928NZTNKOO",
+      "market_product_key": "SM-S928NZTNKOO",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 S24 울트라 자급제",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-ultra-s928/SM-S928NZTNKOO/",
       "has_specs": true,
       "has_support": false
     },
@@ -7073,6 +7493,16 @@
       "name": "갤럭시 S25 엣지 통신사폰 (SKT/KT/LG U+)",
       "url": "https://www.samsung.com/sec/smartphones/galaxy-s25-edge-sm-s937/SM-S937NZSBKOD/",
       "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "SM-S938NAKVKOO",
+      "market_product_key": "SM-S938NAKVKOO",
+      "business_unit": "MX",
+      "category": "smartphones",
+      "name": "갤럭시 S25 울트라 자급제 (삼성닷컴 전용컬러), 16GB+1TB",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-s25-ultra-s938-16-cpo/SM-S938NAKVKOO/",
+      "has_specs": false,
       "has_support": false
     },
     {
