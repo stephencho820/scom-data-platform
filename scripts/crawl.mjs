@@ -1420,7 +1420,7 @@ function parseCatalogListing(html, source) {
   const seen = new Set();
 
   for (let index = 0; index < lines.length; index++) {
-    const modelMatch = lines[index].split(/\s+/).map((part) => part.replace(/^[^A-Z0-9]+|[^A-Z0-9/-]+$/gi, "")).find((part) => pattern.test(part));
+    const modelMatch = lines[index].split(/\s+/).map((part) => part.replace(/^[^A-Z0-9]+|[^A-Z0-9/-]+$/gi, "")).find((part) => pattern.test(part) && validCatalogSku(part, source));
     if (!modelMatch) continue;
     const modelCode = String(modelMatch).toUpperCase();
     if (!validCatalogSku(modelCode, source)) continue;
@@ -2079,13 +2079,23 @@ for (const source of catalogSourceDefs) {
 
     // Static HTML is only a fallback. Product-finder API mdlCode is the preferred
     // evidence for DA/VD because generic page text contains many non-product tokens.
-    let rows = source.business_unit === "MX" ? parseCatalogListing(html, source) : [];
+    // Use Samsung's own goodsList API first for every BU; static HTML is a
+    // verified SKU fallback, not a substitute for variant-level API enumeration.
+    let rows = [];
+    try {
+      const rendered = await renderCatalogHtml(source.url, source);
+      rows = rendered.apiGoods.length ? parseCatalogApiGoods(rendered.apiGoods, source) : [];
+      if (!rows.length) rows = parseCatalogListing(rendered.visibleText, source);
+    } catch (renderError) {
+      console.error("catalog " + source.id + ": render/API unavailable: " + renderError.message);
+    }
+    if (!rows.length) rows = parseCatalogListing(html, source);
     if (!rows.length) {
       console.error("catalog " + source.id + ": static HTML has no product cards; using rendered/API fallback");
       const rendered = await renderCatalogHtml(source.url, source);
       rows = rendered.apiGoods.length
         ? parseCatalogApiGoods(rendered.apiGoods, source)
-        : (source.business_unit === "MX" ? parseCatalogListing(rendered.visibleText, source) : []);
+        : parseCatalogListing(rendered.visibleText, source);
     }
 
     if (!rows.length) throw new Error("No validated SKU records returned; catalog remains unverified");
