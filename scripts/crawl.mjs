@@ -27,6 +27,7 @@ const discoverOnly = process.argv.includes("--discover-only") || batchPages === 
 
 const registry = JSON.parse(await readFile(path.join(ROOT, "config/markets.json"), "utf8"));
 const crawlScope = JSON.parse(await readFile(path.join(ROOT, "config/crawl-scope.json"), "utf8"));
+const refreshPolicy = JSON.parse(await readFile(path.join(ROOT, "config/refresh-policy.json"), "utf8"));
 const catalogRegistry = JSON.parse(await readFile(path.join(ROOT, "config/catalog-sources.json"), "utf8"));
 const catalogSourceDefs = catalogRegistry.markets?.[marketCode] || [];
 const market = registry.markets.find((item) => item.code === marketCode);
@@ -2285,7 +2286,7 @@ if (explicitUrl) {
   selected = [explicitUrl];
 } else if (!discoverOnly) {
   const batch = selectDueUrls(targetUrls, visitedUrls, existingPages, urlAttempts, {
-    at: capturedAt, batchSize: batchPages
+    at: capturedAt, batchSize: batchPages, hours: refreshPolicy.hours
   });
   selected = batch.selected;
   console.error("incremental queue: " + JSON.stringify(batch.outstanding));
