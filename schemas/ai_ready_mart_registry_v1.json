@@ -1,0 +1,1992 @@
+{
+  "schema_version": "1.0.0-draft",
+  "status": "PROPOSED_NOT_IMPLEMENTED",
+  "purpose": "Samsung.com AI-ready MCP logical mart contracts; not evidence of collection or readiness",
+  "markets": [
+    "KR",
+    "US"
+  ],
+  "divisions": [
+    "DA",
+    "VD",
+    "MX",
+    "HARMAN"
+  ],
+  "common_fields": [
+    "market",
+    "locale",
+    "channel_id",
+    "source_id",
+    "source_url",
+    "source_hash",
+    "valid_from",
+    "valid_to",
+    "collected_at",
+    "verified_at",
+    "verification_status",
+    "data_status",
+    "schema_version"
+  ],
+  "enums": {
+    "verification_status": [
+      "verified",
+      "unverified",
+      "rejected"
+    ],
+    "data_status": [
+      "current",
+      "stale",
+      "missing",
+      "not_applicable"
+    ],
+    "model_match_status": [
+      "exact",
+      "verified_alias",
+      "mismatch",
+      "unverified"
+    ]
+  },
+  "rules": [
+    "Never infer missing values or downgrade readiness thresholds",
+    "Do not merge SKU-specific specs without verified model mapping",
+    "Do not present stale prices/offers as current",
+    "Real-time personalized quotes and delivery estimates require authenticated live APIs",
+    "Every published factual claim must trace to a source",
+    "Logical contracts are not physical tables or evidence of collected records"
+  ],
+  "marts": [
+    {
+      "id": "P01",
+      "name": "Product Catalog",
+      "domain": "Product",
+      "grain": [
+        "market",
+        "channel",
+        "sku"
+      ],
+      "primary_key": [
+        "market",
+        "channel",
+        "sku"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "sku",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "model_code",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "division",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "category_id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "product_name",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "lifecycle_status",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "product_url",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "P02",
+      "name": "Product Specifications",
+      "domain": "Product",
+      "grain": [
+        "market",
+        "sku",
+        "spec_key",
+        "applicability"
+      ],
+      "primary_key": [
+        "market",
+        "sku",
+        "spec_key",
+        "applicability"
+      ],
+      "refresh_policy": "correction",
+      "fields": [
+        {
+          "name": "sku",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "spec_key",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "raw_value",
+          "type": "string_or_number",
+          "required": false
+        },
+        {
+          "name": "normalized_value",
+          "type": "string_or_number",
+          "required": false
+        },
+        {
+          "name": "unit",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "source_model_code",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "model_match_status",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "P03",
+      "name": "Product Features",
+      "domain": "Product",
+      "grain": [
+        "market",
+        "model_code",
+        "feature_id"
+      ],
+      "primary_key": [
+        "market",
+        "model_code",
+        "feature_id"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "model_code",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "feature_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "benefit",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "limitations",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "P04",
+      "name": "Product Variants",
+      "domain": "Product",
+      "grain": [
+        "market",
+        "model_code",
+        "sku"
+      ],
+      "primary_key": [
+        "market",
+        "model_code",
+        "sku"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "model_code",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "sku",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "color",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "capacity",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "variant_options",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "P05",
+      "name": "Product Relationships",
+      "domain": "Product",
+      "grain": [
+        "market",
+        "source_sku",
+        "target_sku",
+        "relation_type"
+      ],
+      "primary_key": [
+        "market",
+        "source_sku",
+        "target_sku",
+        "relation_type"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "source_sku",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "target_sku",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "relation_type",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "evidence",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "P06",
+      "name": "Product Compatibility",
+      "domain": "Product",
+      "grain": [
+        "market",
+        "sku",
+        "compatible_sku",
+        "compatibility_type"
+      ],
+      "primary_key": [
+        "market",
+        "sku",
+        "compatible_sku",
+        "compatibility_type"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "sku",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "compatible_sku",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "compatibility_type",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "conditions",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "evidence",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "P07",
+      "name": "Product Lifecycle",
+      "domain": "Product",
+      "grain": [
+        "market",
+        "sku",
+        "event_type",
+        "effective_date"
+      ],
+      "primary_key": [
+        "market",
+        "sku",
+        "event_type",
+        "effective_date"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "sku",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "event_type",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "effective_date",
+          "type": "datetime",
+          "required": true
+        },
+        {
+          "name": "sales_status",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "C01",
+      "name": "Product Prices",
+      "domain": "Commerce",
+      "grain": [
+        "market",
+        "channel",
+        "sku",
+        "price_type",
+        "valid_from"
+      ],
+      "primary_key": [
+        "market",
+        "channel",
+        "sku",
+        "price_type",
+        "valid_from"
+      ],
+      "refresh_policy": "periodic",
+      "fields": [
+        {
+          "name": "sku",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "list_price",
+          "type": "string_or_number",
+          "required": false
+        },
+        {
+          "name": "sale_price",
+          "type": "string_or_number",
+          "required": false
+        },
+        {
+          "name": "currency",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "price_type",
+          "type": "string_or_number",
+          "required": true
+        },
+        {
+          "name": "valid_from",
+          "type": "datetime",
+          "required": true
+        },
+        {
+          "name": "valid_to",
+          "type": "datetime",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "C02",
+      "name": "Availability",
+      "domain": "Commerce",
+      "grain": [
+        "market",
+        "channel",
+        "sku",
+        "fulfillment_scope",
+        "checked_at"
+      ],
+      "primary_key": [
+        "market",
+        "channel",
+        "sku",
+        "fulfillment_scope",
+        "checked_at"
+      ],
+      "refresh_policy": "periodic",
+      "fields": [
+        {
+          "name": "sku",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "availability_status",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "stock_status",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "fulfillment_scope",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "checked_at",
+          "type": "datetime",
+          "required": true
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "C03",
+      "name": "Payment Options",
+      "domain": "Commerce",
+      "grain": [
+        "market",
+        "channel",
+        "payment_method",
+        "provider"
+      ],
+      "primary_key": [
+        "market",
+        "channel",
+        "payment_method",
+        "provider"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "payment_method",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "provider",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "eligibility",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "restrictions",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "C04",
+      "name": "Financing Options",
+      "domain": "Commerce",
+      "grain": [
+        "market",
+        "channel",
+        "provider",
+        "plan_id"
+      ],
+      "primary_key": [
+        "market",
+        "channel",
+        "provider",
+        "plan_id"
+      ],
+      "refresh_policy": "periodic",
+      "fields": [
+        {
+          "name": "provider",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "plan_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "months",
+          "type": "string_or_number",
+          "required": false
+        },
+        {
+          "name": "interest_rate",
+          "type": "string_or_number",
+          "required": false
+        },
+        {
+          "name": "min_amount",
+          "type": "string_or_number",
+          "required": false
+        },
+        {
+          "name": "max_amount",
+          "type": "string_or_number",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "C05",
+      "name": "Trade-in",
+      "domain": "Commerce",
+      "grain": [
+        "market",
+        "program_id",
+        "eligible_device",
+        "condition_grade"
+      ],
+      "primary_key": [
+        "market",
+        "program_id",
+        "eligible_device",
+        "condition_grade"
+      ],
+      "refresh_policy": "periodic",
+      "fields": [
+        {
+          "name": "program_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "eligible_device",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "condition_grade",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "credit_rule",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "return_policy",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "C06",
+      "name": "Offers",
+      "domain": "Commerce",
+      "grain": [
+        "market",
+        "channel",
+        "sku",
+        "offer_id"
+      ],
+      "primary_key": [
+        "market",
+        "channel",
+        "sku",
+        "offer_id"
+      ],
+      "refresh_policy": "periodic",
+      "fields": [
+        {
+          "name": "sku",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "offer_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "benefit_type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "benefit_value",
+          "type": "string_or_number",
+          "required": false
+        },
+        {
+          "name": "stacking_rule",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "C07",
+      "name": "Promotions",
+      "domain": "Commerce",
+      "grain": [
+        "market",
+        "channel",
+        "campaign_id",
+        "eligibility_id"
+      ],
+      "primary_key": [
+        "market",
+        "channel",
+        "campaign_id",
+        "eligibility_id"
+      ],
+      "refresh_policy": "periodic",
+      "fields": [
+        {
+          "name": "campaign_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "eligibility_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "promotion_type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "start_at",
+          "type": "datetime",
+          "required": false
+        },
+        {
+          "name": "end_at",
+          "type": "datetime",
+          "required": false
+        },
+        {
+          "name": "conditions",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "C08",
+      "name": "Delivery Options",
+      "domain": "Commerce",
+      "grain": [
+        "market",
+        "channel",
+        "delivery_type",
+        "region"
+      ],
+      "primary_key": [
+        "market",
+        "channel",
+        "delivery_type",
+        "region"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "delivery_type",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "fee_rule",
+          "type": "string_or_number",
+          "required": false
+        },
+        {
+          "name": "lead_time",
+          "type": "string_or_number",
+          "required": false
+        },
+        {
+          "name": "cutoff_time",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "C09",
+      "name": "Installation Services",
+      "domain": "Commerce",
+      "grain": [
+        "market",
+        "installation_type",
+        "product_scope",
+        "region"
+      ],
+      "primary_key": [
+        "market",
+        "installation_type",
+        "product_scope",
+        "region"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "installation_type",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "product_scope",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "fee_rule",
+          "type": "string_or_number",
+          "required": false
+        },
+        {
+          "name": "site_requirements",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "exclusions",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "C10",
+      "name": "Commerce Policies",
+      "domain": "Commerce",
+      "grain": [
+        "market",
+        "channel",
+        "policy_id",
+        "version"
+      ],
+      "primary_key": [
+        "market",
+        "channel",
+        "policy_id",
+        "version"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "policy_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "policy_type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "eligibility",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "time_limit",
+          "type": "string_or_number",
+          "required": false
+        },
+        {
+          "name": "exceptions",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "S01",
+      "name": "Subscription Programs",
+      "domain": "Subscription",
+      "grain": [
+        "market",
+        "program_id",
+        "plan_id"
+      ],
+      "primary_key": [
+        "market",
+        "program_id",
+        "plan_id"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "program_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "plan_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "plan_type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "eligible_categories",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "S02",
+      "name": "Subscription Plan Prices",
+      "domain": "Subscription",
+      "grain": [
+        "market",
+        "channel",
+        "plan_id",
+        "sku",
+        "term_months",
+        "valid_from"
+      ],
+      "primary_key": [
+        "market",
+        "channel",
+        "plan_id",
+        "sku",
+        "term_months",
+        "valid_from"
+      ],
+      "refresh_policy": "periodic",
+      "fields": [
+        {
+          "name": "plan_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "sku",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "monthly_fee",
+          "type": "string_or_number",
+          "required": false
+        },
+        {
+          "name": "term_months",
+          "type": "string_or_number",
+          "required": true
+        },
+        {
+          "name": "upfront_amount",
+          "type": "string_or_number",
+          "required": false
+        },
+        {
+          "name": "total_cost",
+          "type": "string_or_number",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "S03",
+      "name": "Subscription Benefits",
+      "domain": "Subscription",
+      "grain": [
+        "market",
+        "plan_id",
+        "benefit_id"
+      ],
+      "primary_key": [
+        "market",
+        "plan_id",
+        "benefit_id"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "plan_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "benefit_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "benefit_type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "coverage",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "service_frequency",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "S04",
+      "name": "Subscription Policies",
+      "domain": "Subscription",
+      "grain": [
+        "market",
+        "plan_id",
+        "contract_rule_id"
+      ],
+      "primary_key": [
+        "market",
+        "plan_id",
+        "contract_rule_id"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "plan_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "contract_rule_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "ownership",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "termination_rule",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "end_of_term",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "fee_formula",
+          "type": "string_or_number",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "U01",
+      "name": "Membership Rewards",
+      "domain": "CustomerChannel",
+      "grain": [
+        "market",
+        "channel",
+        "tier",
+        "benefit_id"
+      ],
+      "primary_key": [
+        "market",
+        "channel",
+        "tier",
+        "benefit_id"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "tier",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "benefit_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "point_rate",
+          "type": "string_or_number",
+          "required": false
+        },
+        {
+          "name": "benefit",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "eligibility",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "U02",
+      "name": "Eligibility Programs",
+      "domain": "CustomerChannel",
+      "grain": [
+        "market",
+        "program_id",
+        "customer_group"
+      ],
+      "primary_key": [
+        "market",
+        "program_id",
+        "customer_group"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "program_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "customer_group",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "verification_method",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "discount_rule",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "U03",
+      "name": "Sales Channels",
+      "domain": "CustomerChannel",
+      "grain": [
+        "market",
+        "channel_id"
+      ],
+      "primary_key": [
+        "market",
+        "channel_id"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "channel_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "channel_type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "region",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "access_rules",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "U04",
+      "name": "Carrier Activation",
+      "domain": "CustomerChannel",
+      "grain": [
+        "market",
+        "carrier_id",
+        "plan_id",
+        "sku"
+      ],
+      "primary_key": [
+        "market",
+        "carrier_id",
+        "plan_id",
+        "sku"
+      ],
+      "refresh_policy": "periodic",
+      "fields": [
+        {
+          "name": "carrier_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "plan_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "sku",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "activation_terms",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "H01",
+      "name": "Support Documents",
+      "domain": "Support",
+      "grain": [
+        "market",
+        "document_id",
+        "version",
+        "section_id"
+      ],
+      "primary_key": [
+        "market",
+        "document_id",
+        "version",
+        "section_id"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "document_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "version",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "section_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "model_code",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "language",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "H02",
+      "name": "FAQ Troubleshooting",
+      "domain": "Support",
+      "grain": [
+        "market",
+        "issue_id",
+        "resolution_id"
+      ],
+      "primary_key": [
+        "market",
+        "issue_id",
+        "resolution_id"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "issue_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "resolution_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "symptom",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "error_code",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "steps",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "warnings",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "escalation",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "H03",
+      "name": "Warranty Repair",
+      "domain": "Support",
+      "grain": [
+        "market",
+        "product_scope",
+        "coverage_type",
+        "policy_id"
+      ],
+      "primary_key": [
+        "market",
+        "product_scope",
+        "coverage_type",
+        "policy_id"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "product_scope",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "coverage_type",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "policy_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "duration",
+          "type": "string_or_number",
+          "required": false
+        },
+        {
+          "name": "exclusions",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "repair_policy",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "H04",
+      "name": "Care Plans",
+      "domain": "Support",
+      "grain": [
+        "market",
+        "care_plan_id",
+        "product_scope"
+      ],
+      "primary_key": [
+        "market",
+        "care_plan_id",
+        "product_scope"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "care_plan_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "product_scope",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "coverage",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "fee",
+          "type": "string_or_number",
+          "required": false
+        },
+        {
+          "name": "claim_limits",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "H05",
+      "name": "Service Channels",
+      "domain": "Support",
+      "grain": [
+        "market",
+        "service_channel_id",
+        "region"
+      ],
+      "primary_key": [
+        "market",
+        "service_channel_id",
+        "region"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "service_channel_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "service_type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "region",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "location",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "hours",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "booking_url",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "A01",
+      "name": "AI Search Documents",
+      "domain": "AI",
+      "grain": [
+        "market",
+        "source_document_id",
+        "chunk_id"
+      ],
+      "primary_key": [
+        "market",
+        "source_document_id",
+        "chunk_id"
+      ],
+      "refresh_policy": "derived",
+      "fields": [
+        {
+          "name": "source_document_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "chunk_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "entity_ids",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "keywords",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "source_ref",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "A02",
+      "name": "Recommendation Attributes",
+      "domain": "AI",
+      "grain": [
+        "market",
+        "sku",
+        "attribute"
+      ],
+      "primary_key": [
+        "market",
+        "sku",
+        "attribute"
+      ],
+      "refresh_policy": "derived",
+      "fields": [
+        {
+          "name": "sku",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "attribute",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "string_or_number",
+          "required": false
+        },
+        {
+          "name": "evidence",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "constraint",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "E01",
+      "name": "Reviews Buying Guides",
+      "domain": "Content",
+      "grain": [
+        "market",
+        "content_id",
+        "product_scope"
+      ],
+      "primary_key": [
+        "market",
+        "content_id",
+        "product_scope"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "content_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "content_type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "rating",
+          "type": "string_or_number",
+          "required": false
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "product_scope",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "G01",
+      "name": "Source Registry",
+      "domain": "Governance",
+      "grain": [
+        "source_id",
+        "version"
+      ],
+      "primary_key": [
+        "source_id",
+        "version"
+      ],
+      "refresh_policy": "change",
+      "fields": [
+        {
+          "name": "source_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "source_type",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "content_hash",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "fetched_at",
+          "type": "datetime",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "G02",
+      "name": "Collection Operations",
+      "domain": "Governance",
+      "grain": [
+        "run_id",
+        "target_id"
+      ],
+      "primary_key": [
+        "run_id",
+        "target_id"
+      ],
+      "refresh_policy": "periodic",
+      "fields": [
+        {
+          "name": "run_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "target_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "error_code",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "attempts",
+          "type": "string_or_number",
+          "required": false
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    },
+    {
+      "id": "G03",
+      "name": "Quality Readiness",
+      "domain": "Governance",
+      "grain": [
+        "market",
+        "entity_id",
+        "rule_id",
+        "evaluated_at"
+      ],
+      "primary_key": [
+        "market",
+        "entity_id",
+        "rule_id",
+        "evaluated_at"
+      ],
+      "refresh_policy": "derived",
+      "fields": [
+        {
+          "name": "entity_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "rule_id",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "result",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "reason",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "evaluated_at",
+          "type": "datetime",
+          "required": true
+        }
+      ],
+      "quality_rules": [
+        "unique_primary_key",
+        "valid_source_reference",
+        "no_unverified_claims",
+        "freshness_by_policy"
+      ],
+      "mcp_exposure": "read_only",
+      "implementation_status": "not_assessed"
+    }
+  ]
+}
