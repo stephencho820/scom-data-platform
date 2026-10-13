@@ -33,6 +33,7 @@ jobs:
           node --check scripts/build-demo-data.mjs
           node --check src/pipeline/incremental.mjs
           node --check src/pipeline/spec-pdp.mjs
+          node --check src/pipeline/support-specs.mjs
           node --check src/pipeline/scheduler.mjs
           node --check src/mcp/server.mjs
           node --check web/site.js
