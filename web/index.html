@@ -1,316 +1,188 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Make Samsung.com data usable for AI agents: SKU-first product profiles, source-linked knowledge, selective updates, and open MCP tools." />
-  <title>S.com Data Platform</title>
-  <link rel="stylesheet" href="./styles.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8fc">
+  <meta name="description" content="S.com Data Platform: four data lifecycles, incremental Samsung.com data, and MCP for AI shopping agents.">
+  <title>S.com Data Platform — One source. Four lifecycles.</title>
+  <link rel="stylesheet" href="./landing.css">
 </head>
 <body>
-  <header>
-    <a class="brand" href="./">S.com Data Platform</a>
-    <nav aria-label="Primary navigation">
-      <a href="#why">Why MCP</a>
-      <a href="#lifecycle">Data strategy</a>
-      <a class="nav-primary" href="#dashboard">KR Dashboard</a>
-      <a href="#explorer">Data Explorer</a>
-      <a class="nav-optional" href="#architecture">Architecture</a>
-      <a class="nav-optional" href="#markets">Markets</a>
-      <a href="#mcp">Get started</a>
-      <a class="nav-github" href="https://github.com/stephencho820/scom-data-platform" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-    </nav>
+  <a href="#main" class="skip-link" data-i18n="skip">본문으로 바로가기</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./" aria-label="S.com Data Platform home"><span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>S.com <b>Data Platform</b></span></a>
+      <nav class="main-nav" aria-label="Main">
+        <a href="#lifecycle" data-i18n="navLifecycle">4가지 데이터</a>
+        <a href="#demo" data-i18n="navDemo">작동 방식</a>
+        <a href="#connect" data-i18n="navConnect">MCP 연결</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-switch" aria-label="Language">
+          <button type="button" data-lang="kr" aria-pressed="true">KR</button>
+          <span aria-hidden="true">/</span>
+          <button type="button" data-lang="us" aria-pressed="false">US</button>
+        </div>
+        <a class="header-cta" href="#connect"><span data-i18n="tryMcp">MCP 시작하기</span><span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <section class="hero" aria-labelledby="hero-title">
-      <p class="eyebrow">OPEN · TEXT-FIRST · AGENT-NATIVE</p>
-      <h1 id="hero-title">Samsung.com,<br />as usable data.</h1>
-      <p class="lede">A reusable, SKU-first data layer for AI shopping assistants. Capture enduring product facts once, refresh what changes, and access source-linked answers through MCP.</p>
-      <div class="actions">
-        <a class="primary" href="#mcp">Use the MCP <span aria-hidden="true">↗</span></a>
-        <a class="secondary" href="#why">Why this platform?</a>
-        <a class="secondary" href="#dashboard">View data health</a>
-        <a class="secondary" href="#explorer">Explore the catalog</a>
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="live-dot"></span><span data-i18n="heroEyebrow">AI 에이전트를 위한 삼성닷컴 데이터 플랫폼</span></p>
+        <h1 id="hero-title"><span data-i18n="heroTitle1">제품 정보는 한 번.</span><br><span class="gradient-text" data-i18n="heroTitle2">바뀌는 정보만 새롭게.</span></h1>
+        <p class="hero-desc" data-i18n="heroDescription">제품 스펙부터 가격, 재고까지. 모든 정보를 똑같이 크롤링할 필요는 없습니다. 데이터의 성격에 따라 수집하고, 하나의 MCP로 제공합니다.</p>
+        <div class="hero-buttons">
+          <a href="#lifecycle" class="button button-primary"><span data-i18n="exploreTypes">4가지 유형 살펴보기</span> <span aria-hidden="true">↓</span></a>
+          <a href="#demo" class="button button-outline"><span data-i18n="seeExample">실제 흐름 보기</span> <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="hero-foot">
+          <span class="tiny-icon">✓</span><span data-i18n="heroFoot1">SKU 중심으로 정리</span>
+          <span class="tiny-divider"></span>
+          <span class="tiny-icon">✓</span><span data-i18n="heroFoot2">출처 및 최신성 확인</span>
+        </div>
       </div>
-      <div class="hero-proof" aria-label="Platform principles">
-        <span>SKU-first identity</span>
-        <span>Market-aware</span>
-        <span>Source-linked records</span>
-        <span>Incremental by design</span>
+      <div class="hero-visual" aria-label="Illustrative routing diagram">
+        <div class="visual-heading">
+          <span class="visual-eyebrow" data-i18n="visualEyebrow">데이터 처리 구조 · 개념 예시</span>
+          <span class="visual-indicator"><span></span> POC</span>
+        </div>
+        <div class="visual-source"><span class="source-mark">S</span><div><strong>Samsung.com</strong><small data-i18n="visualSource">국가별 제품 및 서비스 정보</small></div><span class="source-arrow">↓</span></div>
+        <div class="visual-line"></div>
+        <div class="route-stack">
+          <div class="route-row route-a"><span class="route-letter">A</span><div><strong data-i18n="visualA">제품 스펙</strong><small data-i18n="visualADesc">최초 수집 · 재사용</small></div><span class="route-status" data-i18n="visualAStatus">KEEP</span></div>
+          <div class="route-row route-b"><span class="route-letter">B</span><div><strong data-i18n="visualB">FAQ · 정책</strong><small data-i18n="visualBDesc">변경될 때만 업데이트</small></div><span class="route-status" data-i18n="visualBStatus">DETECT</span></div>
+          <div class="route-row route-c"><span class="route-letter">C</span><div><strong data-i18n="visualC">가격 · 프로모션</strong><small data-i18n="visualCDesc">주기적으로 확인</small></div><span class="route-status" data-i18n="visualCStatus">REFRESH</span></div>
+          <div class="route-row route-d"><span class="route-letter">D</span><div><strong data-i18n="visualD">재고 · 배송</strong><small data-i18n="visualDDesc">공식 실시간 연동 필요</small></div><span class="route-status" data-i18n="visualDStatus">CONNECT</span></div>
+        </div>
+        <div class="visual-line"></div>
+        <div class="visual-result"><span class="result-icon" aria-hidden="true">✳</span><div><strong>One MCP Interface</strong><small data-i18n="visualBottom">필요한 데이터를 에이전트에 전달</small></div><span aria-hidden="true">↗</span></div>
       </div>
     </section>
 
-
-    <section class="story-section why-section" id="why" aria-labelledby="why-title">
-      <div class="section-heading story-heading">
-        <div>
-          <p class="eyebrow">WHY S.COM DATA PLATFORM</p>
-          <h2 id="why-title">Stop scraping pages.<br />Start asking questions.</h2>
+    <section class="type-section" id="lifecycle" aria-labelledby="type-title">
+      <div class="wrap">
+        <div class="section-intro">
+          <div><p class="eyebrow" data-i18n="typesEyebrow">THE FOUR DATA LIFECYCLES</p><h2 id="type-title"><span data-i18n="typesTitle1">데이터가 다르면,</span><br><span data-i18n="typesTitle2">수집 방식도 달라야 합니다.</span></h2></div>
+          <p class="section-desc" data-i18n="typesDescription">삼성닷컴 챗봇에 필요한 데이터를 네 가지로 구분했습니다. 각 카드를 누르면 실제 질문에 어떻게 활용되는지 볼 수 있어요.</p>
         </div>
-        <p>Samsung.com spans markets, product categories and thousands of sellable variants. Agents need consistent product identities, reliable source links and an honest view of how fresh the answer is—not another pile of pages.</p>
-      </div>
-      <div class="value-cards">
-        <article class="value-card">
-          <span class="value-index">01 / FIND</span>
-          <h3>One product. Many variants.</h3>
-          <p>Color, storage, capacity and region can create distinct SKUs. Follow a clear <strong>Market → Business Unit → Category → Family → Model → SKU</strong> hierarchy instead of guessing from product names or URLs.</p>
-          <div class="value-foot">Exact SKU lookups</div>
-        </article>
-        <article class="value-card">
-          <span class="value-index">02 / TRUST</span>
-          <h3>Answers with evidence.</h3>
-          <p>Normalized specs, offers and support resources retain their Samsung.com source URLs. Lifecycle and readiness checks help agents distinguish verified information from gaps.</p>
-          <div class="value-foot">Source-linked data marts</div>
-        </article>
-        <article class="value-card">
-          <span class="value-index">03 / REUSE</span>
-          <h3>Collect intelligently.</h3>
-          <p>Keep product identity and hardware specs, detect changes to knowledge and commerce, and update affected records—without treating every refresh as a full product rebuild.</p>
-          <div class="value-foot">Less repeat processing</div>
-        </article>
+
+        <div class="types-grid" role="group" aria-label="Four data lifecycles">
+          <button class="type-card type-a is-active" type="button" data-type="a" aria-pressed="true">
+            <span class="type-top"><span class="type-letter">A</span><span class="type-tag" data-i18n="aTag">ONCE</span></span>
+            <strong class="type-heading" data-i18n="aHeading">한 번 수집</strong>
+            <span class="type-english">Immutable</span>
+            <span class="type-description" data-i18n="aDesc">제품명, SKU, 스펙, 크기, 색상처럼 오래 유지되는 정보</span>
+            <span class="type-spacer"></span>
+            <span class="type-divider"></span>
+            <span class="type-label" data-i18n="typeStrategy">수집 전략</span>
+            <strong class="type-strategy" data-i18n="aStrategy">최초 구축 후 재사용</strong>
+            <span class="type-example" data-i18n="aExample">예: 갤럭시 카메라 사양</span>
+            <span class="type-action" aria-hidden="true">↗</span>
+          </button>
+          <button class="type-card type-b" type="button" data-type="b" aria-pressed="false">
+            <span class="type-top"><span class="type-letter">B</span><span class="type-tag" data-i18n="bTag">ON CHANGE</span></span>
+            <strong class="type-heading" data-i18n="bHeading">바뀔 때만</strong>
+            <span class="type-english">Versioned</span>
+            <span class="type-description" data-i18n="bDesc">FAQ, 사용 설명서, 호환성, 서비스 정책처럼 가끔 수정되는 정보</span>
+            <span class="type-spacer"></span>
+            <span class="type-divider"></span>
+            <span class="type-label" data-i18n="typeStrategy">수집 전략</span>
+            <strong class="type-strategy" data-i18n="bStrategy">변경 감지 후 갱신</strong>
+            <span class="type-example" data-i18n="bExample">예: 새로 추가된 FAQ</span>
+            <span class="type-action" aria-hidden="true">↗</span>
+          </button>
+          <button class="type-card type-c" type="button" data-type="c" aria-pressed="false">
+            <span class="type-top"><span class="type-letter">C</span><span class="type-tag" data-i18n="cTag">SCHEDULED</span></span>
+            <strong class="type-heading" data-i18n="cHeading">자주 새롭게</strong>
+            <span class="type-english">Dynamic</span>
+            <span class="type-description" data-i18n="cDesc">가격, 할인, 프로모션, 판매 상태처럼 자주 달라지는 정보</span>
+            <span class="type-spacer"></span>
+            <span class="type-divider"></span>
+            <span class="type-label" data-i18n="typeStrategy">수집 전략</span>
+            <strong class="type-strategy" data-i18n="cStrategy">주기적 확인 · 변경분 반영</strong>
+            <span class="type-example" data-i18n="cExample">예: 오늘의 판매 가격</span>
+            <span class="type-action" aria-hidden="true">↗</span>
+          </button>
+          <button class="type-card type-d" type="button" data-type="d" aria-pressed="false">
+            <span class="type-top"><span class="type-letter">D</span><span class="type-tag" data-i18n="dTag">ON DEMAND</span></span>
+            <strong class="type-heading" data-i18n="dHeading">그때 바로</strong>
+            <span class="type-english">Real-time</span>
+            <span class="type-description" data-i18n="dDesc">지역별 재고, 배송 예정일, 개인 혜택, 주문 상태처럼 고객마다 다른 정보</span>
+            <span class="type-spacer"></span>
+            <span class="type-divider"></span>
+            <span class="type-label" data-i18n="typeStrategy">수집 전략</span>
+            <strong class="type-strategy" data-i18n="dStrategy">질문 시 공식 API 조회</strong>
+            <span class="type-example" data-i18n="dExample">예: 내일 배송 가능할까?</span>
+            <span class="type-action" aria-hidden="true">↗</span>
+          </button>
+        </div>
+        <p class="type-caveat"><span aria-hidden="true">ⓘ</span> <span data-i18n="typeCaveat">A도 정정 가능성을 확인합니다. D는 크롤링 데이터가 아닌 별도 공식 API 연동이 필요하며, 현재 공개 MCP에는 포함되지 않습니다.</span></p>
       </div>
     </section>
 
-    <section class="story-section lifecycle-section" id="lifecycle" aria-labelledby="lifecycle-title">
-      <div class="section-heading story-heading">
-        <div>
-          <p class="eyebrow">THE DATA LIFECYCLE</p>
-          <h2 id="lifecycle-title">Not every field<br />needs the same clock.</h2>
-        </div>
-        <p>Four data behaviors, four collection strategies. The result is a persistent product profile with separate freshness rules for the information that can change.</p>
+    <section class="demo-section wrap" id="demo" aria-labelledby="demo-title">
+      <div class="section-intro">
+        <div><p class="eyebrow" data-i18n="demoEyebrow">INTERACTIVE POC</p><h2 id="demo-title"><span data-i18n="demoTitle1">질문 하나로 이해하는</span><br><span data-i18n="demoTitle2">데이터의 흐름.</span></h2></div>
+        <p class="section-desc" data-i18n="demoDescription">아래 시나리오를 선택해 보세요. 챗봇이 어떤 데이터 계층을 사용할지, MCP에서는 무엇을 호출할지 보여드립니다.</p>
       </div>
-      <div class="lifecycle-grid">
-        <article class="life-card life-immutable">
-          <div class="life-top"><span class="life-code">A / IMMUTABLE</span><span class="life-badge">Capture once</span></div>
-          <h3>Product master</h3>
-          <p>Identity and stable hardware facts: SKU, model, dimensions, core specifications and variant attributes.</p>
-          <div class="life-rule"><small>Collection</small><strong>On discovery; recheck exceptions</strong></div>
-          <div class="life-rule"><small>Store</small><strong>Durable SKU registry</strong></div>
-        </article>
-        <article class="life-card life-versioned">
-          <div class="life-top"><span class="life-code">B / VERSIONED</span><span class="life-badge">On change</span></div>
-          <h3>Knowledge</h3>
-          <p>FAQs, manuals, support guidance, compatibility, policies and corrected product descriptions.</p>
-          <div class="life-rule"><small>Collection</small><strong>Check for changes; update deltas</strong></div>
-          <div class="life-rule"><small>Store</small><strong>Latest + meaningful versions</strong></div>
-        </article>
-        <article class="life-card life-dynamic">
-          <div class="life-top"><span class="life-code">C / DYNAMIC</span><span class="life-badge">Refresh often</span></div>
-          <h3>Commerce</h3>
-          <p>Market prices, discounts, promotions, buyability, offers and product lifecycle state.</p>
-          <div class="life-rule"><small>Collection</small><strong>Scheduled freshness checks</strong></div>
-          <div class="life-rule"><small>Store</small><strong>Current values + useful history</strong></div>
-        </article>
-        <article class="life-card life-realtime">
-          <div class="life-top"><span class="life-code">D / REAL-TIME</span><span class="life-badge badge-roadmap">Integration needed</span></div>
-          <h3>Live services</h3>
-          <p>Checkout-specific totals, local inventory, delivery estimates, personalized benefits and orders.</p>
-          <div class="life-rule"><small>Collection</small><strong>Query authorized live APIs</strong></div>
-          <div class="life-rule"><small>Store</small><strong>Not inferred from crawled pages</strong></div>
-        </article>
-      </div>
-      <p class="strategy-note"><strong>Important:</strong> “Capture once” describes the default enrichment strategy, not a guarantee that facts never need correction. Live inventory, delivery, account and order APIs are <strong>not included</strong> in the public static-data MCP today; they require separate authorized integrations.</p>
-    </section>
-
-    <section class="story-section flow-section" aria-labelledby="flow-title">
-      <div class="section-heading story-heading">
-        <div>
-          <p class="eyebrow">HOW IT WORKS</p>
-          <h2 id="flow-title">New SKUs in.<br />Only changes move.</h2>
-        </div>
-        <p>Discovery is separate from enrichment. Known products keep their stable records while targeted collection focuses on new variants and data whose freshness actually matters.</p>
-      </div>
-      <ol class="flow-steps">
-        <li><span class="flow-number">01</span><strong>Discover</strong><small>Find market SKUs &amp; variants</small></li>
-        <li><span class="flow-number">02</span><strong>Enrich once</strong><small>Build source-linked master data</small></li>
-        <li><span class="flow-number">03</span><strong>Check changes</strong><small>Observe support &amp; commerce</small></li>
-        <li><span class="flow-number">04</span><strong>Update marts</strong><small>Write only meaningful differences</small></li>
-        <li><span class="flow-number">05</span><strong>Serve via MCP</strong><small>Let agents query normalized data</small></li>
-      </ol>
-      <div class="scenario">
-        <div class="scenario-title">
-          <span class="eyebrow">EXAMPLE · ONE SKU OVER TIME</span>
-          <h3>The specs stay. The offer changes.</h3>
-          <p>Illustrative workflow, not a claim about a specific product or a live offer.</p>
-        </div>
-        <div class="scenario-events">
-          <div><span class="event-dot event-new"></span><strong>New SKU discovered</strong><small>Create Product Master</small></div>
-          <div><span class="event-dot event-commerce"></span><strong>Price changes</strong><small>Update Commerce only</small></div>
-          <div><span class="event-dot event-knowledge"></span><strong>FAQ gets revised</strong><small>Update Knowledge only</small></div>
-          <div><span class="event-dot event-live"></span><strong>Delivery is asked</strong><small>Requires live integration</small></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="story-section agent-section" aria-labelledby="agent-title">
-      <div class="section-heading story-heading">
-        <div>
-          <p class="eyebrow">BUILT FOR AGENT DEVELOPERS</p>
-          <h2 id="agent-title">Give your agent<br />better building blocks.</h2>
-        </div>
-        <p>Use structured, market-aware MCP tools instead of parsing Samsung.com pages inside every conversation. Capabilities depend on what has been collected and verified in each market.</p>
-      </div>
-      <div class="agent-cases">
-        <article>
-          <p class="agent-question">“Find the exact model and its specs.”</p>
-          <h3>Product discovery &amp; comparison</h3>
-          <p>Search by market, resolve a SKU, and retrieve normalized product specifications.</p>
-          <code>search_products</code> <code>get_product_specs</code>
-        </article>
-        <article>
-          <p class="agent-question">“What offer is recorded for this SKU?”</p>
-          <h3>Commerce context</h3>
-          <p>Read the latest collected offer and changes over time—not a guaranteed checkout quote.</p>
-          <code>get_market_offer</code> <code>get_product_history</code>
-        </article>
-        <article>
-          <p class="agent-question">“Where is the official support information?”</p>
-          <h3>Knowledge &amp; provenance</h3>
-          <p>Retrieve manuals and support resources with their original source references.</p>
-          <code>get_support_resources</code> <code>get_kr_sku_knowledge</code>
-        </article>
-      </div>
-      <div class="agent-cta">
-        <p><strong>See the actual coverage before using it.</strong> An incomplete crawl is not a complete catalog. Readiness checks surface missing SKUs, failed sources and support gaps.</p>
-        <div class="agent-cta-actions"><a class="primary" href="#dashboard">Check KR readiness</a><a class="secondary" href="#mcp">Connect with MCP ↗</a></div>
-      </div>
-    </section>
-    <section class="dashboard-section" id="dashboard" aria-labelledby="dashboard-title">
-      <div class="section-heading"><div><p class="eyebrow">KR · CATALOG HEALTH</p><h2 id="dashboard-title">Data dashboard</h2></div><p>Monitor SKU discovery, category coverage, failed sources and chatbot readiness. All figures are loaded from the latest published crawl data.</p></div>
-      <div class="dashboard-content">
-        <div class="dash-top"><div><p id="updated">Loading latest snapshot…</p></div><span id="ready" class="pill">Checking…</span></div>
-        <div class="cards" id="cards" aria-live="polite"></div><div class="panel"><h3>Incremental data sync</h3><p id="sync-status">Awaiting first incremental crawl. This is separate from chatbot READY.</p><div class="cards" id="sync-cards"></div><p>Product profiles/specs are retained; verified offers and commerce update independently. A successful sync alone does not certify SKU completeness.</p></div><div class="panel"><h3>Catalog verification</h3><p id="catalog-verification-note">Checking whether all official category sources were successfully enumerated…</p><p id="catalog-verification-status" aria-live="polite"></p><p>SKU counts below compare the crawler’s discovered IDs against its stored database. Matching counts do <strong>not</strong> independently prove that every Samsung.com SKU was discovered.</p></div>
-        <div class="panel"><div class="panel-head"><div><h3>Category coverage</h3><p>Official catalog source → discovered SKU → database SKU</p></div><div class="filters"><select id="bu" aria-label="Business unit"><option value="ALL">All business units</option><option>MX</option><option>VD</option><option>DA</option><option>HARMAN</option></select><select id="status" aria-label="Source status"><option value="ALL">All statuses</option><option value="failed">Failed</option><option value="ok">OK</option></select><input id="search" type="search" placeholder="Search categories" aria-label="Search categories"></div></div><div class="scroll"><table><thead><tr><th>Business unit / Category</th><th>Discovered</th><th>DB</th><th>Missing</th><th>Unexpected</th><th>Status</th><th>Source</th></tr></thead><tbody id="categories"></tbody></table></div></div>
-        <div class="columns"><div class="panel"><h3>Readiness gates</h3><p>Every gate must pass before READY: TRUE.</p><div id="gates"></div></div><div class="panel"><h3>Failed sources</h3><p>Failed categories must not be interpreted as zero products.</p><div id="failures"></div></div></div>
-        <div class="panel"><h3>New product monitoring</h3><p id="history-note">SKU change comparisons require verified previous and current snapshots.</p><div id="changes" class="muted">No comparison history available yet.</div></div>
-      </div>
-    </section>
-
-    <section class="explorer-section" id="explorer">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">DATA EXPLORER</p>
-          <h2>Korea SKU Catalog</h2>
-        </div>
-        <p>Samsung Korea products indexed by SKU. Browse BU → Category → Product Family → Model → SKU, with variant attributes and source evidence.</p>
-      </div>
-
-      <div class="explorer-shell">
-        <div class="explorer-toolbar">
-          <div class="control"><span>Market</span><strong>KR · Korea</strong></div>
-
-          <div class="control">
-            <span>Dataset</span>
-            <div class="segmented" role="group" aria-label="Select dataset">
-              <button class="dataset-tab active" type="button" data-dataset="products">Products</button>
-              <button class="dataset-tab" type="button" data-dataset="pages">Pages</button>
-              <button class="dataset-tab" type="button" data-dataset="history">History</button>
-            </div>
+      <div class="demo-shell">
+        <div class="demo-left">
+          <p class="demo-section-label" data-i18n="demoChoose">질문을 선택하세요</p>
+          <div class="demo-options" role="group" aria-label="Example questions">
+            <button class="demo-option is-active" data-scenario="a" type="button" aria-pressed="true"><span>A</span><span data-i18n="demoOptionA">이 제품의 스펙은?</span><b aria-hidden="true">↗</b></button>
+            <button class="demo-option" data-scenario="b" type="button" aria-pressed="false"><span>B</span><span data-i18n="demoOptionB">사용법이 바뀌었나요?</span><b aria-hidden="true">↗</b></button>
+            <button class="demo-option" data-scenario="c" type="button" aria-pressed="false"><span>C</span><span data-i18n="demoOptionC">지금 할인 중인가요?</span><b aria-hidden="true">↗</b></button>
+            <button class="demo-option" data-scenario="d" type="button" aria-pressed="false"><span>D</span><span data-i18n="demoOptionD">내일 배송되나요?</span><b aria-hidden="true">↗</b></button>
           </div>
-
-          <label class="control" id="bu-control">
-            <span>Business Unit</span>
-            <select id="explorer-bu" aria-label="Select business unit">
-              <option value="ALL">All BU</option>
-              <option value="DA">DA · Digital Appliances</option>
-              <option value="VD">VD · Visual Display</option>
-              <option value="MX">MX · Mobile eXperience</option>
-              <option value="HARMAN">HARMAN</option>
-            </select>
-          </label>
-
-          <label class="control search-control">
-            <span>Search</span>
-            <input id="explorer-search" type="search" placeholder="Search products…" autocomplete="off" />
-          </label>
+          <div class="demo-notice"><span class="demo-notice-icon">✦</span><p data-i18n="demoDisclaimer">작동 방식을 설명하는 시뮬레이션입니다. 실제 데이터 조회나 실시간 API 호출은 수행하지 않습니다.</p></div>
         </div>
-
-        <div class="explorer-meta">
-          <div id="explorer-summary">Loading dataset…</div>
-          <div id="explorer-captured"></div>
-        </div>
-
-        <div id="explorer-results" class="explorer-results" aria-live="polite"></div>
-
-        <div class="explorer-footer">
-          <button id="explorer-more" class="load-more" type="button" hidden>Show more</button>
+        <div class="demo-right">
+          <div class="demo-screen-top"><span class="screen-dots"><i></i><i></i><i></i></span><span data-i18n="screenTitle">AGENT DATA ROUTE · SIMULATION</span><span class="demo-mode" data-i18n="screenDemo">DEMO</span></div>
+          <div class="demo-screen">
+            <div class="screen-step-label">01 <span data-i18n="screenQuestion">CUSTOMER QUESTION</span></div>
+            <div class="question-bubble" id="demo-question">“이 제품의 스펙은?”</div>
+            <div class="routing-arrow" aria-hidden="true">↓</div>
+            <div class="screen-step-label">02 <span data-i18n="screenRoute">DATA ROUTE</span></div>
+            <div class="decision-card"><div class="decision-symbol" id="demo-symbol">A</div><div><strong id="demo-route">Immutable · Product Master</strong><small id="demo-explanation">한 번 구축한 SKU 제품 사양을 재사용합니다.</small></div></div>
+            <div class="routing-arrow" aria-hidden="true">↓</div>
+            <div class="screen-step-label">03 <span data-i18n="screenOutput">MCP / NEXT ACTION</span></div>
+            <div class="code-response"><code id="demo-code">get_product_specs({ market: "kr", product_key: "&lt;SKU&gt;" })</code></div>
+            <p class="response-foot" id="demo-note">수집된 제품 사양과 삼성닷컴 원본 출처를 함께 제공합니다.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="grid" id="architecture">
-      <article>
-        <span>01</span>
-        <h2>Discover</h2>
-        <p>Find new product variants and source evidence by market; known SKU identities remain stable.</p>
-      </article>
-      <article>
-        <span>02</span>
-        <h2>Normalize</h2>
-        <p>Transform public pages into SKU-first product, support and commerce records with source URLs.</p>
-      </article>
-      <article>
-        <span>03</span>
-        <h2>Version</h2>
-        <p>Preserve stable specs, check changing fields, and retain useful versions without rebuilding everything.</p>
-      </article>
-      <article>
-        <span>04</span>
-        <h2>Serve</h2>
-        <p>Expose searchable local data marts through MCP; live personal services need separate connections.</p>
-      </article>
-    </section>
-
-    <section class="section" id="markets">
-      <div>
-        <p class="eyebrow">LIVE DATASET</p>
-        <h2>Market status</h2>
-      </div>
-      <div id="market-list" class="market-list"><p>Loading repository data…</p></div>
-    </section>
-
-    <section class="section mcp" id="mcp">
-      <div>
-        <p class="eyebrow">MODEL CONTEXT PROTOCOL · GET STARTED</p>
-        <h2>One interface.<br />Reusable data.</h2>
-        <p>Clone the public repository and start the local stdio MCP server. Your agent can use structured product search, specifications, collected market offers, version history and support lookup instead of maintaining its own scraper.</p>
-        <div class="mcp-benefits"><span>Open-source</span><span>Local stdio MCP</span><span>Text-first</span><span>Source attribution</span></div>
-        <p class="mcp-caveat">This is an independent community project, not an official Samsung service. Data completeness and freshness vary by market; inspect the <a href="#dashboard">readiness dashboard</a> before relying on results.</p>
-        <a class="mcp-link" href="https://github.com/stephencho820/scom-data-platform#quick-start" target="_blank" rel="noopener noreferrer">Open setup guide on GitHub ↗</a>
-      </div>
-      <div class="mcp-code">
-        <div class="mcp-code-heading"><span>Terminal · Quick start</span><span>Node.js 20+</span></div>
-        <pre><code>git clone https://github.com/stephencho820/scom-data-platform.git
+    <section class="connect-section" id="connect" aria-labelledby="connect-title">
+      <div class="wrap connect-layout">
+        <div class="connect-copy">
+          <p class="eyebrow eyebrow-light" data-i18n="connectEyebrow">READY FOR AI AGENTS</p>
+          <h2 id="connect-title"><span data-i18n="connectTitle1">데이터를 모으는 대신,</span><br><span data-i18n="connectTitle2">MCP로 사용하세요.</span></h2>
+          <p data-i18n="connectDescription">SKU 검색, 제품 스펙, 수집된 가격, 지원 자료를 하나의 인터페이스로 조회할 수 있습니다. 현재는 오픈소스 기반 로컬 stdio MCP입니다.</p>
+          <div class="connect-actions">
+            <a class="button button-white" href="https://github.com/stephencho820/scom-data-platform#quick-start" target="_blank" rel="noopener noreferrer"><span data-i18n="connectGuide">MCP 연결 가이드</span><span aria-hidden="true">↗</span></a>
+            <a class="connect-status-link" href="./status.html"><span data-i18n="connectStatus">현재 데이터 상태 확인</span> →</a>
+          </div>
+          <p class="connect-small" data-i18n="connectCaveat">※ 수집 범위와 완성도는 국가별로 다릅니다. 인증이 필요한 실시간 재고·배송·주문 조회는 아직 제공하지 않습니다.</p>
+        </div>
+        <div class="terminal" aria-label="MCP installation">
+          <div class="terminal-bar"><span class="terminal-title">Terminal <span class="terminal-dot"></span> quick start</span><button id="copy-install" type="button" data-i18n="copyCode">복사</button></div>
+          <pre><code id="install-code">git clone https://github.com/stephencho820/scom-data-platform.git
 cd scom-data-platform
 npm install
 npm run mcp</code></pre>
-        <p>Connect the local stdio command in your MCP-compatible client. No live stock, checkout or order API is included.</p>
+          <div class="terminal-footer"><span data-i18n="terminalFooter">Node.js 20+ · Local stdio MCP</span><span aria-hidden="true">↗</span></div>
+        </div>
       </div>
     </section>
+
+    <section class="bottom-strip wrap"><div><strong data-i18n="bottomTitle">수집 현황도 투명하게.</strong><p data-i18n="bottomDescription">데이터가 아직 완성되지 않았다면 완료된 것처럼 말하지 않습니다. SKU 누락과 검증 상태를 그대로 보여줍니다.</p></div><div class="bottom-links"><a href="./status.html" data-i18n="bottomStatus">수집 상태 보기 ↗</a><a href="./explorer.html" data-i18n="bottomExplorer">SKU 데이터 탐색 ↗</a></div></section>
   </main>
-
-  <dialog id="data-dialog" class="data-dialog">
-    <div class="dialog-bar">
-      <div>
-        <p class="eyebrow" id="dialog-type">DETAIL</p>
-        <h3 id="dialog-title">Data detail</h3>
-      </div>
-      <button id="dialog-close" class="dialog-close" type="button" aria-label="Close detail">×</button>
-    </div>
-    <div id="dialog-body" class="dialog-body"></div>
-    <div class="dialog-actions">
-      <a id="dialog-source" class="primary" href="#" target="_blank" rel="noopener noreferrer">Open source</a>
-      <button id="dialog-close-bottom" class="secondary" type="button">Close</button>
-    </div>
-  </dialog>
-
-  <footer>
-    <p>Community project. Source records link back to Samsung.com.</p>
-    <p id="build-status">Git-backed · zero-cost-first</p>
-  </footer>
-
-  <script src="./app.js"></script>
-  <script src="./dashboard.js"></script>
+  <footer class="site-footer"><div class="wrap footer-inner"><span class="footer-brand">S.com Data Platform</span><p data-i18n="footerDisclaimer">독립적인 커뮤니티 프로젝트이며 삼성 공식 서비스가 아닙니다.</p><a href="https://github.com/stephencho820/scom-data-platform" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></footer>
+  <script src="./site.js"></script>
 </body>
 </html>

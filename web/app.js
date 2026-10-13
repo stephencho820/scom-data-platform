@@ -226,6 +226,7 @@ async function loadExplorer() {
       if (explorer.dataset === "products") {
         requests.push(fetch(`./data/marts/${explorer.market}/market_offers.jsonl`));
         requests.push(fetch(`./data/marts/${explorer.market}/product_specs.jsonl`));
+        requests.push(fetch(`./data/marts/${explorer.market}/refresh_state.jsonl`));
       }
       if (explorer.dataset === "history") requests.push(fetch(`./data/marts/${explorer.market}/product_master.jsonl`));
 
@@ -239,18 +240,26 @@ async function loadExplorer() {
       if (explorer.dataset === "products") {
         const offerResponse = responses[2];
         const specResponse = responses[3];
+        const refreshResponse = responses[4];
         const offers = offerResponse?.ok ? parseJsonl(await offerResponse.text()) : [];
         const specs = specResponse?.ok ? parseJsonl(await specResponse.text()) : [];
+        const freshness = refreshResponse?.ok ? parseJsonl(await refreshResponse.text()) : [];
+        const verifiedByKey = new Map(freshness.map(row => [row.market_product_key, row.offer_checked_at]));
         const offerByKey = new Map(offers.map((offer) => [offer.market_product_key, offer]));
         const specsByKey = new Map(specs.map((record) => [record.market_product_key, record]));
         rows = parsedRows.map((product) => {
           const offer = offerByKey.get(product.market_product_key);
           const specRecord = specsByKey.get(product.market_product_key);
+          const checkedAt = Date.parse(verifiedByKey.get(product.market_product_key) || "");
+          const isVerified = product.commerce_eligible === true &&
+            product.lifecycle_status === "current_sellable" &&
+            Number.isFinite(checkedAt) && checkedAt <= Date.now() &&
+            Date.now() - checkedAt < 36 * 3600000;
           return {
             ...product,
             key: product.market_product_key,
             url: product.product_url,
-            offers: offer ? { price: offer.price, currency: offer.currency, availability: offer.availability } : null,
+            offers: offer && isVerified ? { price: offer.price, currency: offer.currency, availability: offer.availability } : null,
             specs: specRecord?.specs || [],
             spec_source_url: specRecord?.source_url || ""
           };

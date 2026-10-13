@@ -32,6 +32,9 @@ jobs:
           node --check src/pipeline/incremental.mjs
           node --check src/pipeline/scheduler.mjs
           node --check src/mcp/server.mjs
+          node --check web/site.js
+          node --check web/status.js
+          node --check web/app.js
           node -e "JSON.parse(require('fs').readFileSync('config/markets.json','utf8')); console.log('markets.json ok')"
 
       - name: Test incremental lifecycle and retry logic
