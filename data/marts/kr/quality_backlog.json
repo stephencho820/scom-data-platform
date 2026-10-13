@@ -1,7 +1,7 @@
 {
   "market": "kr",
-  "generated_at": "2026-10-13T11:50:15.563Z",
-  "source_snapshot_at": "2026-10-13T11:43:44.368Z",
+  "generated_at": "2026-10-13T12:38:10.054Z",
+  "source_snapshot_at": "2026-10-13T12:31:12.990Z",
   "ready": false,
   "catalog": {
     "sources_total": 19,
@@ -1352,7 +1352,7 @@
       "category": "cooking-appliances",
       "name": "Bespoke AI 인덕션 (플렉스존)",
       "url": "https://www.samsung.com/sec/cooking-appliances/cooktop-cc80h63g1hs-d2c/CC80H63G1HS/",
-      "has_specs": false,
+      "has_specs": true,
       "has_support": false
     },
     {
@@ -5612,7 +5612,7 @@
       "category": "monitors",
       "name": "오디세이 OLED G5 G50SF QHD 180Hz (LS27FG502S)",
       "url": "https://www.samsung.com/sec/monitors/gaming-ls27fg502skxkr-d2c/LS27FG502SKXKR/",
-      "has_specs": false,
+      "has_specs": true,
       "has_support": false
     },
     {
@@ -6652,7 +6652,7 @@
       "category": "microwave-ovens",
       "name": "세라믹 전자레인지 23L",
       "url": "https://www.samsung.com/sec/microwave-ovens/MS23C3513AW-d2c/MS23C3513AW/",
-      "has_specs": false,
+      "has_specs": true,
       "has_support": false
     },
     {

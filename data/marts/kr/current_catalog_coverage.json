@@ -1,6 +1,6 @@
 {
   "market": "kr",
-  "generated_at": "2026-10-13T11:43:44.368Z",
+  "generated_at": "2026-10-13T12:31:12.990Z",
   "definition": "Current catalog coverage compares SKU identifiers discovered from each configured official Samsung.com KR catalog source with current SKU rows emitted to product_master.",
   "complete": true,
   "catalog_sources_total": 19,

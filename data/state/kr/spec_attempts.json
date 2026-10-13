@@ -214,5 +214,113 @@
     "source_model": "",
     "support_checked": true,
     "category": "harman-lifestyle-audio"
+  },
+  "WE712NS-INST": {
+    "checked_at": "2026-10-13T12:31:12.990Z",
+    "status": "empty",
+    "reason": "sku_not_declared_on_pdp; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/air-purifiers/package-we712ns-inst-d2c/WE712NS-INST/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "air-purifiers"
+  },
+  "SP-LPDF5-F": {
+    "checked_at": "2026-10-13T12:31:12.990Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/projectors/package-sp-lpdf5-f-d2c/SP-LPDF5-F/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "projectors"
+  },
+  "SM-Q505NZSAKOO": {
+    "checked_at": "2026-10-13T12:31:12.990Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/rings/galaxyring-q505/SM-Q505NZSAKOO/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "rings"
+  },
+  "HKGOPLAY3BLKAS": {
+    "checked_at": "2026-10-13T12:31:12.990Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/hk-speaker-hkgoplay3-d2c/HKGOPLAY3BLKAS/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
+  },
+  "MS23C3513AW": {
+    "checked_at": "2026-10-13T12:31:12.990Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/MS23C3513AW/",
+    "source_model": "MS23C3513AW",
+    "support_checked": true,
+    "category": "microwave-ovens"
+  },
+  "HW-Q600H/KR": {
+    "checked_at": "2026-10-13T12:31:12.990Z",
+    "status": "empty",
+    "reason": "sku_not_declared_on_pdp; support_http_404",
+    "source_url": "https://www.samsung.com/sec/soundbars/soundbar-hw-q600h-d2c/HW-Q600H%2FKR/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "soundbars"
+  },
+  "NT750XHD-KC51G": {
+    "checked_at": "2026-10-13T12:31:12.990Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/galaxybook/galaxy-book5-nt750xhd-kc51g/NT750XHD-KC51G/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "galaxybook"
+  },
+  "HKLUNA2BLK": {
+    "checked_at": "2026-10-13T12:31:12.990Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/hk-speaker-luna-2-d2c/HKLUNA2BLK/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
+  },
+  "CC80H63G1HS": {
+    "checked_at": "2026-10-13T12:31:12.990Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/CC80H63G1HS/",
+    "source_model": "CC80H63G1HS",
+    "support_checked": true,
+    "category": "cooking-appliances"
+  },
+  "LS27FG502SKXKR": {
+    "checked_at": "2026-10-13T12:31:12.990Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/LS27FG502SKXKR/",
+    "source_model": "S27FG502SK",
+    "support_checked": true,
+    "category": "monitors"
+  },
+  "SM-R640NZDAKOO": {
+    "checked_at": "2026-10-13T12:31:12.990Z",
+    "status": "empty",
+    "reason": "pdp_sku_mismatch; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/buds/galaxy-buds4-pro-r640-cpo/SM-R640NZDAKOO/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "buds"
+  },
+  "HKOS9GRYAS": {
+    "checked_at": "2026-10-13T12:31:12.990Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/hk-speaker-os9-d2c/HKOS9GRYAS/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
   }
 }
