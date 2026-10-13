@@ -67,6 +67,6 @@ test("cross-BU SKU backfill is gated by a bounded run budget and persists state"
   assert.match(crawler,/renderCrossBuSpecs/);
   assert.match(crawler,/sanitizePdpPairs\(pairs,product\.sku,url,header\)/);
   assert.match(crawler,/spec_attempts\.json/);
-  assert.match(crawler,/product\.spec_model_label=product\.sku/);
+  assert.match(crawler,/product\.spec_model_label=result\.source_model\|\|product\.sku/);
   assert.match(crawler,/await writeFile\(specAttemptsFile,/);
 });
