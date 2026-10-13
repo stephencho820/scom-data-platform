@@ -49,7 +49,12 @@
     "/memory-storage/",
     "/memory/",
     "/ssd/",
-    "/accessories/"
+    "/accessories/",
+    "/harman-lifestyle-audio/",
+    "/harman-speaker/",
+    "/harman-headphone/",
+    "/harman-luxury/",
+    "/harman/"
   ],
   "excludePathPatterns": [
     "/newsroom/",
