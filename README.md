@@ -35,7 +35,7 @@ SKU master keys are deterministic from `market + SKU`. Pages without a concrete 
 - **Agent interface:** local stdio MCP
 - **Images:** not stored
 
-See [PRD](./docs/PRD.md), [Data Marts](./docs/DATA_MART.md), and [Architecture](./docs/ARCHITECTURE.md).
+See [PRD](./docs/PRD.md), [Data Marts](./docs/DATA_MART.md), [Architecture](./docs/ARCHITECTURE.md), and [Incremental Collection](./docs/INCREMENTAL_PIPELINE.md).
 
 ## Quick start
 
@@ -141,3 +141,14 @@ Product identity and hardware specifications are treated as immutable after firs
 ## KR chatbot completion gate
 
 The project must not claim the Korea chatbot dataset is complete until `data/marts/kr/chatbot_readiness.json` reports `ready: true`. The gate requires current-catalog source coverage, zero source failures, specifications for every current SKU, SKU-linked support coverage, legacy ingestion, and zero unresolved/OTHER product records. This deliberately favors an explicit incomplete state over silently presenting partial data as complete.
+
+
+## Incremental collection engine
+
+- New official catalog SKUs are discovered each run, while the persistent SKU registry is appended/enriched rather than overwritten.
+- Configurable URL revisit intervals split commerce, support knowledge, product facts, and low-priority pages (see `config/refresh-policy.json`). Due commerce is prioritized even when discovery remains incomplete; failed URLs enter persisted exponential retry cooldown.
+- Data marts preserve unchanged semantic values and populated spec profiles. Prices and options update independently when fresh evidence exists. `refresh_state.jsonl` records the verification timestamp, separate from when the value last changed.
+- `get_incremental_sync_status` reports newly discovered SKUs, changed prices/specs and verified offers. The integrated homepage dashboard displays this separately from **READY**, which still requires all quality/completeness gates.
+- Unverified or stale commerce cannot be surfaced as current through the MCP. Personalized inventory/delivery/checkout still requires a separately authorized live integration.
+
+Run local regression checks with `node --test test/*.test.mjs`.
