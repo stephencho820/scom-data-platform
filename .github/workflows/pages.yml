@@ -47,6 +47,9 @@ jobs:
           if [ -d data/marts ]; then cp -R data/marts dist/data/marts; fi
           if [ -d data/manifests ]; then cp -R data/manifests dist/data/manifests; fi
 
+      - name: Build data mart dictionary and embed fallback snapshot
+        run: node scripts/build-data-catalog.mjs dist/data/catalog/kr.json dist/catalog.html
+
       - name: Build real SKU-based MCP POC dataset
         run: node scripts/build-demo-data.mjs dist/data/demo/kr.json
 
