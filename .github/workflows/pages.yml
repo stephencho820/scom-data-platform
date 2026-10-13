@@ -47,6 +47,9 @@ jobs:
           if [ -d data/marts ]; then cp -R data/marts dist/data/marts; fi
           if [ -d data/manifests ]; then cp -R data/manifests dist/data/manifests; fi
 
+      - name: Render status snapshot into HTML (works without JavaScript)
+        run: node scripts/build-status-page.mjs dist/status.html
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
