@@ -320,7 +320,9 @@
   "SoldOut": "품절",
   "Preorder": "예약 주문",
   "READY: TRUE": "READY: TRUE",
-  "READY: FALSE": "READY: FALSE"
+  "READY: FALSE": "READY: FALSE",
+  "Interface language": "표시 언어",
+  "English (United States)": "영어 (미국)"
 };
   const dictionary = new Map(Object.entries(ko));
   const savedText = new WeakMap();
@@ -357,7 +359,7 @@
       ["Internal SKU reconciliation: INCOMPLETE ·", "내부 SKU 대조: 미완료 ·"]
     ];
     for (const [en, kr] of replacePrefixes) {
-      if (input.startsWith(en)) return kr + input.slice(en.length);
+      if (input.startsWith(en)) return kr + input.slice(en.length).replaceAll("URLs attempted:", "요청한 URL:").replaceAll("crawl failures:", "수집 실패:");
     }
     const simple = [
       [/^(\d+) failed categories · (\d+) categories with SKU mismatches$/, "$1개 카테고리 수집 실패 · $2개 카테고리 SKU 불일치"],
