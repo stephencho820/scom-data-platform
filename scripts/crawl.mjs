@@ -878,8 +878,10 @@ async function renderCatalogHtml(url, catalogSource) {
       if (!responseUrl.includes("samsung.com")) return;
 
       const body = await response.text();
-      const models = /\/cxhr\/pf\/goodsList/i.test(responseUrl) ? ["CATALOG_API"] : [...new Set((body.match(/SM-[A-Z0-9-]+/gi) || []).map((value) => value.toUpperCase()))];
-      if (!models.length) return;
+      // Only official goodsList JSON is used as catalog API evidence.
+      // Product model prefixes differ across Samsung and HARMAN brands.
+      if (!/\/cxhr\/pf\/goodsList/i.test(responseUrl)) return;
+      const models = ["CATALOG_API"];
 
       catalogPayloads.push({ url: responseUrl, contentType, body, models });
     } catch {}
@@ -893,9 +895,11 @@ async function renderCatalogHtml(url, catalogSource) {
       .filter(Boolean);
 
     for (let index = 0; index < lines.length; index++) {
-      const matches = [...lines[index].matchAll(/SM-[A-Z0-9-]+/gi)];
+      const sourcePattern = new RegExp(catalogSource.model_pattern || "SM-[A-Z0-9-]+", "gi");
+      const matches = [...lines[index].matchAll(sourcePattern)];
       for (const match of matches) {
         const model = match[0].toUpperCase();
+        if (!validCatalogSku(model, catalogSource)) continue;
         const from = Math.max(0, index - 14);
         const to = Math.min(lines.length, index + 32);
         const fragment = lines.slice(from, to).join("\n");
@@ -1400,7 +1404,7 @@ function plausibleCatalogName(line) {
   if (/^[0-9,.]+\s*(?:원|GB|TB|mm|%|P)?$/i.test(value)) return false;
   if (/^(?:색상|컬러|스토리지|저장 용량|연결 방식|평점|리뷰수)/i.test(value)) return false;
   if (/[{}:;]|^\.|"?(?:mdlCode|grpPath|imgChipURL|actvPhonePlanVer)"?/i.test(value)) return false;
-  return /(?:갤럭시|Galaxy|Samsung|삼성|Bespoke|비스포크|QLED|OLED|Crystal|무풍|제트|냉장고|세탁기|건조기|에어컨|청소기|식기세척기|모니터|프로젝터|TV|전자레인지)/i.test(value);
+  return /(?:갤럭시|Galaxy|Samsung|삼성|Bespoke|비스포크|QLED|OLED|Crystal|무풍|제트|냉장고|세탁기|건조기|에어컨|청소기|식기세척기|모니터|프로젝터|TV|전자레인지|JBL|하만카돈|Harman(?: Kardon)?|AKG|ARCAM|Mark Levinson)/i.test(value);
 }
 
 function priceFromCatalogWindow(text) {
@@ -1494,7 +1498,8 @@ function productCatalogCategory(product) {
     ["air-conditioners", ["/air-conditioners/"]], ["air-purifiers", ["/air-cleaners/", "/air-purifiers/"]],
     ["vacuum-cleaners", ["/vacuum-cleaners/", "/vacuums/"]], ["dishwashers", ["/dishwashers/"]],
     ["microwave-ovens", ["/micro-wave-ovens/", "/microwaves/"]], ["cooking-appliances", ["/cooking-appliances/"]],
-    ["soundbars", ["/audio-devices/", "/soundbars/"]]
+    ["soundbars", ["/audio-devices/", "/soundbars/"]],
+    ["harman-lifestyle-audio", ["/harman-lifestyle-audio/", "/harman-speaker/", "/harman-headphone/", "/harman-luxury/"]]
   ];
   return mappings.find(([, paths]) => paths.some((item) => value.includes(item)))?.[0] || "";
 }
@@ -1740,9 +1745,13 @@ function pageForProduct(product, pages) {
 }
 
 function businessUnitFor(product, sourceUrl = "") {
+  // For discovered SKU catalogs, the configured source's business unit wins.
+  // HARMAN model codes (JBL..., HK..., AKG...) do not use Samsung's SM-/HW- convention.
+  const catalogSource = catalogSourceDefs.find((source) => source.id === product?.catalog_source_id);
+  if (catalogSource?.business_unit) return catalogSource.business_unit;
   const haystack = [product?.catalog_category, product?.catalog_group_path, product?.name, sourceUrl]
     .filter(Boolean).join(" ").toLowerCase();
-  if (/\bjbl\b|harman[ -]?kardon|\bakg\b/.test(haystack)) return "HARMAN";
+  if (/harman(?:-lifestyle-audio|-speaker|-headphone|-luxury)|하만카돈|\bjbl\b|harman[ -]?kardon|\bakg\b|\barcam\b/.test(haystack)) return "HARMAN";
   if (/tv|television|monitor|projector|the freestyle|the frame|display|soundbar/.test(haystack)) return "VD";
   if (/smartphone|mobile|galaxy|tablet|watch|buds|ring|phone|wearable/.test(haystack)) return "MX";
   if (/refrigerator|fridge|washer|dryer|laundry|vacuum|air.?condition|dishwasher|oven|range|cooktop|microwave|micro-wave|appliance|bespoke/.test(haystack)) return "DA";

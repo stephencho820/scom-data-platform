@@ -29,6 +29,7 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           node --check scripts/crawl.mjs
+          node --check scripts/build-status-page.mjs
           node --check src/pipeline/incremental.mjs
           node --check src/pipeline/scheduler.mjs
           node --check src/mcp/server.mjs

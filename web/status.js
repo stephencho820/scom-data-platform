@@ -24,6 +24,9 @@ function render(){
   metric(cards,"metricCurrent",fmt(counts.current_skus));
   metric(cards,"metricSpecs",fmt(counts.current_skus_with_specs));
   metric(cards,"metricSources",fmt(meta.catalog_sources_ok)+" / "+fmt(meta.catalog_sources_total));
+  const harman = (meta.categories || []).filter(row => row.business_unit === "HARMAN");
+  const harmanVerified = harman.length > 0 && harman.every(row => row.source_status === "ok");
+  metric(cards,"metricHarman",harmanVerified ? fmt(harman.reduce((sum, row) => sum + (row.discovered_unique_skus || 0), 0)) : t("harmanNotCollected"));
 
   const gates=document.getElementById("status-gates");gates.replaceChildren();
   for(const [key,passed] of Object.entries(readiness.gates||{}))line(gates,t("gate_"+key),t(passed?"passed":"pending"),passed);
@@ -51,21 +54,49 @@ function render(){
     tr.append(source);tbody.append(tr);
   }
 }
-async function load(){
-  try{
-    const [a,b,c]=await Promise.all([
-      fetch(ROOT+"chatbot_readiness.json",{cache:"no-store"}),
-      fetch(ROOT+"current_catalog_coverage.json",{cache:"no-store"}),
-      fetch(ROOT+"incremental_report.json",{cache:"no-store"})
+// Hydrate from the authoritative snapshot embedded at deploy time first.
+// The page is usable immediately even if network requests never resolve.
+function readBootstrappedSnapshot() {
+  const el = document.getElementById("status-bootstrap");
+  if (!el) return null;
+  try {
+    const parsed = JSON.parse(el.textContent || "{}");
+    return parsed?.readiness && parsed?.coverage ? parsed : null;
+  } catch { return null; }
+}
+function fetchWithDeadline(url, timeoutMs = 4500) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  return fetch(url, { cache: "no-store", signal: controller.signal })
+    .then(response => {
+      if (!response.ok) throw Error("HTTP " + response.status + ": " + url);
+      return response.json();
+    })
+    .finally(() => clearTimeout(timer));
+}
+async function refreshSnapshot() {
+  try {
+    const [readiness, coverage] = await Promise.all([
+      fetchWithDeadline(ROOT + "chatbot_readiness.json"),
+      fetchWithDeadline(ROOT + "current_catalog_coverage.json")
     ]);
-    if(!a.ok||!b.ok)throw Error("Readiness files missing");
-    dataset={readiness:await a.json(),coverage:await b.json(),incremental:c.ok?await c.json():null};
+    dataset = { readiness, coverage, incremental: dataset?.incremental || null };
     render();
-  }catch(error){
-    document.getElementById("status-pill").textContent=t("statusUnavailable");
-    document.getElementById("status-updated").textContent=t("statusError");
-    const gate=document.getElementById("status-gates");gate.replaceChildren(node("p","status-error",t("statusError")));
+    fetchWithDeadline(ROOT + "incremental_report.json")
+      .then(incremental => { dataset.incremental = incremental; render(); })
+      .catch(() => {});
+  } catch {
+    if (dataset) {
+      document.getElementById("status-updated").textContent +=
+        " · " + (window.ScomSite.language() === "kr" ? "최신 조회 실패: 배포 스냅샷 표시 중" : "Refresh failed: showing published snapshot");
+      return;
+    }
+    document.getElementById("status-pill").textContent = t("statusUnavailable");
+    document.getElementById("status-updated").textContent = t("statusError");
+    document.getElementById("status-gates").replaceChildren(node("p", "status-error", t("statusError")));
   }
 }
 window.ScomSite.onLanguageChange(render);
-load();
+dataset = readBootstrappedSnapshot();
+if (dataset) render();
+refreshSnapshot();
