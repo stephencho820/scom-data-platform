@@ -34,7 +34,7 @@ function formatCaptured(value) {
   if (!value) return "";
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return value;
-  return new Intl.DateTimeFormat(undefined, {
+  return new Intl.DateTimeFormat(window.ScomI18n?.locale?.() || undefined, {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -48,7 +48,7 @@ function formatPrice(offers) {
   const numeric = Number(offers.price);
   if (!Number.isFinite(numeric)) return `${offers.price} ${offers.currency || ""}`.trim();
   try {
-    return new Intl.NumberFormat(undefined, {
+    return new Intl.NumberFormat(window.ScomI18n?.locale?.() || undefined, {
       style: offers.currency ? "currency" : "decimal",
       currency: offers.currency || undefined,
       maximumFractionDigits: 2
@@ -73,7 +73,7 @@ function truncate(value = "", max = 210) {
 
 function formatNumber(value) {
   const numeric = Number(value);
-  return Number.isFinite(numeric) ? new Intl.NumberFormat().format(numeric) : String(value || 0);
+  return Number.isFinite(numeric) ? new Intl.NumberFormat(window.ScomI18n?.locale?.() || undefined).format(numeric) : String(value || 0);
 }
 
 function coverageText(meta) {
@@ -638,5 +638,9 @@ async function init() {
   await loadMarkets();
   await loadExplorer();
 }
+
+window.addEventListener("scom:languagechange", () => {
+  if (explorer.rows?.length) renderExplorer();
+});
 
 init();
