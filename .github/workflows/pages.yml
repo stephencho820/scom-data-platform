@@ -52,6 +52,9 @@ jobs:
       - name: Build data mart dictionary and embed fallback snapshot
         run: node scripts/build-data-catalog.mjs dist/data/catalog/kr.json dist/catalog.html
 
+      - name: Build AI-ready mart gap analysis
+        run: node scripts/build-mart-gap.mjs dist/data/catalog/kr.json dist/data/gaps/kr.json
+
       - name: Build real SKU-based MCP POC dataset
         run: node scripts/build-demo-data.mjs dist/data/demo/kr.json
 
