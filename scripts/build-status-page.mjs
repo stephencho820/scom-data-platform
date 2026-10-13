@@ -42,7 +42,12 @@ if (readiness && coverage) {
     ["등록된 SKU", counts.sku_registry],
     ["현재 카탈로그 SKU", counts.current_skus],
     ["스펙 보유 SKU", counts.current_skus_with_specs],
-    ["성공한 카탈로그 소스", fmt(coverage.catalog_sources_ok) + " / " + fmt(coverage.catalog_sources_total)]
+    ["성공한 카탈로그 소스", fmt(coverage.catalog_sources_ok) + " / " + fmt(coverage.catalog_sources_total)],
+    ["하만 SKU", (() => {
+      const sources = (coverage.categories || []).filter(item => item.business_unit === "HARMAN");
+      return sources.length && sources.every(item => item.source_status === "ok")
+        ? sources.reduce((sum, item) => sum + (item.discovered_unique_skus || 0), 0) : "수집 전";
+    })()]
   ];
   html = replaceElement(html, "status-pill", isReady ? "READY" : "NOT READY", {attributes: isReady ? "is-good" : null});
   const checked = new Date(readiness.generated_at);
