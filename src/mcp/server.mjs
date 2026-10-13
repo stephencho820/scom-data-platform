@@ -397,8 +397,11 @@ function buildServer() {
     async ({ market, product_key }) => {
       const product = (await productMasterFor(market)).find((item) => item.market_product_key === product_key);
       if (!product) return asError("Product not found.");
-      if (["discontinued", "legacy_supported", "legacy_archived"].includes(product.lifecycle_status) || ["current_out_of_stock", "current_not_directly_sellable"].includes(product.lifecycle_status) || product.commerce_eligible === false) {
+      if (product.commerce_eligible !== true || product.lifecycle_status !== "current_sellable") {
         return asError("Commerce options are only exposed for products verified as currently sellable.");
+      }
+      if (!(await recentlyVerified(market, product_key, "commerce_checked_at", 336))) {
+        return asError("Commerce options are stale or were not verified on a recent product detail page.");
       }
       const row = await findMartRow(market, "commerce_options", product_key);
       return row ? asText(row) : asError("Commerce options not found.");
@@ -451,7 +454,7 @@ function buildServer() {
       const suppressCommerceHistory =
         ["discontinued", "legacy_supported", "legacy_archived"].includes(product?.lifecycle_status) ||
         ["current_out_of_stock", "current_not_directly_sellable"].includes(product?.lifecycle_status) ||
-        product?.commerce_eligible === false;
+        product?.commerce_eligible !== true;
       return asText({
         market,
         product_key,
