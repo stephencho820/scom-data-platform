@@ -118,8 +118,8 @@ async function joinedProduct(market, productKey) {
   if (["current_out_of_stock", "current_not_directly_sellable"].includes(product.lifecycle_status)) {
     return { product, specs, offer: null, commerce_options: null, commerce_note: "Current catalog product is not sellable; only product identity and specs are exposed." };
   }
-  if (product.commerce_eligible === false) {
-    return { product, specs, offer: null, commerce_options: null, commerce_note: "Lifecycle is not safely resolved to a current sellable catalog item; commerce data is intentionally suppressed." };
+  if (product.commerce_eligible !== true || product.lifecycle_status !== "current_sellable") {
+    return { product, specs, offer: null, commerce_options: null, commerce_note: "Only current, verified sellable SKUs can expose commerce." };
   }
   const [offerFresh, commerceFresh] = await Promise.all([
     recentlyVerified(market, productKey, "offer_checked_at", 36),
