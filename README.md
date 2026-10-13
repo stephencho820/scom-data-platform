@@ -37,6 +37,16 @@ SKU master keys are deterministic from `market + SKU`. Pages without a concrete 
 
 See [PRD](./docs/PRD.md), [Data Marts](./docs/DATA_MART.md), [Architecture](./docs/ARCHITECTURE.md), and [Incremental Collection](./docs/INCREMENTAL_PIPELINE.md).
 
+## POC website: four data lifecycles
+
+The public GitHub Pages landing is a simple, **KR / US** language-switchable introduction to why agents benefit from S.com Data Platform. It intentionally separates the user-facing pitch from diagnostic tools:
+
+- [Landing](https://stephencho820.github.io/scom-data-platform/) — interactive four-type POC: **A Immutable**, **B Versioned**, **C Dynamic**, **D Real-time**. A product stays in the SKU registry; FAQs update on change; prices refresh on a schedule; personalized availability needs an authorized live API. The question-to-tool walkthrough is illustrative; it does not make live requests.
+- [Data health](https://stephencho820.github.io/scom-data-platform/status.html) — actual KR readiness gates, source completeness and incremental crawl health. It never claims READY when required checks have not passed.
+- [SKU Explorer](https://stephencho820.github.io/scom-data-platform/explorer.html) — optional deeper view of captured product/source records, behind the simple landing. Prices display only if official offer freshness was verified within the configured TTL.
+
+The homepage uses **three primary navigation items**: the four lifecycles, an interactive explanation, and MCP connection. Source-code setup remains local stdio: this is not a hosted remote MCP endpoint, and the public service does not include authorized stock/delivery/order APIs.
+
 ## Quick start
 
 ```bash
