@@ -360,17 +360,17 @@
       if (input.startsWith(en)) return kr + input.slice(en.length);
     }
     const simple = [
-      [/^(\\d+) failed categories · (\\d+) categories with SKU mismatches$/, "$1개 카테고리 수집 실패 · $2개 카테고리 SKU 불일치"],
-      [/^(\\d+) \\/ (\\d+) mart target URLs · (.+)$/, "수집 대상 URL $1 / $2 · $3"],
-      [/^(\\d+) pages · (\\d+) products$/, "$1페이지 · $2개 제품"],
-      [/^(\\d+) products$/, "$1개 제품"],
-      [/^(\\d+) specs$/, "스펙 $1개"],
-      [/^(\\d+) matching tracked products · (\\d+) total$/, "일치하는 제품 이력 $1개 · 전체 $2개"],
-      [/^(\\d+) tracked products · (\\d+) saved versions$/, "제품 이력 $1개 · 저장된 버전 $2개"],
-      [/^(\\d+) matching (products|pages) · (\\d+) total$/, "검색 결과 $1개 · 전체 $3개"],
-      [/^(\\d+) (products|pages) in current snapshot$/, "현재 수집본 $1개"],
-      [/^(\\d+) versions?$/, "버전 $1개"],
-      [/^(\\d+) latest changes?$/, "최근 변경 $1건"],
+      [/^(\d+) failed categories · (\d+) categories with SKU mismatches$/, "$1개 카테고리 수집 실패 · $2개 카테고리 SKU 불일치"],
+      [/^(\d+) \/ (\d+) mart target URLs · (.+)$/, "수집 대상 URL $1 / $2 · $3"],
+      [/^(\d+) pages · (\d+) products$/, "$1페이지 · $2개 제품"],
+      [/^(\d+) products$/, "$1개 제품"],
+      [/^(\d+) specs$/, "스펙 $1개"],
+      [/^(\d+) matching tracked products · (\d+) total$/, "일치하는 제품 이력 $1개 · 전체 $2개"],
+      [/^(\d+) tracked products · (\d+) saved versions$/, "제품 이력 $1개 · 저장된 버전 $2개"],
+      [/^(\d+) matching (products|pages) · (\d+) total$/, "검색 결과 $1개 · 전체 $3개"],
+      [/^(\d+) (products|pages) in current snapshot$/, "현재 수집본 $1개"],
+      [/^(\d+) versions?$/, "버전 $1개"],
+      [/^(\d+) latest changes?$/, "최근 변경 $1건"],
       [/^First captured (.+)$/, "최초 수집 $1"],
       [/^Latest crawl (.+)$/, "최근 수집 $1"],
       [/^Captured (.+)$/, "수집일 $1"],
@@ -379,8 +379,8 @@
       [/^Model (.+)$/, "모델 $1"],
       [/^History · (.+)$/, "이력 · $1"],
       [/^Page · (.+)$/, "페이지 · $1"],
-      [/^(.+) \\/ (complete|incomplete)$/, (_, status) => " / " + (status === "complete" ? "완료" : "미완료")],
-      [/^(.+) — no readiness claim can be made\\.$/, "$1 — 데이터 검증 상태를 판정할 수 없습니다."]
+      [/^(.+) \/ (complete|incomplete)$/, (_whole, prefix, status) => prefix + " / " + (status === "complete" ? "완료" : "미완료")],
+      [/^(.+) — no readiness claim can be made\.$/, "$1 — 데이터 검증 상태를 판정할 수 없습니다."]
     ];
     for (const [re, replacement] of simple) {
       if (re.test(input)) return input.replace(re, replacement);
@@ -395,7 +395,7 @@
     if (!saved || (current !== saved.applied && current !== saved.original)) {
       saved = { original: current, applied: current };
     }
-    const matches = saved.original.match(/^(\\s*)([\\s\\S]*?)(\\s*)$/);
+    const matches = saved.original.match(/^(\s*)([\s\S]*?)(\s*)$/);
     if (!matches) return;
     const [, before, core, after] = matches;
     const replacement = before + (language === "kr" ? phrase(core) : core) + after;
