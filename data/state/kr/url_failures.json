@@ -73,5 +73,10 @@
     "failure_count": 2,
     "retry_after": "2026-10-13T12:51:02.262Z",
     "last_failed_at": "2026-10-13T10:51:02.262Z"
+  },
+  "https://www.samsung.com/sec/tvs/uhd-ru7190fxkr/UN49RU7190FXKR/": {
+    "failure_count": 1,
+    "retry_after": "2026-10-13T12:15:50.180Z",
+    "last_failed_at": "2026-10-13T11:15:50.180Z"
   }
 }
