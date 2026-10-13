@@ -621,7 +621,7 @@ nav a:hover, .mcp-link:hover { color: var(--accent); }
   .agent-cta { flex-direction: column; align-items: flex-start; }
 }
 @media (max-width: 800px) {
-  nav a { display: none; }
+  nav a { display: none !important; }
   nav .nav-primary,nav .nav-github { display: inline-flex !important; }
   header { gap: 20px; }
   .brand { white-space: nowrap; }
