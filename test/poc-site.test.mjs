@@ -10,7 +10,7 @@ const app = await readFile("web/app.js", "utf8");
 
 test("POC home keeps navigation short and lifecycle-first", () => {
   assert.equal((index.match(/class="type-card /g) || []).length, 4);
-  assert.equal((index.match(/class="demo-option/g) || []).length, 4);
+  assert.equal((index.match(/<button class="demo-option(?:\\s|")/g) || []).length, 4);
   const nav = index.match(/<nav class="main-nav"[\s\S]*?<\/nav>/)?.[0] || "";
   assert.equal((nav.match(/<a\s/g) || []).length, 3);
   assert.ok(index.indexOf('id="lifecycle"') < index.indexOf('id="demo"'));
