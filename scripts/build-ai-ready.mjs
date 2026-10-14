@@ -29,7 +29,7 @@ for(const contract of registry.marts){
     result.push({contract_id:"P02",market,sku,data,provenance:{source_table:"product_specs",source_product_key:row.market_product_key,source_url:sourceUrl,source_collected_at:row.captured_at||null},verification_status:"unverified",data_status:"unverified",schema_version:registry.schema_version});
    }
   }
-  await writeFile(path.join(out,"P02.jsonl"),result.map(x=>JSON.stringify(x)).join("\\n")+(result.length?"\\n":""));
+  await writeFile(path.join(out,"P02.jsonl"),result.map(x=>JSON.stringify(x)).join("\n")+(result.length?"\n":""));
   manifest.marts.push({id:"P02",status:result.length?"MATERIALIZED_UNVERIFIED":"NO_ELIGIBLE_RECORDS",rows:result.length,source_table:"product_specs",skipped_empty_rows:skippedEmpty,skipped_invalid_facts:skippedInvalid,duplicate_spec_keys:duplicates,verification:"NOT_ASSESSED",note:"Only nonempty key/value specs with a Samsung.com source URL. No inference or unit normalization."});
   continue;
  }
