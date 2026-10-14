@@ -15,7 +15,7 @@ for(const contract of registry.marts){
   for(const row of input){
    const sku=row.sku,sourceUrl=row.source_url;
    if(!present(sku)||!present(row.market_product_key)||!Array.isArray(row.specs)||!row.specs.length){skippedEmpty++;continue}
-   if(!present(sourceUrl)||!/^https:\/\/www\\.samsung\\.com\//i.test(sourceUrl)){skippedInvalid++;continue}
+   if(!present(sourceUrl)||!String(sourceUrl).startsWith("https://www.samsung.com/")){skippedInvalid++;continue}
    for(const spec of row.specs){
     if(!spec||typeof spec!=="object"){skippedInvalid++;continue}
     const specKey=spec.key,rawValue=spec.value;
