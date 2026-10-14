@@ -538,5 +538,113 @@
     "source_model": "",
     "support_checked": true,
     "category": "harman-lifestyle-audio"
+  },
+  "MS23T5018AK": {
+    "checked_at": "2026-10-14T02:56:33.824Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/MS23T5018AK/",
+    "source_model": "MS23T5018AK",
+    "support_checked": true,
+    "category": "microwave-ovens"
+  },
+  "SP-LPDU7S-120S": {
+    "checked_at": "2026-10-14T02:56:33.824Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/projectors/packge-sp-lpdu7s-120s-d2c/SP-LPDU7S-120S/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "projectors"
+  },
+  "NT740VJK-KH38G": {
+    "checked_at": "2026-10-14T02:56:33.824Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/galaxybook/galaxy-book6-nt740vjk-kh38g/NT740VJK-KH38G/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "galaxybook"
+  },
+  "JBLBAR1300M2BLKAS1": {
+    "checked_at": "2026-10-14T02:56:33.824Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-soundbar-bar1300mk2-d2c/JBLBAR1300M2BLKAS1/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
+  },
+  "CC99F63G1DS": {
+    "checked_at": "2026-10-14T02:56:33.824Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/CC99F63G1DS/",
+    "source_model": "CC99F63G1DS",
+    "support_checked": true,
+    "category": "cooking-appliances"
+  },
+  "HW-Q990H/KR": {
+    "checked_at": "2026-10-14T02:56:33.824Z",
+    "status": "empty",
+    "reason": "sku_not_declared_on_pdp; support_http_404",
+    "source_url": "https://www.samsung.com/sec/soundbars/soundbar-hw-q990h-d2c/HW-Q990H%2FKR/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "soundbars"
+  },
+  "SM-R510NZWAKOO": {
+    "checked_at": "2026-10-14T02:56:33.824Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/buds/galaxy-buds2-pro-2-r510/SM-R510NZWAKOO/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "buds"
+  },
+  "JBLBAR20AIOM2BLKAS": {
+    "checked_at": "2026-10-14T02:56:33.824Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-soundbar-jblbar20aiom2blkas-d2c/JBLBAR20AIOM2BLKAS/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
+  },
+  "DW30FB305CW0": {
+    "checked_at": "2026-10-14T02:56:33.824Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/DW30FB305CW0/",
+    "source_model": "DW30FB305CW0",
+    "support_checked": true,
+    "category": "dishwashers"
+  },
+  "KMR100RH8593L7": {
+    "checked_at": "2026-10-14T02:56:33.824Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/tvs/package-kmr85rh85-93l7-d2c/KMR100RH8593L7/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "tvs"
+  },
+  "SM-X400NZAEKOO": {
+    "checked_at": "2026-10-14T02:56:33.824Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/tablets/galaxy-tab-s10lite-wifi-x400/SM-X400NZAEKOO/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "tablets"
+  },
+  "JBLBAR300M2BLKAS": {
+    "checked_at": "2026-10-14T02:56:33.824Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-soundbar-bar300mk2-d2c/JBLBAR300M2BLKAS/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
   }
 }
