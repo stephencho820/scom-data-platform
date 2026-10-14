@@ -45,6 +45,7 @@ jobs:
           node --check web/poc.js
           node --check web/catalog.js
           node --check web/registry.js
+          node --check web/ai-data.js
           node --check web/status.js
           node --check web/app.js
           node -e "JSON.parse(require('fs').readFileSync('config/markets.json','utf8')); console.log('markets.json ok')"
