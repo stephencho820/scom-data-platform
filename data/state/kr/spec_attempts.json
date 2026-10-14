@@ -862,5 +862,113 @@
     "source_model": "",
     "support_checked": true,
     "category": "harman-lifestyle-audio"
+  },
+  "NZ62DG300CFW": {
+    "checked_at": "2026-10-14T04:05:06.518Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/NZ62DG300CFW/",
+    "source_model": "NZ62DG300CFW",
+    "support_checked": true,
+    "category": "cooking-appliances"
+  },
+  "SP-LPDU9S-120S": {
+    "checked_at": "2026-10-14T04:05:06.518Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/projectors/packge-sp-lpdu9s-120s-d2c/SP-LPDU9S-120S/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "projectors"
+  },
+  "SM-R530NZWAK13": {
+    "checked_at": "2026-10-14T04:05:06.518Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/buds/package-almond-breeze-case-sm-r530nzw/SM-R530NZWAK13/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "buds"
+  },
+  "JBLGO5BLK": {
+    "checked_at": "2026-10-14T04:05:06.518Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-go5-d2c/JBLGO5BLK/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
+  },
+  "DW80F73Y1FEWS": {
+    "checked_at": "2026-10-14T04:05:06.518Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/dishwashers/free-standing-dw80f73y1fews-d2c/DW80F73Y1FEWS/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "dishwashers"
+  },
+  "HW-B450F/KR": {
+    "checked_at": "2026-10-14T04:05:06.518Z",
+    "status": "empty",
+    "reason": "sku_not_declared_on_pdp; support_http_404",
+    "source_url": "https://www.samsung.com/sec/soundbars/soundbar-hw-b450f-d2c/HW-B450F%2FKR/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "soundbars"
+  },
+  "SM-X526NZAEKOO": {
+    "checked_at": "2026-10-14T04:05:06.518Z",
+    "status": "empty",
+    "reason": "pdp_sku_mismatch; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/tablets/galaxy-tab-s10fe-5g-x526/SM-X526NZAEKOO/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "tablets"
+  },
+  "JBLHORIZON3GRYAS": {
+    "checked_at": "2026-10-14T04:05:06.518Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-horizon3-d2c/JBLHORIZON3GRYAS/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
+  },
+  "VR80F01ADG98C": {
+    "checked_at": "2026-10-14T04:05:06.518Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/vacuum-cleaners/jetbot-vr80f01ad-d2c/VR80F01ADG98C/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "vacuum-cleaners"
+  },
+  "KMR85RH95AFXKR": {
+    "checked_at": "2026-10-14T04:05:06.518Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/KMR85RH95AFXKR/",
+    "source_model": "KMR85RH95AF",
+    "support_checked": true,
+    "category": "tvs"
+  },
+  "SM-R530NZWAKOC": {
+    "checked_at": "2026-10-14T04:05:06.518Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/buds/package-armor-case-sm-r530nzw/SM-R530NZWAKOC/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "buds"
+  },
+  "JBLJR320BLU": {
+    "checked_at": "2026-10-14T04:05:06.518Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-headphone-jr320-d2c/JBLJR320BLU/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
   }
 }

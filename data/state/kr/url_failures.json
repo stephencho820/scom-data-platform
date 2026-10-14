@@ -148,5 +148,20 @@
     "failure_count": 1,
     "retry_after": "2026-10-14T04:23:46.888Z",
     "last_failed_at": "2026-10-14T03:23:46.888Z"
+  },
+  "https://www.samsung.com/sec/monitors/monitor-ls24f350fhkxkr/": {
+    "failure_count": 1,
+    "retry_after": "2026-10-14T05:05:06.518Z",
+    "last_failed_at": "2026-10-14T04:05:06.518Z"
+  },
+  "https://www.samsung.com/sec/monitors/monitor-ls27f350fhkxkr/": {
+    "failure_count": 1,
+    "retry_after": "2026-10-14T05:05:06.518Z",
+    "last_failed_at": "2026-10-14T04:05:06.518Z"
+  },
+  "https://www.samsung.com/sec/monitors/monitor-ls32f351fukxkr/": {
+    "failure_count": 1,
+    "retry_after": "2026-10-14T05:05:06.518Z",
+    "last_failed_at": "2026-10-14T04:05:06.518Z"
   }
 }
