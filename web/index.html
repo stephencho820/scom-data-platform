@@ -4,16 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f8fc">
-  <meta name="description" content="S.com Data Platform: four data lifecycles, incremental Samsung.com data, and MCP for AI shopping agents.">
-  <title>S.com Data Platform — One source. Four lifecycles.</title>
-  <link rel="stylesheet" href="./landing.css?v=20261014-ux32">
+  <meta name="description" content="AI-ready Samsung.com data contracts and MCP integration for AI agent developers.">
+  <title>Samsung.com AI-Ready Data MCP · S.com Data Platform</title>
+  <link rel="stylesheet" href="./landing.css?v=20261014-ai">
 </head>
 <body>
   <a href="#main" class="skip-link" data-i18n="skip">본문으로 바로가기</a>
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="./" aria-label="S.com Data Platform home"><span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>S.com <b>Data Platform</b></span></a>
-      <nav class="main-nav" aria-label="Main"><a href="./" data-i18n="navOverview">소개</a><a href="./catalog.html" data-i18n="navData">데이터</a><a href="./explorer.html" data-i18n="navExplorer">SKU 탐색</a><a href="./#connect" data-i18n="navConnect">MCP 연결</a></nav>
+      <nav class="main-nav" aria-label="Main"><a href="./" data-i18n="navOverview">소개</a><a href="./registry.html" data-i18n="navSpec">AI-Ready 명세</a><a href="./ai-data.html" data-i18n="navAiData">AI-Ready 데이터</a><a href="./#connect" data-i18n="navConnect">MCP 연결</a></nav>
       <div class="header-actions">
         <div class="lang-switch" aria-label="Language">
           <button type="button" data-lang="kr" aria-pressed="true">KR</button>
@@ -33,7 +33,7 @@
         <p class="hero-desc" data-i18n="heroDescription">제품 스펙부터 가격, 재고까지. 모든 정보를 똑같이 크롤링할 필요는 없습니다. 데이터의 성격에 따라 수집하고, 하나의 MCP로 제공합니다.</p>
         <div class="hero-buttons">
           <a href="#connect" class="button button-primary"><span data-i18n="exploreTypes">4가지 유형 살펴보기</span> <span aria-hidden="true">↓</span></a>
-          <a href="./catalog.html" class="button button-outline"><span data-i18n="seeExample">실제 흐름 보기</span> <span aria-hidden="true">↗</span></a>
+          <a href="./registry.html" class="button button-outline"><span data-i18n="seeExample">실제 흐름 보기</span> <span aria-hidden="true">↗</span></a>
         </div>
         <div class="hero-foot">
           <span class="tiny-icon">✓</span><span data-i18n="heroFoot1">SKU 중심으로 정리</span>
@@ -59,121 +59,7 @@
       </div>
     </section>
 
-    <section class="type-section" id="lifecycle" aria-labelledby="type-title">
-      <div class="wrap">
-        <div class="section-intro">
-          <div><p class="eyebrow" data-i18n="typesEyebrow">THE FOUR DATA LIFECYCLES</p><h2 id="type-title"><span data-i18n="typesTitle1">데이터가 다르면,</span><br><span data-i18n="typesTitle2">수집 방식도 달라야 합니다.</span></h2></div>
-          <p class="section-desc" data-i18n="typesDescription">삼성닷컴 챗봇에 필요한 데이터를 네 가지로 구분했습니다. 각 카드를 누르면 실제 질문에 어떻게 활용되는지 볼 수 있어요.</p>
-        </div>
-
-        <div class="types-grid" role="group" aria-label="Four data lifecycles">
-          <button class="type-card type-a is-active" type="button" data-type="a" aria-pressed="true">
-            <span class="type-top"><span class="type-letter">A</span><span class="type-tag" data-i18n="aTag">ONCE</span></span>
-            <strong class="type-heading" data-i18n="aHeading">한 번 수집</strong>
-            <span class="type-english">Immutable</span>
-            <span class="type-description" data-i18n="aDesc">제품명, SKU, 스펙, 크기, 색상처럼 오래 유지되는 정보</span>
-            <span class="type-spacer"></span>
-            <span class="type-divider"></span>
-            <span class="type-label" data-i18n="typeStrategy">수집 전략</span>
-            <strong class="type-strategy" data-i18n="aStrategy">최초 구축 후 재사용</strong>
-            <span class="type-example" data-i18n="aExample">예: 갤럭시 카메라 사양</span>
-            <span class="type-action" aria-hidden="true">↗</span>
-          </button>
-          <button class="type-card type-b" type="button" data-type="b" aria-pressed="false">
-            <span class="type-top"><span class="type-letter">B</span><span class="type-tag" data-i18n="bTag">ON CHANGE</span></span>
-            <strong class="type-heading" data-i18n="bHeading">바뀔 때만</strong>
-            <span class="type-english">Versioned</span>
-            <span class="type-description" data-i18n="bDesc">FAQ, 사용 설명서, 호환성, 서비스 정책처럼 가끔 수정되는 정보</span>
-            <span class="type-spacer"></span>
-            <span class="type-divider"></span>
-            <span class="type-label" data-i18n="typeStrategy">수집 전략</span>
-            <strong class="type-strategy" data-i18n="bStrategy">변경 감지 후 갱신</strong>
-            <span class="type-example" data-i18n="bExample">예: 새로 추가된 FAQ</span>
-            <span class="type-action" aria-hidden="true">↗</span>
-          </button>
-          <button class="type-card type-c" type="button" data-type="c" aria-pressed="false">
-            <span class="type-top"><span class="type-letter">C</span><span class="type-tag" data-i18n="cTag">SCHEDULED</span></span>
-            <strong class="type-heading" data-i18n="cHeading">자주 새롭게</strong>
-            <span class="type-english">Dynamic</span>
-            <span class="type-description" data-i18n="cDesc">가격, 할인, 프로모션, 판매 상태처럼 자주 달라지는 정보</span>
-            <span class="type-spacer"></span>
-            <span class="type-divider"></span>
-            <span class="type-label" data-i18n="typeStrategy">수집 전략</span>
-            <strong class="type-strategy" data-i18n="cStrategy">주기적 확인 · 변경분 반영</strong>
-            <span class="type-example" data-i18n="cExample">예: 오늘의 판매 가격</span>
-            <span class="type-action" aria-hidden="true">↗</span>
-          </button>
-          <button class="type-card type-d" type="button" data-type="d" aria-pressed="false">
-            <span class="type-top"><span class="type-letter">D</span><span class="type-tag" data-i18n="dTag">ON DEMAND</span></span>
-            <strong class="type-heading" data-i18n="dHeading">그때 바로</strong>
-            <span class="type-english">Real-time</span>
-            <span class="type-description" data-i18n="dDesc">지역별 재고, 배송 예정일, 개인 혜택, 주문 상태처럼 고객마다 다른 정보</span>
-            <span class="type-spacer"></span>
-            <span class="type-divider"></span>
-            <span class="type-label" data-i18n="typeStrategy">수집 전략</span>
-            <strong class="type-strategy" data-i18n="dStrategy">질문 시 공식 API 조회</strong>
-            <span class="type-example" data-i18n="dExample">예: 내일 배송 가능할까?</span>
-            <span class="type-action" aria-hidden="true">↗</span>
-          </button>
-        </div>
-        <p class="type-caveat"><span aria-hidden="true">ⓘ</span> <span data-i18n="typeCaveat">A도 정정 가능성을 확인합니다. D는 크롤링 데이터가 아닌 별도 공식 API 연동이 필요하며, 현재 공개 MCP에는 포함되지 않습니다.</span></p>
-      </div>
-    </section>
-
-    <section class="demo-section wrap" id="demo" aria-labelledby="demo-title">
-      <div class="section-intro">
-        <div><p class="eyebrow" data-i18n="demoEyebrow">INTERACTIVE POC</p><h2 id="demo-title"><span data-i18n="demoTitle1">질문 하나로 이해하는</span><br><span data-i18n="demoTitle2">데이터의 흐름.</span></h2></div>
-        <p class="section-desc" data-i18n="demoDescription">아래 시나리오를 선택해 보세요. 챗봇이 어떤 데이터 계층을 사용할지, MCP에서는 무엇을 호출할지 보여드립니다.</p>
-      </div>
-      <div class="demo-shell">
-        <div class="demo-left">
-          <div class="demo-product-picker">
-            <label for="demo-sku-search" class="demo-section-label" data-i18n="demoSkuTitle">01 · 실제 삼성 제품 선택</label>
-            <div class="demo-bu-filters" role="group" aria-label="Filter business units">
-              <button class="bu-filter is-active" type="button" data-demo-bu="ALL" aria-pressed="true">ALL</button>
-              <button class="bu-filter" type="button" data-demo-bu="MX" aria-pressed="false">MX</button>
-              <button class="bu-filter" type="button" data-demo-bu="DA" aria-pressed="false">DA</button>
-              <button class="bu-filter" type="button" data-demo-bu="VD" aria-pressed="false">VD</button>
-              <button class="bu-filter" type="button" data-demo-bu="HARMAN" aria-pressed="false">HARMAN</button>
-            </div>
-            <input type="search" id="demo-sku-search" autocomplete="off" placeholder="제품명 또는 SKU 검색" aria-label="Search collected products">
-            <button id="demo-retry" type="button" class="poc-retry" hidden>다시 불러오기 ↻</button>
-            <select id="demo-sku-select" aria-label="Select a collected Samsung SKU" disabled>
-              <option>수집된 제품 데이터 로딩 중…</option>
-            </select>
-            <div class="demo-selected-product" id="demo-product-summary" aria-live="polite">SKU · —</div>
-          </div>
-          <p class="demo-section-label" data-i18n="demoChoose">02 · 질문 선택</p>
-          <div class="demo-options" role="group" aria-label="Example questions">
-            <button class="demo-option is-active" data-scenario="a" type="button" aria-pressed="true"><span>A</span><span data-i18n="demoOptionA">이 제품의 스펙은?</span><b aria-hidden="true">↗</b></button>
-            <button class="demo-option" data-scenario="b" type="button" aria-pressed="false"><span>B</span><span data-i18n="demoOptionB">사용법이 바뀌었나요?</span><b aria-hidden="true">↗</b></button>
-            <button class="demo-option" data-scenario="c" type="button" aria-pressed="false"><span>C</span><span data-i18n="demoOptionC">지금 할인 중인가요?</span><b aria-hidden="true">↗</b></button>
-            <button class="demo-option" data-scenario="d" type="button" aria-pressed="false"><span>D</span><span data-i18n="demoOptionD">내일 배송되나요?</span><b aria-hidden="true">↗</b></button>
-          </div>
-          <div class="demo-notice"><span class="demo-notice-icon">✦</span><p data-i18n="demoDisclaimer">제품 정보는 실제 수집 마트의 정적 스냅샷입니다. 표시된 MCP 명령은 호출 예시이며 실시간 재고·배송 API는 연결되지 않았습니다.</p></div>
-        </div>
-        <div class="demo-right">
-          <div class="demo-screen-top"><span class="screen-dots"><i></i><i></i><i></i></span><span data-i18n="screenTitle">AGENT DATA ROUTE · ACTUAL SNAPSHOT</span><span class="demo-mode" data-i18n="screenDemo">SNAPSHOT</span></div>
-          <div class="demo-screen">
-            <div class="screen-step-label">01 <span data-i18n="screenQuestion">CUSTOMER QUESTION</span></div>
-            <div class="question-bubble" id="demo-question">“이 제품의 스펙은?”</div>
-            <div class="routing-arrow" aria-hidden="true">↓</div>
-            <div class="screen-step-label">02 <span data-i18n="screenRoute">DATA ROUTE</span></div>
-            <div class="decision-card"><div class="decision-symbol" id="demo-symbol">A</div><div><strong id="demo-route">Immutable · Product Master</strong><small id="demo-explanation">한 번 구축한 SKU 제품 사양을 재사용합니다.</small></div></div>
-            <div class="routing-arrow" aria-hidden="true">↓</div>
-            <div class="screen-step-label">03 <span data-i18n="screenOutput">MCP / NEXT ACTION</span></div>
-            <div class="code-response"><code id="demo-code">get_product_specs({ market: "kr", product_key: "&lt;SKU&gt;" })</code></div>
-            <p class="response-foot" id="demo-note">제품을 선택하면 수집된 실제 레코드가 표시됩니다.</p>
-            <div class="demo-evidence" id="demo-evidence" aria-live="polite"><p>SKU 데이터를 확인 중…</p></div>
-            <div class="demo-record-actions">
-              <a id="demo-source" href="https://www.samsung.com/sec/" target="_blank" rel="noopener noreferrer" hidden><span data-i18n="demoOriginalSource">삼성닷컴 원본 보기</span> ↗</a>
-              <span id="demo-snapshot-age"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
+    <section class="ai-steps wrap" aria-label="AI-ready platform workflow"><p class="eyebrow">SCHEMA → DATA → MCP</p><h2 data-i18n="aiStepsTitle">필요한 데이터만 만들고, MCP로 연결합니다.</h2><p class="ai-steps-lead" data-i18n="aiStepsLead">목표 마트 명세를 먼저 정의합니다. 수집은 명세에 필요한 필드만 채우기 위한 내부 과정입니다.</p><div class="ai-steps-grid"><a href="./registry.html"><span>01 / SCHEMA</span><strong data-i18n="aiStepSchema">AI-Ready 데이터 명세</strong><small data-i18n="aiStepSchemaDesc">필드 · 키 · 관계 · 갱신 정책</small><b>↗</b></a><a href="./ai-data.html"><span>02 / DATA</span><strong data-i18n="aiStepData">AI-Ready 데이터 현황</strong><small data-i18n="aiStepDataDesc">목표 계약 · 확보된 근거 · 검증 상태</small><b>↗</b></a><a href="#connect"><span>03 / MCP</span><strong data-i18n="aiStepMcp">Agent에 MCP 연결</strong><small data-i18n="aiStepMcpDesc">로컬 stdio · 도구 · 연결 설정</small><b>↗</b></a></div><p class="ai-steps-note" data-i18n="aiStepsNote">36개 목표 마트는 설계 초안이며, 현재 MCP가 모든 명세를 구현한 것은 아닙니다.</p></section>
     <section class="connect-section" id="connect" aria-labelledby="connect-title">
       <div class="wrap connect-layout">
         <div class="connect-copy">
@@ -197,10 +83,10 @@ npm run mcp</code></pre>
       </div>
     </section>
 
-    <section class="bottom-strip wrap"><div><strong data-i18n="bottomTitle">수집 현황도 투명하게.</strong><p data-i18n="bottomDescription">데이터가 아직 완성되지 않았다면 완료된 것처럼 말하지 않습니다. SKU 누락과 검증 상태를 그대로 보여줍니다.</p></div><div class="bottom-links"><a href="./status.html" data-i18n="bottomStatus">수집 상태 보기 ↗</a><a href="./catalog.html" data-i18n="bottomCatalog">데이터 마트 명세 ↗</a><a href="./explorer.html" data-i18n="bottomExplorer">SKU 데이터 탐색 ↗</a></div></section>
+    <section class="bottom-strip wrap"><div><strong data-i18n="bottomTitle">수집 현황도 투명하게.</strong><p data-i18n="bottomDescription">데이터가 아직 완성되지 않았다면 완료된 것처럼 말하지 않습니다. SKU 누락과 검증 상태를 그대로 보여줍니다.</p></div><div class="bottom-links"><a href="./ai-data.html" data-i18n="bottomStatus">수집 상태 보기 ↗</a><a href="./registry.html" data-i18n="bottomCatalog">데이터 마트 명세 ↗</a><a href="./explorer.html" data-i18n="bottomExplorer">SKU 데이터 탐색 ↗</a></div></section>
   </main>
   <footer class="site-footer"><div class="wrap footer-inner"><span class="footer-brand">S.com Data Platform</span><p data-i18n="footerDisclaimer">독립적인 커뮤니티 프로젝트이며 삼성 공식 서비스가 아닙니다.</p><a href="https://github.com/stephencho820/scom-data-platform" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></footer>
-  <script src="./site.js?v=20261014-agent"></script>
-  <script src="./poc.js"></script>
+  <script src="./site.js?v=20261014-aiready"></script>
+  
 </body>
 </html>

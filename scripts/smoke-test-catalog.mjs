@@ -83,11 +83,18 @@ try{
  await page.locator("#collapse-all").click();
  assert.equal(await page.locator("details.registry-mart[open]").count(),0,"Collapse all must work");
  assert.deepEqual(errors,[],"Registry browser errors: "+errors.join("\\n"));
- // Header regression: all five public pages must render the same four links
+ // AI-ready evidence is not the raw 12-table catalog.
+ await page.goto("http://127.0.0.1:"+port+"/ai-data.html",{waitUntil:"domcontentloaded"});
+ await page.locator(".ai-item").first().waitFor({timeout:12000});
+ assert.equal(await page.locator(".ai-item").count(),36,"AI-ready evidence must list 36 contracts");
+ assert.equal(await page.locator(".ai-group").count(),8,"AI-ready evidence must show eight domains");
+ assert.ok((await page.locator("#ai-ready").innerText()).includes("미검증"),"Must not claim verified marts");
+ assert.equal(await page.locator("#ai-error").isHidden(),true);
+ // Header regression: all six public pages must render the same four links
  // in the same order. Navigating between them must not add/drop a menu item.
- const expectedKeys=["navOverview","navData","navExplorer","navConnect"];
- const expectedHrefs=["./","./catalog.html","./explorer.html","./#connect"];
- const routes=["index.html","status.html","catalog.html","registry.html","explorer.html"];
+ const expectedKeys=["navOverview","navSpec","navAiData","navConnect"];
+ const expectedHrefs=["./","./registry.html","./ai-data.html","./#connect"];
+ const routes=["index.html","status.html","catalog.html","registry.html","explorer.html","ai-data.html"];
  const actualBase="http://127.0.0.1:"+port+"/";
  for(const language of ["kr","us"]){
    for(const route of routes){
@@ -102,11 +109,11 @@ try{
      assert.deepEqual(nav.map(link=>link.href),expectedHrefs,"Menu href drift in "+route+" / "+language);
      assert.deepEqual(nav.map(link=>link.key),expectedKeys,"Menu order drift in "+route+" / "+language);
      assert.ok(nav.every(link=>link.text.length>0),"Missing translated menu label in "+route);
-     if(language==="us")assert.equal(nav[1].text,"Data","Data label must translate on "+route);
-     else assert.equal(nav[1].text,"데이터","Data label must be Korean on "+route);
+     if(language==="us")assert.equal(nav[1].text,"AI-Ready Schema","Schema label must translate on "+route);
+     else assert.equal(nav[1].text,"AI-Ready 명세","Schema label must be Korean on "+route);
    }
  }
- console.log("PASS: 12 real marts and verified constant four-link KR/US navigation across all five pages.");
+ console.log("PASS: 12 raw source marts and verified constant four-link KR/US navigation across all five pages.");
 }finally{
  if(browser)await browser.close();
  await new Promise(resolve=>server.close(resolve));
