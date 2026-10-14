@@ -6,7 +6,7 @@
   "private": false,
   "scripts": {
     "crawl": "node scripts/crawl.mjs",
-    "mcp": "node src/mcp/server.mjs",
+    "mcp": "node scripts/build-ai-ready.mjs kr 1>&2 && node src/mcp/server.mjs",\n    "build:ai-ready": "node scripts/build-ai-ready.mjs kr",
     "serve:web": "python3 -m http.server 3000 -d web"
   },
   "dependencies": {

@@ -204,6 +204,23 @@ function buildServer() {
     version: "0.2.0"
   });
 
+  server.registerTool("list_ai_ready_contracts",{
+    description:"List AI-ready data contracts and actual materialization status; unverified records are not production-ready.",
+    inputSchema:z.object({market:z.string().default("kr")})
+  },async({market})=>{const contract=await readJson(path.join(ROOT,"schemas/ai_ready_mart_registry_v1.json"));
+    const manifest=await readJson(path.join(ROOT,"data/ai-ready",market.toLowerCase(),"manifest.json"));
+    return asText({market,registry_version:contract?.schema_version||null,contracts:(contract?.marts||[]).map(m=>({id:m.id,name:m.name,domain:m.domain,grain:m.grain,fields:m.fields,materialization:manifest?.marts?.find(x=>x.id===m.id)||{status:"NOT_MATERIALIZED",rows:0}})),warning:"Materialized does not mean verified or complete."});
+  });
+  server.registerTool("get_ai_ready_data",{
+    description:"Read source-traceable AI-ready contract records. Records are explicitly unverified and must not be represented as confirmed business facts.",
+    inputSchema:z.object({market:z.string().default("kr"),contract_id:z.string().regex(/^[A-Z][0-9]{2}$/),sku:z.string().optional(),limit:z.number().int().min(1).max(100).default(20)})
+  },async({market,contract_id,sku,limit})=>{
+    const contract=await readJson(path.join(ROOT,"schemas/ai_ready_mart_registry_v1.json"));
+    if(!contract?.marts?.some(m=>m.id===contract_id))return asError("Unknown AI-ready contract ID");
+    const records=await readJsonl(path.join(ROOT,"data/ai-ready",market.toLowerCase(),contract_id+".jsonl"));
+    const selected=records.filter(x=>!sku||x.sku===sku).slice(0,limit);
+    return asText({market,contract_id,count:selected.length,records:selected,verification_status:"unverified",note:"Source-traceable partial materialization only. Check provenance and freshness; not verified or complete."});
+  });
   server.registerTool(
     "get_incremental_sync_status",
     {
