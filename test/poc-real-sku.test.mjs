@@ -60,18 +60,14 @@ test("published actual KR demo includes all four BU and clearly labels missing s
  }finally{await rm(dir,{force:true,recursive:true});}
 });
 
-test("browser routes are explanatory and reject expired/future-verified prices",async()=>{
+test("AI-ready portal does not expose removed demo; legacy POC still gates prices",async()=>{
  const js=await readFile("web/poc.js","utf8");
  const html=await readFile("web/index.html","utf8");
- assert.ok(html.includes("demo-sku-select"));
- assert.ok(html.includes("demo-sku-search"));
- assert.ok(html.includes("data-demo-bu=\"HARMAN\""));
- assert.ok(html.includes('<script src="./poc.js"></script>'));
+ assert.ok(html.includes('class="ai-steps-grid"'));
+ assert.ok(html.includes('href="./registry.html"'));
+ assert.ok(html.includes('href="./ai-data.html"'));
+ assert.ok(!html.includes('demo-sku-select'));
  assert.ok(js.includes("now-stamp<=36*3600000"));
  assert.ok(js.includes("now>=stamp"));
- assert.ok(js.includes("get_product_specs"));
- assert.ok(js.includes("get_market_offer"));
- assert.ok(js.includes("get_support_resources"));
  assert.ok(js.includes("authorized inventory / delivery API"));
- assert.ok(js.includes("AbortController"));
 });
