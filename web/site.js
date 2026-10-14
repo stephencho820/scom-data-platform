@@ -2,8 +2,8 @@
 const copy = {
   kr: {
     skip:"본문으로 바로가기",navLifecycle:"4가지 데이터",navDemo:"작동 방식",navConnect:"MCP 연결",tryMcp:"MCP 시작하기",
-    heroEyebrow:"AI 에이전트 개발자를 위한 삼성닷컴 MCP",heroTitle1:"삼성닷컴 AI-Ready Data.",heroTitle2:"내 Agent에 MCP로 연결.",
-    heroDescription:"자신의 AI 에이전트에 삼성닷컴 제품 정보를 연결하세요. SKU별 제품 스펙과 수집된 가격·지원 자료를 로컬 MCP 서버에서 조회할 수 있습니다. 실시간 재고·주문 API는 제공하지 않습니다.",
+    heroEyebrow:"AI 에이전트 개발자를 위한 AI-Ready Data MCP",heroTitle1:"삼성닷컴 AI-Ready Data.",heroTitle2:"내 Agent에 MCP로 연결.",
+    heroDescription:"AI-Ready 데이터 명세를 정의하고, 필요한 삼성닷컴 데이터만 수집·정규화해 MCP로 제공합니다. 개발자는 자신의 Agent에서 현재 제공 가능한 데이터를 조회할 수 있습니다.",
     exploreTypes:"MCP 연결 방법 보기",seeExample:"데이터 카탈로그 보기",heroFoot1:"SKU 중심으로 정리",heroFoot2:"출처 및 최신성 확인",
     visualEyebrow:"데이터 처리 구조 · 개념 예시",visualSource:"국가별 제품 및 서비스 정보",
     visualA:"제품 스펙",visualADesc:"최초 수집 · 재사용",visualAStatus:"KEEP",
@@ -43,7 +43,7 @@ const copy = {
   us: {
     skip:"Skip to content",navLifecycle:"The 4 data types",navDemo:"How it works",navConnect:"Connect MCP",tryMcp:"Use the MCP",
     heroEyebrow:"SAMSUNG.COM MCP FOR AGENT DEVELOPERS",heroTitle1:"Samsung.com AI-Ready Data.",heroTitle2:"Connect it to your agent.",
-    heroDescription:"Connect Samsung.com product data to your own AI agent using a local MCP server. Query collected SKU specs, prices and support resources. Live inventory and order APIs are not connected.",
+    heroDescription:"Define AI-ready data contracts, collect and normalize only the Samsung.com facts those contracts require, and expose available records through MCP for your own agent.",
     exploreTypes:"Connect your agent",seeExample:"Explore the data catalog",heroFoot1:"SKU-first records",heroFoot2:"Sources & freshness",
     visualEyebrow:"DATA ROUTING · CONCEPT",visualSource:"Market-specific product & service data",
     visualA:"Product specifications",visualADesc:"Collect once · reuse",visualAStatus:"KEEP",
