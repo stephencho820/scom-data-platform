@@ -55,13 +55,13 @@ test("static catalog has accessible main navigation, bilingual UI and source-onl
   readFile("web/catalog.css","utf8"),readFile("web/site.js","utf8"),
   readFile(".github/workflows/pages.yml","utf8")
  ]);
- assert.ok(html.includes('href="./status.html" data-i18n="navStatus"'));
- assert.ok(html.includes('href="./catalog.html" data-i18n="navCatalog"'));
- assert.ok(html.includes('href="./explorer.html" data-i18n="navExplorer"'));
+ assert.ok(html.includes('href="./" data-i18n="navOverview"'));
+ assert.ok(html.includes('href="./registry.html" data-i18n="navSpec"'));
+ assert.ok(html.includes('href="./ai-data.html" data-i18n="navAiData"'));
  assert.ok(html.includes('id="catalog-table-list"'));
  assert.ok(html.includes('id="catalog-detail"'));
- assert.ok(site.includes('navStatus:"데이터 현황"'));
- assert.ok(site.includes('navStatus:"Data status"'));
+ assert.ok(site.includes('navSpec:"AI-Ready 명세"'));
+ assert.ok(site.includes('navSpec:"AI-Ready Schema"'));
  assert.ok(code.includes("document.createElement"));
  assert.ok(code.includes("textContent"));
  assert.ok(!code.includes("innerHTML"));
