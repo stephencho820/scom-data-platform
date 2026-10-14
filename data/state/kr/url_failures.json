@@ -40,44 +40,44 @@
     "last_failed_at": "2026-10-13T21:52:37.411Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-nu7150fxkr/": {
-    "failure_count": 3,
-    "retry_after": "2026-10-14T01:52:37.411Z",
-    "last_failed_at": "2026-10-13T21:52:37.411Z"
+    "failure_count": 4,
+    "retry_after": "2026-10-14T10:42:22.159Z",
+    "last_failed_at": "2026-10-14T02:42:22.159Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-nu7150fxkr/UN43NU7150FXKR/": {
-    "failure_count": 3,
-    "retry_after": "2026-10-14T01:52:37.411Z",
-    "last_failed_at": "2026-10-13T21:52:37.411Z"
+    "failure_count": 4,
+    "retry_after": "2026-10-14T10:42:22.159Z",
+    "last_failed_at": "2026-10-14T02:42:22.159Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru6990fxkr/UN49RU6990FXKR/": {
-    "failure_count": 3,
-    "retry_after": "2026-10-14T01:52:37.411Z",
-    "last_failed_at": "2026-10-13T21:52:37.411Z"
+    "failure_count": 4,
+    "retry_after": "2026-10-14T10:42:22.159Z",
+    "last_failed_at": "2026-10-14T02:42:22.159Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7100fxkr/": {
-    "failure_count": 3,
-    "retry_after": "2026-10-14T01:52:37.411Z",
-    "last_failed_at": "2026-10-13T21:52:37.411Z"
+    "failure_count": 4,
+    "retry_after": "2026-10-14T10:42:22.159Z",
+    "last_failed_at": "2026-10-14T02:42:22.159Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7100fxkr/UN49RU7100FXKR/": {
-    "failure_count": 3,
-    "retry_after": "2026-10-14T01:52:37.411Z",
-    "last_failed_at": "2026-10-13T21:52:37.411Z"
+    "failure_count": 4,
+    "retry_after": "2026-10-14T10:42:22.159Z",
+    "last_failed_at": "2026-10-14T02:42:22.159Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7100fxkr/UN70RU7100FXKR/": {
-    "failure_count": 3,
-    "retry_after": "2026-10-14T01:52:37.411Z",
-    "last_failed_at": "2026-10-13T21:52:37.411Z"
+    "failure_count": 4,
+    "retry_after": "2026-10-14T10:42:22.159Z",
+    "last_failed_at": "2026-10-14T02:42:22.159Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7150fxkr/UN49RU7150FXKR/": {
-    "failure_count": 3,
-    "retry_after": "2026-10-14T01:52:37.411Z",
-    "last_failed_at": "2026-10-13T21:52:37.411Z"
+    "failure_count": 4,
+    "retry_after": "2026-10-14T10:42:22.159Z",
+    "last_failed_at": "2026-10-14T02:42:22.159Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7190fxkr/UN49RU7190FXKR/": {
-    "failure_count": 2,
-    "retry_after": "2026-10-13T23:52:37.411Z",
-    "last_failed_at": "2026-10-13T21:52:37.411Z"
+    "failure_count": 3,
+    "retry_after": "2026-10-14T06:42:22.159Z",
+    "last_failed_at": "2026-10-14T02:42:22.159Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7470fxkr/": {
     "failure_count": 2,
