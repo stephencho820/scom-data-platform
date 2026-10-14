@@ -646,5 +646,113 @@
     "source_model": "",
     "support_checked": true,
     "category": "harman-lifestyle-audio"
+  },
+  "CC99H63I1D": {
+    "checked_at": "2026-10-14T03:08:26.775Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/CC99H63I1D/",
+    "source_model": "CC99H63I1D",
+    "support_checked": true,
+    "category": "cooking-appliances"
+  },
+  "SP-LPDU7S-120W": {
+    "checked_at": "2026-10-14T03:08:26.775Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/projectors/packge-sp-lpdu7s-120w-d2c/SP-LPDU7S-120W/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "projectors"
+  },
+  "NT750XGJ-KP51S": {
+    "checked_at": "2026-10-14T03:08:26.775Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/galaxybook/galaxy-book4-nt750xgj-kp51s/NT750XGJ-KP51S/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "galaxybook"
+  },
+  "JBLBAR800M2BLKAS1": {
+    "checked_at": "2026-10-14T03:08:26.775Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-soundbar-bar800mk2-d2c/JBLBAR800M2BLKAS1/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
+  },
+  "DW80F71Y1UEWS": {
+    "checked_at": "2026-10-14T03:08:26.775Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/dishwashers/built-in-dw80f71y1uews-d2c/DW80F71Y1UEWS/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "dishwashers"
+  },
+  "HW-QS90H/KR": {
+    "checked_at": "2026-10-14T03:08:26.775Z",
+    "status": "empty",
+    "reason": "sku_not_declared_on_pdp; support_http_404",
+    "source_url": "https://www.samsung.com/sec/soundbars/soundbar-hw-qs90h-d2c/HW-QS90H%2FKR/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "soundbars"
+  },
+  "SM-R530NZAAKOO": {
+    "checked_at": "2026-10-14T03:08:26.775Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/buds/galaxy-buds3-r530/SM-R530NZAAKOO/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "buds"
+  },
+  "JBLBATTERY200": {
+    "checked_at": "2026-10-14T03:08:26.775Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/JBLBATTERY200/",
+    "source_model": "JBLBATTERY200",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
+  },
+  "VR70F00AGG98C": {
+    "checked_at": "2026-10-14T03:08:26.775Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/vacuum-cleaners/jetbot-vr70f00ag-d2c/VR70F00AGG98C/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "vacuum-cleaners"
+  },
+  "KMR100RH85FXKR": {
+    "checked_at": "2026-10-14T03:08:26.775Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/KMR100RH85FXKR/",
+    "source_model": "KMR100RH85F",
+    "support_checked": true,
+    "category": "tvs"
+  },
+  "SM-X406NZAEKOO": {
+    "checked_at": "2026-10-14T03:08:26.775Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/tablets/galaxy-tab-s10lite-5g-x406/SM-X406NZAEKOO/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "tablets"
+  },
+  "JBLCHARGE6B-SSB": {
+    "checked_at": "2026-10-14T03:08:26.775Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/package-jblcharge6b-ssb-d2c/JBLCHARGE6B-SSB/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
   }
 }
