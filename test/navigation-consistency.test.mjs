@@ -23,7 +23,7 @@ test("every published page uses the identical permanent navigation; none may ind
     return [href,key];
   });
   assert.deepEqual(links,canonical,"Navigation drift on "+path);
-  assert.ok(html.includes('./site.js'),"Navigation runtime must load on "+path);
+  assert.ok(html.includes('<script src="./site.js?v=20261014-nav29"></script>'),"All pages must use the same fresh shared navigation script: "+path);
  }
 });
 test("shared site.js owns permanent nav, translations and active state",async()=>{
