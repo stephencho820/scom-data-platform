@@ -4,7 +4,7 @@ const copy = {
     skip:"본문으로 바로가기",navLifecycle:"4가지 데이터",navDemo:"작동 방식",navConnect:"MCP 연결",tryMcp:"MCP 시작하기",
     heroEyebrow:"AI 에이전트 개발자를 위한 삼성닷컴 MCP",heroTitle1:"제품 정보는 한 번.",heroTitle2:"바뀌는 정보만 새롭게.",
     heroDescription:"자신의 AI 에이전트에 삼성닷컴 제품 정보를 연결하세요. SKU별 제품 스펙과 수집된 가격·지원 자료를 로컬 MCP 서버에서 조회할 수 있습니다. 실시간 재고·주문 API는 제공하지 않습니다.",
-    exploreTypes:"MCP 연결 방법 보기",seeExample:"실제 데이터 확인",heroFoot1:"SKU 중심으로 정리",heroFoot2:"출처 및 최신성 확인",
+    exploreTypes:"MCP 연결 방법 보기",seeExample:"데이터 카탈로그 보기",heroFoot1:"SKU 중심으로 정리",heroFoot2:"출처 및 최신성 확인",
     visualEyebrow:"데이터 처리 구조 · 개념 예시",visualSource:"국가별 제품 및 서비스 정보",
     visualA:"제품 스펙",visualADesc:"최초 수집 · 재사용",visualAStatus:"KEEP",
     visualB:"FAQ · 정책",visualBDesc:"변경될 때만 업데이트",visualBStatus:"DETECT",
