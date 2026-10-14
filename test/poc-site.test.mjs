@@ -11,8 +11,8 @@ const poc = await readFile("web/poc.js", "utf8");
 const app = await readFile("web/app.js", "utf8");
 
 test("home prioritizes AI-ready schema, data and MCP",()=>{
- const nav=index.match(/<nav class="main-nav"[\\s\\S]*?<\\/nav>/)?.[0]||"";
- assert.equal((nav.match(/<a\\s/g)||[]).length,4);
+ const nav=index.match(/<nav class="main-nav"[\s\S]*?<\/nav>/)?.[0]||"";
+ assert.equal((nav.match(/<a\s/g)||[]).length,4);
  assert.ok(nav.includes('href="./registry.html"'));
  assert.ok(nav.includes('href="./ai-data.html"'));
  assert.ok(nav.includes('href="./#connect"'));
