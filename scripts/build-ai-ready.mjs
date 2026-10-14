@@ -25,7 +25,7 @@ for(const contract of registry.marts){
     const data={sku,spec_key:String(specKey),raw_value:rawValue};
     if(present(spec.unit)&&typeof spec.unit==="string")data.unit=spec.unit;
     if(present(row.source_model))data.source_model_code=row.source_model;
-    data.model_match_status=row.source_model&&row.model&&row.source_model===row.model?"exact":"unverified";
+    data.model_match_status="unverified";
     result.push({contract_id:"P02",market,sku,data,provenance:{source_table:"product_specs",source_product_key:row.market_product_key,source_url:sourceUrl,source_collected_at:row.captured_at||null},verification_status:"unverified",data_status:"unverified",schema_version:registry.schema_version});
    }
   }
