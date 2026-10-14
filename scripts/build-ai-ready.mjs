@@ -5,7 +5,7 @@ const root=process.cwd(),market=(process.argv[2]||"kr").toLowerCase();
 const out=path.resolve(process.argv[3]||"data/ai-ready/"+market);
 const registry=JSON.parse(await readFile(path.join(root,"schemas/ai_ready_mart_registry_v1.json"),"utf8"));
 async function rows(table){try{return (await readFile(path.join(root,"data/marts",market,table+".jsonl"),"utf8")).split(/\r?\n/).filter(Boolean).map(JSON.parse)}catch{return []}}
-const sources={P01:["product_master",{sku:"sku",model_code:"model",division:"business_unit",category_id:"category",product_name:"name",lifecycle_status:"lifecycle_status",product_url:"product_url"}],P04:["product_master",{sku:"sku",model_code:"model",variant_options:"variant_attributes"}],P07:["product_master",{sku:"sku",sales_status:"lifecycle_status"}]};
+const sources={P01:["product_master",{sku:"sku",model_code:"model",division:"business_unit",category_id:"category",product_name:"name",lifecycle_status:"lifecycle_status",product_url:"product_url"}],P04:["product_master",{sku:"sku",model_code:"model",variant_options:"variant_attributes"}]};
 const present=v=>v!==null&&v!==undefined&&v!==""&&(!Array.isArray(v)||v.length>0)&&(!(typeof v==="object"&&!Array.isArray(v))||Object.keys(v).length>0);
 const manifest={schema_version:1,market,generated_at:new Date().toISOString(),status:"PARTIAL_NOT_VERIFIED",contract_registry_version:registry.schema_version,marts:[]};
 await mkdir(out,{recursive:true});
