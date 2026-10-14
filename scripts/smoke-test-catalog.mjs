@@ -83,10 +83,10 @@ try{
  await page.locator("#collapse-all").click();
  assert.equal(await page.locator("details.registry-mart[open]").count(),0,"Collapse all must work");
  assert.deepEqual(errors,[],"Registry browser errors: "+errors.join("\\n"));
- // Header regression: all five public pages must render the same six links
+ // Header regression: all five public pages must render the same four links
  // in the same order. Navigating between them must not add/drop a menu item.
- const expectedKeys=["navStatus","navCatalog","navRegistry","navExplorer","navDemo","navConnect"];
- const expectedHrefs=["./status.html","./catalog.html","./registry.html","./explorer.html","./#demo","./#connect"];
+ const expectedKeys=["navOverview","navData","navExplorer","navConnect"];
+ const expectedHrefs=["./","./catalog.html","./explorer.html","./#connect"];
  const routes=["index.html","status.html","catalog.html","registry.html","explorer.html"];
  const actualBase="http://127.0.0.1:"+port+"/";
  for(const language of ["kr","us"]){
@@ -102,11 +102,11 @@ try{
      assert.deepEqual(nav.map(link=>link.href),expectedHrefs,"Menu href drift in "+route+" / "+language);
      assert.deepEqual(nav.map(link=>link.key),expectedKeys,"Menu order drift in "+route+" / "+language);
      assert.ok(nav.every(link=>link.text.length>0),"Missing translated menu label in "+route);
-     if(language==="us")assert.equal(nav[2].text,"AI mart design","Registry label must translate on "+route);
-     else assert.equal(nav[2].text,"AI 마트 설계","Registry label must be Korean on "+route);
+     if(language==="us")assert.equal(nav[1].text,"Data","Data label must translate on "+route);
+     else assert.equal(nav[1].text,"데이터","Data label must be Korean on "+route);
    }
  }
- console.log("PASS: 12 real marts and verified constant six-link KR/US navigation across all five pages.");
+ console.log("PASS: 12 real marts and verified constant four-link KR/US navigation across all five pages.");
 }finally{
  if(browser)await browser.close();
  await new Promise(resolve=>server.close(resolve));
