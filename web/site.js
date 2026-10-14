@@ -175,7 +175,7 @@ function syncMainNavigation() {
       });
       nav.replaceChildren(...newLinks);
     }
-    nav.setAttribute("aria-label","Main");
+    nav.setAttribute("aria-label",currentLanguage==="kr"?"주요 메뉴":"Main navigation");
     [...nav.querySelectorAll(":scope > a")].forEach((link,i) => {
       const item=NAVIGATION_ITEMS[i];
       link.textContent=t(item.key);
@@ -198,11 +198,11 @@ function applyLanguage(lang) {
   document.querySelectorAll("[data-lang]").forEach(el => { el.setAttribute("aria-pressed", String(el.dataset.lang === currentLanguage)); });
   syncMainNavigation();
   try { localStorage.setItem("scom_lang", currentLanguage); } catch {}
-  listeners.forEach(fn => fn(currentLanguage));
+  listeners.forEach(fn => fn(currentLanguage));\n  const active=document.querySelector(".main-nav a[aria-current]");\n  if(active) revealActiveNavigation(active);
 }
 window.ScomSite = { t, language: () => currentLanguage, onLanguageChange(fn) { listeners.add(fn); } };
 document.querySelectorAll("[data-lang]").forEach(el => el.addEventListener("click", () => applyLanguage(el.dataset.lang)));
-window.addEventListener("hashchange",syncMainNavigation);
+function revealActiveNavigation(active){\n  const nav=active.closest(".main-nav");\n  if(!nav)return;\n  const left=active.offsetLeft-nav.offsetLeft;\n  const right=left+active.offsetWidth;\n  if(left<nav.scrollLeft)nav.scrollLeft=left;\n  else if(right>nav.scrollLeft+nav.clientWidth)nav.scrollLeft=right-nav.clientWidth;\n}\nwindow.addEventListener("hashchange",syncMainNavigation);\nwindow.addEventListener("hashchange",()=>{\n  const active=document.querySelector(".main-nav a[aria-current]");\n  if(active)revealActiveNavigation(active);\n});
 
 // The real-record POC has its own controller in poc.js.
 const copyButton=document.getElementById("copy-install");
