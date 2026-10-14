@@ -43,7 +43,7 @@ const copy = {
   us: {
     skip:"Skip to content",navLifecycle:"The 4 data types",navDemo:"How it works",navConnect:"Connect MCP",tryMcp:"Use the MCP",
     heroEyebrow:"SAMSUNG.COM MCP FOR AGENT DEVELOPERS",heroTitle1:"Capture stable facts once.",heroTitle2:"Refresh only what changes.",
-    heroDescription:"Specs, prices, inventory and more shouldn't all be crawled the same way. Collect each type on its own schedule and make it accessible through one MCP interface.",
+    heroDescription:"Connect Samsung.com product data to your own AI agent using a local MCP server. Query collected SKU specs, prices and support resources. Live inventory and order APIs are not connected.",
     exploreTypes:"Explore the 4 types",seeExample:"See it in action",heroFoot1:"SKU-first records",heroFoot2:"Sources & freshness",
     visualEyebrow:"DATA ROUTING · CONCEPT",visualSource:"Market-specific product & service data",
     visualA:"Product specifications",visualADesc:"Collect once · reuse",visualAStatus:"KEEP",
