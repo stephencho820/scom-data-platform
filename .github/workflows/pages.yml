@@ -8,6 +8,8 @@ on:
       - "data/**"
       - "config/**"
       - "schemas/**"
+      - "scripts/**"
+      - "src/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
   workflow_run:
