@@ -42,7 +42,7 @@ const copy = {
   },
   us: {
     skip:"Skip to content",navLifecycle:"The 4 data types",navDemo:"How it works",navConnect:"Connect MCP",tryMcp:"Use the MCP",
-    heroEyebrow:"SAMSUNG.COM DATA FOR AI AGENTS",heroTitle1:"Capture stable facts once.",heroTitle2:"Refresh only what changes.",
+    heroEyebrow:"SAMSUNG.COM MCP FOR AGENT DEVELOPERS",heroTitle1:"Capture stable facts once.",heroTitle2:"Refresh only what changes.",
     heroDescription:"Specs, prices, inventory and more shouldn't all be crawled the same way. Collect each type on its own schedule and make it accessible through one MCP interface.",
     exploreTypes:"Explore the 4 types",seeExample:"See it in action",heroFoot1:"SKU-first records",heroFoot2:"Sources & freshness",
     visualEyebrow:"DATA ROUTING · CONCEPT",visualSource:"Market-specific product & service data",
