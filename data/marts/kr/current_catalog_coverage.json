@@ -1,13 +1,13 @@
 {
   "market": "kr",
-  "generated_at": "2026-10-14T04:05:06.518Z",
+  "generated_at": "2026-10-14T20:44:20.265Z",
   "definition": "Current catalog coverage compares SKU identifiers discovered from each configured official Samsung.com KR catalog source with current SKU rows emitted to product_master.",
   "complete": true,
   "catalog_sources_total": 19,
   "catalog_sources_ok": 19,
   "catalog_sources_failed": 0,
-  "discovered_unique_skus": 919,
-  "db_current_unique_skus": 919,
+  "discovered_unique_skus": 913,
+  "db_current_unique_skus": 913,
   "categories": [
     {
       "source_id": "smartphones",
@@ -99,8 +99,8 @@
       "category": "air-conditioners",
       "source_url": "https://www.samsung.com/sec/air-conditioners/all-air-conditioners/",
       "source_status": "ok",
-      "discovered_unique_skus": 100,
-      "db_current_unique_skus": 100,
+      "discovered_unique_skus": 139,
+      "db_current_unique_skus": 139,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -231,8 +231,8 @@
       "category": "harman-lifestyle-audio",
       "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/all-harman-lifestyle-audio/",
       "source_status": "ok",
-      "discovered_unique_skus": 121,
-      "db_current_unique_skus": 121,
+      "discovered_unique_skus": 76,
+      "db_current_unique_skus": 76,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
