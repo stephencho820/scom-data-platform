@@ -59,3 +59,4 @@
   .main-nav a{flex:none}
   .header-actions{flex:none}
 }
+\n/* Consistent keyboard navigation and touch targets across all public pages. */\n:where(a,button,input,select,textarea,summary):focus-visible{outline:3px solid #3467df;outline-offset:3px}\n.main-nav a{position:relative}\n.main-nav a[aria-current]{color:var(--blue);font-weight:850}\n@media(max-width:680px){\n  .main-nav{scroll-padding-inline:10px;padding-inline:2px}\n  .main-nav a{min-height:40px}\n  .lang-switch button{min-width:35px;min-height:40px}\n  .site-header{scroll-margin-top:0}\n}\n@media(prefers-reduced-motion:reduce){.main-nav{scroll-behavior:auto}}\n
