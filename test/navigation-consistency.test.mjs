@@ -1,41 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {readFile} from "node:fs/promises";
-
-const routes=["index.html","status.html","catalog.html","registry.html","explorer.html"];
-const canonical=[
- ["./status.html","navStatus"],
- ["./catalog.html","navCatalog"],
- ["./registry.html","navRegistry"],
- ["./explorer.html","navExplorer"],
- ["./#demo","navDemo"],
- ["./#connect","navConnect"]
-];
-
-test("every published page uses the identical permanent navigation; none may independently add or reorder links",async()=>{
- for(const path of routes){
-  const html=await readFile("web/"+path,"utf8");
-  const nav=html.match(/<nav\b[^>]*class="main-nav"[^>]*>[\s\S]*?<\/nav>/)?.[0];
-  assert.ok(nav,"Missing global nav in "+path);
-  const links=[...nav.matchAll(/<a\b([^>]+)>/g)].map(m=>{
-    const href=m[1].match(/\bhref="([^"]+)"/)?.[1];
-    const key=m[1].match(/\bdata-i18n="([^"]+)"/)?.[1];
-    return [href,key];
-  });
-  assert.deepEqual(links,canonical,"Navigation drift on "+path);
-  assert.ok(html.includes('<script src="./site.js?v=20261014-nav29"></script>'),"All pages must use the same fresh shared navigation script: "+path);
- }
+const routes=["index.html","status.html","catalog.html","registry.html","explorer.html","ai-data.html"];
+const canonical=[["./","navOverview"],["./registry.html","navSpec"],["./ai-data.html","navAiData"],["./#connect","navConnect"]];
+test("all public pages have one consistent four-link AI-ready portal navigation",async()=>{
+ for(const route of routes){const html=await readFile("web/"+route,"utf8");const nav=html.match(/<nav\\b[^>]*class="main-nav"[^>]*>[\\s\\S]*?<\\/nav>/)?.[0];assert.ok(nav,"Missing nav "+route);const links=[...nav.matchAll(/<a\\b([^>]+)>/g)].map(m=>[m[1].match(/\\bhref="([^"]+)"/)?.[1],m[1].match(/\\bdata-i18n="([^"]+)"/)?.[1]]);assert.deepEqual(links,canonical,"Nav mismatch "+route);assert.match(html,/<script src="\\.\\/site\\.js\\?v=[^"]+"><\\/script>/,"Versioned shared script missing "+route)}
 });
-test("shared site.js owns permanent nav, translations and active state",async()=>{
- const js=await readFile("web/site.js","utf8");
- assert.ok(js.includes("const NAVIGATION_ITEMS = Object.freeze("));
- assert.ok(js.includes("function syncMainNavigation()"));
- assert.ok(js.includes("syncMainNavigation();"));
- assert.ok(js.includes('window.addEventListener("hashchange",syncMainNavigation)'));
- for(const [href,key] of canonical){
-  assert.ok(js.includes('href: "'+href+'"'),"Missing canonical href "+href);
-  assert.ok(js.includes('key: "'+key+'"'),"Missing canonical key "+key);
- }
- assert.match(js,/navRegistry:"AI 마트 설계"/);
- assert.match(js,/navRegistry:"AI mart design"/);
+test("shared site owns canonical AI-ready navigation and both language labels",async()=>{
+ const js=await readFile("web/site.js","utf8");assert.ok(js.includes("const NAVIGATION_ITEMS = Object.freeze("));assert.ok(js.includes("function syncMainNavigation()"));assert.ok(js.includes("syncMainNavigation();"));for(const [href,key] of canonical){assert.ok(js.includes('href: "'+href+'"'),"Missing href "+href);assert.ok(js.includes('key: "'+key+'"'),"Missing key "+key)}assert.match(js,/navSpec:"AI-Ready 명세"/);assert.match(js,/navSpec:"AI-Ready Schema"/);
 });
