@@ -1,0 +1,72 @@
+/**
+ * Real Chromium smoke test for the published data mart catalog.
+ * Asserts a table list is rendered (not just that the JavaScript parses).
+ */
+import assert from "node:assert/strict";
+import { createServer } from "node:http";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import { chromium } from "playwright-core";
+
+const root=path.resolve(process.argv[2]||"dist");
+const chrome=process.env.CHROME_PATH || [
+  "/usr/bin/google-chrome","/usr/bin/google-chrome-stable","/usr/bin/chromium"
+].find(Boolean);
+if(!chrome)throw new Error("Chrome executable must be installed in the CI environment");
+
+const mime={".html":"text/html; charset=utf-8",".js":"text/javascript; charset=utf-8",
+ ".css":"text/css; charset=utf-8",".json":"application/json; charset=utf-8"};
+const server=createServer(async(req,res)=>{
+ try{
+  const url=new URL(req.url||"/","http://127.0.0.1");
+  const pathname=decodeURIComponent(url.pathname);
+  const file=path.resolve(root,"."+pathname);
+  if(!file.startsWith(root+path.sep))throw Error("Path traversal");
+  const data=await readFile(file);
+  res.writeHead(200,{"content-type":mime[path.extname(file)]||"application/octet-stream","cache-control":"no-store"});
+  res.end(data);
+ }catch{res.writeHead(404);res.end("Not found");}
+});
+await new Promise(resolve=>server.listen(0,"127.0.0.1",resolve));
+const port=server.address().port;
+let browser;
+try{
+ browser=await chromium.launch({headless:true,executablePath:chrome,args:["--no-sandbox","--disable-dev-shm-usage"]});
+ const page=await browser.newPage();
+ const errors=[];
+ page.on("pageerror",error=>errors.push(String(error)));
+ const endpoint="http://127.0.0.1:"+port+"/catalog.html";
+ await page.goto(endpoint,{waitUntil:"domcontentloaded"});
+ await page.locator(".catalog-table-item").first().waitFor({timeout:12000});
+ let cards=await page.locator(".catalog-table-item").count();
+ assert.equal(cards,12,"Expected 12 real data marts in browser, got "+cards);
+ assert.equal((await page.locator("#catalog-stat-tables").innerText()).trim(),"12");
+ assert.ok(Number((await page.locator("#catalog-stat-skus").innerText()).replace(/[^\d]/g,""))>0,"Current SKU count must be rendered");
+ assert.equal(await page.locator(".catalog-report").count(),4,"Quality reports must render");
+ assert.equal(await page.locator("#catalog-error").isHidden(),true);
+ await page.locator(".catalog-table-item").filter({has:page.locator("code", {hasText:"product_specs"})}).first().click();
+ assert.ok((await page.locator("#catalog-detail").innerText()).includes("product_specs"));
+ assert.ok((await page.locator("#catalog-detail").innerText()).includes("specs"));
+ assert.ok((await page.locator(".catalog-field-table tbody tr").count())>5);
+ await page.locator("[data-lang=us]").click();
+ assert.ok((await page.locator("#catalog-browser-title").innerText()).includes("Per-table"));
+ await page.locator("[data-lang=kr]").click();
+ await page.locator("#catalog-search").fill("refresh_state");
+ assert.equal(await page.locator(".catalog-table-item").count(),1,"Search should filter to real table");
+ await page.locator("#catalog-search").fill("");
+ await page.locator(".catalog-filter[data-layer=B]").click();
+ assert.ok((await page.locator(".catalog-table-item").count())>=2,"Versioned tables must be selectable");
+ await page.locator(".catalog-filter[data-layer=all]").click();
+ // No-network fallback: snapshot embedded at build time must render even when
+ // the manifest request is blocked or GitHub Pages CDN temporarily fails.
+ await page.route("**/data/catalog/kr.json",route=>route.abort("failed"));
+ await page.reload({waitUntil:"domcontentloaded"});
+ await page.locator(".catalog-table-item").first().waitFor({timeout:12000});
+ assert.equal(await page.locator(".catalog-table-item").count(),12,"Embedded bootstrap must survive network failure");
+ assert.equal(await page.locator("#catalog-error").isHidden(),true);
+ assert.deepEqual(errors,[],"Browser errors: "+errors.join("\n"));
+ console.log("PASS: 12 real marts, field dictionary, 4 quality reports, SKU metrics, KR/US, filter, no-network recovery; no page errors.");
+}finally{
+ if(browser)await browser.close();
+ await new Promise(resolve=>server.close(resolve));
+}
