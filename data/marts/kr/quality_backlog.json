@@ -1,7 +1,7 @@
 {
   "market": "kr",
-  "generated_at": "2026-10-14T03:18:13.178Z",
-  "source_snapshot_at": "2026-10-14T03:08:26.775Z",
+  "generated_at": "2026-10-14T03:30:34.744Z",
+  "source_snapshot_at": "2026-10-14T03:23:46.888Z",
   "ready": false,
   "catalog": {
     "sources_total": 19,
@@ -9332,7 +9332,7 @@
       "category": "projectors",
       "name": "2024 The Premiere LPDU7",
       "url": "https://www.samsung.com/sec/projectors/the-premiere-lpdu7s-d2c/SP-LPDU7SAXXKR/",
-      "has_specs": false,
+      "has_specs": true,
       "has_support": false
     },
     {

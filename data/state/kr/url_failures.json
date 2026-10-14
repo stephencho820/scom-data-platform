@@ -123,5 +123,30 @@
     "failure_count": 2,
     "retry_after": "2026-10-14T05:08:26.775Z",
     "last_failed_at": "2026-10-14T03:08:26.775Z"
+  },
+  "https://www.samsung.com/sec/monitors/monitor-ls19e45kmrs-kr/": {
+    "failure_count": 1,
+    "retry_after": "2026-10-14T04:23:46.888Z",
+    "last_failed_at": "2026-10-14T03:23:46.888Z"
+  },
+  "https://www.samsung.com/sec/monitors/monitor-ls20d300nh-cr/": {
+    "failure_count": 1,
+    "retry_after": "2026-10-14T04:23:46.888Z",
+    "last_failed_at": "2026-10-14T03:23:46.888Z"
+  },
+  "https://www.samsung.com/sec/monitors/monitor-ls22f350fhkxkr/": {
+    "failure_count": 1,
+    "retry_after": "2026-10-14T04:23:46.888Z",
+    "last_failed_at": "2026-10-14T03:23:46.888Z"
+  },
+  "https://www.samsung.com/sec/monitors/monitor-ls23c45kbss-kr/": {
+    "failure_count": 1,
+    "retry_after": "2026-10-14T04:23:46.888Z",
+    "last_failed_at": "2026-10-14T03:23:46.888Z"
+  },
+  "https://www.samsung.com/sec/monitors/monitor-ls24e45kbsa-cr/": {
+    "failure_count": 1,
+    "retry_after": "2026-10-14T04:23:46.888Z",
+    "last_failed_at": "2026-10-14T03:23:46.888Z"
   }
 }

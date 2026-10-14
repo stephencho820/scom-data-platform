@@ -754,5 +754,113 @@
     "source_model": "",
     "support_checked": true,
     "category": "harman-lifestyle-audio"
+  },
+  "CC99H84JADS": {
+    "checked_at": "2026-10-14T03:23:46.888Z",
+    "status": "empty",
+    "reason": "sku_not_declared_on_pdp; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/cooking-appliances/cooktop-cc99h84jad-d2c/CC99H84JADS/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "cooking-appliances"
+  },
+  "SP-LPDU7SAXXKR": {
+    "checked_at": "2026-10-14T03:23:46.888Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/SP-LPDU7SAXXKR/",
+    "source_model": "SPLPDU7SAX",
+    "support_checked": true,
+    "category": "projectors"
+  },
+  "SM-R530NZWAK10": {
+    "checked_at": "2026-10-14T03:23:46.888Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/buds/package-carabiner-clip-case-sm-r530nz/SM-R530NZWAK10/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "buds"
+  },
+  "JBLCLIP5BLK": {
+    "checked_at": "2026-10-14T03:23:46.888Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-clip5-d2c/JBLCLIP5BLK/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
+  },
+  "DW80F73X1UEWS": {
+    "checked_at": "2026-10-14T03:23:46.888Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/dishwashers/built-in-dw80f73x1uews-d2c/DW80F73X1UEWS/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "dishwashers"
+  },
+  "HW-B400F/KR": {
+    "checked_at": "2026-10-14T03:23:46.888Z",
+    "status": "empty",
+    "reason": "sku_not_declared_on_pdp; support_http_404",
+    "source_url": "https://www.samsung.com/sec/soundbars/soundbar-hw-b400f-d2c/HW-B400F%2FKR/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "soundbars"
+  },
+  "SM-X520NZAEKOO": {
+    "checked_at": "2026-10-14T03:23:46.888Z",
+    "status": "empty",
+    "reason": "pdp_sku_mismatch; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/tablets/galaxy-tab-s10fe-wifi-x520/SM-X520NZAEKOO/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "tablets"
+  },
+  "JBLESMINI2-GOB": {
+    "checked_at": "2026-10-14T03:23:46.888Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/package-jblesmini2-gob-d2c/JBLESMINI2-GOB/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
+  },
+  "VR70F00SGG98C": {
+    "checked_at": "2026-10-14T03:23:46.888Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/vacuum-cleaners/jetbot-vr70f00sgg-d2c/VR70F00SGG98C/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "vacuum-cleaners"
+  },
+  "KMR85RH95-93": {
+    "checked_at": "2026-10-14T03:23:46.888Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/tvs/package-kmr85rh95-93-d2c/KMR85RH95-93/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "tvs"
+  },
+  "SM-R530NZWAK11": {
+    "checked_at": "2026-10-14T03:23:46.888Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
+    "source_url": "https://www.samsung.com/sec/buds/package-carabiner-clip-case-sm-br530nz/SM-R530NZWAK11/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "buds"
+  },
+  "JBLFLIP7BLK": {
+    "checked_at": "2026-10-14T03:23:46.888Z",
+    "status": "empty",
+    "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
+    "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-flip7-d2c/JBLFLIP7BLK/",
+    "source_model": "",
+    "support_checked": true,
+    "category": "harman-lifestyle-audio"
   }
 }
