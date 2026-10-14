@@ -247,8 +247,8 @@ if(process.argv[1] && path.resolve(process.argv[1])===path.resolve(new URL(impor
  if(process.argv[3]){
   const htmlPath=path.resolve(process.argv[3]);
   const html=await readFile(htmlPath,"utf8");
-  const script='<script src="./site.js"></script>';
-  if(!html.includes(script))throw new Error("Catalog HTML mount marker is missing");
+  const script=html.match(/<script src="\.\/site\.js(?:\?[^"]+)?"><\/script>/)?.[0];
+  if(!script)throw new Error("Catalog HTML mount marker is missing");
   const safe=JSON.stringify(result).replace(/</g,"\\u003c").replace(/>/g,"\\u003e").replace(/&/g,"\\u0026");
   await writeFile(htmlPath,html.replace(script,'<script type="application/json" id="catalog-bootstrap">'+safe+'</script>\n'+script));
  }
