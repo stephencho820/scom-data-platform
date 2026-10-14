@@ -32,6 +32,7 @@ jobs:
           node --check scripts/build-status-page.mjs
           node --check scripts/build-demo-data.mjs
           node --check scripts/build-data-catalog.mjs
+          node --check scripts/smoke-test-catalog.mjs
           node --check src/pipeline/incremental.mjs
           node --check src/pipeline/spec-pdp.mjs
           node --check src/pipeline/support-specs.mjs
@@ -53,3 +54,17 @@ jobs:
       - name: Verify MCP SDK imports
         run: |
           node -e "Promise.all([import('@modelcontextprotocol/server'), import('@modelcontextprotocol/server/stdio'), import('zod/v4')]).then(()=>console.log('MCP imports ok'))"
+
+      - name: Browser-level Data Catalog render smoke test
+        env:
+          CI: "true"
+        run: |
+          chrome="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)"
+          if [ -z "$chrome" ]; then
+            echo "Chrome is required for Data Catalog end-to-end validation."
+            exit 1
+          fi
+          mkdir -p dist
+          cp -R web/. dist/
+          node scripts/build-data-catalog.mjs dist/data/catalog/kr.json dist/catalog.html
+          CHROME_PATH="$chrome" node scripts/smoke-test-catalog.mjs dist

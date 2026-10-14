@@ -163,6 +163,7 @@ function applyLanguage(lang) {
 window.ScomSite = { t, language: () => currentLanguage, onLanguageChange(fn) { listeners.add(fn); } };
 document.querySelectorAll("[data-lang]").forEach(el => el.addEventListener("click", () => applyLanguage(el.dataset.lang)));
 
-// The real-record POC has its own controller in poc.js.\nconst copyButton=document.getElementById("copy-install");
+// The real-record POC has its own controller in poc.js.
+const copyButton=document.getElementById("copy-install");
 if(copyButton)copyButton.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(document.getElementById("install-code").textContent.trim());copyButton.textContent=t("copied");setTimeout(()=>{copyButton.textContent=t("copyCode");},1800);}catch{copyButton.textContent=t("copyFailed");}});
 applyLanguage(currentLanguage);
