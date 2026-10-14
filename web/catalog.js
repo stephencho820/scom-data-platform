@@ -1,3 +1,6 @@
+/* Keep catalog internals out of the global scope shared with site.js. */
+(function catalogPageController(){
+"use strict";
 /**
  * Data Catalog UI. Reads one published manifest generated from the real marts.
  * Text-only DOM rendering prevents a stored source value from injecting HTML.
@@ -192,3 +195,5 @@ window.ScomSite.onLanguageChange(render);
 catalogData=bootstrapped();
 render();
 loadManifest();
+
+})();
