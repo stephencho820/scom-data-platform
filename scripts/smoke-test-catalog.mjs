@@ -67,7 +67,30 @@ try{
  assert.equal(await page.locator(".catalog-table-item").count(),12,"Embedded bootstrap must survive network failure");
  assert.equal(await page.locator("#catalog-error").isHidden(),true);
  assert.deepEqual(errors,[],"Browser errors: "+errors.join("\n"));
- console.log("PASS: 12 real marts, field dictionary, 4 quality reports, SKU metrics, KR/US, filter, no-network recovery; no page errors.");
+ // Header regression: all five public pages must render the same six links
+ // in the same order. Navigating between them must not add/drop a menu item.
+ const expectedKeys=["navStatus","navCatalog","navRegistry","navExplorer","navDemo","navConnect"];
+ const expectedHrefs=["./status.html","./catalog.html","./registry.html","./explorer.html","./#demo","./#connect"];
+ const routes=["index.html","status.html","catalog.html","registry.html","explorer.html"];
+ const actualBase="http://127.0.0.1:"+port+"/";
+ for(const language of ["kr","us"]){
+   for(const route of routes){
+     await page.goto(actualBase+route,{waitUntil:"domcontentloaded"});
+     await page.waitForFunction(()=>Boolean(window.ScomSite?.language));
+     if((await page.evaluate(()=>window.ScomSite.language()))!==language){
+       await page.locator("[data-lang="+language+"]").click();
+     }
+     const nav=await page.locator(".main-nav > a").evaluateAll(links=>links.map(link=>({
+       href:link.getAttribute("href"),key:link.dataset.i18n,text:link.textContent.trim()
+     })));
+     assert.deepEqual(nav.map(link=>link.href),expectedHrefs,"Menu href drift in "+route+" / "+language);
+     assert.deepEqual(nav.map(link=>link.key),expectedKeys,"Menu order drift in "+route+" / "+language);
+     assert.ok(nav.every(link=>link.text.length>0),"Missing translated menu label in "+route);
+     if(language==="us")assert.equal(nav[2].text,"AI mart design","Registry label must translate on "+route);
+     else assert.equal(nav[2].text,"AI 마트 설계","Registry label must be Korean on "+route);
+   }
+ }
+ console.log("PASS: 12 real marts and verified constant six-link KR/US navigation across all five pages.");
 }finally{
  if(browser)await browser.close();
  await new Promise(resolve=>server.close(resolve));

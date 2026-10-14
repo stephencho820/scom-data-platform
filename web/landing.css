@@ -51,3 +51,11 @@
   .status-page-next{display:flex;flex-direction:column;gap:10px}
 }
 .status-page-next{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 75px}
+
+/* Keep the same six-item global menu visible at intermediate widths. */
+@media(min-width:681px) and (max-width:1199px){
+  .header-inner{gap:clamp(12px,1.4vw,20px)}
+  .main-nav{flex:1 1 auto;min-width:0;max-width:100%;overflow-x:auto;white-space:nowrap;scrollbar-width:thin}
+  .main-nav a{flex:none}
+  .header-actions{flex:none}
+}

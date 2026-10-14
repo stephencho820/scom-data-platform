@@ -84,7 +84,7 @@ const copy = {
 Object.assign(copy.kr, {demoSkuTitle:"01 · 실제 삼성 제품 선택",demoOriginalSource:"삼성닷컴 원본 보기",metricHarman:"하만 SKU",harmanNotCollected:"수집 전",explorerEyebrow:"SKU-FIRST DATA EXPLORER",explorerTitle:"SKU 데이터 탐색",explorerLead:"수집된 제품 데이터를 조회합니다. 일부 SKU나 스펙은 아직 누락될 수 있습니다.",explorerMarket:"국가",explorerDataset:"데이터 유형",explorerProducts:"제품",explorerPages:"페이지",explorerHistory:"변경 이력",explorerBu:"사업부",explorerAllBu:"전체",explorerSearch:"검색",explorerCaveat:"가격은 최근 검증된 경우에만 표시됩니다. 최종 결제 가격은 아닙니다."});
 Object.assign(copy.us, {demoSkuTitle:"01 · SELECT A REAL SAMSUNG SKU",demoOriginalSource:"Official Samsung.com source",metricHarman:"HARMAN SKUs",harmanNotCollected:"Not collected",explorerEyebrow:"SKU-FIRST DATA EXPLORER",explorerTitle:"Explore SKU data",explorerLead:"Browse collected product data. Some SKUs or specs may still be missing.",explorerMarket:"Market",explorerDataset:"Dataset",explorerProducts:"Products",explorerPages:"Pages",explorerHistory:"History",explorerBu:"Business unit",explorerAllBu:"All",explorerSearch:"Search",explorerCaveat:"Prices appear only with recent verification; they are not checkout quotes."});
 Object.assign(copy.kr,{
-  navStatus:"데이터 현황",navCatalog:"마트 명세",navExplorer:"SKU 탐색",
+  navStatus:"데이터 현황",navCatalog:"마트 명세",navRegistry:"AI 마트 설계",navExplorer:"SKU 탐색",
   catalogEyebrow:"DATA MART CATALOG · KOREA",catalogTitle:"데이터 마트 명세서.",
   catalogLead:"우리가 수집한 각 마트의 목적과 저장 필드, 실제 건수, 갱신 정책, 품질 상태를 확인할 수 있습니다. 모든 명세는 저장된 JSONL 파일에서 자동 생성합니다.",
   catalogGoStatus:"전체 수집 현황",catalogGoExplorer:"SKU 데이터 조회",
@@ -116,7 +116,7 @@ Object.assign(copy.kr,{
   catalogFootnote:"※ 행 수와 데이터 완성도는 다릅니다. product_specs에는 실제 specs 값이 없는 행도 저장되며, 가격을 표시하려면 refresh_state의 마지막 확인 시각을 검증해야 합니다."
 });
 Object.assign(copy.us,{
-  navStatus:"Data status",navCatalog:"Mart catalog",navExplorer:"SKU explorer",
+  navStatus:"Data status",navCatalog:"Mart catalog",navRegistry:"AI mart design",navExplorer:"SKU explorer",
   catalogEyebrow:"DATA MART CATALOG · KOREA",catalogTitle:"Explore the data marts.",
   catalogLead:"Understand what each mart contains, how it's keyed, its refresh strategy, real stored row counts and coverage. The dictionary is generated from committed JSONL records.",
   catalogGoStatus:"Collection health",catalogGoExplorer:"Explore SKUs",
@@ -148,6 +148,45 @@ Object.assign(copy.us,{
   catalogFootnote:"※ Row counts are not coverage. The product_specs mart includes empty specs arrays; market-offer prices require timestamp verification in refresh_state."
 });
 
+// Canonical sitewide navigation. Changing menu items in individual page HTML
+// must not create different header structures at runtime.
+const NAVIGATION_ITEMS = Object.freeze([
+  { href: "./status.html", key: "navStatus", route: "status.html" },
+  { href: "./catalog.html", key: "navCatalog", route: "catalog.html" },
+  { href: "./registry.html", key: "navRegistry", route: "registry.html" },
+  { href: "./explorer.html", key: "navExplorer", route: "explorer.html" },
+  { href: "./#demo", key: "navDemo", hash: "#demo" },
+  { href: "./#connect", key: "navConnect", hash: "#connect" }
+]);
+function syncMainNavigation() {
+  const page=location.pathname.split("/").pop()||"index.html";
+  const home=page==="index.html";
+  document.querySelectorAll(".main-nav").forEach(nav => {
+    const anchors=[...nav.querySelectorAll(":scope > a")];
+    const changed=anchors.length!==NAVIGATION_ITEMS.length ||
+      NAVIGATION_ITEMS.some((item,i)=>anchors[i]?.getAttribute("href")!==item.href ||
+        anchors[i]?.dataset.i18n!==item.key);
+    if(changed) {
+      const newLinks=NAVIGATION_ITEMS.map(item => {
+        const a=document.createElement("a");
+        a.href=item.href;
+        a.dataset.i18n=item.key;
+        return a;
+      });
+      nav.replaceChildren(...newLinks);
+    }
+    nav.setAttribute("aria-label","Main");
+    [...nav.querySelectorAll(":scope > a")].forEach((link,i) => {
+      const item=NAVIGATION_ITEMS[i];
+      link.textContent=t(item.key);
+      const current=item.route===page ||
+        (home && item.hash===location.hash);
+      if(current)link.setAttribute("aria-current",item.hash?"location":"page");
+      else link.removeAttribute("aria-current");
+    });
+  });
+}
+
 let currentLanguage = "kr";
 try { const saved = localStorage.getItem("scom_lang"); if (saved === "us" || saved === "kr") currentLanguage = saved; } catch {}
 const listeners = new Set();
@@ -157,11 +196,13 @@ function applyLanguage(lang) {
   document.documentElement.lang = currentLanguage === "kr" ? "ko" : "en";
   document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
   document.querySelectorAll("[data-lang]").forEach(el => { el.setAttribute("aria-pressed", String(el.dataset.lang === currentLanguage)); });
+  syncMainNavigation();
   try { localStorage.setItem("scom_lang", currentLanguage); } catch {}
   listeners.forEach(fn => fn(currentLanguage));
 }
 window.ScomSite = { t, language: () => currentLanguage, onLanguageChange(fn) { listeners.add(fn); } };
 document.querySelectorAll("[data-lang]").forEach(el => el.addEventListener("click", () => applyLanguage(el.dataset.lang)));
+window.addEventListener("hashchange",syncMainNavigation);
 
 // The real-record POC has its own controller in poc.js.
 const copyButton=document.getElementById("copy-install");

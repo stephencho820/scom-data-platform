@@ -14,9 +14,10 @@ test("POC home keeps four data lifecycles and exposes health, catalog, and explo
   assert.equal((index.match(/class="type-card /g) || []).length, 4);
   assert.equal((index.match(/<button class="demo-option/g) || []).length, 4);
   const nav = index.match(/<nav class="main-nav"[\s\S]*?<\/nav>/)?.[0] || "";
-  assert.equal((nav.match(/<a\s/g) || []).length, 5);
+  assert.equal((nav.match(/<a\s/g) || []).length, 6);
   assert.ok(nav.includes('href="./status.html"'));
   assert.ok(nav.includes('href="./catalog.html"'));
+  assert.ok(nav.includes('href="./registry.html"'));
   assert.ok(nav.includes('href="./explorer.html"'));
   assert.ok(index.indexOf('id="lifecycle"') < index.indexOf('id="demo"'));
   assert.ok(index.indexOf('id="demo"') < index.indexOf('id="connect"'));
