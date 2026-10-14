@@ -86,7 +86,9 @@ function safeSource(candidate) {
 // even if JavaScript or API requests fail.
 const payload = JSON.stringify({readiness, coverage, incremental}).replace(/</g, "\\u003c");
 const embed = '<script type="application/json" id="status-bootstrap">' + payload + "</script>";
-html = html.replace('<script src="./site.js"></script>', embed+'\n<script src="./site.js"></script>');
+const siteScript = html.match(/<script src="\.\/site\.js(?:\?[^"]+)?"><\/script>/)?.[0];
+if (!siteScript) throw new Error("Status HTML is missing the shared site script");
+html = html.replace(siteScript, embed + "\n" + siteScript);
 await writeFile(pageFile, html);
 console.log(JSON.stringify({
   page: pageFile,
