@@ -4,7 +4,7 @@ const copy = {
     skip:"본문으로 바로가기",navLifecycle:"4가지 데이터",navDemo:"작동 방식",navConnect:"MCP 연결",tryMcp:"MCP 시작하기",
     heroEyebrow:"AI 에이전트 개발자를 위한 AI-Ready Data MCP",heroTitle1:"삼성닷컴 AI-Ready Data.",heroTitle2:"내 Agent에 MCP로 연결.",
     heroDescription:"AI-Ready 데이터 명세를 정의하고, 필요한 삼성닷컴 데이터만 수집·정규화해 MCP로 제공합니다. 개발자는 자신의 Agent에서 현재 제공 가능한 데이터를 조회할 수 있습니다.",
-    exploreTypes:"MCP 연결 방법 보기",seeExample:"데이터 카탈로그 보기",heroFoot1:"SKU 중심으로 정리",heroFoot2:"출처 및 최신성 확인",
+    exploreTypes:"MCP 연결 방법 보기",seeExample:"AI-Ready 명세 보기",heroFoot1:"SKU 중심으로 정리",heroFoot2:"출처 및 최신성 확인",
     visualEyebrow:"데이터 처리 구조 · 개념 예시",visualSource:"국가별 제품 및 서비스 정보",
     visualA:"제품 스펙",visualADesc:"최초 수집 · 재사용",visualAStatus:"KEEP",
     visualB:"FAQ · 정책",visualBDesc:"변경될 때만 업데이트",visualBStatus:"DETECT",
@@ -44,7 +44,7 @@ const copy = {
     skip:"Skip to content",navLifecycle:"The 4 data types",navDemo:"How it works",navConnect:"Connect MCP",tryMcp:"Use the MCP",
     heroEyebrow:"SAMSUNG.COM MCP FOR AGENT DEVELOPERS",heroTitle1:"Samsung.com AI-Ready Data.",heroTitle2:"Connect it to your agent.",
     heroDescription:"Define AI-ready data contracts, collect and normalize only the Samsung.com facts those contracts require, and expose available records through MCP for your own agent.",
-    exploreTypes:"Connect your agent",seeExample:"Explore the data catalog",heroFoot1:"SKU-first records",heroFoot2:"Sources & freshness",
+    exploreTypes:"Connect your agent",seeExample:"View AI-ready schema",heroFoot1:"SKU-first records",heroFoot2:"Sources & freshness",
     visualEyebrow:"DATA ROUTING · CONCEPT",visualSource:"Market-specific product & service data",
     visualA:"Product specifications",visualADesc:"Collect once · reuse",visualAStatus:"KEEP",
     visualB:"FAQs & policies",visualBDesc:"Update only on change",visualBStatus:"DETECT",
@@ -84,7 +84,7 @@ const copy = {
 Object.assign(copy.kr, {demoSkuTitle:"01 · 실제 삼성 제품 선택",demoOriginalSource:"삼성닷컴 원본 보기",metricHarman:"하만 SKU",harmanNotCollected:"수집 전",explorerEyebrow:"SKU-FIRST DATA EXPLORER",explorerTitle:"SKU 데이터 탐색",explorerLead:"수집된 제품 데이터를 조회합니다. 일부 SKU나 스펙은 아직 누락될 수 있습니다.",explorerMarket:"국가",explorerDataset:"데이터 유형",explorerProducts:"제품",explorerPages:"페이지",explorerHistory:"변경 이력",explorerBu:"사업부",explorerAllBu:"전체",explorerSearch:"검색",explorerCaveat:"가격은 최근 검증된 경우에만 표시됩니다. 최종 결제 가격은 아닙니다."});
 Object.assign(copy.us, {demoSkuTitle:"01 · SELECT A REAL SAMSUNG SKU",demoOriginalSource:"Official Samsung.com source",metricHarman:"HARMAN SKUs",harmanNotCollected:"Not collected",explorerEyebrow:"SKU-FIRST DATA EXPLORER",explorerTitle:"Explore SKU data",explorerLead:"Browse collected product data. Some SKUs or specs may still be missing.",explorerMarket:"Market",explorerDataset:"Dataset",explorerProducts:"Products",explorerPages:"Pages",explorerHistory:"History",explorerBu:"Business unit",explorerAllBu:"All",explorerSearch:"Search",explorerCaveat:"Prices appear only with recent verification; they are not checkout quotes."});
 Object.assign(copy.kr,{
-  navOverview:"소개",navData:"데이터",navSpec:"AI-Ready 명세",navAiData:"AI-Ready 데이터",dataHubTitle:"데이터 작업 공간",dataHubLead:"실제 저장 데이터, 목표 스키마, 수집 상태, SKU 레코드를 한곳에서 확인하세요.",dataHubCurrent:"실제 데이터 명세",dataHubCurrentDesc:"저장된 테이블 · 컬럼 · 레코드",dataHubTarget:"목표 마트 설계",dataHubTargetDesc:"36개 계약 · Gap Analysis",dataHubStatus:"수집·품질 현황",dataHubStatusDesc:"SKU 커버리지 · READY 검증",dataHubExplorer:"SKU 레코드 탐색",dataHubExplorerDesc:"개별 제품 데이터 확인",
+  aiStepsTitle:"필요한 데이터만 만들고, MCP로 연결합니다.",aiStepsLead:"목표 마트 명세를 먼저 정의합니다. 수집은 명세에 필요한 필드만 채우기 위한 내부 과정입니다.",aiStepSchema:"AI-Ready 데이터 명세",aiStepSchemaDesc:"필드 · 키 · 관계 · 갱신 정책",aiStepData:"AI-Ready 데이터 현황",aiStepDataDesc:"목표 계약 · 확보된 근거 · 검증 상태",aiStepMcp:"Agent에 MCP 연결",aiStepMcpDesc:"로컬 stdio · 도구 · 연결 설정",aiStepsNote:"36개 목표 마트는 설계 초안이며, 현재 MCP가 모든 명세를 구현한 것은 아닙니다.",navOverview:"소개",navData:"데이터",navSpec:"AI-Ready 명세",navAiData:"AI-Ready 데이터",dataHubTitle:"데이터 작업 공간",dataHubLead:"실제 저장 데이터, 목표 스키마, 수집 상태, SKU 레코드를 한곳에서 확인하세요.",dataHubCurrent:"실제 데이터 명세",dataHubCurrentDesc:"저장된 테이블 · 컬럼 · 레코드",dataHubTarget:"목표 마트 설계",dataHubTargetDesc:"36개 계약 · Gap Analysis",dataHubStatus:"수집·품질 현황",dataHubStatusDesc:"SKU 커버리지 · READY 검증",dataHubExplorer:"SKU 레코드 탐색",dataHubExplorerDesc:"개별 제품 데이터 확인",
   navStatus:"데이터 현황",navCatalog:"마트 명세",navRegistry:"AI 마트 설계",navExplorer:"SKU 탐색",
   catalogEyebrow:"DATA MART CATALOG · KOREA",catalogTitle:"데이터 마트 명세서.",
   catalogLead:"우리가 수집한 각 마트의 목적과 저장 필드, 실제 건수, 갱신 정책, 품질 상태를 확인할 수 있습니다. 모든 명세는 저장된 JSONL 파일에서 자동 생성합니다.",
@@ -117,7 +117,7 @@ Object.assign(copy.kr,{
   catalogFootnote:"※ 행 수와 데이터 완성도는 다릅니다. product_specs에는 실제 specs 값이 없는 행도 저장되며, 가격을 표시하려면 refresh_state의 마지막 확인 시각을 검증해야 합니다."
 });
 Object.assign(copy.us,{
-  navOverview:"Overview",navData:"Data",navSpec:"AI-Ready Schema",navAiData:"AI-Ready Data",dataHubTitle:"Data workspace",dataHubLead:"Inspect stored data, target schemas, collection health and individual SKU records in one place.",dataHubCurrent:"Observed data catalog",dataHubCurrentDesc:"Stored tables, columns and records",dataHubTarget:"Target mart registry",dataHubTargetDesc:"36 contracts and gap analysis",dataHubStatus:"Collection & quality",dataHubStatusDesc:"SKU coverage and readiness checks",dataHubExplorer:"SKU record explorer",dataHubExplorerDesc:"Inspect individual product records",
+  aiStepsTitle:"Build only the data your agent needs, then connect via MCP.",aiStepsLead:"Define target data contracts first. Collection is an internal process to populate the required fields.",aiStepSchema:"AI-ready data contracts",aiStepSchemaDesc:"Fields · keys · relationships · refresh policy",aiStepData:"AI-ready data evidence",aiStepDataDesc:"Target contracts · source evidence · verification",aiStepMcp:"Connect MCP to your agent",aiStepMcpDesc:"Local stdio · tools · setup",aiStepsNote:"The 36 target marts are proposed contracts; the current MCP does not implement all of them.",navOverview:"Overview",navData:"Data",navSpec:"AI-Ready Schema",navAiData:"AI-Ready Data",dataHubTitle:"Data workspace",dataHubLead:"Inspect stored data, target schemas, collection health and individual SKU records in one place.",dataHubCurrent:"Observed data catalog",dataHubCurrentDesc:"Stored tables, columns and records",dataHubTarget:"Target mart registry",dataHubTargetDesc:"36 contracts and gap analysis",dataHubStatus:"Collection & quality",dataHubStatusDesc:"SKU coverage and readiness checks",dataHubExplorer:"SKU record explorer",dataHubExplorerDesc:"Inspect individual product records",
   navStatus:"Data status",navCatalog:"Mart catalog",navRegistry:"AI mart design",navExplorer:"SKU explorer",
   catalogEyebrow:"DATA MART CATALOG · KOREA",catalogTitle:"Explore the data marts.",
   catalogLead:"Understand what each mart contains, how it's keyed, its refresh strategy, real stored row counts and coverage. The dictionary is generated from committed JSONL records.",
