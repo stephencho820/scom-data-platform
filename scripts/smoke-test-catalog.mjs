@@ -67,6 +67,22 @@ try{
  assert.equal(await page.locator(".catalog-table-item").count(),12,"Embedded bootstrap must survive network failure");
  assert.equal(await page.locator("#catalog-error").isHidden(),true);
  assert.deepEqual(errors,[],"Browser errors: "+errors.join("\n"));
+ // AI-ready registry: all 36 marts must be discoverable without search.
+ await page.goto("http://127.0.0.1:"+port+"/registry.html",{waitUntil:"domcontentloaded"});
+ await page.locator("details.registry-mart").first().waitFor({timeout:12000});
+ assert.equal(await page.locator("details.registry-mart").count(),36,"Registry must list all 36 marts");
+ assert.equal(await page.locator(".registry-domain").count(),8,"Registry must group into eight domains");
+ assert.equal(await page.locator("#registry-error").isHidden(),true,"Registry schema must load");
+ await page.locator("details.registry-mart").first().locator("summary").click();
+ assert.equal(await page.locator("details.registry-mart").first().getAttribute("open"),"","First mart must expand");
+ assert.ok((await page.locator("details.registry-mart").first().innerText()).includes("Primary Key"));
+ await page.locator("#expand-all").click();
+ assert.equal(await page.locator("details.registry-mart[open]").count(),36,"Expand all must work");
+ await page.locator("[data-lang=us]").click();
+ assert.equal(await page.locator("details.registry-mart[open]").count(),36,"Language toggle must preserve expansion");
+ await page.locator("#collapse-all").click();
+ assert.equal(await page.locator("details.registry-mart[open]").count(),0,"Collapse all must work");
+ assert.deepEqual(errors,[],"Registry browser errors: "+errors.join("\\n"));
  // Header regression: all five public pages must render the same six links
  // in the same order. Navigating between them must not add/drop a menu item.
  const expectedKeys=["navStatus","navCatalog","navRegistry","navExplorer","navDemo","navConnect"];
