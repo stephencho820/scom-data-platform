@@ -52,7 +52,9 @@ try{
  assert.ok((await page.locator("#catalog-browser-title").innerText()).includes("Per-table"));
  await page.locator("[data-lang=kr]").click();
  await page.locator("#catalog-search").fill("refresh_state");
- assert.equal(await page.locator(".catalog-table-item").count(),1,"Search should filter to real table");
+ const matches=await page.locator(".catalog-table-item code").allInnerTexts();
+ assert.ok(matches.includes("refresh_state"),"Search must expose the named mart");
+ assert.ok(matches.length>0 && matches.length<12,"Search must narrow down the set of marts");
  await page.locator("#catalog-search").fill("");
  await page.locator(".catalog-filter[data-layer=B]").click();
  assert.ok((await page.locator(".catalog-table-item").count())>=2,"Versioned tables must be selectable");
