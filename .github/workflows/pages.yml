@@ -57,7 +57,10 @@ jobs:
       - name: Build AI-ready mart gap analysis
         run: node scripts/build-mart-gap.mjs dist/data/catalog/kr.json dist/data/gaps/kr.json
 
-      - name: Materialize AI-ready contract data\n        run: node scripts/build-ai-ready.mjs kr dist/data/ai-ready/kr\n\n      - name: Build real SKU-based MCP POC dataset
+      - name: Materialize AI-ready contract data
+        run: node scripts/build-ai-ready.mjs kr dist/data/ai-ready/kr
+
+      - name: Build real SKU-based MCP POC dataset
         run: node scripts/build-demo-data.mjs dist/data/demo/kr.json
 
       - name: Render status snapshot into HTML (works without JavaScript)
