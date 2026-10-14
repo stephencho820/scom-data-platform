@@ -8,6 +8,8 @@ on:
       - "scripts/**"
       - "src/**"
       - "config/**"
+      - "web/**"
+      - "schemas/**"
       - ".github/workflows/validate.yml"
   pull_request:
   workflow_dispatch:
@@ -32,6 +34,7 @@ jobs:
           node --check scripts/build-status-page.mjs
           node --check scripts/build-demo-data.mjs
           node --check scripts/build-data-catalog.mjs
+          node --check scripts/build-mart-gap.mjs
           node --check scripts/smoke-test-catalog.mjs
           node --check src/pipeline/incremental.mjs
           node --check src/pipeline/spec-pdp.mjs
@@ -41,6 +44,7 @@ jobs:
           node --check web/site.js
           node --check web/poc.js
           node --check web/catalog.js
+          node --check web/registry.js
           node --check web/status.js
           node --check web/app.js
           node -e "JSON.parse(require('fs').readFileSync('config/markets.json','utf8')); console.log('markets.json ok')"
@@ -67,4 +71,7 @@ jobs:
           mkdir -p dist
           cp -R web/. dist/
           node scripts/build-data-catalog.mjs dist/data/catalog/kr.json dist/catalog.html
+          mkdir -p dist/schemas
+          cp schemas/ai_ready_mart_registry_v1.json dist/schemas/
+          node scripts/build-mart-gap.mjs dist/data/catalog/kr.json dist/data/gaps/kr.json
           CHROME_PATH="$chrome" node scripts/smoke-test-catalog.mjs dist
