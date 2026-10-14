@@ -179,7 +179,7 @@ function syncMainNavigation() {
     [...nav.querySelectorAll(":scope > a")].forEach((link,i) => {
       const item=NAVIGATION_ITEMS[i];
       link.textContent=t(item.key);
-      const current=item.route===page || item.routes?.includes(page) ||
+      const current=(item.route===page && !(home && location.hash==="#connect")) || item.routes?.includes(page) ||
         (home && item.hash===location.hash);
       if(current)link.setAttribute("aria-current",item.hash?"location":"page");
       else link.removeAttribute("aria-current");
