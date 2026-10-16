@@ -75,98 +75,98 @@
     "last_failed_at": "2026-10-15T20:22:03.555Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7190fxkr/UN49RU7190FXKR/": {
-    "failure_count": 5,
-    "retry_after": "2026-10-16T12:22:03.555Z",
-    "last_failed_at": "2026-10-15T20:22:03.555Z"
+    "failure_count": 6,
+    "retry_after": "2026-10-18T03:58:14.483Z",
+    "last_failed_at": "2026-10-16T19:58:14.483Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7470fxkr/": {
-    "failure_count": 5,
-    "retry_after": "2026-10-16T12:22:03.555Z",
-    "last_failed_at": "2026-10-15T20:22:03.555Z"
+    "failure_count": 6,
+    "retry_after": "2026-10-18T03:58:14.483Z",
+    "last_failed_at": "2026-10-16T19:58:14.483Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7470fxkr/UN49RU7470FXKR/": {
-    "failure_count": 5,
-    "retry_after": "2026-10-16T12:22:03.555Z",
-    "last_failed_at": "2026-10-15T20:22:03.555Z"
+    "failure_count": 6,
+    "retry_after": "2026-10-18T03:58:14.483Z",
+    "last_failed_at": "2026-10-16T19:58:14.483Z"
   },
   "https://www.samsung.com/sec/monitors/curved-lc24f390fhkxkr/": {
-    "failure_count": 4,
-    "retry_after": "2026-10-16T04:22:03.555Z",
-    "last_failed_at": "2026-10-15T20:22:03.555Z"
+    "failure_count": 5,
+    "retry_after": "2026-10-17T11:58:14.483Z",
+    "last_failed_at": "2026-10-16T19:58:14.483Z"
   },
   "https://www.samsung.com/sec/monitors/curved-lc27f390fhkxkr/": {
-    "failure_count": 4,
-    "retry_after": "2026-10-16T04:22:03.555Z",
-    "last_failed_at": "2026-10-15T20:22:03.555Z"
+    "failure_count": 5,
+    "retry_after": "2026-10-17T11:58:14.483Z",
+    "last_failed_at": "2026-10-16T19:58:14.483Z"
   },
   "https://www.samsung.com/sec/monitors/curved-lc27f391fhkxkr/": {
-    "failure_count": 4,
-    "retry_after": "2026-10-16T04:22:03.555Z",
-    "last_failed_at": "2026-10-15T20:22:03.555Z"
+    "failure_count": 5,
+    "retry_after": "2026-10-17T11:58:14.483Z",
+    "last_failed_at": "2026-10-16T19:58:14.483Z"
   },
   "https://www.samsung.com/sec/monitors/curved-lc27f581fdkxkr/": {
-    "failure_count": 4,
-    "retry_after": "2026-10-16T04:22:03.555Z",
-    "last_failed_at": "2026-10-15T20:22:03.555Z"
+    "failure_count": 5,
+    "retry_after": "2026-10-17T11:58:14.483Z",
+    "last_failed_at": "2026-10-16T19:58:14.483Z"
   },
   "https://www.samsung.com/sec/monitors/curved-lc27f591fdkxkr/": {
-    "failure_count": 4,
-    "retry_after": "2026-10-16T04:22:03.555Z",
-    "last_failed_at": "2026-10-15T20:22:03.555Z"
+    "failure_count": 5,
+    "retry_after": "2026-10-17T11:58:14.483Z",
+    "last_failed_at": "2026-10-16T19:58:14.483Z"
   },
   "https://www.samsung.com/sec/monitors/curved-ls24e510csx-cr/": {
-    "failure_count": 4,
-    "retry_after": "2026-10-16T04:22:03.555Z",
-    "last_failed_at": "2026-10-15T20:22:03.555Z"
+    "failure_count": 5,
+    "retry_after": "2026-10-17T11:58:14.483Z",
+    "last_failed_at": "2026-10-16T19:58:14.483Z"
   },
   "https://www.samsung.com/sec/monitors/curved-ls27e500cs-kr/": {
-    "failure_count": 4,
-    "retry_after": "2026-10-16T04:22:03.555Z",
-    "last_failed_at": "2026-10-15T20:22:03.555Z"
+    "failure_count": 5,
+    "retry_after": "2026-10-17T11:58:14.483Z",
+    "last_failed_at": "2026-10-16T19:58:14.483Z"
   },
   "https://www.samsung.com/sec/monitors/monitor-ls19e45kmrs-kr/": {
-    "failure_count": 3,
-    "retry_after": "2026-10-16T00:22:03.555Z",
-    "last_failed_at": "2026-10-15T20:22:03.555Z"
+    "failure_count": 4,
+    "retry_after": "2026-10-17T03:58:14.483Z",
+    "last_failed_at": "2026-10-16T19:58:14.483Z"
   },
   "https://www.samsung.com/sec/monitors/monitor-ls20d300nh-cr/": {
-    "failure_count": 3,
-    "retry_after": "2026-10-16T00:22:03.555Z",
-    "last_failed_at": "2026-10-15T20:22:03.555Z"
+    "failure_count": 4,
+    "retry_after": "2026-10-17T03:58:14.483Z",
+    "last_failed_at": "2026-10-16T19:58:14.483Z"
   },
   "https://www.samsung.com/sec/monitors/monitor-ls22f350fhkxkr/": {
-    "failure_count": 3,
-    "retry_after": "2026-10-16T00:22:03.555Z",
-    "last_failed_at": "2026-10-15T20:22:03.555Z"
+    "failure_count": 4,
+    "retry_after": "2026-10-17T03:58:14.483Z",
+    "last_failed_at": "2026-10-16T19:58:14.483Z"
   },
   "https://www.samsung.com/sec/monitors/monitor-ls23c45kbss-kr/": {
-    "failure_count": 3,
-    "retry_after": "2026-10-16T00:22:03.555Z",
-    "last_failed_at": "2026-10-15T20:22:03.555Z"
+    "failure_count": 4,
+    "retry_after": "2026-10-17T03:58:14.483Z",
+    "last_failed_at": "2026-10-16T19:58:14.483Z"
   },
   "https://www.samsung.com/sec/monitors/monitor-ls24e45kbsa-cr/": {
-    "failure_count": 3,
-    "retry_after": "2026-10-16T00:22:03.555Z",
-    "last_failed_at": "2026-10-15T20:22:03.555Z"
+    "failure_count": 4,
+    "retry_after": "2026-10-17T03:58:14.483Z",
+    "last_failed_at": "2026-10-16T19:58:14.483Z"
   },
   "https://www.samsung.com/sec/monitors/monitor-ls24f350fhkxkr/": {
-    "failure_count": 3,
-    "retry_after": "2026-10-16T00:22:03.555Z",
-    "last_failed_at": "2026-10-15T20:22:03.555Z"
+    "failure_count": 4,
+    "retry_after": "2026-10-17T03:58:14.483Z",
+    "last_failed_at": "2026-10-16T19:58:14.483Z"
   },
   "https://www.samsung.com/sec/monitors/monitor-ls27f350fhkxkr/": {
-    "failure_count": 3,
-    "retry_after": "2026-10-16T00:22:03.555Z",
-    "last_failed_at": "2026-10-15T20:22:03.555Z"
+    "failure_count": 4,
+    "retry_after": "2026-10-17T03:58:14.483Z",
+    "last_failed_at": "2026-10-16T19:58:14.483Z"
   },
   "https://www.samsung.com/sec/monitors/monitor-ls32f351fukxkr/": {
-    "failure_count": 3,
-    "retry_after": "2026-10-16T00:22:03.555Z",
-    "last_failed_at": "2026-10-15T20:22:03.555Z"
+    "failure_count": 4,
+    "retry_after": "2026-10-17T03:58:14.483Z",
+    "last_failed_at": "2026-10-16T19:58:14.483Z"
   },
   "https://www.samsung.com/sec/monitors/tv-lt27d590cde-cr/": {
-    "failure_count": 2,
-    "retry_after": "2026-10-15T22:22:03.555Z",
-    "last_failed_at": "2026-10-15T20:22:03.555Z"
+    "failure_count": 3,
+    "retry_after": "2026-10-16T23:58:14.483Z",
+    "last_failed_at": "2026-10-16T19:58:14.483Z"
   }
 }
