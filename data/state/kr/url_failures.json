@@ -75,19 +75,19 @@
     "last_failed_at": "2026-10-17T19:27:05.250Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7190fxkr/UN49RU7190FXKR/": {
-    "failure_count": 6,
-    "retry_after": "2026-10-18T03:58:14.483Z",
-    "last_failed_at": "2026-10-16T19:58:14.483Z"
+    "failure_count": 7,
+    "retry_after": "2026-10-21T11:27:11.637Z",
+    "last_failed_at": "2026-10-18T19:27:11.637Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7470fxkr/": {
-    "failure_count": 6,
-    "retry_after": "2026-10-18T03:58:14.483Z",
-    "last_failed_at": "2026-10-16T19:58:14.483Z"
+    "failure_count": 7,
+    "retry_after": "2026-10-21T11:27:11.637Z",
+    "last_failed_at": "2026-10-18T19:27:11.637Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7470fxkr/UN49RU7470FXKR/": {
-    "failure_count": 6,
-    "retry_after": "2026-10-18T03:58:14.483Z",
-    "last_failed_at": "2026-10-16T19:58:14.483Z"
+    "failure_count": 7,
+    "retry_after": "2026-10-21T11:27:11.637Z",
+    "last_failed_at": "2026-10-18T19:27:11.637Z"
   },
   "https://www.samsung.com/sec/monitors/curved-lc24f390fhkxkr/": {
     "failure_count": 6,
@@ -125,48 +125,48 @@
     "last_failed_at": "2026-10-17T19:27:05.250Z"
   },
   "https://www.samsung.com/sec/monitors/monitor-ls19e45kmrs-kr/": {
-    "failure_count": 5,
-    "retry_after": "2026-10-18T11:27:05.250Z",
-    "last_failed_at": "2026-10-17T19:27:05.250Z"
+    "failure_count": 6,
+    "retry_after": "2026-10-20T03:27:11.637Z",
+    "last_failed_at": "2026-10-18T19:27:11.637Z"
   },
   "https://www.samsung.com/sec/monitors/monitor-ls20d300nh-cr/": {
-    "failure_count": 5,
-    "retry_after": "2026-10-18T11:27:05.250Z",
-    "last_failed_at": "2026-10-17T19:27:05.250Z"
+    "failure_count": 6,
+    "retry_after": "2026-10-20T03:27:11.637Z",
+    "last_failed_at": "2026-10-18T19:27:11.637Z"
   },
   "https://www.samsung.com/sec/monitors/monitor-ls22f350fhkxkr/": {
-    "failure_count": 5,
-    "retry_after": "2026-10-18T11:27:05.250Z",
-    "last_failed_at": "2026-10-17T19:27:05.250Z"
+    "failure_count": 6,
+    "retry_after": "2026-10-20T03:27:11.637Z",
+    "last_failed_at": "2026-10-18T19:27:11.637Z"
   },
   "https://www.samsung.com/sec/monitors/monitor-ls23c45kbss-kr/": {
-    "failure_count": 5,
-    "retry_after": "2026-10-18T11:27:05.250Z",
-    "last_failed_at": "2026-10-17T19:27:05.250Z"
+    "failure_count": 6,
+    "retry_after": "2026-10-20T03:27:11.637Z",
+    "last_failed_at": "2026-10-18T19:27:11.637Z"
   },
   "https://www.samsung.com/sec/monitors/monitor-ls24e45kbsa-cr/": {
-    "failure_count": 5,
-    "retry_after": "2026-10-18T11:27:05.250Z",
-    "last_failed_at": "2026-10-17T19:27:05.250Z"
+    "failure_count": 6,
+    "retry_after": "2026-10-20T03:27:11.637Z",
+    "last_failed_at": "2026-10-18T19:27:11.637Z"
   },
   "https://www.samsung.com/sec/monitors/monitor-ls24f350fhkxkr/": {
-    "failure_count": 5,
-    "retry_after": "2026-10-18T11:27:05.250Z",
-    "last_failed_at": "2026-10-17T19:27:05.250Z"
+    "failure_count": 6,
+    "retry_after": "2026-10-20T03:27:11.637Z",
+    "last_failed_at": "2026-10-18T19:27:11.637Z"
   },
   "https://www.samsung.com/sec/monitors/monitor-ls27f350fhkxkr/": {
-    "failure_count": 5,
-    "retry_after": "2026-10-18T11:27:05.250Z",
-    "last_failed_at": "2026-10-17T19:27:05.250Z"
+    "failure_count": 6,
+    "retry_after": "2026-10-20T03:27:11.637Z",
+    "last_failed_at": "2026-10-18T19:27:11.637Z"
   },
   "https://www.samsung.com/sec/monitors/monitor-ls32f351fukxkr/": {
-    "failure_count": 5,
-    "retry_after": "2026-10-18T11:27:05.250Z",
-    "last_failed_at": "2026-10-17T19:27:05.250Z"
+    "failure_count": 6,
+    "retry_after": "2026-10-20T03:27:11.637Z",
+    "last_failed_at": "2026-10-18T19:27:11.637Z"
   },
   "https://www.samsung.com/sec/monitors/tv-lt27d590cde-cr/": {
-    "failure_count": 4,
-    "retry_after": "2026-10-18T03:27:05.250Z",
-    "last_failed_at": "2026-10-17T19:27:05.250Z"
+    "failure_count": 5,
+    "retry_after": "2026-10-19T11:27:11.637Z",
+    "last_failed_at": "2026-10-18T19:27:11.637Z"
   }
 }
