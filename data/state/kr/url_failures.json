@@ -90,39 +90,39 @@
     "last_failed_at": "2026-10-18T19:27:11.637Z"
   },
   "https://www.samsung.com/sec/monitors/curved-lc24f390fhkxkr/": {
-    "failure_count": 6,
-    "retry_after": "2026-10-19T03:27:05.250Z",
-    "last_failed_at": "2026-10-17T19:27:05.250Z"
+    "failure_count": 7,
+    "retry_after": "2026-10-22T13:34:12.459Z",
+    "last_failed_at": "2026-10-19T21:34:12.459Z"
   },
   "https://www.samsung.com/sec/monitors/curved-lc27f390fhkxkr/": {
-    "failure_count": 6,
-    "retry_after": "2026-10-19T03:27:05.250Z",
-    "last_failed_at": "2026-10-17T19:27:05.250Z"
+    "failure_count": 7,
+    "retry_after": "2026-10-22T13:34:12.459Z",
+    "last_failed_at": "2026-10-19T21:34:12.459Z"
   },
   "https://www.samsung.com/sec/monitors/curved-lc27f391fhkxkr/": {
-    "failure_count": 6,
-    "retry_after": "2026-10-19T03:27:05.250Z",
-    "last_failed_at": "2026-10-17T19:27:05.250Z"
+    "failure_count": 7,
+    "retry_after": "2026-10-22T13:34:12.459Z",
+    "last_failed_at": "2026-10-19T21:34:12.459Z"
   },
   "https://www.samsung.com/sec/monitors/curved-lc27f581fdkxkr/": {
-    "failure_count": 6,
-    "retry_after": "2026-10-19T03:27:05.250Z",
-    "last_failed_at": "2026-10-17T19:27:05.250Z"
+    "failure_count": 7,
+    "retry_after": "2026-10-22T13:34:12.459Z",
+    "last_failed_at": "2026-10-19T21:34:12.459Z"
   },
   "https://www.samsung.com/sec/monitors/curved-lc27f591fdkxkr/": {
-    "failure_count": 6,
-    "retry_after": "2026-10-19T03:27:05.250Z",
-    "last_failed_at": "2026-10-17T19:27:05.250Z"
+    "failure_count": 7,
+    "retry_after": "2026-10-22T13:34:12.459Z",
+    "last_failed_at": "2026-10-19T21:34:12.459Z"
   },
   "https://www.samsung.com/sec/monitors/curved-ls24e510csx-cr/": {
-    "failure_count": 6,
-    "retry_after": "2026-10-19T03:27:05.250Z",
-    "last_failed_at": "2026-10-17T19:27:05.250Z"
+    "failure_count": 7,
+    "retry_after": "2026-10-22T13:34:12.459Z",
+    "last_failed_at": "2026-10-19T21:34:12.459Z"
   },
   "https://www.samsung.com/sec/monitors/curved-ls27e500cs-kr/": {
-    "failure_count": 6,
-    "retry_after": "2026-10-19T03:27:05.250Z",
-    "last_failed_at": "2026-10-17T19:27:05.250Z"
+    "failure_count": 7,
+    "retry_after": "2026-10-22T13:34:12.459Z",
+    "last_failed_at": "2026-10-19T21:34:12.459Z"
   },
   "https://www.samsung.com/sec/monitors/monitor-ls19e45kmrs-kr/": {
     "failure_count": 6,
@@ -165,8 +165,8 @@
     "last_failed_at": "2026-10-18T19:27:11.637Z"
   },
   "https://www.samsung.com/sec/monitors/tv-lt27d590cde-cr/": {
-    "failure_count": 5,
-    "retry_after": "2026-10-19T11:27:11.637Z",
-    "last_failed_at": "2026-10-18T19:27:11.637Z"
+    "failure_count": 6,
+    "retry_after": "2026-10-21T05:34:12.459Z",
+    "last_failed_at": "2026-10-19T21:34:12.459Z"
   }
 }
