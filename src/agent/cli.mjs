@@ -5,6 +5,8 @@
  */
 import { createInterface } from "node:readline/promises";
 import process from "node:process";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { createCustomerTools } from "./customer-tools.mjs";
 
 const tools = createCustomerTools();
@@ -112,8 +114,8 @@ export async function askShoppingAgent(question, { model = process.env.OPENAI_MO
   return "현재 요청을 검증된 정보로 완료하지 못했습니다. 질문을 조금 더 구체적으로 입력해 주세요.";
 }
 
-const startedDirectly = process.argv[1] && 
-  new URL(import.meta.url).pathname === new URL("file://" + process.argv[1]).pathname;
+const startedDirectly = process.argv[1] &&
+  fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
 if (startedDirectly) {
   if (!process.env.OPENAI_API_KEY) {
     console.error("OPENAI_API_KEY 환경변수가 필요합니다. API 키는 GitHub에 커밋하지 마세요.");
