@@ -59,6 +59,7 @@ function observedPrice(product, offer, refresh, now, maxAgeHours) {
 
 function normalizeSpecs(specRow) {
   const sourceUrl = officialUrl(specRow?.source_url);
+  if (!specRow) return { status: "missing", specs: [], source_url: null };
   if (!sourceUrl) return { status: "unverified_source", specs: [], source_url: null };
   const specs = (specRow?.specs || [])
     .filter(item => item && item.value !== null && item.value !== undefined &&
@@ -74,7 +75,8 @@ function normalizeSpecs(specRow) {
 
 function batteryMah(spec) {
   const item = spec.specs.find(item => /battery|배터리/i.test(item.key + " " + item.name) &&
-    /capacity|용량|배터리|battery/i.test(item.key + " " + item.name));
+    /capacity|용량|battery_capacity|배터리 용량/i.test(item.key + " " + item.name) &&
+    /mah/i.test([item.key, item.name, item.value, item.unit].join(" ")));
   if (!item) return null;
   const match = String(item.value).replaceAll(",", "").match(/(\d{3,5})(?:\s*mAh)?/i);
   return match ? Number(match[1]) : null;
