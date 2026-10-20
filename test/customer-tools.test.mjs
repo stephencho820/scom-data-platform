@@ -75,7 +75,7 @@ test("specs are linked to exact SKU and do not fabricate missing data", async ()
     assert.equal(s.source_url, url("SM-TEST-FLIP"));
     const missing = await tools.get_product_specs({ sku: "SM-TEST-OLD" });
     assert.deepEqual(missing.specs, []);
-    assert.equal(missing.status, "unverified_source");
+    assert.equal(missing.status, "missing");
     assert.equal((await tools.get_product_specs({ sku: "SM-NOT-FOUND" })).status, "sku_not_found_or_unverified");
   } finally { await f.clean(); }
 });
