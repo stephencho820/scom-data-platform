@@ -8,7 +8,8 @@
     "crawl": "node scripts/crawl.mjs",
     "mcp": "node scripts/build-ai-ready.mjs kr 1>&2 && node src/mcp/server.mjs",
     "build:ai-ready": "node scripts/build-ai-ready.mjs kr",
-    "serve:web": "python3 -m http.server 3000 -d web"
+    "serve:web": "python3 -m http.server 3000 -d web",
+    "agent:cli": "node src/agent/cli.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/server": "^2.3.1",
