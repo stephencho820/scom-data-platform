@@ -27,7 +27,7 @@
     "category": "rings"
   },
   "AKGN5HYBRIDBLK": {
-    "checked_at": "2026-10-14T20:44:20.265Z",
+    "checked_at": "2026-10-20T20:38:59.187Z",
     "status": "empty",
     "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
     "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/akg-earphone-akgn5hybrid-d2c/AKGN5HYBRIDBLK/",
@@ -126,7 +126,7 @@
     "category": "projectors"
   },
   "SM-Q505NZKAKOO": {
-    "checked_at": "2026-10-17T19:27:05.250Z",
+    "checked_at": "2026-10-20T20:38:59.187Z",
     "status": "empty",
     "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
     "source_url": "https://www.samsung.com/sec/rings/galaxyring-q505/SM-Q505NZKAKOO/",
@@ -135,7 +135,7 @@
     "category": "rings"
   },
   "HKENCH1100BLKAS": {
-    "checked_at": "2026-10-17T19:27:05.250Z",
+    "checked_at": "2026-10-20T20:38:59.187Z",
     "status": "empty",
     "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
     "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/hk-soundbar-ench1100-d2c/HKENCH1100BLKAS/",
@@ -153,7 +153,7 @@
     "category": "microwave-ovens"
   },
   "HW-LS70H/KR": {
-    "checked_at": "2026-10-17T19:27:05.250Z",
+    "checked_at": "2026-10-20T20:38:59.187Z",
     "status": "empty",
     "reason": "sku_not_declared_on_pdp; support_http_404",
     "source_url": "https://www.samsung.com/sec/soundbars/wifi-speaker-hw-ls70h-d2c/HW-LS70H%2FKR/",
@@ -162,7 +162,7 @@
     "category": "soundbars"
   },
   "NT740VJK-KC51G": {
-    "checked_at": "2026-10-17T19:27:05.250Z",
+    "checked_at": "2026-10-20T20:38:59.187Z",
     "status": "empty",
     "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
     "source_url": "https://www.samsung.com/sec/galaxybook/galaxy-book6-nt740vjk-kc51g/NT740VJK-KC51G/",
@@ -171,7 +171,7 @@
     "category": "galaxybook"
   },
   "HKENCH900BLKAS": {
-    "checked_at": "2026-10-17T19:27:05.250Z",
+    "checked_at": "2026-10-20T20:38:59.187Z",
     "status": "empty",
     "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
     "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/hk-soundbar-enchant900-d2c/HKENCH900BLKAS/",
@@ -198,7 +198,7 @@
     "category": "monitors"
   },
   "SM-R540NZWAKOO": {
-    "checked_at": "2026-10-17T19:27:05.250Z",
+    "checked_at": "2026-10-20T20:38:59.187Z",
     "status": "empty",
     "reason": "pdp_sku_mismatch; support_model_not_confirmed",
     "source_url": "https://www.samsung.com/sec/buds/galaxy-buds4-r540/SM-R540NZWAKOO/",
@@ -225,7 +225,7 @@
     "category": "air-purifiers"
   },
   "SP-LPDF5-F": {
-    "checked_at": "2026-10-17T19:27:05.250Z",
+    "checked_at": "2026-10-20T20:38:59.187Z",
     "status": "empty",
     "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
     "source_url": "https://www.samsung.com/sec/projectors/package-sp-lpdf5-f-d2c/SP-LPDF5-F/",
@@ -324,7 +324,7 @@
     "category": "harman-lifestyle-audio"
   },
   "WE912NR-INST": {
-    "checked_at": "2026-10-17T19:27:05.250Z",
+    "checked_at": "2026-10-20T20:38:59.187Z",
     "status": "empty",
     "reason": "sku_not_declared_on_pdp; not_a_support_spec_page",
     "source_url": "https://www.samsung.com/sec/air-purifiers/package-we912nr-inst-d2c/WE912NR-INST/",
@@ -792,7 +792,7 @@
     "category": "harman-lifestyle-audio"
   },
   "DW80F73X1UEWS": {
-    "checked_at": "2026-10-16T19:58:14.483Z",
+    "checked_at": "2026-10-20T20:38:59.187Z",
     "status": "empty",
     "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
     "source_url": "https://www.samsung.com/sec/dishwashers/built-in-dw80f73x1uews-d2c/DW80F73X1UEWS/",
@@ -1015,5 +1015,23 @@
     "source_model": "NZ63DB503CFT",
     "support_checked": true,
     "category": "cooking-appliances"
+  },
+  "NZ63DB657CFH": {
+    "checked_at": "2026-10-20T20:38:59.187Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/NZ63DB657CFH/",
+    "source_model": "NZ63DB657CFH",
+    "support_checked": true,
+    "category": "cooking-appliances"
+  },
+  "LS27FG530EKXKR": {
+    "checked_at": "2026-10-20T20:38:59.187Z",
+    "status": "enriched",
+    "reason": "ok",
+    "source_url": "https://www.samsung.com/sec/support/model/LS27FG530EKXKR/",
+    "source_model": "S27FG530EK",
+    "support_checked": true,
+    "category": "monitors"
   }
 }

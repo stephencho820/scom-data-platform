@@ -1,7 +1,7 @@
 {
   "market": "kr",
-  "generated_at": "2026-10-19T21:46:32.112Z",
-  "source_snapshot_at": "2026-10-19T21:34:12.459Z",
+  "generated_at": "2026-10-20T20:51:37.994Z",
+  "source_snapshot_at": "2026-10-20T20:38:59.187Z",
   "ready": false,
   "catalog": {
     "sources_total": 19,
@@ -12,8 +12,8 @@
         "category": "smartphones",
         "source_id": "smartphones",
         "status": "ok",
-        "discovered_skus": 90,
-        "db_skus": 90,
+        "discovered_skus": 50,
+        "db_skus": 50,
         "complete": true,
         "missing_in_db": [],
         "unexpected_in_db": []
@@ -45,8 +45,8 @@
         "category": "monitors",
         "source_id": "monitors",
         "status": "ok",
-        "discovered_skus": 99,
-        "db_skus": 99,
+        "discovered_skus": 136,
+        "db_skus": 136,
         "complete": true,
         "missing_in_db": [],
         "unexpected_in_db": []
@@ -67,8 +67,8 @@
         "category": "refrigerators",
         "source_id": "refrigerators",
         "status": "ok",
-        "discovered_skus": 116,
-        "db_skus": 116,
+        "discovered_skus": 70,
+        "db_skus": 70,
         "complete": true,
         "missing_in_db": [],
         "unexpected_in_db": []
@@ -89,8 +89,8 @@
         "category": "air-conditioners",
         "source_id": "air-conditioners",
         "status": "ok",
-        "discovered_skus": 139,
-        "db_skus": 139,
+        "discovered_skus": 100,
+        "db_skus": 100,
         "complete": true,
         "missing_in_db": [],
         "unexpected_in_db": []
@@ -144,8 +144,8 @@
         "category": "galaxybook",
         "source_id": "galaxybook",
         "status": "ok",
-        "discovered_skus": 7,
-        "db_skus": 7,
+        "discovered_skus": 2,
+        "db_skus": 2,
         "complete": true,
         "missing_in_db": [],
         "unexpected_in_db": []
@@ -210,8 +210,8 @@
         "category": "harman-lifestyle-audio",
         "source_id": "harman-lifestyle-audio",
         "status": "ok",
-        "discovered_skus": 121,
-        "db_skus": 121,
+        "discovered_skus": 119,
+        "db_skus": 119,
         "complete": true,
         "missing_in_db": [],
         "unexpected_in_db": []
@@ -219,22 +219,12 @@
     ]
   },
   "counts": {
-    "current_products": 1247,
-    "specs_rows": 1247,
+    "current_products": 1256,
+    "specs_rows": 1256,
     "support_rows": 5,
-    "products_missing_specs_or_support": 1113
+    "products_missing_specs_or_support": 1018
   },
   "sku_gaps": [
-    {
-      "sku": "AF17B7538GZT",
-      "market_product_key": "AF17B7538GZT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke 무풍에어컨 클래식 56.9㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af17b7538gz-d2c/AF17B7538GZT/",
-      "has_specs": false,
-      "has_support": false
-    },
     {
       "sku": "AF17BX735NFT",
       "market_product_key": "AF17BX735NFT",
@@ -356,32 +346,12 @@
       "has_support": false
     },
     {
-      "sku": "AF19B7534BZT",
-      "market_product_key": "AF19B7534BZT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke 무풍에어컨 클래식 62.6㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af19b7534bz-d2c/AF19B7534BZT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "AF19B7932RFT",
       "market_product_key": "AF19B7932RFT",
       "business_unit": "DA",
       "category": "air-conditioners",
       "name": "무풍에어컨 클래식 청정 62.6㎡",
       "url": "https://www.samsung.com/sec/air-conditioners/package-af19b7932rfr-d2c/AF19B7932RFT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AF19B7934TST",
-      "market_product_key": "AF19B7934TST",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke 무풍에어컨 클래식 청정 62.6㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af19b7934ts-d2c/AF19B7934TST/",
       "has_specs": false,
       "has_support": false
     },
@@ -436,16 +406,6 @@
       "has_support": false
     },
     {
-      "sku": "AF20BX936ZFT",
-      "market_product_key": "AF20BX936ZFT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke 무풍에어컨 갤러리 청정 65.9㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af20bx936sf-d2c/AF20BX936ZFT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "AF20CX936GFT",
       "market_product_key": "AF20CX936GFT",
       "business_unit": "DA",
@@ -462,66 +422,6 @@
       "category": "air-conditioners",
       "name": "Bespoke 무풍에어컨 갤러리 청정 65.9㎡",
       "url": "https://www.samsung.com/sec/air-conditioners/package-af20cx939wsr-d2c/AF20CX939WST/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AF20DX936WFT",
-      "market_product_key": "AF20DX936WFT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke AI 무풍 갤러리 청정 65.9㎡ ( 스탠드형 리모컨 포함)",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af20dx936wfrt-d2c/AF20DX936WFT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AF23BX939VST",
-      "market_product_key": "AF23BX939VST",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke 무풍에어컨 갤러리 청정 75.5㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af23bx939vs-d2c/AF23BX939VST/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AF23CX936BFT",
-      "market_product_key": "AF23CX936BFT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke 무풍에어컨 갤러리 청정 75.5㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af23cx936bf-d2c/AF23CX936BFT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AF25BX934WART",
-      "market_product_key": "AF25BX934WART",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke 무풍에어컨 갤러리 청정 81.8㎡/18.7㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af25bx934war-d2c/AF25BX934WART/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AF25CX934AART",
-      "market_product_key": "AF25CX934AART",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke 무풍에어컨 갤러리 청정 81.8/18.7㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af25cx934aar-d2c/AF25CX934AART/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AF25DX934WAT",
-      "market_product_key": "AF25DX934WAT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke AI 무풍 갤러리 청정 81.8㎡ (스탠드형 리모컨 포함)",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af25dx934wart-d2c/AF25DX934WAT/",
       "has_specs": false,
       "has_support": false
     },
@@ -582,16 +482,6 @@
       "category": "air-conditioners",
       "name": "AI Q9000 청정 62.6/18.7㎡ (리모컨 포함)",
       "url": "https://www.samsung.com/sec/air-conditioners/package-af60f19d12wrt-d2c/AF60F19D12WRT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AF60H17D12BRT",
-      "market_product_key": "AF60H17D12BRT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "AI Q9000 청정 56.9/18.7㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af60h17d12brt-d2c/AF60H17D12BRT/",
       "has_specs": false,
       "has_support": false
     },
@@ -676,16 +566,6 @@
       "has_support": false
     },
     {
-      "sku": "AF70F17D24LRT",
-      "market_product_key": "AF70F17D24LRT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke AI 무풍 클래식 56.9/18.7㎡ (리모컨 포함)",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af70f17d24lrt-d2c/AF70F17D24LRT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "AF70F17D24WRT",
       "market_product_key": "AF70F17D24WRT",
       "business_unit": "DA",
@@ -702,26 +582,6 @@
       "category": "air-conditioners",
       "name": "Bespoke AI 무풍 클래식 56.9/18.7㎡+블루스카이 3100 33.1㎡",
       "url": "https://www.samsung.com/sec/air-conditioners/package-af70f17d24wrt2-d2c/AF70F17D24WRT2/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AF70F17D24WRTL",
-      "market_product_key": "AF70F17D24WRTL",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke AI 무풍 클래식 56.9/18.7㎡ (리모컨 포함)+블루스카이 3100 33.1㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af70f17d24wrtl-d2c/AF70F17D24WRTL/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AF70F17D25WRT",
-      "market_product_key": "AF70F17D25WRT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke AI 무풍 클래식 청정 56.9/18.7㎡ (리모컨 포함)",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af70f17d25wrt-d2c/AF70F17D25WRT/",
       "has_specs": false,
       "has_support": false
     },
@@ -766,42 +626,12 @@
       "has_support": false
     },
     {
-      "sku": "AF70F19D24RRT",
-      "market_product_key": "AF70F19D24RRT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke AI 무풍 클래식 62.6/18.7㎡ (리모컨 포함)",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af70f19d24rrt-d2c/AF70F19D24RRT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AF70F19D25BRT",
-      "market_product_key": "AF70F19D25BRT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke AI 무풍 클래식 청정 62.6/18.7㎡ (리모컨 포함)",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af70f19d25wrt-d2c/AF70F19D25BRT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "AF70F19D25WRTK",
       "market_product_key": "AF70F19D25WRTK",
       "business_unit": "DA",
       "category": "air-conditioners",
       "name": "Bespoke AI 무풍 클래식 청정 62.6/18.7㎡ (리모컨 포함)+블루스카이 3100 33.1㎡",
       "url": "https://www.samsung.com/sec/air-conditioners/package-af70f19d25wrtk-d2c/AF70F19D25WRTK/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AF80F17D21CRT",
-      "market_product_key": "AF80F17D21CRT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke AI 무풍콤보 갤러리 56.9/18.7㎡ (리모컨 포함)",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af80f17d21crt-d2c/AF80F17D21CRT/",
       "has_specs": false,
       "has_support": false
     },
@@ -896,26 +726,6 @@
       "has_support": false
     },
     {
-      "sku": "AF80F19D24CRT",
-      "market_product_key": "AF80F19D24CRT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke AI 무풍콤보 갤러리 62.6/18.7㎡ (리모컨 포함)",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af80f19d24crt-d2c/AF80F19D24CRT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AF80F19D25BRT",
-      "market_product_key": "AF80F19D25BRT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke AI 무풍콤보 갤러리 청정 62.6/18.7㎡ (리모컨 포함)",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af80f19d25wrt-d2c/AF80F19D25BRT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "AF80F19D25BRTM",
       "market_product_key": "AF80F19D25BRTM",
       "business_unit": "DA",
@@ -942,16 +752,6 @@
       "category": "air-conditioners",
       "name": "Bespoke AI 무풍콤보 갤러리 청정 62.6/18.7㎡ (리모컨 포함)+블루스카이 3100 33.1㎡",
       "url": "https://www.samsung.com/sec/air-conditioners/package-af80f19d25wrtm-d2c/AF80F19D25WRTM/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AF80F19D26WRT",
-      "market_product_key": "AF80F19D26WRT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke AI 무풍콤보 갤러리 청정 62.6/18.7㎡ (리모컨 포함)",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af80f19d26wrt-d2c/AF80F19D26WRT/",
       "has_specs": false,
       "has_support": false
     },
@@ -986,16 +786,6 @@
       "has_support": false
     },
     {
-      "sku": "AF80F25D29WRT",
-      "market_product_key": "AF80F25D29WRT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke AI 무풍콤보 갤러리 청정 81.8/18.7㎡ (리모컨 포함)",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af80f25d29wrt-d2c/AF80F25D29WRT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "AF90H17D24GRT",
       "market_product_key": "AF90H17D24GRT",
       "business_unit": "DA",
@@ -1016,32 +806,12 @@
       "has_support": false
     },
     {
-      "sku": "AF90H17D24SRT",
-      "market_product_key": "AF90H17D24SRT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke AI 무풍콤보 갤러리 프로 56.9/18.7㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h17d24srt-d2c/AF90H17D24SRT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "AF90H17D27GRT",
       "market_product_key": "AF90H17D27GRT",
       "business_unit": "DA",
       "category": "air-conditioners",
       "name": "Bespoke AI 무풍콤보 갤러리 프로 56.9/18.7㎡",
       "url": "https://www.samsung.com/sec/air-conditioners/package-af90h17d27grt-d2c/AF90H17D27GRT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AF90H17D27SRT",
-      "market_product_key": "AF90H17D27SRT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke AI 무풍콤보 갤러리 프로 56.9/18.7㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h17d27srt-d2c/AF90H17D27SRT/",
       "has_specs": false,
       "has_support": false
     },
@@ -1196,32 +966,12 @@
       "has_support": false
     },
     {
-      "sku": "AF90H22D35ERT",
-      "market_product_key": "AF90H22D35ERT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke AI 무풍콤보 갤러리 프로 청정 74.5/18.7㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h22d35ert-d2c/AF90H22D35ERT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "AF90H22D35WRT",
       "market_product_key": "AF90H22D35WRT",
       "business_unit": "DA",
       "category": "air-conditioners",
       "name": "Bespoke AI 무풍콤보 갤러리 프로 청정 74.5/18.7㎡",
       "url": "https://www.samsung.com/sec/air-conditioners/package-af90h22d35wrt-d2c/AF90H22D35WRT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AF90H22D36WRT",
-      "market_product_key": "AF90H22D36WRT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke AI 무풍콤보 갤러리 프로 청정 74.5/18.7㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-af90h22d36wrt-d2c/AF90H22D36WRT/",
       "has_specs": false,
       "has_support": false
     },
@@ -1256,12 +1006,12 @@
       "has_support": false
     },
     {
-      "sku": "AKGN5HYBRIDWHT",
-      "market_product_key": "AKGN5HYBRIDWHT",
+      "sku": "AKGN5HYBRIDBLK",
+      "market_product_key": "AKGN5HYBRIDBLK",
       "business_unit": "HARMAN",
       "category": "harman-lifestyle-audio",
       "name": "AKG N5 하이브리드 노이즈 캔슬링 무선 이어폰",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/akg-earphone-akgn5hybrid-d2c/AKGN5HYBRIDWHT/",
+      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/akg-earphone-akgn5hybrid-d2c/AKGN5HYBRIDBLK/",
       "has_specs": false,
       "has_support": false
     },
@@ -1286,82 +1036,12 @@
       "has_support": false
     },
     {
-      "sku": "AR07B9350GBT",
-      "market_product_key": "AR07B9350GBT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke 무풍에어컨 벽걸이 와이드 청정 24.4㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-ar07b9350gbt-d2c/AR07B9350GBT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AR07C9181HZT",
-      "market_product_key": "AR07C9181HZT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "무풍에어컨 벽걸이 냉난방 22㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-ar07c9181hzt-d2c/AR07C9181HZT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AR07D9150HAT",
-      "market_product_key": "AR07D9150HAT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "무풍에어컨 벽걸이 와이드 청정 24.4㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-ar07d9150hat-d2c/AR07D9150HAT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AR07D9150HZT",
-      "market_product_key": "AR07D9150HZT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "무풍에어컨 벽걸이 슬림 24.4㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-ar07d9150hzt-d2c/AR07D9150HZT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "AR07D9181HZT",
       "market_product_key": "AR07D9181HZT",
       "business_unit": "DA",
       "category": "air-conditioners",
       "name": "무풍에어컨 벽걸이 냉난방 24.4㎡",
       "url": "https://www.samsung.com/sec/air-conditioners/package-ar07d9181hzt-d2c/AR07D9181HZT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AR09B9150HZT",
-      "market_product_key": "AR09B9150HZT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "무풍에어컨 벽걸이 와이드 29.3㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-ar09b9150hzt-d2c/AR09B9150HZT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AR09C9180HZT",
-      "market_product_key": "AR09C9180HZT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "무풍에어컨 벽걸이 냉난방 29.3㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-ar09c9180hzt-d2c/AR09C9180HZT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AR11C9180HZT",
-      "market_product_key": "AR11C9180HZT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "무풍에어컨 벽걸이 냉난방 38.2㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-ar11c9180hzt-d2c/AR11C9180HZT/",
       "has_specs": false,
       "has_support": false
     },
@@ -1376,62 +1056,12 @@
       "has_support": false
     },
     {
-      "sku": "AR15D9150HZT",
-      "market_product_key": "AR15D9150HZT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "무풍에어컨 벽걸이 와이드 48.8㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-ar15d9150hzt-d2c/AR15D9150HZT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AR40H06D01TT",
-      "market_product_key": "AR40H06D01TT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "에어컨 벽걸이 18.7㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-ar40h06d01tt-d2c/AR40H06D01TT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AR50F07D01HT",
-      "market_product_key": "AR50F07D01HT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "벽걸이 에어컨 24.4㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-ar50f07d01ht-d2c/AR50F07D01HT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AR50F09D01HT",
-      "market_product_key": "AR50F09D01HT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "벽걸이 에어컨 29.3㎡",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-ar50f09d01ht-d2c/AR50F09D01HT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "AR50F10D13HT",
       "market_product_key": "AR50F10D13HT",
       "business_unit": "DA",
       "category": "air-conditioners",
       "name": "벽걸이 에어컨 31.7㎡ (리모컨 포함)",
       "url": "https://www.samsung.com/sec/air-conditioners/package-ar50f10d13h-d2c/AR50F10D13HT/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AR60F07C11WT",
-      "market_product_key": "AR60F07C11WT",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "AI 무풍콤보 벽걸이 냉난방 22㎡ (리모컨 포함)",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-ar60f07c11wt-d2c/AR60F07C11WT/",
       "has_specs": false,
       "has_support": false
     },
@@ -1636,52 +1266,12 @@
       "has_support": false
     },
     {
-      "sku": "AW06C7155W18V",
-      "market_product_key": "AW06C7155W18V",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke 무풍에어컨 윈도우핏 19.2㎡ (매립형) + 인버터 제습기 18L",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-aw06c7155w18v-d2c/AW06C7155W18V/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "AW06C7155W23V",
-      "market_product_key": "AW06C7155W23V",
-      "business_unit": "DA",
-      "category": "air-conditioners",
-      "name": "Bespoke 무풍에어컨 윈도우핏 19.2㎡ (매립형) + 인버터 제습기 23L",
-      "url": "https://www.samsung.com/sec/air-conditioners/package-aw06c7155w23v-d2c/AW06C7155W23V/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "AW06C7155WWAZ",
       "market_product_key": "AW06C7155WWAZ",
       "business_unit": "DA",
       "category": "air-conditioners",
       "name": "Bespoke 무풍에어컨 윈도우핏 19.2㎡ (매립형)",
       "url": "https://www.samsung.com/sec/air-conditioners/package-aw06c7155wwaz-d2c/AW06C7155WWAZ/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "BRB70F26D3F0",
-      "market_product_key": "BRB70F26D3F0",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "빌트인 냉장고 259L",
-      "url": "https://www.samsung.com/sec/refrigerators/bottom-mount-freezer-brb70f26d3f0-d2c/BRB70F26D3F0/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "BRB80F26A2F0",
-      "market_product_key": "BRB80F26A2F0",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "빌트인 냉장고 256L",
-      "url": "https://www.samsung.com/sec/refrigerators/bottom-mount-freezer-brb80f26a2f0-d2c/BRB80F26A2F0/",
       "has_specs": false,
       "has_support": false
     },
@@ -2216,46 +1806,6 @@
       "has_support": false
     },
     {
-      "sku": "HKCITA1100-SUB",
-      "market_product_key": "HKCITA1100-SUB",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "하만카돈 CITATION 멀티빔 1100 + 우퍼 패키지",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/package-hkcita1100-sub-d2c/HKCITA1100-SUB/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "HKCITA1100-SUB-SUR",
-      "market_product_key": "HKCITA1100-SUB-SUR",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "하만카돈 CITATION 멀티빔 1100 홈시네마 패키지",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/package-hkcita1100-sub-surr-d2c/HKCITA1100-SUB-SUR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "HKCITAB1100-SUB",
-      "market_product_key": "HKCITAB1100-SUB",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "하만카돈 CITATION 멀티빔 1100 + 우퍼 패키지",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/package-hkcitamb1100-sub-d2c/HKCITAB1100-SUB/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "HKCITAB1100-SUB-SR",
-      "market_product_key": "HKCITAB1100-SUB-SR",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "하만카돈 CITATION 멀티빔 1100 홈시네마 패키지",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/package-hkcitamb1100-sub-surr-d2c/HKCITAB1100-SUB-SR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "HKCITAMB1100GRYAS",
       "market_product_key": "HKCITAMB1100GRYAS",
       "business_unit": "HARMAN",
@@ -2766,6 +2316,16 @@
       "has_support": false
     },
     {
+      "sku": "JBLAUTH200WHTAS",
+      "market_product_key": "JBLAUTH200WHTAS",
+      "business_unit": "HARMAN",
+      "category": "harman-lifestyle-audio",
+      "name": "JBL Authentics 200 블루투스/Wi-Fi 스피커",
+      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-auth200blkas-d2c/JBLAUTH200WHTAS/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "JBLAUTH300BLKAS",
       "market_product_key": "JBLAUTH300BLKAS",
       "business_unit": "HARMAN",
@@ -3142,6 +2702,16 @@
       "category": "harman-lifestyle-audio",
       "name": "JBL LIVE 680NC 무선 온이어 헤드폰",
       "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-headphone-live680nc-d2c/JBLLIVE680NCBLK/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "JBLLIVE770NCBLK",
+      "market_product_key": "JBLLIVE770NCBLK",
+      "business_unit": "HARMAN",
+      "category": "harman-lifestyle-audio",
+      "name": "JBL LIVE 770NC 무선 오버이어 헤드폰",
+      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-headphone-jbllive770nc-d2c/JBLLIVE770NCBLK/",
       "has_specs": false,
       "has_support": false
     },
@@ -3576,6 +3146,16 @@
       "has_support": false
     },
     {
+      "sku": "JBLT770NCBLK",
+      "market_product_key": "JBLT770NCBLK",
+      "business_unit": "HARMAN",
+      "category": "harman-lifestyle-audio",
+      "name": "JBL TUNE 770NC 무선 오버이어 헤드폰",
+      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-headphone-t770nc-d2c/JBLT770NCBLK/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "JBLT770NCPUR",
       "market_product_key": "JBLT770NCPUR",
       "business_unit": "HARMAN",
@@ -3672,16 +3252,6 @@
       "category": "harman-lifestyle-audio",
       "name": "JBL WIND3S 블루투스 스피커",
       "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-wind3s-d2c/JBLWIND3S/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBLWIRELESSMICAS3",
-      "market_product_key": "JBLWIRELESSMICAS3",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL 무선 마이크",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-microphone-wirelessmic-d2c/JBLWIRELESSMICAS3/",
       "has_specs": false,
       "has_support": false
     },
@@ -4436,6 +4006,16 @@
       "has_support": false
     },
     {
+      "sku": "KQ55SH90AFXKR",
+      "market_product_key": "KQ55SH90AFXKR",
+      "business_unit": "VD",
+      "category": "tvs",
+      "name": "2026 OLED SH90 (138cm)",
+      "url": "https://www.samsung.com/sec/tvs/oled-sh90-d2c/KQ55SH90AFXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "KQ65LSD01-MF",
       "market_product_key": "KQ65LSD01-MF",
       "business_unit": "VD",
@@ -4782,16 +4362,6 @@
       "category": "tvs",
       "name": "2026 OLED SH85 (209cm)",
       "url": "https://www.samsung.com/sec/tvs/oled-sh85-d2c/KQ83SH85AEXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ83SH90AEXKR",
-      "market_product_key": "KQ83SH90AEXKR",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 OLED SH90 (209cm)",
-      "url": "https://www.samsung.com/sec/tvs/oled-sh90-d2c/KQ83SH90AEXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -6056,6 +5626,16 @@
       "has_support": false
     },
     {
+      "sku": "LC34G55TWWKXKR",
+      "market_product_key": "LC34G55TWWKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "오디세이 G5 G55T WQHD 165Hz 커브드 (LC34G55T)",
+      "url": "https://www.samsung.com/sec/monitors/gaming-lc34g55twwkxkr-d2c/LC34G55TWWKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LH55BEFHLGS1BE",
       "market_product_key": "LH55BEFHLGS1BE",
       "business_unit": "VD",
@@ -6076,6 +5656,26 @@
       "has_support": false
     },
     {
+      "sku": "LH55BEFHLGS2BE",
+      "market_product_key": "LH55BEFHLGS2BE",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "무빙스타일 Biz (138.7cm) 스탠다드",
+      "url": "https://www.samsung.com/sec/monitors/package-lh55befhlgs2be-d2c/LH55BEFHLGS2BE/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LH55BEFHLGS2WE",
+      "market_product_key": "LH55BEFHLGS2WE",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "무빙스타일 Biz (138.7cm) 스탠다드",
+      "url": "https://www.samsung.com/sec/monitors/package-lh55befhlgs2we-d2c/LH55BEFHLGS2WE/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS22D402GAKXKR",
       "market_product_key": "LS22D402GAKXKR",
       "business_unit": "VD",
@@ -6092,6 +5692,16 @@
       "category": "monitors",
       "name": "에센셜 모니터 (LS24D302) FHD 100Hz",
       "url": "https://www.samsung.com/sec/monitors/ls24d302gakxkr-d2c/LS24D302GAKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS24D402GAKXKR",
+      "market_product_key": "LS24D402GAKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "IPS 100Hz 에센셜 모니터 (LS24D402)",
+      "url": "https://www.samsung.com/sec/monitors/ls24d402gakxkr-d2c/LS24D402GAKXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -6126,6 +5736,16 @@
       "has_support": false
     },
     {
+      "sku": "LS24F430UAKXKR",
+      "market_product_key": "LS24F430UAKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "IPS 100Hz 에센셜 모니터 (LS24F430)",
+      "url": "https://www.samsung.com/sec/monitors/ls24f430uakxkr-d2c/LS24F430UAKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS24F432UAKXKR",
       "market_product_key": "LS24F432UAKXKR",
       "business_unit": "VD",
@@ -6156,6 +5776,16 @@
       "has_support": false
     },
     {
+      "sku": "LS27BG400EKXKR",
+      "market_product_key": "LS27BG400EKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "오디세이 G4 G40B FHD 240Hz (LS27BG400)",
+      "url": "https://www.samsung.com/sec/monitors/gaming-ls25bg400ekxkr-d2c/LS27BG400EKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS27C900PAKXKR",
       "market_product_key": "LS27C900PAKXKR",
       "business_unit": "VD",
@@ -6163,6 +5793,26 @@
       "name": "뷰피니티 S9 S90PC 5K 스마트 (LS27C900)",
       "url": "https://www.samsung.com/sec/monitors/high-resolution-ls27c900pakxkr-d2c/LS27C900PAKXKR/",
       "has_specs": true,
+      "has_support": false
+    },
+    {
+      "sku": "LS27CG510EKXKR",
+      "market_product_key": "LS27CG510EKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "게이밍모니터 오디세이 G51C (68.4 cm)",
+      "url": "https://www.samsung.com/sec/monitors/gaming-ls27cg510ekxkr-dc2/LS27CG510EKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS27CM801UKXKR",
+      "market_product_key": "LS27CM801UKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "2023 스마트모니터 M8 M80C 웜 화이트 (68.4 cm)",
+      "url": "https://www.samsung.com/sec/monitors/smart-ls27cm801ukxkr-d2c/LS27CM801UKXKR/",
+      "has_specs": false,
       "has_support": false
     },
     {
@@ -6196,6 +5846,26 @@
       "has_support": false
     },
     {
+      "sku": "LS27D394GAKXKR",
+      "market_product_key": "LS27D394GAKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "에센셜 모니터 (LS27DG394) 커브드 100Hz",
+      "url": "https://www.samsung.com/sec/monitors/ls32d394gakxkr-d2c/LS27D394GAKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS27D402GAKXKR",
+      "market_product_key": "LS27D402GAKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "IPS 100Hz 에센셜 모니터 (LS27D402)",
+      "url": "https://www.samsung.com/sec/monitors/ls27d402gakxkr-d2c/LS27D402GAKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS27D700EAKXKR",
       "market_product_key": "LS27D700EAKXKR",
       "business_unit": "VD",
@@ -6206,12 +5876,72 @@
       "has_support": false
     },
     {
+      "sku": "LS27DM502EKXKR",
+      "market_product_key": "LS27DM502EKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "2024 스마트모니터 M5 M50D 블랙 (68.6 cm)",
+      "url": "https://www.samsung.com/sec/monitors/smart-ls32dm503ekxkr-d2c/LS27DM502EKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS27DM503EK-ST",
+      "market_product_key": "LS27DM503EK-ST",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "2024 무빙스타일 M5 (M50D) 화이트 (68.6 cm)",
+      "url": "https://www.samsung.com/sec/monitors/package-ls32dm503ek-st-d2c/LS27DM503EK-ST/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS27DM503EKXKR",
+      "market_product_key": "LS27DM503EKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "2024 스마트모니터 M5 M50D 화이트 (68.6 cm)",
+      "url": "https://www.samsung.com/sec/monitors/smart-ls32dm503ekxkr-d2c/LS27DM503EKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS27F320GAKXKR",
       "market_product_key": "LS27F320GAKXKR",
       "business_unit": "VD",
       "category": "monitors",
       "name": "에센셜 모니터 S3 S32GF FHD 120Hz (LS27F320)",
       "url": "https://www.samsung.com/sec/monitors/ls27f320gakxkr-d2c/LS27F320GAKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS27F322GAKXKR",
+      "market_product_key": "LS27F322GAKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "에센셜 모니터 S3 S32GF FHD 120Hz (LS27F322)",
+      "url": "https://www.samsung.com/sec/monitors/ls27f322gakxkr-d2c/LS27F322GAKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS27F430UAKXKR",
+      "market_product_key": "LS27F430UAKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "IPS 100Hz 에센셜 모니터 (LS27F430)",
+      "url": "https://www.samsung.com/sec/monitors/ls27f430uakxkr-d2c/LS27F430UAKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS27F610EAKXKR",
+      "market_product_key": "LS27F610EAKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "고해상도 뷰피니티 S6(S61F) (68.4cm)",
+      "url": "https://www.samsung.com/sec/monitors/high-resolution-ls27f610eakxkr-d2c/LS27F610EAKXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -6242,7 +5972,7 @@
       "category": "monitors",
       "name": "오디세이 G5 G53F QHD 200Hz (LS27FG530)",
       "url": "https://www.samsung.com/sec/monitors/gaming-ls27fg504ekxkr-d2c/LS27FG530EKXKR/",
-      "has_specs": false,
+      "has_specs": true,
       "has_support": false
     },
     {
@@ -6266,16 +5996,6 @@
       "has_support": false
     },
     {
-      "sku": "LS27FG700EKXKR",
-      "market_product_key": "LS27FG700EKXKR",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "오디세이 G7 G70F 4K 180Hz 듀얼모드 (LS27FG700)",
-      "url": "https://www.samsung.com/sec/monitors/gaming-ls32dg702ekxkr-d2c/LS27FG700EKXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "LS27FG900XKXKR",
       "market_product_key": "LS27FG900XKXKR",
       "business_unit": "VD",
@@ -6286,22 +6006,22 @@
       "has_support": false
     },
     {
+      "sku": "LS27FM502E-1BE",
+      "market_product_key": "LS27FM502E-1BE",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "무빙스타일 M5 (68.6cm) 라이트",
+      "url": "https://www.samsung.com/sec/monitors/package-ls32dm503e-1we-d2c/LS27FM502E-1BE/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS27FM502EKXKR",
       "market_product_key": "LS27FM502EKXKR",
       "business_unit": "VD",
       "category": "monitors",
       "name": "2025 스마트모니터 M5 M50F FHD 블랙 (LS27FM502)",
       "url": "https://www.samsung.com/sec/monitors/smart-m50f-d2c/LS27FM502EKXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "LS27FM503E-1ME",
-      "market_product_key": "LS27FM503E-1ME",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "무빙스타일 M5 (68.6cm) 라이트",
-      "url": "https://www.samsung.com/sec/monitors/package-ls32dm503e-1we-d2c/LS27FM503E-1ME/",
       "has_specs": false,
       "has_support": false
     },
@@ -6436,6 +6156,26 @@
       "has_support": false
     },
     {
+      "sku": "LS32BG654EKXKR",
+      "market_product_key": "LS32BG654EKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "게이밍모니터 오디세이 G65B (80.1 cm)",
+      "url": "https://www.samsung.com/sec/monitors/gaming-ls27bg654ekxkr-d2c/LS32BG654EKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS32BG750NKXKR",
+      "market_product_key": "LS32BG750NKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "게이밍모니터 오디세이 G75NB (80 cm)",
+      "url": "https://www.samsung.com/sec/monitors/gaming-ls32bg750nkxkr-d2c/LS32BG750NKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS32CG554EKXKR",
       "market_product_key": "LS32CG554EKXKR",
       "business_unit": "VD",
@@ -6446,12 +6186,42 @@
       "has_support": false
     },
     {
+      "sku": "LS32CM502EKXKR",
+      "market_product_key": "LS32CM502EKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "2023 스마트모니터 M5 M50C 블랙 (80.1 cm)",
+      "url": "https://www.samsung.com/sec/monitors/smart-ls32cm502ekxkr-d2c/LS32CM502EKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS32CM80BUKXKR",
+      "market_product_key": "LS32CM80BUKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "2023 스마트모니터 M8 M80C 데이라이트 블루 (80 cm)",
+      "url": "https://www.samsung.com/sec/monitors/smart-ls32cm80bukxkr-d2c/LS32CM80BUKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS32D392GAKXKR",
       "market_product_key": "LS32D392GAKXKR",
       "business_unit": "VD",
       "category": "monitors",
       "name": "에센셜모니터 S39GD (80.1cm)",
       "url": "https://www.samsung.com/sec/monitors/ls32d392gakxkr-d2c/LS32D392GAKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS32D394GAKXKR",
+      "market_product_key": "LS32D394GAKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "에센셜 모니터 (LS32DG394) 커브드 100Hz",
+      "url": "https://www.samsung.com/sec/monitors/ls32d394gakxkr-d2c/LS32D394GAKXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -6506,6 +6276,16 @@
       "has_support": false
     },
     {
+      "sku": "LS32D806UBKXKR",
+      "market_product_key": "LS32D806UBKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "뷰피니티 S8 S80UD 4K USB-C (LS32D806U)",
+      "url": "https://www.samsung.com/sec/monitors/high-resolution-ls32d806ubkxkr-d2c/LS32D806UBKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS32DG304EKXKR",
       "market_product_key": "LS32DG304EKXKR",
       "business_unit": "VD",
@@ -6532,6 +6312,16 @@
       "category": "monitors",
       "name": "오디세이 G7(G70D) (80.1cm)",
       "url": "https://www.samsung.com/sec/monitors/gaming-ls32dg700ekxkr-d2c/LS32DG700EKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS32DG702EKXKR",
+      "market_product_key": "LS32DG702EKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "오디세이 G7 G70D 4K 144Hz 스마트 (LS32DG702)",
+      "url": "https://www.samsung.com/sec/monitors/gaming-ls32dg702ekxkr-d2c/LS32DG702EKXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -6566,12 +6356,62 @@
       "has_support": false
     },
     {
+      "sku": "LS32DM703UK-ST",
+      "market_product_key": "LS32DM703UK-ST",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "2024 무빙스타일 M7 (M70D) 화이트 (80.0 cm)",
+      "url": "https://www.samsung.com/sec/monitors/package-ls43dm703uk-st-d2c/LS32DM703UK-ST/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS32DM803UK-SF",
+      "market_product_key": "LS32DM803UK-SF",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "2024 무빙스타일(선반 거치대 포함) M8 (M80D) 웜 화이트 (80.0 cm)",
+      "url": "https://www.samsung.com/sec/monitors/package-ls32dm803uk-sf-d2c/LS32DM803UK-SF/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS32DM803UK-ST",
+      "market_product_key": "LS32DM803UK-ST",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "2024 무빙스타일 M8 (M80D) 웜 화이트 (80.0 cm)",
+      "url": "https://www.samsung.com/sec/monitors/package-ls32dm803uk-st-d2c/LS32DM803UK-ST/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS32DM803UKXKR",
+      "market_product_key": "LS32DM803UKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "2024 스마트모니터 M8 M80D 웜 화이트 (80.0 cm)",
+      "url": "https://www.samsung.com/sec/monitors/smart-ls32dm803ukxkr-d2c/LS32DM803UKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS32FG510EKXKR",
       "market_product_key": "LS32FG510EKXKR",
       "business_unit": "VD",
       "category": "monitors",
       "name": "오디세이 G5 G51F QHD 180Hz (LS32FG510)",
       "url": "https://www.samsung.com/sec/monitors/gaming-ls32fg510ekxkr-d2c/LS32FG510EKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS32FG810SKXKR",
+      "market_product_key": "LS32FG810SKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "오디세이 OLED G8 (G81SF)(80.3cm)",
+      "url": "https://www.samsung.com/sec/monitors/gaming-ls32fg810skxkr-d2c/LS32FG810SKXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -6716,6 +6556,16 @@
       "has_support": false
     },
     {
+      "sku": "LS32H705EAKXKR",
+      "market_product_key": "LS32H705EAKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "뷰피니티 S7 S70H 4K 웜화이트 (LS32H705)",
+      "url": "https://www.samsung.com/sec/monitors/high-resolution-ls32h705eakxkr-d2c/LS32H705EAKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS32H802UAKXKR",
       "market_product_key": "LS32H802UAKXKR",
       "business_unit": "VD",
@@ -6776,12 +6626,42 @@
       "has_support": false
     },
     {
+      "sku": "LS34C500GAKXKR",
+      "market_product_key": "LS34C500GAKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "고해상도 뷰피니티 S50GC (86.4 cm)",
+      "url": "https://www.samsung.com/sec/monitors/high-resolution-ls34c500gakxkr-d2c/LS34C500GAKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS34C502GAKXKR",
+      "market_product_key": "LS34C502GAKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "뷰피니티 S5 UWQHD 모니터 86.4cm",
+      "url": "https://www.samsung.com/sec/monitors/high-resolution-ls34c502gakxkr-d2c/LS34C502GAKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS34C650TAKXKR",
       "market_product_key": "LS34C650TAKXKR",
       "business_unit": "VD",
       "category": "monitors",
       "name": "뷰피니티 S6 S65TC UWQHD (LS34C650T)",
       "url": "https://www.samsung.com/sec/monitors/high-resolution-ls34c650takxkr-d2c/LS34C650TAKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS34C650UAKXKR",
+      "market_product_key": "LS34C650UAKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "고해상도 뷰피니티 S65UC (86.4 cm)",
+      "url": "https://www.samsung.com/sec/monitors/high-resolution-ls34c650uakxkr-d2c/LS34C650UAKXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -6896,12 +6776,62 @@
       "has_support": false
     },
     {
+      "sku": "LS43BM703UKXKR",
+      "market_product_key": "LS43BM703UKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "스마트모니터 M7(M70B) 화이트 (107.9 cm)",
+      "url": "https://www.samsung.com/sec/monitors/smart-ls43bm703ukxkr-d2c/LS43BM703UKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS43CG700NKXKR",
+      "market_product_key": "LS43CG700NKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "게이밍모니터 오디세이 G70NC (107.9 cm)",
+      "url": "https://www.samsung.com/sec/monitors/gaming-ls43cg700nkxkr-d2c/LS43CG700NKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS43CG702NKXKR",
       "market_product_key": "LS43CG702NKXKR",
       "business_unit": "VD",
       "category": "monitors",
       "name": "오디세이 Neo G7 G70NC 4K 144Hz 스마트 (LS43CG702)",
       "url": "https://www.samsung.com/sec/monitors/gaming-ls43cg702nkxkr-d2c/LS43CG702NKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS43DM1E3UK-ST",
+      "market_product_key": "LS43DM1E3UK-ST",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "2024 무빙스타일 M1 (107.9 cm)",
+      "url": "https://www.samsung.com/sec/monitors/package-ls43dm1e3uk-st-d2c1/LS43DM1E3UK-ST/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS43DM703UK-ST",
+      "market_product_key": "LS43DM703UK-ST",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "2024 무빙스타일 M7 (M70D) 화이트 (107.9 cm)",
+      "url": "https://www.samsung.com/sec/monitors/package-ls43dm703uk-st-d2c/LS43DM703UK-ST/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS43DM703UKXKR",
+      "market_product_key": "LS43DM703UKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "2024 스마트모니터 M7 M70D 화이트 (107.9 cm)",
+      "url": "https://www.samsung.com/sec/monitors/smart-ls43dm703ukxkr-d2c/LS43DM703UKXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -7046,6 +6976,16 @@
       "has_support": false
     },
     {
+      "sku": "LU32J592UQKXKR",
+      "market_product_key": "LU32J592UQKXKR",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "고해상도 UHD (UJ590) (80.1 cm)",
+      "url": "https://www.samsung.com/sec/monitors/uhd-monitor-u32j592uqk-d2c/LU32J592UQKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "MG23A5378CE",
       "market_product_key": "MG23A5378CE",
       "business_unit": "DA",
@@ -7126,56 +7066,6 @@
       "has_support": false
     },
     {
-      "sku": "NT740VJK-KH38G",
-      "market_product_key": "NT740VJK-KH38G",
-      "business_unit": "MX",
-      "category": "galaxybook",
-      "name": "갤럭시 북6 (35.6cm) Core™ 3 / 256GB NVMe SSD",
-      "url": "https://www.samsung.com/sec/galaxybook/galaxy-book6-nt740vjk-kh38g/NT740VJK-KH38G/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "NT750XGJ-KP51S",
-      "market_product_key": "NT750XGJ-KP51S",
-      "business_unit": "MX",
-      "category": "galaxybook",
-      "name": "갤럭시 북4 (39.6cm) Core™ i5 / 512GB NVMe SSD",
-      "url": "https://www.samsung.com/sec/galaxybook/galaxy-book4-nt750xgj-kp51s/NT750XGJ-KP51S/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "NT750XHD-KC51G",
-      "market_product_key": "NT750XHD-KC51G",
-      "business_unit": "MX",
-      "category": "galaxybook",
-      "name": "갤럭시 북5 (39.6cm) Core™ Ultra 5 / 512GB NVMe SSD",
-      "url": "https://www.samsung.com/sec/galaxybook/galaxy-book5-nt750xhd-kc51g/NT750XHD-KC51G/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "NT750XHD-KC58G",
-      "market_product_key": "NT750XHD-KC58G",
-      "business_unit": "MX",
-      "category": "galaxybook",
-      "name": "갤럭시 북5 (39.6cm) Core™ Ultra 5 / 256GB NVMe SSD",
-      "url": "https://www.samsung.com/sec/galaxybook/galaxy-book5-nt750xhd-kc58g/NT750XHD-KC58G/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "NT750XHD-KD72G",
-      "market_product_key": "NT750XHD-KD72G",
-      "business_unit": "MX",
-      "category": "galaxybook",
-      "name": "갤럭시 북5 (39.6cm) Core™ Ultra 7 / 512GB NVMe SSD",
-      "url": "https://www.samsung.com/sec/galaxybook/galaxy-book5-nt750xhd-kd72g/NT750XHD-KD72G/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "NZ62DG300CFW",
       "market_product_key": "NZ62DG300CFW",
       "business_unit": "DA",
@@ -7212,7 +7102,7 @@
       "category": "cooking-appliances",
       "name": "Bespoke AI 인덕션 (플렉스존)",
       "url": "https://www.samsung.com/sec/cooking-appliances/cooktop-nz63db607cf-d2c/NZ63DB657CFH/",
-      "has_specs": false,
+      "has_specs": true,
       "has_support": false
     },
     {
@@ -7272,16 +7162,6 @@
       "category": "refrigerators",
       "name": "냉장고 306L",
       "url": "https://www.samsung.com/sec/refrigerators/bottom-mount-freezer-rb30d4051s9-d2c/RB30F4051WW/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RB33A3662AP",
-      "market_product_key": "RB33A3662AP",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke 냉장고 2도어 키친핏 333L",
-      "url": "https://www.samsung.com/sec/refrigerators/bottom-mount-freezer-rb33a3661ap-d2c/RB33A3662AP/",
       "has_specs": false,
       "has_support": false
     },
@@ -7376,36 +7256,6 @@
       "has_support": false
     },
     {
-      "sku": "RM70F33B1AA",
-      "market_product_key": "RM70F33B1AA",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 하이브리드 4도어 키친핏 Max+김치플러스 3도어 키친핏 623/313L",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rm70f33b1aa-d2c/RM70F33B1AA/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RM70F33C101",
-      "market_product_key": "RM70F33C101",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 하이브리드 4도어 키친핏 Max+김치플러스 3도어 키친핏 623/313L",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rm70f33c101-d2c/RM70F33C101/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RM70F33GDAB",
-      "market_product_key": "RM70F33GDAB",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 하이브리드 4도어 키친핏 Max+김치플러스 3도어 키친핏(메탈쿨링) 623/313L",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rm70f33gdab-d2c/RM70F33GDAB/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "RM70F63M2A",
       "market_product_key": "RM70F63M2A",
       "business_unit": "DA",
@@ -7416,32 +7266,12 @@
       "has_support": false
     },
     {
-      "sku": "RM70F63R27955A",
-      "market_product_key": "RM70F63R27955A",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 냉장고 4도어 키친핏 Max+냉동고 1도어 키친핏 640/347L",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rm70f63r27955a-d2c/RM70F63R27955A/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "RM70F63R2A",
       "market_product_key": "RM70F63R2A",
       "business_unit": "DA",
       "category": "refrigerators",
       "name": "Bespoke AI 냉장고 4도어 키친핏 Max 640L",
       "url": "https://www.samsung.com/sec/refrigerators/french-door-rm70f63r2a-d2c/RM70F63R2A/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RM70F6442AA",
-      "market_product_key": "RM70F6442AA",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 하이브리드 4도어 키친핏 Max+김치플러스 4도어 키친핏 Max 623/420L",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rm70f6442aa-d2c/RM70F6442AA/",
       "has_specs": false,
       "has_support": false
     },
@@ -7462,16 +7292,6 @@
       "category": "refrigerators",
       "name": "Bespoke AI 하이브리드 4도어 키친핏 Max 623L (빅아이스/큐브)",
       "url": "https://www.samsung.com/sec/refrigerators/french-door-rm70f64q1a-d2c/RM70F64Q1A/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RM70F64R17955A",
-      "market_product_key": "RM70F64R17955A",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 하이브리드 냉장고 4도어 키친핏Max+냉동고 1도어 키친핏 637/347L",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rm70f64r17955a-d2c/RM70F64R17955A/",
       "has_specs": false,
       "has_support": false
     },
@@ -7546,16 +7366,6 @@
       "has_support": false
     },
     {
-      "sku": "RM70F91RM7955A",
-      "market_product_key": "RM70F91RM7955A",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 하이브리드 냉장고 4도어+냉동고 1도어 키친핏 901/347L",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rm70f91rm7955a-d2c/RM70F91RM7955A/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "RM70F91RM94U1A",
       "market_product_key": "RM70F91RM94U1A",
       "business_unit": "DA",
@@ -7566,82 +7376,12 @@
       "has_support": false
     },
     {
-      "sku": "RM70F91RMA",
-      "market_product_key": "RM70F91RMA",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 하이브리드 4도어 901L (에너지 1등급 최저기준 대비 -30%, UV탈취)",
-      "url": "https://www.samsung.com/sec/refrigerators/french-door-rm70f91rma-d2c/RM70F91RMA/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RM70H63R1A",
-      "market_product_key": "RM70H63R1A",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 냉장고 4도어 키친핏 Max 640L",
-      "url": "https://www.samsung.com/sec/refrigerators/french-door-rm70h63r1a-d2c/RM70H63R1A/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RM70H90R1ZGD",
-      "market_product_key": "RM70H90R1ZGD",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 냉장고 4도어 905L",
-      "url": "https://www.samsung.com/sec/refrigerators/french-door-rm70h90r1zgd-d2c/RM70H90R1ZGD/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RM70H91R1X",
-      "market_product_key": "RM70H91R1X",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 하이브리드 4도어 901L (UV탈취)",
-      "url": "https://www.samsung.com/sec/refrigerators/french-door-rm70f91r1x-d2c/RM70H91R1X/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "RM70H91RMA",
       "market_product_key": "RM70H91RMA",
       "business_unit": "DA",
       "category": "refrigerators",
       "name": "Bespoke AI 하이브리드 4도어 901L (에너지 1등급 최저기준 대비 -35%, UV탈취)",
       "url": "https://www.samsung.com/sec/refrigerators/french-door-rm70h91rma-d2c/RM70H91RMA/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RM80F6433AA",
-      "market_product_key": "RM80F6433AA",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 하이브리드 4도어 키친핏 Max+김치플러스 3도어 키친핏 611/313L",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rm80f6433aa-d2c/RM80F6433AA/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RM80F6442AA",
-      "market_product_key": "RM80F6442AA",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 하이브리드 4도어 키친핏 Max+김치플러스 4도어 키친핏 Max 611/418L",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rm80f6442aa-d2c/RM80F6442AA/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RM80F6442XJ",
-      "market_product_key": "RM80F6442XJ",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 냉장고+김치플러스 4도어 키친핏 Max 611/418L",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rm80f6442xj-d2c/RM80F6442XJ/",
       "has_specs": false,
       "has_support": false
     },
@@ -7666,52 +7406,12 @@
       "has_support": false
     },
     {
-      "sku": "RM80F91K17955X",
-      "market_product_key": "RM80F91K17955X",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 하이브리드 냉장고 4도어+냉동고 1도어 키친핏 889/347L",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rm80f91k17955x-d2c/RM80F91K17955X/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "RM80F91K1XJ",
       "market_product_key": "RM80F91K1XJ",
       "business_unit": "DA",
       "category": "refrigerators",
       "name": "Bespoke AI 하이브리드 4도어 889L (오토오픈도어)",
       "url": "https://www.samsung.com/sec/refrigerators/french-door-rm80f91k1a-d2c/RM80F91K1XJ/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RM80F91L1A",
-      "market_product_key": "RM80F91L1A",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 하이브리드 4도어 875L (오토오픈도어)",
-      "url": "https://www.samsung.com/sec/refrigerators/french-door-rm80f91l1a-d2c/RM80F91L1A/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RM80F91M1XJ",
-      "market_product_key": "RM80F91M1XJ",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 하이브리드 4도어 894L (오토오픈도어)",
-      "url": "https://www.samsung.com/sec/refrigerators/french-door-rm80f91m1xj-d2c/RM80F91M1XJ/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RM80H647411A",
-      "market_product_key": "RM80H647411A",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 하이브리드 4도어 키친핏 Max+Bespoke 김치플러스 3도어 키친핏 609/313L",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rm80h647411a-d2c/RM80H647411A/",
       "has_specs": false,
       "has_support": false
     },
@@ -7736,32 +7436,12 @@
       "has_support": false
     },
     {
-      "sku": "RM90F6442WW",
-      "market_product_key": "RM90F6442WW",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 하이브리드 4도어 키친핏 Max+김치플러스 4도어 키친핏 Max 602/418L",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rm90f6442ww-d2c/RM90F6442WW/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "RM90F64E2W",
       "market_product_key": "RM90F64E2W",
       "business_unit": "DA",
       "category": "refrigerators",
       "name": "Bespoke AI 패밀리허브 4도어 키친핏 Max 602L (AI 푸드매니저, 오토오픈도어)",
       "url": "https://www.samsung.com/sec/refrigerators/french-door-rm90f64e2w-d2c/RM90F64E2W/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RM90F91D1W",
-      "market_product_key": "RM90F91D1W",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 패밀리허브 4도어 864L (AI 푸드매니저, 오토오픈도어)",
-      "url": "https://www.samsung.com/sec/refrigerators/french-door-rm90f91d1w-d2c/RM90F91D1W/",
       "has_specs": false,
       "has_support": false
     },
@@ -7806,16 +7486,6 @@
       "has_support": false
     },
     {
-      "sku": "RR39A7695A01FK",
-      "market_product_key": "RR39A7695A01FK",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke 냉장고 1도어 키친핏 380L (좌열림/열림방향 가변, 냉장전용)",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rr39a7695a01fk-d2c/RR39A7695A01FK/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "RR40B9971APK",
       "market_product_key": "RR40B9971APK",
       "business_unit": "DA",
@@ -7832,16 +7502,6 @@
       "category": "refrigerators",
       "name": "Bespoke AI 냉장고 1도어 키친핏 408L (우열림, 냉장전용)",
       "url": "https://www.samsung.com/sec/refrigerators/one-door-rr40c7895ap-d2c/RR40C7895AP/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RR40C78RZRQ79A",
-      "market_product_key": "RR40C78RZRQ79A",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 냉장고+냉동고+김치플러스 1도어 키친핏 409/347/347L",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rr40c78rzrq79a-d2c/RR40C78RZRQ79A/",
       "has_specs": false,
       "has_support": false
     },
@@ -7876,32 +7536,12 @@
       "has_support": false
     },
     {
-      "sku": "RR40C79857801",
-      "market_product_key": "RR40C79857801",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 냉동고+냉장고+김치플러스 1도어 키친핏 347/409/347L",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rr40c79857801-d2c/RR40C79857801/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "RR40C7985AP",
       "market_product_key": "RR40C7985AP",
       "business_unit": "DA",
       "category": "refrigerators",
       "name": "Bespoke AI 냉장고 1도어 키친핏 409L (좌열림, 냉장전용)",
       "url": "https://www.samsung.com/sec/refrigerators/one-door-rr40c7885ap-d2c/RR40C7985AP/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RR40C7985APW6",
-      "market_product_key": "RR40C7985APW6",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 냉장고 1도어 키친핏 409L (좌열림, 냉장전용)",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rr40c7985ap01-d2c/RR40C7985APW6/",
       "has_specs": false,
       "has_support": false
     },
@@ -7916,16 +7556,6 @@
       "has_support": false
     },
     {
-      "sku": "RR40C9981APA11",
-      "market_product_key": "RR40C9981APA11",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Infinite AI 정수기 냉장고+냉동고+김치플러스 1도어 키친핏 386/379/404L+수납존",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rr40c9981apa43-d2c/RR40C9981APA11/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "RR40C9981APG",
       "market_product_key": "RR40C9981APG",
       "business_unit": "DA",
@@ -7936,42 +7566,12 @@
       "has_support": false
     },
     {
-      "sku": "RR40C9981APGW6",
-      "market_product_key": "RR40C9981APGW6",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Infinite AI 정수기 냉장고 1도어 키친핏 386L+수납존",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rr40c9981apgw6-d2c/RR40C9981APGW6/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RR70H39E10",
-      "market_product_key": "RR70H39E10",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 냉장고 1도어 키친핏 380L (좌열림/열림방향 가변, 냉장전용)",
-      "url": "https://www.samsung.com/sec/refrigerators/one-door-rr70h39e10-d2c/RR70H39E10/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "RR70H39G10",
       "market_product_key": "RR70H39G10",
       "business_unit": "DA",
       "category": "refrigerators",
       "name": "Bespoke AI 냉장고 1도어 키친핏 380L (좌열림/열림방향 가변, 냉장전용)",
       "url": "https://www.samsung.com/sec/refrigerators/one-door-rr70h39g10-d2c/RR70H39G10/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RR70H39G1001",
-      "market_product_key": "RR70H39G1001",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 냉장고 1도어 키친핏 380L (좌열림/열림방향 가변, 냉장전용)",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rr70h39g1001-d2c/RR70H39G1001/",
       "has_specs": false,
       "has_support": false
     },
@@ -8046,16 +7646,6 @@
       "has_support": false
     },
     {
-      "sku": "RS84DB5602CW",
-      "market_product_key": "RS84DB5602CW",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke 양문형 냉장고 846L (오토오픈도어)",
-      "url": "https://www.samsung.com/sec/refrigerators/side-by-side-rs84db5602cw-d2c/RS84DB5602CW/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "RS84DB5661CW",
       "market_product_key": "RS84DB5661CW",
       "business_unit": "DA",
@@ -8072,16 +7662,6 @@
       "category": "refrigerators",
       "name": "양문형 냉장고 852L",
       "url": "https://www.samsung.com/sec/refrigerators/side-by-side-rs84db5002ww-d2c/RS84DG5002WW/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RS84DG5022B4",
-      "market_product_key": "RS84DG5022B4",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "양문형 냉장고 852L (메탈쿨링커버)",
-      "url": "https://www.samsung.com/sec/refrigerators/side-by-side-rs84dg5022b4-d2c/RS84DG5022B4/",
       "has_specs": false,
       "has_support": false
     },
@@ -8106,42 +7686,12 @@
       "has_support": false
     },
     {
-      "sku": "RT09DG004WW",
-      "market_product_key": "RT09DG004WW",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "냉장고 82L",
-      "url": "https://www.samsung.com/sec/refrigerators/one-door-rt09dg004ww-d2c/RT09DG004WW/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RT20FARL3S9",
-      "market_product_key": "RT20FARL3S9",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "냉장고 203L",
-      "url": "https://www.samsung.com/sec/refrigerators/top-mount-freezer-rt20farl3s9-d2c/RT20FARL3S9/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "RT25BAR41WW",
       "market_product_key": "RT25BAR41WW",
       "business_unit": "DA",
       "category": "refrigerators",
       "name": "냉장고 255L",
       "url": "https://www.samsung.com/sec/refrigerators/top-freezer-rt25bar41ww-d2c/RT25BAR41WW/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RT25DARAHS9",
-      "market_product_key": "RT25DARAHS9",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "냉장고 255L",
-      "url": "https://www.samsung.com/sec/refrigerators/top-mount-freezer-rt25darahs9-d2c/RT25DARAHS9/",
       "has_specs": false,
       "has_support": false
     },
@@ -8156,42 +7706,12 @@
       "has_support": false
     },
     {
-      "sku": "RT31CB5624C3",
-      "market_product_key": "RT31CB5624C3",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "냉장고 298L",
-      "url": "https://www.samsung.com/sec/refrigerators/top-mount-freezer-rt31cg5624s9-d2c/RT31CB5624C3/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "RT40H15V3SW",
       "market_product_key": "RT40H15V3SW",
       "business_unit": "DA",
       "category": "refrigerators",
       "name": "냉장고 150L",
       "url": "https://www.samsung.com/sec/refrigerators/one-door-rt40h15v3sw-d2c/RT40H15V3SW/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RT42CG6024S9",
-      "market_product_key": "RT42CG6024S9",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "냉장고 410L",
-      "url": "https://www.samsung.com/sec/refrigerators/top-mount-freezer-rt42cg6024s9-d2c/RT42CG6024S9/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RT53DB7A1CET",
-      "market_product_key": "RT53DB7A1CET",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "냉장고 525L",
-      "url": "https://www.samsung.com/sec/refrigerators/top-mount-freezer-rt53db7a1cet-d2c/RT53DB7A1CET/",
       "has_specs": false,
       "has_support": false
     },
@@ -8216,26 +7736,6 @@
       "has_support": false
     },
     {
-      "sku": "RW33C99B1TFG",
-      "market_product_key": "RW33C99B1TFG",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Infinite Line 와인냉장고 1도어 키친핏 101병 (좌열림)",
-      "url": "https://www.samsung.com/sec/refrigerators/one-door-rw33c99b1tfg-d2c/RW33C99B1TFG/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RW99H33WN0",
-      "market_product_key": "RW99H33WN0",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Infinite AI 와인냉장고 1도어 키친핏 101병 (좌열림)",
-      "url": "https://www.samsung.com/sec/refrigerators/one-door-rw99h33wn0-d2c/RW99H33WN0/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "RZ22CG4000WW",
       "market_product_key": "RZ22CG4000WW",
       "business_unit": "DA",
@@ -8246,32 +7746,12 @@
       "has_support": false
     },
     {
-      "sku": "RZ24A5660A01FK",
-      "market_product_key": "RZ24A5660A01FK",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke 변온 냉동고 1도어 키친핏 240L (우열림/열림방향 가변)",
-      "url": "https://www.samsung.com/sec/refrigerators/one-door-rz24a5660ap-d2c/RZ24A5660A01FK/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "RZ24C58G0AP",
       "market_product_key": "RZ24C58G0AP",
       "business_unit": "DA",
       "category": "refrigerators",
       "name": "Bespoke AI 변온 냉동고 1도어 키친핏 240L (우열림)",
       "url": "https://www.samsung.com/sec/refrigerators/one-door-rz24c58g0ap-d2c/RZ24C58G0AP/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RZ32A7665A01FK",
-      "market_product_key": "RZ32A7665A01FK",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke 냉동고 1도어 키친핏 318L (우열림/열림방향 가변, 냉동전용)",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rz32a7665a01fk-d2c/RZ32A7665A01FK/",
       "has_specs": false,
       "has_support": false
     },
@@ -8292,16 +7772,6 @@
       "category": "refrigerators",
       "name": "Bespoke AI 냉동고 1도어 키친핏 347L (우열림, 냉동전용)",
       "url": "https://www.samsung.com/sec/refrigerators/one-door-rz34c7855ap-d2c/RZ34C7855AP/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RZ34C7965AP01",
-      "market_product_key": "RZ34C7965AP01",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 냉동고 1도어 키친핏 347L (좌열림, 냉동전용)",
-      "url": "https://www.samsung.com/sec/refrigerators/one-door-rz34c7865ap-d2c/RZ34C7965AP01/",
       "has_specs": false,
       "has_support": false
     },
@@ -8336,16 +7806,6 @@
       "has_support": false
     },
     {
-      "sku": "RZ70H32JN0",
-      "market_product_key": "RZ70H32JN0",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 냉동고 1도어 키친핏 318L (우열림/열림방향 가변, 냉동전용)",
-      "url": "https://www.samsung.com/sec/refrigerators/one-door-rz70h32jn0-d2c/RZ70H32JN0/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "RZ70H32UN0",
       "market_product_key": "RZ70H32UN0",
       "business_unit": "DA",
@@ -8366,62 +7826,12 @@
       "has_support": false
     },
     {
-      "sku": "RZ70H32UN0011",
-      "market_product_key": "RZ70H32UN0011",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 냉동고 1도어 키친핏 318L (우열림/열림방향 가변, 냉동전용)",
-      "url": "https://www.samsung.com/sec/refrigerators/package-rz70h32un0011-d2c/RZ70H32UN0011/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "SM-A155NLBEKOO",
-      "market_product_key": "SM-A155NLBEKOO",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 A15 자급제",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-a15-lte-a155/SM-A155NLBEKOO/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-A156LZKALUC",
-      "market_product_key": "SM-A156LZKALUC",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 버디3 사업자향 (LG U+)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-a15-5g-a156-co/SM-A156LZKALUC/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-A165NZKEKOD",
-      "market_product_key": "SM-A165NZKEKOD",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 A16 통신사폰 (SKT/KT/LG U+)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-a16-lte-sm-a165/SM-A165NZKEKOD/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
       "sku": "SM-A165NZKEKOO",
       "market_product_key": "SM-A165NZKEKOO",
       "business_unit": "MX",
       "category": "smartphones",
       "name": "갤럭시 A16 자급제",
       "url": "https://www.samsung.com/sec/smartphones/galaxy-a16-lte-a165/SM-A165NZKEKOO/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-A166LZKELUC",
-      "market_product_key": "SM-A166LZKELUC",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 버디4 사업자향 (LG U+)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-a16-5g-a166-co/SM-A166LZKELUC/",
       "has_specs": true,
       "has_support": false
     },
@@ -8456,52 +7866,12 @@
       "has_support": false
     },
     {
-      "sku": "SM-A256NLBAKOD",
-      "market_product_key": "SM-A256NLBAKOD",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 A25 5G 통신사폰 (SKT/KT/LG U+)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-a25-5g-sm-a256/SM-A256NLBAKOD/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-A256NLBAKOO",
-      "market_product_key": "SM-A256NLBAKOO",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 A25 5G 자급제",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-a25-5g-a256/SM-A256NLBAKOO/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
       "sku": "SM-A276KZKAKTC",
       "market_product_key": "SM-A276KZKAKTC",
       "business_unit": "MX",
       "category": "smartphones",
       "name": "갤럭시 점프5 사업자향 (KT)",
       "url": "https://www.samsung.com/sec/smartphones/galaxy-a27-5g-a276-co/SM-A276KZKAKTC/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-A356NZKWKOD",
-      "market_product_key": "SM-A356NZKWKOD",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 A35 5G 통신사폰 (SKT/KT/LG U+)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-a35-5g-sm-a356/SM-A356NZKWKOD/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-A356NZKWKOO",
-      "market_product_key": "SM-A356NZKWKOO",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 A35 5G 자급제",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-a35-5g-a356/SM-A356NZKWKOO/",
       "has_specs": true,
       "has_support": false
     },
@@ -8546,16 +7916,6 @@
       "has_support": false
     },
     {
-      "sku": "SM-A556SZKBSKC",
-      "market_product_key": "SM-A556SZKBSKC",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 퀀텀5 사업자향 (SKT)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-a55-5g-a556-co/SM-A556SZKBSKC/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
       "sku": "SM-A566SZABSKC",
       "market_product_key": "SM-A566SZABSKC",
       "business_unit": "MX",
@@ -8576,92 +7936,12 @@
       "has_support": false
     },
     {
-      "sku": "SM-F731NDBDKOO",
-      "market_product_key": "SM-F731NDBDKOO",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 Z 플립5 레트로",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-flip5-retro-sm-f731/SM-F731NDBDKOO/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-F731NLGAKOD",
-      "market_product_key": "SM-F731NLGAKOD",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 Z 플립5 통신사폰 (SKT/KT/LG U+)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-flip5-5g-f731/SM-F731NLGAKOD/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-F731NZSZKOO",
-      "market_product_key": "SM-F731NZSZKOO",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 Z 플립5 메종 마르지엘라 에디션",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-flip5-maison-margiela-sm-f731/SM-F731NZSZKOO/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "SM-F741NLBAKOD",
-      "market_product_key": "SM-F741NLBAKOD",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 Z 플립6 통신사폰 (SKT/KT/LG U+)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-flip6-sm-f741/SM-F741NLBAKOD/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-F741NLBAKOO",
-      "market_product_key": "SM-F741NLBAKOO",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 Z 플립6 자급제",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-flip6-f741/SM-F741NLBAKOO/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-F741NZWAKOO",
-      "market_product_key": "SM-F741NZWAKOO",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 Z 플립6 자급제 (삼성닷컴/삼성 강남 전용컬러)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-flip6-f741-cpo/SM-F741NZWAKOO/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-F761NZKVKOD",
-      "market_product_key": "SM-F761NZKVKOD",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 Z 플립7 FE 통신사폰 (SKT/KT/LG U+)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-flip7fe-sm-f761v/SM-F761NZKVKOD/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
       "sku": "SM-F761NZKVKOO",
       "market_product_key": "SM-F761NZKVKOO",
       "business_unit": "MX",
       "category": "smartphones",
       "name": "갤럭시 Z 플립7 FE 자급제",
       "url": "https://www.samsung.com/sec/smartphones/galaxy-z-flip7fe-f761v/SM-F761NZKVKOO/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-F766NDBAKOD",
-      "market_product_key": "SM-F766NDBAKOD",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 Z 플립7 통신사폰 (SKT/KT/LG U+)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-flip7-sm-f766/SM-F766NDBAKOD/",
       "has_specs": true,
       "has_support": false
     },
@@ -8716,86 +7996,6 @@
       "has_support": false
     },
     {
-      "sku": "SM-F946NAKZKOO",
-      "market_product_key": "SM-F946NAKZKOO",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 Z 폴드5 톰브라운 에디션",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-fold5-tb-sm-f946/SM-F946NAKZKOO/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "SM-F946NLBAKOD",
-      "market_product_key": "SM-F946NLBAKOD",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 Z 폴드5 통신사폰 (SKT/KT/LG U+)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-fold5-5g-f946/SM-F946NLBAKOD/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-F956NAKAKOO",
-      "market_product_key": "SM-F956NAKAKOO",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 Z 폴드6 자급제 (삼성닷컴/삼성 강남 전용컬러)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-fold6-f956-cpo/SM-F956NAKAKOO/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-F956NZSAKOD",
-      "market_product_key": "SM-F956NZSAKOD",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 Z 폴드6 통신사폰 (SKT/KT/LG U+)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-fold6-sm-f956/SM-F956NZSAKOD/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-F956NZSAKOO",
-      "market_product_key": "SM-F956NZSAKOO",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 Z 폴드6 자급제",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-fold6-f956/SM-F956NZSAKOO/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-F958NZKAKOO",
-      "market_product_key": "SM-F958NZKAKOO",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 Z 폴드 스페셜 에디션 자급제",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-fold6-se-f958/SM-F958NZKAKOO/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-F966NDBAKOD",
-      "market_product_key": "SM-F966NDBAKOD",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 Z 폴드7 통신사폰 (SKT/KT/LG U+)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-fold7-sm-f966/SM-F966NDBAKOD/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "SM-F966NDBPKOO",
-      "market_product_key": "SM-F966NDBPKOO",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 Z 폴드7 자급제",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-fold7-f966v/SM-F966NDBPKOO/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
       "sku": "SM-F966NLGPKOO",
       "market_product_key": "SM-F966NLGPKOO",
       "business_unit": "MX",
@@ -8806,13 +8006,13 @@
       "has_support": false
     },
     {
-      "sku": "SM-F968NZKAKOO",
-      "market_product_key": "SM-F968NZKAKOO",
+      "sku": "SM-F966NZKPKOO",
+      "market_product_key": "SM-F966NZKPKOO",
       "business_unit": "MX",
       "category": "smartphones",
-      "name": "갤럭시 Z 트라이폴드 자급제",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-trifold-f968/SM-F968NZKAKOO/",
-      "has_specs": true,
+      "name": "갤럭시 Z 폴드7 자급제",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-fold7-f966v/SM-F966NZKPKOO/",
+      "has_specs": false,
       "has_support": false
     },
     {
@@ -8982,26 +8182,6 @@
       "category": "watches",
       "name": "갤럭시 워치 울트라2 (LTE 자급제, 47mm)",
       "url": "https://www.samsung.com/sec/watches/galaxywatch-ultra2-l715/SM-L715NZSAKOO/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-M156SDBASKC",
-      "market_product_key": "SM-M156SDBASKC",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 와이드7 사업자향 (SKT)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-m15-5g-m156-co/SM-M156SDBASKC/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-M166SZKASKC",
-      "market_product_key": "SM-M166SZKASKC",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 와이드8 사업자향 (SKT)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-m16-5g-m166-co/SM-M166SZKASKC/",
       "has_specs": true,
       "has_support": false
     },
@@ -9356,36 +8536,6 @@
       "has_support": false
     },
     {
-      "sku": "SM-S711NZPWKOD",
-      "market_product_key": "SM-S711NZPWKOD",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 S23 FE 통신사폰 (SKT/KT/LG U+)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-s23-fe-5g-s711/SM-S711NZPWKOD/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-S721NLBWKOD",
-      "market_product_key": "SM-S721NLBWKOD",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 S24 FE 통신사폰 (SKT/KT/LG U+)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-fe-sm-s721/SM-S721NLBWKOD/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-S721NLBWKOO",
-      "market_product_key": "SM-S721NLBWKOO",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 S24 FE 자급제",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-fe-s721/SM-S721NLBWKOO/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
       "sku": "SM-S731NDBWKOD",
       "market_product_key": "SM-S731NDBWKOD",
       "business_unit": "MX",
@@ -9422,96 +8572,6 @@
       "category": "smartphones",
       "name": "갤럭시 S26 FE 자급제",
       "url": "https://www.samsung.com/sec/smartphones/galaxy-s26-fe-s741/SM-S741NLGWKOO/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-S921NLBFKOO",
-      "market_product_key": "SM-S921NLBFKOO",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 S24 자급제 (삼성닷컴/삼성 강남 전용컬러)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-s921-cpo/SM-S921NLBFKOO/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-S921NZYFKOD",
-      "market_product_key": "SM-S921NZYFKOD",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 S24 통신사폰 (SKT/KT/LG U+)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-sm-s921/SM-S921NZYFKOD/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-S921NZYFKOO",
-      "market_product_key": "SM-S921NZYFKOO",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 S24 자급제",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-s921/SM-S921NZYFKOO/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-S926NLBEKOO",
-      "market_product_key": "SM-S926NLBEKOO",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 S24+ 자급제 (삼성닷컴/삼성 강남 전용컬러)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-plus-s926-cpo/SM-S926NLBEKOO/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-S926NZVEKOD",
-      "market_product_key": "SM-S926NZVEKOD",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 S24+ 통신사폰 (SKT/KT/LG U+)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-plus-sm-s926/SM-S926NZVEKOD/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-S926NZVEKOO",
-      "market_product_key": "SM-S926NZVEKOO",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 S24+ 자급제",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-plus-s926/SM-S926NZVEKOO/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-S928NLBNKOO",
-      "market_product_key": "SM-S928NLBNKOO",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 S24 울트라 자급제 (삼성닷컴/삼성 강남 전용컬러)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-ultra-s928-cpo/SM-S928NLBNKOO/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-S928NZTFKOD",
-      "market_product_key": "SM-S928NZTFKOD",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 S24 울트라 통신사폰 (SKT/KT/LG U+)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-ultra-sm-s928/SM-S928NZTFKOD/",
-      "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-S928NZTNKOO",
-      "market_product_key": "SM-S928NZTNKOO",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 S24 울트라 자급제",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-s24-ultra-s928/SM-S928NZTNKOO/",
       "has_specs": true,
       "has_support": false
     },
@@ -9583,16 +8643,6 @@
       "name": "갤럭시 S25 엣지 통신사폰 (SKT/KT/LG U+)",
       "url": "https://www.samsung.com/sec/smartphones/galaxy-s25-edge-sm-s937/SM-S937NZSBKOD/",
       "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "SM-S938NAKVKOO",
-      "market_product_key": "SM-S938NAKVKOO",
-      "business_unit": "MX",
-      "category": "smartphones",
-      "name": "갤럭시 S25 울트라 자급제 (삼성닷컴 전용컬러), 16GB+1TB",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-s25-ultra-s938-16-cpo/SM-S938NAKVKOO/",
-      "has_specs": false,
       "has_support": false
     },
     {
@@ -10346,22 +9396,22 @@
       "has_support": false
     },
     {
-      "sku": "VS28D950AIW",
-      "market_product_key": "VS28D950AIW",
+      "sku": "VS28D950AIA",
+      "market_product_key": "VS28D950AIA",
       "business_unit": "DA",
       "category": "vacuum-cleaners",
       "name": "Bespoke AI 제트 Lite 280W",
-      "url": "https://www.samsung.com/sec/vacuum-cleaners/bespoke-jet-vs28d950ai-d2c/VS28D950AIW/",
+      "url": "https://www.samsung.com/sec/vacuum-cleaners/bespoke-jet-vs28d950ai-d2c/VS28D950AIA/",
       "has_specs": false,
       "has_support": false
     },
     {
-      "sku": "VS28D950HCA",
-      "market_product_key": "VS28D950HCA",
+      "sku": "VS28D950HCB",
+      "market_product_key": "VS28D950HCB",
       "business_unit": "DA",
       "category": "vacuum-cleaners",
       "name": "Bespoke AI 제트 Lite 고온 세척 브러시 패키지",
-      "url": "https://www.samsung.com/sec/vacuum-cleaners/bespoke-jet-vs28d950hc-d2c/VS28D950HCA/",
+      "url": "https://www.samsung.com/sec/vacuum-cleaners/bespoke-jet-vs28d950hc-d2c/VS28D950HCB/",
       "has_specs": false,
       "has_support": false
     },
@@ -11266,12 +10316,12 @@
       "has_support": false
     },
     {
-      "sku": "WH90F2520AAHS",
-      "market_product_key": "WH90F2520AAHS",
+      "sku": "WH90F2520AAHT",
+      "market_product_key": "WH90F2520AAHT",
       "business_unit": "DA",
       "category": "laundry",
       "name": "Bespoke AI 원바디 25/20kg (177.8mm LCD)",
-      "url": "https://www.samsung.com/sec/laundry/onebody-wh90f2520aahs-d2c/WH90F2520AAHS/",
+      "url": "https://www.samsung.com/sec/laundry/onebody-wh90f2520aahs-d2c/WH90F2520AAHT/",
       "has_specs": false,
       "has_support": false
     },
