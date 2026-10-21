@@ -47,6 +47,14 @@ The public GitHub Pages landing is a **KR / US** introduction with a **real coll
 
 The homepage uses **three primary navigation items**: the four lifecycles, an interactive explanation, and MCP connection. Source-code setup remains local stdio: this is not a hosted remote MCP endpoint, and the public service does not include authorized stock/delivery/order APIs.
 
+## Customer Shopping Agent POC (KR) — GitHub Pages
+
+The static customer Shopping Agent **browser demo** is deployed from this repository's existing GitHub Pages workflow to **[Shopping Agent POC](https://stephencho820.github.io/scom-data-platform/agent.html)**. It uses the published `data/demo/kr.json` snapshot of collected Samsung.com SKUs and offers product search, comparison, specifications, source-linked product cards, and a local execution trace.
+
+**Important:** GitHub Pages cannot execute a secure server-side LLM Agent. The Pages page is clearly labeled as a **rule-based browser demo, not a live LLM Agent**. No API key, MCP server or private customer/commerce API is deployed on Pages. Source prices are shown only while recently verified; missing or stale prices are withheld.
+
+The repository still contains an **optional local** OpenAI Responses CLI (`npm run agent:cli`) and local API test runner (`npm run dev:shopping-agent`). These local backends are not connected to the GitHub Pages deployment. See [Customer Agent POC](./docs/CUSTOMER_AGENT_POC.md).
+
 ## Quick start
 
 ```bash

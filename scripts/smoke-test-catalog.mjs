@@ -113,6 +113,31 @@ try{
      else assert.equal(nav[1].text,"AI-Ready 명세","Schema label must be Korean on "+route);
    }
  }
+
+ // Previous legacy pages can produce unrelated script errors after their language-switch navigation.
+ // Test the customer page in its own clean browser context for accurate attribution.
+ errors.length = 0;
+ // GitHub Pages customer shopping demo must work WITHOUT any /api calls.
+ await page.route("**/api/**", route=>route.abort("blockedbyclient"));
+ await page.goto(actualBase+"agent.html",{waitUntil:"domcontentloaded"});
+ await page.locator("#product-count").waitFor({state:"visible",timeout:10000});
+ await page.waitForFunction(()=>{
+   const value=document.querySelector("#product-count")?.textContent || "";
+   return /SKUs 확인|조회 실패/.test(value);
+ });
+ const dataStatus=(await page.locator("#product-count").innerText()).trim();
+ assert.match(dataStatus,/SKUs 확인/,"Customer demo must load the published KR snapshot: "+dataStatus);
+ assert.ok(await page.locator(".product-card").count()>0,"Customer demo needs real collected smartphone SKU cards");
+ assert.match(await page.locator("#service-state").innerText(),/LLM 미연결/);
+ await page.locator(".starter-grid button").first().click();
+ await page.locator(".message.assistant").last().waitFor({timeout:10000});
+ assert.ok((await page.locator(".message.assistant").last().innerText()).length>10);
+ assert.match(await page.locator("#tool-count").innerText(),/1 tools/);
+ assert.ok(await page.locator(".tool-item").count()>=1,"Tool trace must reflect client-side function calls");
+ await page.locator("#catalog-query").fill("플립");
+ await page.locator("#search-catalog").click();
+ assert.ok((await page.locator("#product-count").innerText()).includes("SKUs 확인"));
+ assert.deepEqual(errors,[],"Customer demo browser errors: "+errors.join("\n"));
  console.log("PASS: 12 raw source marts and verified constant four-link KR/US navigation across all five pages.");
 }finally{
  if(browser)await browser.close();
