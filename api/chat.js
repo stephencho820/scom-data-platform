@@ -9,7 +9,9 @@ const validOrigin = req => {
   try {
     const originUrl = new URL(origin);
     const expected = req.headers["x-forwarded-host"] || req.headers.host;
-    return originUrl.protocol === "https:" && originUrl.host === expected;
+    const localOnly = originUrl.protocol === "http:" &&
+      /^(?:localhost|127\.0\.0\.1)(?::\d+)?$/.test(originUrl.host);
+    return (originUrl.protocol === "https:" || localOnly) && originUrl.host === expected;
   } catch { return false; }
 };
 function cardsFromEvent(event) {
