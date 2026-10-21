@@ -10,7 +10,8 @@
     "build:ai-ready": "node scripts/build-ai-ready.mjs kr",
     "serve:web": "python3 -m http.server 3000 -d web",
     "agent:cli": "node src/agent/cli.mjs",
-    "build:shopping-agent": "node scripts/build-shopping-agent-web.mjs"
+    "build:shopping-agent": "node scripts/build-shopping-agent-web.mjs",
+    "dev:shopping-agent": "npm run build:shopping-agent && node scripts/serve-shopping-agent.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/server": "^2.3.1",
