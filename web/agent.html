@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#f8f9fc">
   <meta name="robots" content="noindex,nofollow">
   <meta name="description" content="실제 수집된 삼성닷컴 제품 데이터를 기반으로 하는 고객용 Shopping AI Agent POC">
-  <title>Shopping Agent Browser Demo · S.com Data Platform</title>
+  <title>Shopping Agent POC · S.com Data Platform</title>
   <link rel="stylesheet" href="./agent.css">
 </head>
 <body>
@@ -43,7 +43,7 @@
       <header class="topbar">
         <div class="top-title">
           <div class="top-icon" aria-hidden="true">✦</div>
-          <div><strong>Shopping Agent Demo</strong><span>GitHub Pages · 규칙 기반 제품 탐색</span></div>
+          <div><strong>Shopping Agent POC</strong><span>GitHub Pages · Source-grounded shopping</span></div>
         </div>
         <div class="top-actions">
           <span id="service-state" class="service-state warn"><span class="state-dot"></span>스냅샷 로딩 중</span>
@@ -58,7 +58,7 @@
             <div class="welcome-mark">✳</div>
             <div class="eyebrow">S.COM SHOPPING · STATIC POC</div>
             <h1>찾고 있는 제품,<br><em>쉽게 비교하고 선택하세요.</em></h1>
-            <p>삼성닷컴에서 수집한 공개 제품·SKU·스펙 스냅샷으로 제품을 탐색합니다. 이 화면은 <strong>LLM을 연결하지 않은 규칙 기반 체험판</strong>이며, 가격은 최근 검증된 근거가 있을 때만 표시합니다.</p>
+            <p>삼성닷컴에서 수집한 공개 제품·SKU·스펙 스냅샷으로 제품을 탐색합니다. GPT 연결 설정 전에는 브라우저 규칙 기반 체험판으로 동작합니다. 연결 상태는 상단에 표시되며, 가격은 최근 검증된 근거가 있을 때만 표시합니다.</p>
             <div class="starter-grid">
               <button data-prompt="현재 판매하는 갤럭시 플립 모델들을 찾아줘."><span class="starter-icon">◈</span><strong>제품 찾기</strong><small>현재 판매하는 플립은?</small><span class="starter-arrow">↗</span></button>
               <button data-prompt="갤럭시 플립과 폴드를 비교해줘."><span class="starter-icon">⊞</span><strong>제품 비교</strong><small>플립과 폴드의 차이</small><span class="starter-arrow">↗</span></button>
@@ -95,7 +95,7 @@
           <div><span class="pipeline-icon">01</span><span><strong>Customer intent</strong><small>한국어 자연어 질문</small></span><span class="pipeline-check">✓</span></div>
           <div><span class="pipeline-icon">02</span><span><strong>Local demo functions</strong><small>Search · Specs · Pricing · Compare</small></span><span class="pipeline-check">→</span></div>
           <div><span class="pipeline-icon">03</span><span><strong>AI-ready data</strong><small>Source-linked market SKU</small></span><span class="pipeline-check">→</span></div>
-          <div><span class="pipeline-icon">04</span><span><strong>Rule-based response</strong><small>LLM 추론 없이 근거 기반 생성</small></span><span class="pipeline-check">→</span></div>
+          <div><span class="pipeline-icon">04</span><span><strong>Grounded response</strong><small>원천 데이터 기반 답변</small></span><span class="pipeline-check">→</span></div>
         </div>
       </section>
       <section class="inspector-section">
@@ -108,12 +108,12 @@
           <div><dt>Market</dt><dd>KR</dd></div>
           <div><dt>Data source</dt><dd>Samsung.com</dd></div>
           <div><dt>Data completeness</dt><dd class="status-partial">Partial</dd></div>
-          <div><dt>Model / backend</dt><dd>Not connected</dd></div>
+          <div><dt>Model / backend</dt><dd id="backend-status">Browser rules</dd></div>
           <div><dt>Historical NL2SQL</dt><dd>Not used</dd></div>
           <div><dt>Stock / delivery</dt><dd>Not connected</dd></div>
         </dl>
       </section>
-      <div class="inspector-footer">GitHub Pages는 정적 호스팅이므로 이 화면에는 서버형 LLM Agent가 연결되어 있지 않습니다. 개발자 패널의 실행 기록은 브라우저 내부 함수 호출 기록입니다.</div>
+      <div class="inspector-footer">기본은 브라우저 규칙 기반 데모입니다. GPT 백엔드가 설정되면 서버에서 Tool Calling을 실행하며 OpenAI API 키는 브라우저에 공개되지 않습니다.</div>
     </aside>
   </div>
   <script type="module" src="./agent.js"></script>
