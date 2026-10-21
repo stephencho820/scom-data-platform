@@ -77,4 +77,5 @@ jobs:
           cp schemas/ai_ready_mart_registry_v1.json dist/schemas/
           node scripts/build-mart-gap.mjs dist/data/catalog/kr.json dist/data/gaps/kr.json
           node scripts/build-ai-ready.mjs kr dist/data/ai-ready/kr
+          node scripts/build-demo-data.mjs dist/data/demo/kr.json
           CHROME_PATH="$chrome" node scripts/smoke-test-catalog.mjs dist
