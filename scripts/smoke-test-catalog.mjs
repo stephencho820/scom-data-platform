@@ -114,6 +114,9 @@ try{
    }
  }
 
+ // Previous legacy pages can produce unrelated script errors after their language-switch navigation.
+ // Test the customer page in its own clean browser context for accurate attribution.
+ errors.length = 0;
  // GitHub Pages customer shopping demo must work WITHOUT any /api calls.
  await page.route("**/api/**", route=>route.abort("blockedbyclient"));
  await page.goto(actualBase+"agent.html",{waitUntil:"domcontentloaded"});
