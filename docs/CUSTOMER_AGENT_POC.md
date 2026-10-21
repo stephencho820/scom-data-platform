@@ -58,6 +58,23 @@ Sample prompts:
 
 This is an interactive local CLI, NOT a deployed customer chatbot. GitHub Pages is static; it cannot securely host the API key. A separately protected server backend is needed before public deployment.
 
+## Browser UI (implemented)
+
+The POC includes a customer chat UI, real KR SKU search, source-linked product cards and an optional developer monitor. The frontend is web/agent.html + web/agent.css + web/agent.js. Routes are implemented under api/catalog.js and api/chat.js.
+
+Local setup:
+
+1. npm install (Node.js 20+).
+2. To use AI chat, set OPENAI_API_KEY **in the server environment** (not in the browser). Optional OPENAI_MODEL is supported.
+3. Run: npm run dev:shopping-agent
+4. Open http://127.0.0.1:3001
+
+Without a key, the real SKU catalog still works; the chat clearly says that the backend AI is not configured. Unknown/stale price is withheld, not invented.
+
+Vercel: vercel.json builds the independent shopping UI into public/ and exposes the two serverless routes. Link this repository as a separate Vercel project with root directory at the repository root, then configure an encrypted OPENAI_API_KEY for preview. Deploy the feature branch as a preview first. Project creation through the connected Vercel account currently returned permission denied (403); deployment is **not complete**. Avoid deploying over existing Casa/Tominiko projects.
+
+Security note: this is a restricted-access POC. Before sharing a public chat endpoint, enable platform deployment protection / authentication, rate limits and spend monitoring; same-origin checks alone are not abuse prevention. Do not place API keys in static frontend, GitHub source, or commits.
+
 ## Architecture
 
 Samsung.com KR → existing crawler/marts → customer-tools.mjs (four read-only tools) → Responses API agent → grounded Korean answer.
