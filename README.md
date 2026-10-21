@@ -53,6 +53,8 @@ The static customer Shopping Agent **browser demo** is deployed from this reposi
 
 **Important:** GitHub Pages cannot execute a secure server-side LLM Agent. The Pages page is clearly labeled as a **rule-based browser demo, not a live LLM Agent**. No API key, MCP server or private customer/commerce API is deployed on Pages. Source prices are shown only while recently verified; missing or stale prices are withheld.
 
+For the optional **GPT-enabled GitHub Pages frontend**, see [Secure GPT Connection Guide](./docs/GITHUB_PAGES_GPT_CONNECTION.md). It uses a separate password-gated Supabase Edge Function so no OpenAI API keys are exposed in static pages. This integration is dormant until a Supabase project, server-side secrets and a public endpoint URL are configured.
+
 The repository still contains an **optional local** OpenAI Responses CLI (`npm run agent:cli`) and local API test runner (`npm run dev:shopping-agent`). These local backends are not connected to the GitHub Pages deployment. See [Customer Agent POC](./docs/CUSTOMER_AGENT_POC.md).
 
 ## Quick start
