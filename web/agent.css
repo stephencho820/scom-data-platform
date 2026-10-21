@@ -20,3 +20,5 @@ body.inspector-hidden .app-shell{grid-template-columns:251px minmax(0,1fr)}body.
 @media(max-width:360px){.starter-grid{grid-template-columns:1fr}.starter-grid button{height:76px}.starter-icon{float:left;margin-right:10px}.starter-grid small{margin-left:29px}.welcome h1{font-size:24px}.service-state{display:none!important}}
 
 [hidden]{display:none!important}
+
+.tool-source{display:inline-block;margin-top:8px;font-size:10px;font-weight:700;color:#4f72cc;overflow-wrap:anywhere}.tool-freshness{font-size:10px;color:#8c9bb4;margin-top:5px}
