@@ -1,0 +1,5 @@
+# Only the shopping-agent Edge Function is configured here.
+# A separate POC access code is mandatory in the function's own handler.
+# This intentionally allows the GitHub Pages browser request without a Supabase auth JWT.
+[functions.shopping-agent]
+verify_jwt = false
