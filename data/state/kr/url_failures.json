@@ -165,8 +165,8 @@
     "last_failed_at": "2026-10-20T20:38:59.187Z"
   },
   "https://www.samsung.com/sec/monitors/tv-lt27d590cde-cr/": {
-    "failure_count": 6,
-    "retry_after": "2026-10-21T05:34:12.459Z",
-    "last_failed_at": "2026-10-19T21:34:12.459Z"
+    "failure_count": 7,
+    "retry_after": "2026-10-24T00:17:36.820Z",
+    "last_failed_at": "2026-10-21T08:17:36.820Z"
   }
 }
