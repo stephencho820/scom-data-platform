@@ -1,5 +1,6 @@
+import { runDemoQuestion, searchCatalog as findProducts } from "./agent-demo.js";
 const $ = id => document.getElementById(id);
-const state = { sending: false, aiReady: false, history: [], found: [] };
+const state = { sending: false, snapshot: null, history: [], found: [] };
 const validProductUrl = url => {
   try {
     const parsed = new URL(url);
@@ -19,23 +20,28 @@ const money = (amount, currency) => {
   }).format(amount); }
   catch { return String(amount) + " " + (currency || ""); }
 };
-function setService(ready, online = true) {
-  state.aiReady = Boolean(ready);
-  const node = $("service-state");
-  node.classList.toggle("warn", online && !ready);
-  node.classList.toggle("fail", !online);
-  node.lastChild.textContent = !online ? "데이터 연결 오류" : ready ? "AI 연결됨" : "제품 탐색만 가능";
-  $("composer-hint").textContent = ready ?
-    "Enter로 전송 · Shift+Enter 줄바꿈 · 수집 데이터 출처를 검증한 뒤 답변합니다." :
-    "현재 제품 탐색만 가능합니다. AI 채팅은 서버에 OPENAI_API_KEY를 설정하면 활성화됩니다.";
-}
-async function loadStatus() {
+async function loadSnapshot() {
+  const service = $("service-state");
+  const hint = $("composer-hint");
   try {
-    const response = await fetch("/api/catalog?status=1", { cache: "no-store" });
-    if (!response.ok) throw new Error("offline");
-    const result = await response.json();
-    setService(result.ai_configured, true);
-  } catch { setService(false, false); }
+    const response = await fetch("./data/demo/kr.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("snapshot unavailable");
+    const snapshot = await response.json();
+    if (snapshot.market !== "kr" || !Array.isArray(snapshot.products)) throw new Error("invalid snapshot");
+    state.snapshot = snapshot;
+    service.classList.remove("fail");
+    service.classList.add("warn");
+    service.lastChild.textContent = "브라우저 체험 · LLM 미연결";
+    const produced = snapshot.generated_at ?
+      new Date(snapshot.generated_at).toLocaleString("ko-KR") : "알 수 없음";
+    hint.textContent = "Enter 전송 · Shift+Enter 줄바꿈 · 한국 SKU 스냅샷 (" +
+      produced + ") · 규칙 기반 데모, 실제 LLM Agent 아님";
+  } catch {
+    state.snapshot = null;
+    service.classList.add("fail");
+    service.lastChild.textContent = "카탈로그 로드 실패";
+    hint.textContent = "데이터 파일을 읽지 못했습니다. GitHub Pages 배포 및 파일 경로를 확인해 주세요.";
+  }
 }
 function buildCard(p) {
   const source = validProductUrl(p.product_url);
@@ -60,7 +66,7 @@ function buildCard(p) {
   official.target = "_blank";
   official.rel = "noopener noreferrer";
   links.append(official);
-  if (state.aiReady && p.sku) {
+  if (state.snapshot && p.sku) {
     const ask = el("button", "", "스펙 질문 ↗");
     ask.type = "button";
     ask.addEventListener("click", () => sendMessage(p.sku + " 제품의 주요 사양을 알려줘."));
@@ -83,22 +89,20 @@ function renderCards(target, products) {
 async function searchCatalog() {
   const query = $("catalog-query").value.trim().slice(0, 100);
   const grid = $("catalog-grid");
-  grid.replaceChildren(el("div", "catalog-loading", "제품 SKU를 조회하고 있어요…"));
+  grid.replaceChildren(el("div", "catalog-loading", "공개된 SKU 스냅샷을 검색하고 있어요…"));
   $("search-catalog").disabled = true;
   try {
-    const url = "/api/catalog?" + new URLSearchParams({ q: query || "갤럭시",
-      category: "smartphones", limit: "12" }).toString();
-    const response = await fetch(url, { cache: "no-store" });
-    if (!response.ok) throw new Error("catalog error");
-    const result = await response.json();
-    if (result.status !== "ok") throw new Error("catalog not available");
-    state.found = result.products || [];
+    if (!state.snapshot) throw new Error("missing snapshot");
+    const result = findProducts(state.snapshot.products, query || "갤럭시", {
+      now: Date.now(), limit: 12
+    });
+    state.found = result.products;
     renderCards(grid, state.found);
     $("product-count").textContent = result.matched +
       " SKUs 확인" + (result.matched > state.found.length ? " · 일부 표시" : "");
   } catch {
     grid.replaceChildren(el("div", "catalog-empty",
-      "현재 카탈로그를 불러올 수 없습니다. 백엔드 연결 상태를 확인해 주세요."));
+      "스냅샷을 아직 불러오지 못했습니다. GitHub Pages 연결 상태를 확인해 주세요."));
     $("product-count").textContent = "조회 실패";
   } finally { $("search-catalog").disabled = false; }
 }
@@ -171,32 +175,20 @@ async function sendMessage(customQuestion = null) {
   input.value = "";
   input.style.height = "auto";
   busy(true);
-  const placeholder = renderMessage("assistant", "제품 데이터를 조회하고 답변을 작성하고 있어요…");
+  const placeholder = renderMessage("assistant", "수집된 SKU 데이터에서 근거를 찾고 있어요…");
   try {
-    const response = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: question, history: state.history.slice(-8) })
-    });
-    const result = await response.json();
+    if (!state.snapshot) throw new Error("snapshot unavailable");
+    // Deliberately deterministic: GitHub Pages cannot run a private LLM backend.
+    const result = runDemoQuestion(question, state.snapshot, Date.now());
     placeholder.remove();
-    if (!response.ok) {
-      if (result.error === "agent_not_configured") {
-        showChatError("현재 제품 카탈로그 탐색 기능만 활성화되어 있습니다. AI 대화는 서버에서 API 키를 연결한 후 사용할 수 있어요. 아래에서 제품을 검색하거나 공식 제품 페이지를 열어 보세요.");
-        $("catalog").scrollIntoView({ behavior: "smooth", block: "start" });
-      } else {
-        showChatError(result.message || "질문을 처리하지 못했습니다. 잠시 후 다시 시도해 주세요.");
-      }
-      return;
-    }
-    renderMessage("assistant", result.answer || "확인 가능한 정보가 없습니다.", result.products || []);
+    renderMessage("assistant", result.answer, result.products || []);
     renderRun(result.developer);
     state.history.push({ role: "user", content: question },
-      { role: "assistant", content: String(result.answer || "") });
+      { role: "assistant", content: result.answer });
     state.history = state.history.slice(-8);
   } catch {
     placeholder.remove();
-    showChatError("Agent 서버에 연결하지 못했습니다. 서비스 상태를 확인해 주세요.");
+    showChatError("데이터를 읽지 못했습니다. 페이지를 새로 고친 후 다시 시도해 주세요.");
   } finally {
     busy(false);
     input.focus();
@@ -240,5 +232,4 @@ $("reset-chat").addEventListener("click", () => {
   $("welcome").hidden = false; renderRun(null);
   $("content-scroll").scrollTo({ top: 0, behavior: "smooth" });
 });
-loadStatus();
-searchCatalog();
+loadSnapshot().then(searchCatalog);
