@@ -47,11 +47,13 @@ The public GitHub Pages landing is a **KR / US** introduction with a **real coll
 
 The homepage uses **three primary navigation items**: the four lifecycles, an interactive explanation, and MCP connection. Source-code setup remains local stdio: this is not a hosted remote MCP endpoint, and the public service does not include authorized stock/delivery/order APIs.
 
-## Customer Shopping AI Agent POC (KR)
+## Customer Shopping Agent POC (KR) — GitHub Pages
 
-A separate customer-facing web experience now builds on the existing data marts, without NL2SQL or historical BI queries. It includes a KR Galaxy SKU browser, read-only agent tools, source-checked product cards, a chat interface, and a developer monitor that shows Tool calls and source/freshness evidence.
+The static customer Shopping Agent **browser demo** is deployed from this repository's existing GitHub Pages workflow to **[Shopping Agent POC](https://stephencho820.github.io/scom-data-platform/agent.html)**. It uses the published `data/demo/kr.json` snapshot of collected Samsung.com SKUs and offers product search, comparison, specifications, source-linked product cards, and a local execution trace.
 
-**Run locally:** `npm run dev:shopping-agent` then open `http://127.0.0.1:3001`. Set the server-side `OPENAI_API_KEY` to enable LLM chat; without it, product browsing still works. The agent UI is *not* deployed to the existing GitHub Pages portal. See [Customer Agent POC](./docs/CUSTOMER_AGENT_POC.md) for architecture, limitations and deployment guidance.
+**Important:** GitHub Pages cannot execute a secure server-side LLM Agent. The Pages page is clearly labeled as a **rule-based browser demo, not a live LLM Agent**. No API key, MCP server or private customer/commerce API is deployed on Pages. Source prices are shown only while recently verified; missing or stale prices are withheld.
+
+The repository still contains an **optional local** OpenAI Responses CLI (`npm run agent:cli`) and local API test runner (`npm run dev:shopping-agent`). These local backends are not connected to the GitHub Pages deployment. See [Customer Agent POC](./docs/CUSTOMER_AGENT_POC.md).
 
 ## Quick start
 
