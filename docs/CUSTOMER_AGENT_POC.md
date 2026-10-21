@@ -58,22 +58,39 @@ Sample prompts:
 
 This is an interactive local CLI, NOT a deployed customer chatbot. GitHub Pages is static; it cannot securely host the API key. A separately protected server backend is needed before public deployment.
 
-## Browser UI (implemented)
+## GitHub Pages customer browser demo (primary deployment)
 
-The POC includes a customer chat UI, real KR SKU search, source-linked product cards and an optional developer monitor. The frontend is web/agent.html + web/agent.css + web/agent.js. Routes are implemented under api/catalog.js and api/chat.js.
+The **GitHub Pages** site publishes a separate customer-facing Shopping Agent POC at:
 
-Local setup:
+https://stephencho820.github.io/scom-data-platform/agent.html
 
-1. npm install (Node.js 20+).
-2. To use AI chat, set OPENAI_API_KEY **in the server environment** (not in the browser). Optional OPENAI_MODEL is supported.
-3. Run: npm run dev:shopping-agent
-4. Open http://127.0.0.1:3001
+The main AI-ready data landing links to the demo. During each existing GitHub Pages build, the workflow copies all files from web/ (including agent.html, agent.css, agent.js and agent-demo.js) to the public artifact and generates data/demo/kr.json from actual source-linked KR marts.
 
-Without a key, the real SKU catalog still works; the chat clearly says that the backend AI is not configured. Unknown/stale price is withheld, not invented.
+### What works entirely on GitHub Pages
 
-Vercel: vercel.json builds the independent shopping UI into public/ and exposes the two serverless routes. Link this repository as a separate Vercel project with root directory at the repository root, then configure an encrypted OPENAI_API_KEY for preview. Deploy the feature branch as a preview first. Project creation through the connected Vercel account currently returned permission denied (403); deployment is **not complete**. Avoid deploying over existing Casa/Tominiko projects.
+- Mobile-friendly customer questions with a **transparent deterministic rule-based answer demo**.
+- Search live-published (but not necessarily up-to-the-second) KR SKU catalog snapshots.
+- Display normalized specifications only when captured, compare two exact variants, filter by budget **only when observed price is verified within 36 hours**.
+- Show official Samsung.com product links and a Developer Monitor of local functions and provenance.
+- No NL2SQL, historical price analytics, client-side credentials, or promises about stock/delivery.
 
-Security note: this is a restricted-access POC. Before sharing a public chat endpoint, enable platform deployment protection / authentication, rate limits and spend monitoring; same-origin checks alone are not abuse prevention. Do not place API keys in static frontend, GitHub source, or commits.
+### What GitHub Pages cannot do
+
+GitHub Pages is static hosting. It **cannot host a private server-side OpenAI API key**, implement secure LLM tool calling, connect confidential internal Samsung services, or expose a hosted MCP server. The browser demo is not a functioning LLM Agent; labels in the UI explicitly state this. A full production customer-facing LLM Agent would need a separate authenticated backend; the front end may still remain on GitHub Pages.
+
+### Optional full LLM Agent backend (local proof only)
+
+The repository also includes a Node.js OpenAI Responses tool-calling CLI and a local browser backend for future use, both **outside GitHub Pages**. To test locally:
+
+1. npm install
+2. Set OPENAI_API_KEY in your server shell (never in the browser or GitHub repository).
+3. npm run agent:cli (local LLM CLI) or npm run dev:shopping-agent (local API server).
+
+The local LLM experiment and static Pages browser demo are **distinct execution modes** and must not be represented as the same live service.
+
+### Data limitations
+
+From the 2026-10-19 readiness record, the current KR catalog had 1,113 current SKUs but only 123 with normalized specs. The official catalog universe is not independently certified complete and readiness remains false. The Pages snapshot is regenerated when its deployment workflow runs; data may still be stale when opened later. Prices expire client-side instead of being displayed as current. Collected offer prices must never be labeled official list/MSRP.
 
 ## Architecture
 
