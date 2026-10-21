@@ -219,8 +219,9 @@ $("show-catalog").addEventListener("click", () =>
   $("catalog").scrollIntoView({ behavior: "smooth", block: "start" }));
 $("toggle-inspector").addEventListener("click", () => setInspector(true));
 $("toggle-inspector-top").addEventListener("click", () =>
-  setInspector(!($("inspector").classList.contains("open")) &&
-    !document.body.classList.contains("inspector-hidden")));
+  setInspector(matchMedia("(max-width:1120px)").matches ?
+    !$("inspector").classList.contains("open") :
+    document.body.classList.contains("inspector-hidden")));
 $("close-inspector").addEventListener("click", () => setInspector(false));
 $("reset-chat").addEventListener("click", () => {
   state.history = []; $("messages").replaceChildren();
