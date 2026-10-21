@@ -54,8 +54,11 @@ test("static website build includes responsive chat and developer monitor", asyn
   assert.match(html, /id="messages"/);
   assert.match(html, /id="catalog-grid"/);
   assert.match(html, /id="inspector"/);
-  assert.match(js, /\/api\/chat/);
-  assert.match(js, /\/api\/catalog/);
+  assert.match(js, /\.\/data\/demo\/kr\.json/);
+  assert.match(js, /runDemoQuestion/);
+  assert.doesNotMatch(js, /fetch\(["']\/api\//);
+  assert.match(html, /\.\/agent\.js/);
+  assert.doesNotMatch(html, /href="\/" aria-label="Shopping Agent home"/);
   assert.ok((await stat("public/agent.css")).size > 1000);
 });
 
