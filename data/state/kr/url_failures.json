@@ -75,19 +75,19 @@
     "last_failed_at": "2026-10-20T20:38:59.187Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7190fxkr/UN49RU7190FXKR/": {
-    "failure_count": 7,
-    "retry_after": "2026-10-21T11:27:11.637Z",
-    "last_failed_at": "2026-10-18T19:27:11.637Z"
+    "failure_count": 8,
+    "retry_after": "2026-10-27T04:39:37.230Z",
+    "last_failed_at": "2026-10-21T20:39:37.230Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7470fxkr/": {
-    "failure_count": 7,
-    "retry_after": "2026-10-21T11:27:11.637Z",
-    "last_failed_at": "2026-10-18T19:27:11.637Z"
+    "failure_count": 8,
+    "retry_after": "2026-10-27T04:39:37.230Z",
+    "last_failed_at": "2026-10-21T20:39:37.230Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7470fxkr/UN49RU7470FXKR/": {
-    "failure_count": 7,
-    "retry_after": "2026-10-21T11:27:11.637Z",
-    "last_failed_at": "2026-10-18T19:27:11.637Z"
+    "failure_count": 8,
+    "retry_after": "2026-10-27T04:39:37.230Z",
+    "last_failed_at": "2026-10-21T20:39:37.230Z"
   },
   "https://www.samsung.com/sec/monitors/curved-lc24f390fhkxkr/": {
     "failure_count": 7,
