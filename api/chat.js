@@ -87,7 +87,11 @@ export default async function handler(req, res) {
           name: e.name,
           parameters: (() => { try { return JSON.parse(e.arguments || "{}"); } catch { return {}; } })(),
           result_status: e.result?.status || null,
-          result_count: e.result?.products?.length || (e.result?.sku ? 1 : 0)
+          result_count: e.result?.products?.length || (e.result?.sku ? 1 : 0),
+          source_url: e.result?.source_url || e.result?.product_url ||
+            e.result?.price?.source_url || e.result?.products?.[0]?.product_url || null,
+          price_verified_at: e.result?.price?.verified_at ||
+            e.result?.products?.find?.(p => p.price?.verified_at)?.price?.verified_at || null
         })),
         provider: "OpenAI Responses API",
         customer_data: "Existing Samsung.com KR captured marts",
