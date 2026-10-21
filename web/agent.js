@@ -1,6 +1,8 @@
 import { runDemoQuestion, searchCatalog as findProducts } from "./agent-demo.js";
+import { backendUrl, askRemoteAgent } from "./agent-backend.js";
 const $ = id => document.getElementById(id);
 const state = { sending: false, snapshot: null, history: [], found: [] };
+const usesRemote = Boolean(backendUrl());
 const validProductUrl = url => {
   try {
     const parsed = new URL(url);
@@ -31,10 +33,12 @@ async function loadSnapshot() {
     state.snapshot = snapshot;
     service.classList.remove("fail");
     service.classList.add("warn");
-    service.lastChild.textContent = "브라우저 체험 · LLM 미연결";
+    service.lastChild.textContent = usesRemote ? "GPT 연결 설정됨 · POC 인증" : "브라우저 체험 · LLM 미연결";
     const produced = snapshot.generated_at ?
       new Date(snapshot.generated_at).toLocaleString("ko-KR") : "알 수 없음";
-    hint.textContent = "Enter 전송 · Shift+Enter 줄바꿈 · 한국 SKU 스냅샷 (" +
+    hint.textContent = usesRemote ?
+      "GPT Tool Calling 백엔드가 설정되었습니다. 첫 질문에서 POC 접속 코드로 인증합니다." :
+      "Enter 전송 · Shift+Enter 줄바꿈 · 한국 SKU 스냅샷 (" +
       produced + ") · 규칙 기반 데모, 실제 LLM Agent 아님";
   } catch {
     state.snapshot = null;
@@ -177,18 +181,27 @@ async function sendMessage(customQuestion = null) {
   busy(true);
   const placeholder = renderMessage("assistant", "수집된 SKU 데이터에서 근거를 찾고 있어요…");
   try {
-    if (!state.snapshot) throw new Error("snapshot unavailable");
-    // Deliberately deterministic: GitHub Pages cannot run a private LLM backend.
-    const result = runDemoQuestion(question, state.snapshot, Date.now());
+    if (!usesRemote && !state.snapshot) throw new Error("snapshot unavailable");
+    const result = usesRemote ?
+      await askRemoteAgent(question, state.history.slice(-6)) :
+      runDemoQuestion(question, state.snapshot, Date.now());
     placeholder.remove();
     renderMessage("assistant", result.answer, result.products || []);
     renderRun(result.developer);
     state.history.push({ role: "user", content: question },
       { role: "assistant", content: result.answer });
     state.history = state.history.slice(-8);
-  } catch {
+  } catch (error) {
     placeholder.remove();
-    showChatError("데이터를 읽지 못했습니다. 페이지를 새로 고친 후 다시 시도해 주세요.");
+    const reasons = {
+      access_code_required: "접속 코드 입력이 취소되어 요청하지 않았습니다.",
+      unauthorized: "POC 접속 코드가 올바르지 않습니다. 다음 질문에서 다시 입력해 주세요.",
+      backend_not_configured: "GPT 백엔드가 아직 설정되지 않았습니다. 제품 검색은 계속 사용할 수 있어요.",
+      rate_limited: "사용량 제한에 도달했습니다. 제품 검색 기능을 이용해 주세요.",
+      agent_unavailable: "AI 응답을 가져올 수 없습니다. 수집된 제품 데이터는 아래에서 탐색할 수 있어요."
+    };
+    showChatError(reasons[error.message] ||
+      "AI 또는 데이터 연결에 문제가 발생했습니다. 제품 검색을 이용해 주세요.");
   } finally {
     busy(false);
     input.focus();
