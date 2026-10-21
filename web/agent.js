@@ -3,6 +3,8 @@ import { backendUrl, askRemoteAgent } from "./agent-backend.js";
 const $ = id => document.getElementById(id);
 const state = { sending: false, snapshot: null, history: [], found: [] };
 const usesRemote = Boolean(backendUrl());
+const backendStatus = document.getElementById("backend-status");
+if (backendStatus) backendStatus.textContent = usesRemote ? "GPT backend URL configured" : "Browser rules";
 const validProductUrl = url => {
   try {
     const parsed = new URL(url);
