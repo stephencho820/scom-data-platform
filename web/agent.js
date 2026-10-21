@@ -137,6 +137,18 @@ function renderRun(info) {
     heading.append(el("span", "", entry.result_status || "executed"));
     const params = el("pre", "", JSON.stringify(entry.parameters || {}, null, 2));
     item.append(heading, params);
+    const source = validProductUrl(entry.source_url);
+    if (source) {
+      const urlNode = el("a", "tool-source", "Samsung.com source ↗");
+      urlNode.href = source; urlNode.target = "_blank"; urlNode.rel = "noopener noreferrer";
+      item.append(urlNode);
+    }
+    if (entry.price_verified_at) {
+      const verified = new Date(entry.price_verified_at);
+      if (!Number.isNaN(verified.getTime())) item.append(
+        el("div", "tool-freshness", "가격 검증: " + verified.toLocaleString("ko-KR"))
+      );
+    }
     log.append(item);
   }
 }
