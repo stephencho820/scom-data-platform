@@ -6,21 +6,21 @@
   <meta name="theme-color" content="#f8f9fc">
   <meta name="robots" content="noindex,nofollow">
   <meta name="description" content="실제 수집된 삼성닷컴 제품 데이터를 기반으로 하는 고객용 Shopping AI Agent POC">
-  <title>Shopping AI Agent · S.com Data Platform</title>
+  <title>Shopping Agent Browser Demo · S.com Data Platform</title>
   <link rel="stylesheet" href="./agent.css">
 </head>
 <body>
   <a class="skip-link" href="#chat">채팅으로 건너뛰기</a>
   <div class="app-shell">
     <aside class="sidebar">
-      <a class="brand" href="/" aria-label="Shopping Agent home">
+      <a class="brand" href="./agent.html" aria-label="Shopping Agent home">
         <span class="brand-symbol"><span></span><span></span><span></span><span></span></span>
         <span class="brand-text">S.com <strong>Agent</strong><small>Shopping intelligence</small></span>
       </a>
 
       <div class="nav-caption">WORKSPACE</div>
       <nav class="side-nav" aria-label="앱 메뉴">
-        <a class="side-nav-item active" href="/"><span aria-hidden="true">✦</span> 쇼핑 어시스턴트 <b>POC</b></a>
+        <a class="side-nav-item active" href="./agent.html"><span aria-hidden="true">✦</span> 쇼핑 어시스턴트 <b>POC</b></a>
         <button type="button" id="show-catalog" class="side-nav-item"><span aria-hidden="true">▦</span> 제품 탐색</button>
         <button type="button" id="toggle-inspector" class="side-nav-item"><span aria-hidden="true">⌘</span> 개발자 모니터 <span class="arrow">↗</span></button>
       </nav>
@@ -43,10 +43,10 @@
       <header class="topbar">
         <div class="top-title">
           <div class="top-icon" aria-hidden="true">✦</div>
-          <div><strong>Shopping AI</strong><span>Samsung.com product advisor</span></div>
+          <div><strong>Shopping Agent Demo</strong><span>GitHub Pages · 규칙 기반 제품 탐색</span></div>
         </div>
         <div class="top-actions">
-          <span id="service-state" class="service-state"><span class="state-dot"></span>연결 확인 중</span>
+          <span id="service-state" class="service-state warn"><span class="state-dot"></span>스냅샷 로딩 중</span>
           <button type="button" class="desktop-inspector-button" id="toggle-inspector-top" aria-label="개발자 패널 표시 및 숨기기">⌘ <span>Developer</span></button>
           <button type="button" class="clear-btn" id="reset-chat">새 대화</button>
         </div>
@@ -56,9 +56,9 @@
         <div class="chat-container">
           <div class="welcome" id="welcome">
             <div class="welcome-mark">✳</div>
-            <div class="eyebrow">S.COM SHOPPING INTELLIGENCE</div>
+            <div class="eyebrow">S.COM SHOPPING · STATIC POC</div>
             <h1>찾고 있는 제품,<br><em>쉽게 비교하고 선택하세요.</em></h1>
-            <p>실제 삼성닷컴에서 수집한 제품·SKU·스펙 정보를 활용해 제품 탐색을 돕습니다. 현재 판매가격은 최신 검증된 정보가 있을 때만 표시합니다.</p>
+            <p>삼성닷컴에서 수집한 공개 제품·SKU·스펙 스냅샷으로 제품을 탐색합니다. 이 화면은 <strong>LLM을 연결하지 않은 규칙 기반 체험판</strong>이며, 가격은 최근 검증된 근거가 있을 때만 표시합니다.</p>
             <div class="starter-grid">
               <button data-prompt="현재 판매하는 갤럭시 플립 모델들을 찾아줘."><span class="starter-icon">◈</span><strong>제품 찾기</strong><small>현재 판매하는 플립은?</small><span class="starter-arrow">↗</span></button>
               <button data-prompt="갤럭시 플립과 폴드를 비교해줘."><span class="starter-icon">⊞</span><strong>제품 비교</strong><small>플립과 폴드의 차이</small><span class="starter-arrow">↗</span></button>
@@ -69,7 +69,7 @@
           <section class="messages" id="messages" aria-label="AI 대화" aria-live="polite"></section>
 
           <section class="catalog-section" id="catalog">
-            <div class="section-heading"><div><span class="section-eyebrow">LIVE DATA PREVIEW</span><h2>삼성닷컴 제품 탐색</h2><p>수집된 한국 스마트폰 SKU를 기반으로 합니다. 전체 제품 커버리지가 검증된 것은 아닙니다.</p></div><span class="count-badge" id="product-count">불러오는 중</span></div>
+            <div class="section-heading"><div><span class="section-eyebrow">PUBLISHED DATA SNAPSHOT</span><h2>삼성닷컴 제품 탐색</h2><p>GitHub Pages에 배포된 KR 스마트폰 SKU 스냅샷을 검색합니다. 전체 제품 커버리지와 실시간 가격은 보장하지 않습니다.</p></div><span class="count-badge" id="product-count">불러오는 중</span></div>
             <div class="catalog-controls"><label class="search-field"><span aria-hidden="true">⌕</span><input type="search" id="catalog-query" value="갤럭시" placeholder="갤럭시, Galaxy, 모델명 검색" maxlength="100" aria-label="제품 검색"></label><button type="button" id="search-catalog" class="search-button">제품 검색</button></div>
             <div class="catalog-grid" id="catalog-grid" aria-live="polite">
               <div class="catalog-loading"><span class="spinner"></span> 실제 SKU 목록을 확인하고 있어요.</div>
@@ -90,16 +90,16 @@
     <aside class="inspector" id="inspector">
       <div class="inspector-header"><div><span class="eyebrow">TRANSPARENCY BY DESIGN</span><h2>Developer monitor</h2></div><button type="button" id="close-inspector" aria-label="개발자 패널 닫기">×</button></div>
       <section class="inspector-section">
-        <div class="inspector-label">PIPELINE</div>
+        <div class="inspector-label">BROWSER DEMO PIPELINE</div>
         <div class="pipeline">
           <div><span class="pipeline-icon">01</span><span><strong>Customer intent</strong><small>한국어 자연어 질문</small></span><span class="pipeline-check">✓</span></div>
-          <div><span class="pipeline-icon">02</span><span><strong>Agent tools</strong><small>Product · Specs · Pricing</small></span><span class="pipeline-check">→</span></div>
+          <div><span class="pipeline-icon">02</span><span><strong>Local demo functions</strong><small>Search · Specs · Pricing · Compare</small></span><span class="pipeline-check">→</span></div>
           <div><span class="pipeline-icon">03</span><span><strong>AI-ready data</strong><small>Source-linked market SKU</small></span><span class="pipeline-check">→</span></div>
-          <div><span class="pipeline-icon">04</span><span><strong>Grounded answer</strong><small>검증 결과 기반 답변</small></span><span class="pipeline-check">→</span></div>
+          <div><span class="pipeline-icon">04</span><span><strong>Rule-based response</strong><small>LLM 추론 없이 근거 기반 생성</small></span><span class="pipeline-check">→</span></div>
         </div>
       </section>
       <section class="inspector-section">
-        <div class="inspector-label">LAST AGENT RUN <span id="tool-count">0 tools</span></div>
+        <div class="inspector-label">LAST LOCAL DEMO RUN <span id="tool-count">0 calls</span></div>
         <div class="tool-log" id="tool-log"><div class="empty-log"><span>⌁</span>질문을 전송하면<br>실행된 Tool이 표시됩니다.</div></div>
       </section>
       <section class="inspector-section system-status">
@@ -108,11 +108,12 @@
           <div><dt>Market</dt><dd>KR</dd></div>
           <div><dt>Data source</dt><dd>Samsung.com</dd></div>
           <div><dt>Data completeness</dt><dd class="status-partial">Partial</dd></div>
+          <div><dt>Model / backend</dt><dd>Not connected</dd></div>
           <div><dt>Historical NL2SQL</dt><dd>Not used</dd></div>
           <div><dt>Stock / delivery</dt><dd>Not connected</dd></div>
         </dl>
       </section>
-      <div class="inspector-footer">Agent는 데이터가 없거나 최신 검증에 실패하면 사실을 만들어 답변하지 않도록 설계되었습니다.</div>
+      <div class="inspector-footer">GitHub Pages는 정적 호스팅이므로 이 화면에는 서버형 LLM Agent가 연결되어 있지 않습니다. 개발자 패널의 실행 기록은 브라우저 내부 함수 호출 기록입니다.</div>
     </aside>
   </div>
   <script type="module" src="./agent.js"></script>
