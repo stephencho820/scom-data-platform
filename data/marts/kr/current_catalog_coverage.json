@@ -1,13 +1,13 @@
 {
   "market": "kr",
-  "generated_at": "2026-10-23T20:29:55.301Z",
+  "generated_at": "2026-10-24T19:31:52.695Z",
   "definition": "Current catalog coverage compares SKU identifiers discovered from each configured official Samsung.com KR catalog source with current SKU rows emitted to product_master.",
   "complete": true,
   "catalog_sources_total": 19,
   "catalog_sources_ok": 19,
   "catalog_sources_failed": 0,
-  "discovered_unique_skus": 949,
-  "db_current_unique_skus": 949,
+  "discovered_unique_skus": 1038,
+  "db_current_unique_skus": 1038,
   "categories": [
     {
       "source_id": "smartphones",
@@ -39,8 +39,8 @@
       "category": "tvs",
       "source_url": "https://www.samsung.com/sec/tvs/all-tvs/",
       "source_status": "ok",
-      "discovered_unique_skus": 124,
-      "db_current_unique_skus": 124,
+      "discovered_unique_skus": 165,
+      "db_current_unique_skus": 165,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -51,8 +51,8 @@
       "category": "monitors",
       "source_url": "https://www.samsung.com/sec/monitors/all-monitors/",
       "source_status": "ok",
-      "discovered_unique_skus": 131,
-      "db_current_unique_skus": 131,
+      "discovered_unique_skus": 136,
+      "db_current_unique_skus": 136,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -87,8 +87,8 @@
       "category": "laundry",
       "source_url": "https://www.samsung.com/sec/washers-and-dryers/all-washers-and-dryers/",
       "source_status": "ok",
-      "discovered_unique_skus": 57,
-      "db_current_unique_skus": 57,
+      "discovered_unique_skus": 100,
+      "db_current_unique_skus": 100,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
