@@ -168,15 +168,5 @@
     "failure_count": 8,
     "retry_after": "2026-10-30T03:31:52.695Z",
     "last_failed_at": "2026-10-24T19:31:52.695Z"
-  },
-  "https://www.samsung.com/sec/refrigerators/kimchi-stand-rq48t9411ap/": {
-    "failure_count": 1,
-    "retry_after": "2026-10-24T20:31:52.695Z",
-    "last_failed_at": "2026-10-24T19:31:52.695Z"
-  },
-  "https://www.samsung.com/sec/refrigerators/kimchi-stand-rq48t9411ap/RQ48T9411AP/": {
-    "failure_count": 1,
-    "retry_after": "2026-10-24T20:31:52.695Z",
-    "last_failed_at": "2026-10-24T19:31:52.695Z"
   }
 }
