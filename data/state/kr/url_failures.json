@@ -1,78 +1,78 @@
 {
   "https://www.samsung.com/sec/tvs/fhd-n5000afxkr/UN49N5000AFXKR/": {
-    "failure_count": 8,
-    "retry_after": "2026-10-26T04:38:59.187Z",
-    "last_failed_at": "2026-10-20T20:38:59.187Z"
+    "failure_count": 9,
+    "retry_after": "2026-11-01T05:39:17.855Z",
+    "last_failed_at": "2026-10-26T21:39:17.855Z"
   },
   "https://www.samsung.com/sec/tvs/fhd-n5010afxkr/": {
-    "failure_count": 8,
-    "retry_after": "2026-10-26T04:38:59.187Z",
-    "last_failed_at": "2026-10-20T20:38:59.187Z"
+    "failure_count": 9,
+    "retry_after": "2026-11-01T05:39:17.855Z",
+    "last_failed_at": "2026-10-26T21:39:17.855Z"
   },
   "https://www.samsung.com/sec/tvs/fhd-n5010afxkr/UN49N5010AFXKR/": {
-    "failure_count": 8,
-    "retry_after": "2026-10-26T04:38:59.187Z",
-    "last_failed_at": "2026-10-20T20:38:59.187Z"
+    "failure_count": 9,
+    "retry_after": "2026-11-01T05:39:17.855Z",
+    "last_failed_at": "2026-10-26T21:39:17.855Z"
   },
   "https://www.samsung.com/sec/tvs/full-hd-m5200afxkr/UN49M5200AFXKR/": {
-    "failure_count": 8,
-    "retry_after": "2026-10-26T04:38:59.187Z",
-    "last_failed_at": "2026-10-20T20:38:59.187Z"
+    "failure_count": 9,
+    "retry_after": "2026-11-01T05:39:17.855Z",
+    "last_failed_at": "2026-10-26T21:39:17.855Z"
   },
   "https://www.samsung.com/sec/tvs/qled-4k-q60rafxkr/QN49Q60RAFXKR/": {
-    "failure_count": 8,
-    "retry_after": "2026-10-26T04:38:59.187Z",
-    "last_failed_at": "2026-10-20T20:38:59.187Z"
+    "failure_count": 9,
+    "retry_after": "2026-11-01T05:39:17.855Z",
+    "last_failed_at": "2026-10-26T21:39:17.855Z"
   },
   "https://www.samsung.com/sec/tvs/qled-4k-q65rafxkr/QN49Q65RAFXKR/": {
-    "failure_count": 8,
-    "retry_after": "2026-10-26T04:38:59.187Z",
-    "last_failed_at": "2026-10-20T20:38:59.187Z"
+    "failure_count": 9,
+    "retry_after": "2026-11-01T05:39:17.855Z",
+    "last_failed_at": "2026-10-26T21:39:17.855Z"
   },
   "https://www.samsung.com/sec/tvs/the-frame-ls03rafxkr/QN49LS03RAFXKR/": {
-    "failure_count": 8,
-    "retry_after": "2026-10-26T04:38:59.187Z",
-    "last_failed_at": "2026-10-20T20:38:59.187Z"
+    "failure_count": 9,
+    "retry_after": "2026-11-01T05:39:17.855Z",
+    "last_failed_at": "2026-10-26T21:39:17.855Z"
   },
   "https://www.samsung.com/sec/tvs/the-serif-ls01rafxkr/QN49LS01RAFXKR/": {
-    "failure_count": 8,
-    "retry_after": "2026-10-26T04:38:59.187Z",
-    "last_failed_at": "2026-10-20T20:38:59.187Z"
+    "failure_count": 9,
+    "retry_after": "2026-11-01T05:39:17.855Z",
+    "last_failed_at": "2026-10-26T21:39:17.855Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-nu7150fxkr/": {
-    "failure_count": 8,
-    "retry_after": "2026-10-26T04:38:59.187Z",
-    "last_failed_at": "2026-10-20T20:38:59.187Z"
+    "failure_count": 9,
+    "retry_after": "2026-11-01T05:39:17.855Z",
+    "last_failed_at": "2026-10-26T21:39:17.855Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-nu7150fxkr/UN43NU7150FXKR/": {
-    "failure_count": 8,
-    "retry_after": "2026-10-26T04:38:59.187Z",
-    "last_failed_at": "2026-10-20T20:38:59.187Z"
+    "failure_count": 9,
+    "retry_after": "2026-11-01T05:39:17.855Z",
+    "last_failed_at": "2026-10-26T21:39:17.855Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru6990fxkr/UN49RU6990FXKR/": {
-    "failure_count": 8,
-    "retry_after": "2026-10-26T04:38:59.187Z",
-    "last_failed_at": "2026-10-20T20:38:59.187Z"
+    "failure_count": 9,
+    "retry_after": "2026-11-01T05:39:17.855Z",
+    "last_failed_at": "2026-10-26T21:39:17.855Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7100fxkr/": {
-    "failure_count": 8,
-    "retry_after": "2026-10-26T04:38:59.187Z",
-    "last_failed_at": "2026-10-20T20:38:59.187Z"
+    "failure_count": 9,
+    "retry_after": "2026-11-01T05:39:17.855Z",
+    "last_failed_at": "2026-10-26T21:39:17.855Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7100fxkr/UN49RU7100FXKR/": {
-    "failure_count": 8,
-    "retry_after": "2026-10-26T04:38:59.187Z",
-    "last_failed_at": "2026-10-20T20:38:59.187Z"
+    "failure_count": 9,
+    "retry_after": "2026-11-01T05:39:17.855Z",
+    "last_failed_at": "2026-10-26T21:39:17.855Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7100fxkr/UN70RU7100FXKR/": {
-    "failure_count": 8,
-    "retry_after": "2026-10-26T04:38:59.187Z",
-    "last_failed_at": "2026-10-20T20:38:59.187Z"
+    "failure_count": 9,
+    "retry_after": "2026-11-01T05:39:17.855Z",
+    "last_failed_at": "2026-10-26T21:39:17.855Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7150fxkr/UN49RU7150FXKR/": {
-    "failure_count": 8,
-    "retry_after": "2026-10-26T04:38:59.187Z",
-    "last_failed_at": "2026-10-20T20:38:59.187Z"
+    "failure_count": 9,
+    "retry_after": "2026-11-01T05:39:17.855Z",
+    "last_failed_at": "2026-10-26T21:39:17.855Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7190fxkr/UN49RU7190FXKR/": {
     "failure_count": 8,
@@ -168,5 +168,10 @@
     "failure_count": 8,
     "retry_after": "2026-10-30T03:31:52.695Z",
     "last_failed_at": "2026-10-24T19:31:52.695Z"
+  },
+  "https://www.samsung.com/sec/bespoke/buy/fam/": {
+    "failure_count": 1,
+    "retry_after": "2026-10-26T22:39:17.855Z",
+    "last_failed_at": "2026-10-26T21:39:17.855Z"
   }
 }
