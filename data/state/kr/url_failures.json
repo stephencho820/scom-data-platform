@@ -75,19 +75,19 @@
     "last_failed_at": "2026-10-26T21:39:17.855Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7190fxkr/UN49RU7190FXKR/": {
-    "failure_count": 8,
-    "retry_after": "2026-10-27T04:39:37.230Z",
-    "last_failed_at": "2026-10-21T20:39:37.230Z"
+    "failure_count": 9,
+    "retry_after": "2026-11-02T05:22:13.611Z",
+    "last_failed_at": "2026-10-27T21:22:13.611Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7470fxkr/": {
-    "failure_count": 8,
-    "retry_after": "2026-10-27T04:39:37.230Z",
-    "last_failed_at": "2026-10-21T20:39:37.230Z"
+    "failure_count": 9,
+    "retry_after": "2026-11-02T05:22:13.611Z",
+    "last_failed_at": "2026-10-27T21:22:13.611Z"
   },
   "https://www.samsung.com/sec/tvs/uhd-ru7470fxkr/UN49RU7470FXKR/": {
-    "failure_count": 8,
-    "retry_after": "2026-10-27T04:39:37.230Z",
-    "last_failed_at": "2026-10-21T20:39:37.230Z"
+    "failure_count": 9,
+    "retry_after": "2026-11-02T05:22:13.611Z",
+    "last_failed_at": "2026-10-27T21:22:13.611Z"
   },
   "https://www.samsung.com/sec/monitors/curved-lc24f390fhkxkr/": {
     "failure_count": 8,
@@ -169,9 +169,14 @@
     "retry_after": "2026-10-30T03:31:52.695Z",
     "last_failed_at": "2026-10-24T19:31:52.695Z"
   },
-  "https://www.samsung.com/sec/bespoke/buy/fam/": {
+  "https://www.samsung.com/sec/refrigerators/kimchi-top-loading-rp22t3241z1/": {
     "failure_count": 1,
-    "retry_after": "2026-10-26T22:39:17.855Z",
-    "last_failed_at": "2026-10-26T21:39:17.855Z"
+    "retry_after": "2026-10-27T22:22:13.611Z",
+    "last_failed_at": "2026-10-27T21:22:13.611Z"
+  },
+  "https://www.samsung.com/sec/refrigerators/kimchi-top-loading-rp22t3241z1/RP22T3241Z1/": {
+    "failure_count": 1,
+    "retry_after": "2026-10-27T22:22:13.611Z",
+    "last_failed_at": "2026-10-27T21:22:13.611Z"
   }
 }
