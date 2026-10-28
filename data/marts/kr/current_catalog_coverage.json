@@ -1,13 +1,13 @@
 {
   "market": "kr",
-  "generated_at": "2026-10-27T21:22:13.611Z",
+  "generated_at": "2026-10-28T21:41:48.389Z",
   "definition": "Current catalog coverage compares SKU identifiers discovered from each configured official Samsung.com KR catalog source with current SKU rows emitted to product_master.",
   "complete": true,
   "catalog_sources_total": 19,
   "catalog_sources_ok": 19,
   "catalog_sources_failed": 0,
-  "discovered_unique_skus": 1084,
-  "db_current_unique_skus": 1084,
+  "discovered_unique_skus": 1113,
+  "db_current_unique_skus": 1113,
   "categories": [
     {
       "source_id": "smartphones",
@@ -39,8 +39,8 @@
       "category": "tvs",
       "source_url": "https://www.samsung.com/sec/tvs/all-tvs/",
       "source_status": "ok",
-      "discovered_unique_skus": 234,
-      "db_current_unique_skus": 234,
+      "discovered_unique_skus": 232,
+      "db_current_unique_skus": 232,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -51,8 +51,8 @@
       "category": "monitors",
       "source_url": "https://www.samsung.com/sec/monitors/all-monitors/",
       "source_status": "ok",
-      "discovered_unique_skus": 88,
-      "db_current_unique_skus": 88,
+      "discovered_unique_skus": 140,
+      "db_current_unique_skus": 140,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -75,8 +75,8 @@
       "category": "refrigerators",
       "source_url": "https://www.samsung.com/sec/refrigerators/all-refrigerators/",
       "source_status": "ok",
-      "discovered_unique_skus": 100,
-      "db_current_unique_skus": 100,
+      "discovered_unique_skus": 131,
+      "db_current_unique_skus": 131,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -87,8 +87,8 @@
       "category": "laundry",
       "source_url": "https://www.samsung.com/sec/washers-and-dryers/all-washers-and-dryers/",
       "source_status": "ok",
-      "discovered_unique_skus": 107,
-      "db_current_unique_skus": 107,
+      "discovered_unique_skus": 58,
+      "db_current_unique_skus": 58,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -231,8 +231,8 @@
       "category": "harman-lifestyle-audio",
       "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/all-harman-lifestyle-audio/",
       "source_status": "ok",
-      "discovered_unique_skus": 124,
-      "db_current_unique_skus": 124,
+      "discovered_unique_skus": 121,
+      "db_current_unique_skus": 121,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
