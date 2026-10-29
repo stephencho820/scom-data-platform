@@ -9,7 +9,7 @@
     "category": "air-purifiers"
   },
   "SP-LFCF3-FB": {
-    "checked_at": "2026-10-28T21:41:48.389Z",
+    "checked_at": "2026-10-29T21:50:20.517Z",
     "status": "empty",
     "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
     "source_url": "https://www.samsung.com/sec/projectors/packge-sp-lfcf3-fb-d2c/SP-LFCF3-FB/",
@@ -18,7 +18,7 @@
     "category": "projectors"
   },
   "SM-Q505NZDAKOO": {
-    "checked_at": "2026-10-28T21:41:48.389Z",
+    "checked_at": "2026-10-29T21:50:20.517Z",
     "status": "empty",
     "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
     "source_url": "https://www.samsung.com/sec/rings/galaxyring-q505/SM-Q505NZDAKOO/",
@@ -45,7 +45,7 @@
     "category": "microwave-ovens"
   },
   "HW-LS51H/KR": {
-    "checked_at": "2026-10-28T21:41:48.389Z",
+    "checked_at": "2026-10-29T21:50:20.517Z",
     "status": "empty",
     "reason": "sku_not_declared_on_pdp; support_http_404",
     "source_url": "https://www.samsung.com/sec/soundbars/wifi-speaker-hw-ls50h-d2c/HW-LS51H%2FKR/",
@@ -54,7 +54,7 @@
     "category": "soundbars"
   },
   "NT740VJK-KC38G": {
-    "checked_at": "2026-10-28T21:41:48.389Z",
+    "checked_at": "2026-10-29T21:50:20.517Z",
     "status": "empty",
     "reason": "pdp_sku_mismatch; support_model_not_confirmed",
     "source_url": "https://www.samsung.com/sec/galaxybook/galaxy-book6-nt740vjk-kc58g/NT740VJK-KC38G/",
@@ -63,7 +63,7 @@
     "category": "galaxybook"
   },
   "AKGN9HYBRIDBLK": {
-    "checked_at": "2026-10-28T21:41:48.389Z",
+    "checked_at": "2026-10-29T21:50:20.517Z",
     "status": "empty",
     "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
     "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/akg-headphone-akgn9hybrid-d2c/AKGN9HYBRIDBLK/",
@@ -90,7 +90,7 @@
     "category": "monitors"
   },
   "SM-R420NZKAKOO": {
-    "checked_at": "2026-10-28T21:41:48.389Z",
+    "checked_at": "2026-10-29T21:50:20.517Z",
     "status": "empty",
     "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
     "source_url": "https://www.samsung.com/sec/buds/galaxy-buds3-r420/SM-R420NZKAKOO/",
@@ -99,7 +99,7 @@
     "category": "buds"
   },
   "HKAURAS5BLKAS": {
-    "checked_at": "2026-10-28T21:41:48.389Z",
+    "checked_at": "2026-10-29T21:50:20.517Z",
     "status": "empty",
     "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
     "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/hk-speaker-auras5-d2c/HKAURAS5BLKAS/",
@@ -216,7 +216,7 @@
     "category": "harman-lifestyle-audio"
   },
   "WE712NS-INST": {
-    "checked_at": "2026-10-28T21:41:48.389Z",
+    "checked_at": "2026-10-29T21:50:20.517Z",
     "status": "empty",
     "reason": "sku_not_declared_on_pdp; not_a_support_spec_page",
     "source_url": "https://www.samsung.com/sec/air-purifiers/package-we712ns-inst-d2c/WE712NS-INST/",
@@ -513,7 +513,7 @@
     "category": "dishwashers"
   },
   "LS27FG530D604U": {
-    "checked_at": "2026-10-28T21:41:48.389Z",
+    "checked_at": "2026-10-29T21:50:20.517Z",
     "status": "empty",
     "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
     "source_url": "https://www.samsung.com/sec/monitors/package-ls27fg530d604u-d2c/LS27FG530D604U/",
@@ -684,7 +684,7 @@
     "category": "harman-lifestyle-audio"
   },
   "DW80F71Y1UEWS": {
-    "checked_at": "2026-10-28T21:41:48.389Z",
+    "checked_at": "2026-10-29T21:50:20.517Z",
     "status": "empty",
     "reason": "no_valid_pdp_pairs; not_a_support_spec_page",
     "source_url": "https://www.samsung.com/sec/dishwashers/built-in-dw80f71y1uews-d2c/DW80F71Y1UEWS/",
@@ -756,7 +756,7 @@
     "category": "harman-lifestyle-audio"
   },
   "CC99H84JADS": {
-    "checked_at": "2026-10-28T21:41:48.389Z",
+    "checked_at": "2026-10-29T21:50:20.517Z",
     "status": "empty",
     "reason": "sku_not_declared_on_pdp; not_a_support_spec_page",
     "source_url": "https://www.samsung.com/sec/cooking-appliances/cooktop-cc99h84jad-d2c/CC99H84JADS/",
@@ -999,7 +999,7 @@
     "category": "tvs"
   },
   "AKGN5HYBRIDWHT": {
-    "checked_at": "2026-10-28T21:41:48.389Z",
+    "checked_at": "2026-10-29T21:50:20.517Z",
     "status": "empty",
     "reason": "no_valid_pdp_pairs; support_model_not_confirmed",
     "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/akg-earphone-akgn5hybrid-d2c/AKGN5HYBRIDWHT/",
