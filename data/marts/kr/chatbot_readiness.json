@@ -1,24 +1,30 @@
 {
   "market": "kr",
-  "generated_at": "2026-10-29T21:50:20.517Z",
+  "generated_at": "2026-10-30T21:32:30.386Z",
   "ready": false,
   "gates": {
-    "current_catalog_coverage": true,
-    "no_failed_catalog_sources": true,
+    "current_catalog_coverage": false,
+    "no_failed_catalog_sources": false,
     "current_specs_complete": false,
     "support_linkage_complete": false,
     "legacy_ingestion_present": false,
     "unresolved_products_zero": false
   },
   "counts": {
-    "sku_registry": 1299,
-    "current_skus": 1056,
-    "current_skus_with_specs": 128,
+    "sku_registry": 1309,
+    "current_skus": 960,
+    "current_skus_with_specs": 122,
     "support_resources": 6,
     "support_linked_current_skus": 0,
     "legacy_skus": 0,
-    "unverified_skus": 4,
+    "unverified_skus": 43,
     "other_bu_skus": 3
   },
-  "failed_catalog_sources": []
+  "failed_catalog_sources": [
+    {
+      "id": "watches",
+      "url": "https://www.samsung.com/sec/watches/all-watches/",
+      "error": "No validated SKU records returned; catalog remains unverified"
+    }
+  ]
 }

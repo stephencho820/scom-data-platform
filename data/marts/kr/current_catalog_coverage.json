@@ -1,13 +1,13 @@
 {
   "market": "kr",
-  "generated_at": "2026-10-29T21:50:20.517Z",
+  "generated_at": "2026-10-30T21:32:30.386Z",
   "definition": "Current catalog coverage compares SKU identifiers discovered from each configured official Samsung.com KR catalog source with current SKU rows emitted to product_master.",
-  "complete": true,
+  "complete": false,
   "catalog_sources_total": 19,
-  "catalog_sources_ok": 19,
-  "catalog_sources_failed": 0,
-  "discovered_unique_skus": 1056,
-  "db_current_unique_skus": 1056,
+  "catalog_sources_ok": 18,
+  "catalog_sources_failed": 1,
+  "discovered_unique_skus": 960,
+  "db_current_unique_skus": 960,
   "categories": [
     {
       "source_id": "smartphones",
@@ -15,8 +15,8 @@
       "category": "smartphones",
       "source_url": "https://www.samsung.com/sec/smartphones/all-smartphones/",
       "source_status": "ok",
-      "discovered_unique_skus": 90,
-      "db_current_unique_skus": 90,
+      "discovered_unique_skus": 89,
+      "db_current_unique_skus": 89,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -26,12 +26,12 @@
       "business_unit": "MX",
       "category": "watches",
       "source_url": "https://www.samsung.com/sec/watches/all-watches/",
-      "source_status": "ok",
-      "discovered_unique_skus": 18,
-      "db_current_unique_skus": 18,
+      "source_status": "failed",
+      "discovered_unique_skus": 0,
+      "db_current_unique_skus": 0,
       "missing_in_db": [],
       "unexpected_in_db": [],
-      "complete": true
+      "complete": false
     },
     {
       "source_id": "tvs",
@@ -39,8 +39,8 @@
       "category": "tvs",
       "source_url": "https://www.samsung.com/sec/tvs/all-tvs/",
       "source_status": "ok",
-      "discovered_unique_skus": 131,
-      "db_current_unique_skus": 131,
+      "discovered_unique_skus": 90,
+      "db_current_unique_skus": 90,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -87,8 +87,8 @@
       "category": "laundry",
       "source_url": "https://www.samsung.com/sec/washers-and-dryers/all-washers-and-dryers/",
       "source_status": "ok",
-      "discovered_unique_skus": 108,
-      "db_current_unique_skus": 108,
+      "discovered_unique_skus": 104,
+      "db_current_unique_skus": 104,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -159,8 +159,8 @@
       "category": "galaxybook",
       "source_url": "https://www.samsung.com/sec/galaxybook/all-galaxybook/",
       "source_status": "ok",
-      "discovered_unique_skus": 7,
-      "db_current_unique_skus": 7,
+      "discovered_unique_skus": 9,
+      "db_current_unique_skus": 9,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -219,8 +219,8 @@
       "category": "cooking-appliances",
       "source_url": "https://www.samsung.com/sec/cooking-appliances/all-cooking-appliances/",
       "source_status": "ok",
-      "discovered_unique_skus": 16,
-      "db_current_unique_skus": 16,
+      "discovered_unique_skus": 18,
+      "db_current_unique_skus": 18,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -231,8 +231,8 @@
       "category": "harman-lifestyle-audio",
       "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/all-harman-lifestyle-audio/",
       "source_status": "ok",
-      "discovered_unique_skus": 121,
-      "db_current_unique_skus": 121,
+      "discovered_unique_skus": 85,
+      "db_current_unique_skus": 85,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
