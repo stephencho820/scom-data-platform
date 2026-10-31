@@ -1,13 +1,13 @@
 {
   "market": "kr",
-  "generated_at": "2026-10-30T21:32:30.386Z",
+  "generated_at": "2026-10-31T20:28:05.450Z",
   "definition": "Current catalog coverage compares SKU identifiers discovered from each configured official Samsung.com KR catalog source with current SKU rows emitted to product_master.",
-  "complete": false,
+  "complete": true,
   "catalog_sources_total": 19,
-  "catalog_sources_ok": 18,
-  "catalog_sources_failed": 1,
-  "discovered_unique_skus": 960,
-  "db_current_unique_skus": 960,
+  "catalog_sources_ok": 19,
+  "catalog_sources_failed": 0,
+  "discovered_unique_skus": 1131,
+  "db_current_unique_skus": 1131,
   "categories": [
     {
       "source_id": "smartphones",
@@ -26,12 +26,12 @@
       "business_unit": "MX",
       "category": "watches",
       "source_url": "https://www.samsung.com/sec/watches/all-watches/",
-      "source_status": "failed",
-      "discovered_unique_skus": 0,
-      "db_current_unique_skus": 0,
+      "source_status": "ok",
+      "discovered_unique_skus": 18,
+      "db_current_unique_skus": 18,
       "missing_in_db": [],
       "unexpected_in_db": [],
-      "complete": false
+      "complete": true
     },
     {
       "source_id": "tvs",
@@ -39,8 +39,8 @@
       "category": "tvs",
       "source_url": "https://www.samsung.com/sec/tvs/all-tvs/",
       "source_status": "ok",
-      "discovered_unique_skus": 90,
-      "db_current_unique_skus": 90,
+      "discovered_unique_skus": 196,
+      "db_current_unique_skus": 196,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -51,8 +51,8 @@
       "category": "monitors",
       "source_url": "https://www.samsung.com/sec/monitors/all-monitors/",
       "source_status": "ok",
-      "discovered_unique_skus": 133,
-      "db_current_unique_skus": 133,
+      "discovered_unique_skus": 142,
+      "db_current_unique_skus": 142,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -63,8 +63,8 @@
       "category": "projectors",
       "source_url": "https://www.samsung.com/sec/projectors/all-projectors/",
       "source_status": "ok",
-      "discovered_unique_skus": 11,
-      "db_current_unique_skus": 11,
+      "discovered_unique_skus": 12,
+      "db_current_unique_skus": 12,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -87,8 +87,8 @@
       "category": "laundry",
       "source_url": "https://www.samsung.com/sec/washers-and-dryers/all-washers-and-dryers/",
       "source_status": "ok",
-      "discovered_unique_skus": 104,
-      "db_current_unique_skus": 104,
+      "discovered_unique_skus": 105,
+      "db_current_unique_skus": 105,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -231,8 +231,8 @@
       "category": "harman-lifestyle-audio",
       "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/all-harman-lifestyle-audio/",
       "source_status": "ok",
-      "discovered_unique_skus": 85,
-      "db_current_unique_skus": 85,
+      "discovered_unique_skus": 121,
+      "db_current_unique_skus": 121,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true

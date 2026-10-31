@@ -168,5 +168,10 @@
     "failure_count": 9,
     "retry_after": "2026-11-05T05:32:30.386Z",
     "last_failed_at": "2026-10-30T21:32:30.386Z"
+  },
+  "https://www.samsung.com/sec/bespoke/buy/fam/": {
+    "failure_count": 1,
+    "retry_after": "2026-10-31T21:28:05.450Z",
+    "last_failed_at": "2026-10-31T20:28:05.450Z"
   }
 }
