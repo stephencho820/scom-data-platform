@@ -1,13 +1,13 @@
 {
   "market": "kr",
-  "generated_at": "2026-11-10T22:23:40.353Z",
+  "generated_at": "2026-11-11T23:29:11.140Z",
   "definition": "Current catalog coverage compares SKU identifiers discovered from each configured official Samsung.com KR catalog source with current SKU rows emitted to product_master.",
   "complete": true,
   "catalog_sources_total": 19,
   "catalog_sources_ok": 19,
   "catalog_sources_failed": 0,
-  "discovered_unique_skus": 958,
-  "db_current_unique_skus": 958,
+  "discovered_unique_skus": 1066,
+  "db_current_unique_skus": 1066,
   "categories": [
     {
       "source_id": "smartphones",
@@ -39,8 +39,8 @@
       "category": "tvs",
       "source_url": "https://www.samsung.com/sec/tvs/all-tvs/",
       "source_status": "ok",
-      "discovered_unique_skus": 80,
-      "db_current_unique_skus": 80,
+      "discovered_unique_skus": 166,
+      "db_current_unique_skus": 166,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -51,8 +51,8 @@
       "category": "monitors",
       "source_url": "https://www.samsung.com/sec/monitors/all-monitors/",
       "source_status": "ok",
-      "discovered_unique_skus": 133,
-      "db_current_unique_skus": 133,
+      "discovered_unique_skus": 141,
+      "db_current_unique_skus": 141,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -87,8 +87,8 @@
       "category": "laundry",
       "source_url": "https://www.samsung.com/sec/washers-and-dryers/all-washers-and-dryers/",
       "source_status": "ok",
-      "discovered_unique_skus": 56,
-      "db_current_unique_skus": 56,
+      "discovered_unique_skus": 106,
+      "db_current_unique_skus": 106,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -231,8 +231,8 @@
       "category": "harman-lifestyle-audio",
       "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/all-harman-lifestyle-audio/",
       "source_status": "ok",
-      "discovered_unique_skus": 121,
-      "db_current_unique_skus": 121,
+      "discovered_unique_skus": 85,
+      "db_current_unique_skus": 85,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
