@@ -1,13 +1,13 @@
 {
   "market": "kr",
-  "generated_at": "2026-11-11T23:29:11.140Z",
+  "generated_at": "2026-11-12T22:45:15.342Z",
   "definition": "Current catalog coverage compares SKU identifiers discovered from each configured official Samsung.com KR catalog source with current SKU rows emitted to product_master.",
   "complete": true,
   "catalog_sources_total": 19,
   "catalog_sources_ok": 19,
   "catalog_sources_failed": 0,
-  "discovered_unique_skus": 1066,
-  "db_current_unique_skus": 1066,
+  "discovered_unique_skus": 1138,
+  "db_current_unique_skus": 1138,
   "categories": [
     {
       "source_id": "smartphones",
@@ -39,8 +39,8 @@
       "category": "tvs",
       "source_url": "https://www.samsung.com/sec/tvs/all-tvs/",
       "source_status": "ok",
-      "discovered_unique_skus": 166,
-      "db_current_unique_skus": 166,
+      "discovered_unique_skus": 231,
+      "db_current_unique_skus": 231,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -75,8 +75,8 @@
       "category": "refrigerators",
       "source_url": "https://www.samsung.com/sec/refrigerators/all-refrigerators/",
       "source_status": "ok",
-      "discovered_unique_skus": 132,
-      "db_current_unique_skus": 132,
+      "discovered_unique_skus": 100,
+      "db_current_unique_skus": 100,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -231,8 +231,8 @@
       "category": "harman-lifestyle-audio",
       "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/all-harman-lifestyle-audio/",
       "source_status": "ok",
-      "discovered_unique_skus": 85,
-      "db_current_unique_skus": 85,
+      "discovered_unique_skus": 124,
+      "db_current_unique_skus": 124,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
