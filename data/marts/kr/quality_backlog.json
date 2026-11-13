@@ -1,7 +1,7 @@
 {
   "market": "kr",
-  "generated_at": "2026-11-12T22:58:48.785Z",
-  "source_snapshot_at": "2026-11-12T22:45:15.342Z",
+  "generated_at": "2026-11-13T22:52:33.633Z",
+  "source_snapshot_at": "2026-11-13T22:41:02.389Z",
   "ready": false,
   "catalog": {
     "sources_total": 19,
@@ -34,8 +34,8 @@
         "category": "tvs",
         "source_id": "tvs",
         "status": "ok",
-        "discovered_skus": 231,
-        "db_skus": 231,
+        "discovered_skus": 227,
+        "db_skus": 227,
         "complete": true,
         "missing_in_db": [],
         "unexpected_in_db": []
@@ -67,8 +67,8 @@
         "category": "refrigerators",
         "source_id": "refrigerators",
         "status": "ok",
-        "discovered_skus": 100,
-        "db_skus": 100,
+        "discovered_skus": 132,
+        "db_skus": 132,
         "complete": true,
         "missing_in_db": [],
         "unexpected_in_db": []
@@ -219,10 +219,10 @@
     ]
   },
   "counts": {
-    "current_products": 1354,
-    "specs_rows": 1354,
+    "current_products": 1359,
+    "specs_rows": 1359,
     "support_rows": 6,
-    "products_missing_specs_or_support": 1138
+    "products_missing_specs_or_support": 1166
   },
   "sku_gaps": [
     {
@@ -1672,6 +1672,36 @@
       "category": "air-conditioners",
       "name": "Bespoke 무풍에어컨 윈도우핏 19.2㎡ (매립형)",
       "url": "https://www.samsung.com/sec/air-conditioners/package-aw06c7155wwaz-d2c/AW06C7155WWAZ/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "BRB70F26D3F0",
+      "market_product_key": "BRB70F26D3F0",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "빌트인 냉장고 259L",
+      "url": "https://www.samsung.com/sec/refrigerators/bottom-mount-freezer-brb70f26d3f0-d2c/BRB70F26D3F0/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "BRB80F26A2F0",
+      "market_product_key": "BRB80F26A2F0",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "빌트인 냉장고 256L",
+      "url": "https://www.samsung.com/sec/refrigerators/bottom-mount-freezer-brb80f26a2f0-d2c/BRB80F26A2F0/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "BRF425220AP",
+      "market_product_key": "BRF425220AP",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "셰프컬렉션 T-Type 냉장고 621L",
+      "url": "https://www.samsung.com/sec/refrigerators/brf425220ap-d2c/BRF425220AP/",
       "has_specs": false,
       "has_support": false
     },
@@ -4436,26 +4466,6 @@
       "has_support": false
     },
     {
-      "sku": "KQ65LSH03E-SG",
-      "market_product_key": "KQ65LSH03E-SG",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 The Frame (163cm) 챔퍼 샌드골드 베젤",
-      "url": "https://www.samsung.com/sec/tvs/package-lsh03e-sg-d2c/KQ65LSH03E-SG/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ65LSH03W-SG",
-      "market_product_key": "KQ65LSH03W-SG",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 The Frame Pro (163cm) 챔퍼 샌드골드 베젤",
-      "url": "https://www.samsung.com/sec/tvs/package-lsh03w-sg-d2c/KQ65LSH03W-SG/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "KQ65QF8AA-B6",
       "market_product_key": "KQ65QF8AA-B6",
       "business_unit": "VD",
@@ -4582,26 +4592,6 @@
       "category": "tvs",
       "name": "2026 OLED SH95 (163cm)+뮤직 스튜디오 5 LS50H",
       "url": "https://www.samsung.com/sec/tvs/package-kq65sh95-l5-d2c/KQ65SH95-L5/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ75LSH03E-SG",
-      "market_product_key": "KQ75LSH03E-SG",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 The Frame (189cm) 챔퍼 샌드골드 베젤",
-      "url": "https://www.samsung.com/sec/tvs/package-lsh03e-sg-d2c/KQ75LSH03E-SG/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "KQ75LSH03W-SG",
-      "market_product_key": "KQ75LSH03W-SG",
-      "business_unit": "VD",
-      "category": "tvs",
-      "name": "2026 The Frame Pro (189cm) 챔퍼 샌드골드 베젤",
-      "url": "https://www.samsung.com/sec/tvs/package-lsh03w-sg-d2c/KQ75LSH03W-SG/",
       "has_specs": false,
       "has_support": false
     },
@@ -7706,6 +7696,96 @@
       "has_support": false
     },
     {
+      "sku": "RB33R8798SR",
+      "market_product_key": "RB33R8798SR",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "냉장고 343L",
+      "url": "https://www.samsung.com/sec/refrigerators/bottom-mount-freezer-rb33r8798sr-d2c/RB33R8798SR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RF60DB9A62APG",
+      "market_product_key": "RF60DB9A62APG",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Infinite AI 정수기 냉장고 4도어 키친핏 585L (오토 아이스/위스키볼)",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rf60db9a62apg-d2c/RF60DB9A62APG/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RF84R9203S8",
+      "market_product_key": "RF84R9203S8",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "T9000 2.0 푸드쇼케이스 848L",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rf84r9203s8-d2c/RF84R9203S8/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RF85A95E1APN",
+      "market_product_key": "RF85A95E1APN",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 패밀리허브 4도어 838L (빅아이스/큐브)",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rf85a95e1apw-d2c/RF85A95E1APN/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RF85DB90F1AP",
+      "market_product_key": "RF85DB90F1AP",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 냉장고 4도어 874L (UV탈취)",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rf85db90f1ap-d2c/RF85DB90F1AP/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RF85DB91F1AP",
+      "market_product_key": "RF85DB91F1AP",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 냉장고 4도어 869L (UV탈취)",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rf85db91f1ap-d2c/RF85DB91F1AP/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RF90DG90124E",
+      "market_product_key": "RF90DG90124E",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 냉장고 4도어 905L",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rf90dg90124e-d2c/RF90DG90124E/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RF91DB90LEW6",
+      "market_product_key": "RF91DB90LEW6",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 하이브리드 4도어 900L (에너지 1등급 최저기준 대비 -30%)",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rf91db90le01-d2c/RF91DB90LEW6/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RF91DB98J1AP",
+      "market_product_key": "RF91DB98J1AP",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 하이브리드 4도어 868L (빅아이스/위스키볼)",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rf91db98j1ap-d2c/RF91DB98J1AP/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "RM70F33B1AA",
       "market_product_key": "RM70F33B1AA",
       "business_unit": "DA",
@@ -7762,6 +7842,16 @@
       "category": "refrigerators",
       "name": "Bespoke AI 냉장고 4도어 키친핏 Max+Bespoke 김치플러스 3도어 키친핏 636/313L",
       "url": "https://www.samsung.com/sec/refrigerators/package-rm70f63m74c1a-d2c/RM70F63M74C1A/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RM70F63R27955A",
+      "market_product_key": "RM70F63R27955A",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 냉장고 4도어 키친핏 Max+냉동고 1도어 키친핏 640/347L",
+      "url": "https://www.samsung.com/sec/refrigerators/package-rm70f63r27955a-d2c/RM70F63R27955A/",
       "has_specs": false,
       "has_support": false
     },
@@ -7826,6 +7916,16 @@
       "has_support": false
     },
     {
+      "sku": "RM70F64R17955A",
+      "market_product_key": "RM70F64R17955A",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 하이브리드 냉장고 4도어 키친핏Max+냉동고 1도어 키친핏 637/347L",
+      "url": "https://www.samsung.com/sec/refrigerators/package-rm70f64r17955a-d2c/RM70F64R17955A/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "RM70F64R1A",
       "market_product_key": "RM70F64R1A",
       "business_unit": "DA",
@@ -7836,12 +7936,12 @@
       "has_support": false
     },
     {
-      "sku": "RM70F90M1ZD",
-      "market_product_key": "RM70F90M1ZD",
+      "sku": "RM70F90M1GD",
+      "market_product_key": "RM70F90M1GD",
       "business_unit": "DA",
       "category": "refrigerators",
       "name": "Bespoke AI 냉장고 4도어 902L",
-      "url": "https://www.samsung.com/sec/refrigerators/french-door-rm70f90m1zd-d2c/RM70F90M1ZD/",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rm70f90m1zd-d2c/RM70F90M1GD/",
       "has_specs": false,
       "has_support": false
     },
@@ -7896,6 +7996,36 @@
       "has_support": false
     },
     {
+      "sku": "RM70F91RM7955A",
+      "market_product_key": "RM70F91RM7955A",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 하이브리드 냉장고 4도어+냉동고 1도어 키친핏 901/347L",
+      "url": "https://www.samsung.com/sec/refrigerators/package-rm70f91rm7955a-d2c/RM70F91RM7955A/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RM70F91RM94U1A",
+      "market_product_key": "RM70F91RM94U1A",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 하이브리드+김치플러스 4도어 901/583L",
+      "url": "https://www.samsung.com/sec/refrigerators/package-rm70f91rm94u1a-d2c/RM70F91RM94U1A/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RM70F91RMA",
+      "market_product_key": "RM70F91RMA",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 하이브리드 4도어 901L (에너지 1등급 최저기준 대비 -30%, UV탈취)",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rm70f91rma-d2c/RM70F91RMA/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "RM70H6342AA",
       "market_product_key": "RM70H6342AA",
       "business_unit": "DA",
@@ -7946,12 +8076,12 @@
       "has_support": false
     },
     {
-      "sku": "RM70H91RMA",
-      "market_product_key": "RM70H91RMA",
+      "sku": "RM70H91RMXJ",
+      "market_product_key": "RM70H91RMXJ",
       "business_unit": "DA",
       "category": "refrigerators",
       "name": "Bespoke AI 하이브리드 4도어 901L (에너지 1등급 최저기준 대비 -35%, UV탈취)",
-      "url": "https://www.samsung.com/sec/refrigerators/french-door-rm70h91rma-d2c/RM70H91RMA/",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rm70h91rma-d2c/RM70H91RMXJ/",
       "has_specs": false,
       "has_support": false
     },
@@ -7962,6 +8092,16 @@
       "category": "refrigerators",
       "name": "Bespoke AI 하이브리드 4도어 키친핏 Max+Bespoke 김치플러스 3도어 키친핏 611/313L",
       "url": "https://www.samsung.com/sec/refrigerators/package-rm80f6433aa-d2c/RM80F6433AA/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RM80F6442AA",
+      "market_product_key": "RM80F6442AA",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 하이브리드+김치플러스 4도어 키친핏 Max 611/418L",
+      "url": "https://www.samsung.com/sec/refrigerators/package-rm80f6442aa-d2c/RM80F6442AA/",
       "has_specs": false,
       "has_support": false
     },
@@ -8016,22 +8156,32 @@
       "has_support": false
     },
     {
-      "sku": "RM80F64L2A",
-      "market_product_key": "RM80F64L2A",
+      "sku": "RM80F64L2X",
+      "market_product_key": "RM80F64L2X",
       "business_unit": "DA",
       "category": "refrigerators",
       "name": "Bespoke AI 하이브리드 4도어 키친핏 Max 611L (푸드 쇼케이스)",
-      "url": "https://www.samsung.com/sec/refrigerators/french-door-rm80f64l2a-d2c/RM80F64L2A/",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rm80f64l2a-d2c/RM80F64L2X/",
       "has_specs": false,
       "has_support": false
     },
     {
-      "sku": "RM80F91H1W",
-      "market_product_key": "RM80F91H1W",
+      "sku": "RM80F91H1X",
+      "market_product_key": "RM80F91H1X",
       "business_unit": "DA",
       "category": "refrigerators",
       "name": "Bespoke AI 하이브리드 4도어 874L (오토오픈도어)",
-      "url": "https://www.samsung.com/sec/refrigerators/french-door-rm80f91h1w-d2c/RM80F91H1W/",
+      "url": "https://www.samsung.com/sec/refrigerators/french-door-rm80f91h1w-d2c/RM80F91H1X/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RM80F91K17955X",
+      "market_product_key": "RM80F91K17955X",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 하이브리드 냉장고 4도어+냉동고 1도어 키친핏 889/347L",
+      "url": "https://www.samsung.com/sec/refrigerators/package-rm80f91k17955x-d2c/RM80F91K17955X/",
       "has_specs": false,
       "has_support": false
     },
@@ -8186,6 +8336,16 @@
       "has_support": false
     },
     {
+      "sku": "RM90R294U1ZDRQ",
+      "market_product_key": "RM90R294U1ZDRQ",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 냉장고+김치플러스 4도어 905/583L",
+      "url": "https://www.samsung.com/sec/refrigerators/package-rm90r294u1zdrq-d2c/RM90R294U1ZDRQ/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "RR09BG014WW",
       "market_product_key": "RR09BG014WW",
       "business_unit": "DA",
@@ -8206,6 +8366,16 @@
       "has_support": false
     },
     {
+      "sku": "RR40B9971APK",
+      "market_product_key": "RR40B9971APK",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Infinite Line 냉장고 1도어 키친핏 396L (좌열림, 냉장전용)",
+      "url": "https://www.samsung.com/sec/refrigerators/one-door-rr40b9971apk-d2c/RR40B9971APK/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "RR40C7885AP",
       "market_product_key": "RR40C7885AP",
       "business_unit": "DA",
@@ -8216,12 +8386,42 @@
       "has_support": false
     },
     {
+      "sku": "RR40C7895AP",
+      "market_product_key": "RR40C7895AP",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 냉장고 1도어 키친핏 408L (우열림, 냉장전용)",
+      "url": "https://www.samsung.com/sec/refrigerators/one-door-rr40c7895ap-d2c/RR40C7895AP/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RR40C78RZRQ79A",
+      "market_product_key": "RR40C78RZRQ79A",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 냉장고+냉동고+김치플러스 1도어 키친핏 409/347/347L",
+      "url": "https://www.samsung.com/sec/refrigerators/package-rr40c78rzrq79a-d2c/RR40C78RZRQ79A/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "RR40C79057801",
       "market_product_key": "RR40C79057801",
       "business_unit": "DA",
       "category": "refrigerators",
       "name": "Bespoke AI 냉동고+냉장고+김치플러스 1도어 키친핏 347/409/348L",
       "url": "https://www.samsung.com/sec/refrigerators/package-rr40c79057801-d2c/RR40C79057801/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RR40C79057915A",
+      "market_product_key": "RR40C79057915A",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 냉장고+김치플러스 1도어 키친핏 409/348L",
+      "url": "https://www.samsung.com/sec/refrigerators/package-rr40c79057915a-d2c/RR40C79057915A/",
       "has_specs": false,
       "has_support": false
     },
@@ -8316,6 +8516,16 @@
       "has_support": false
     },
     {
+      "sku": "RR70H39E10",
+      "market_product_key": "RR70H39E10",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 냉장고 1도어 키친핏 380L (좌열림/열림방향 가변, 냉장전용)",
+      "url": "https://www.samsung.com/sec/refrigerators/one-door-rr70h39e10-d2c/RR70H39E10/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "RR70H39G10",
       "market_product_key": "RR70H39G10",
       "business_unit": "DA",
@@ -8372,6 +8582,26 @@
       "category": "refrigerators",
       "name": "양문형 냉장고 623L (오토오픈도어)",
       "url": "https://www.samsung.com/sec/refrigerators/side-by-side-rs80f64j3f-d2c/RS80F64J3F/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RS80F64J3F01",
+      "market_product_key": "RS80F64J3F01",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "양문형 냉장고 623L+교체형 정수필터 2개",
+      "url": "https://www.samsung.com/sec/refrigerators/package-rs80f64j3f01-d2c/RS80F64J3F01/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RS82M6000S8",
+      "market_product_key": "RS82M6000S8",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "양문형 냉장고 815 L",
+      "url": "https://www.samsung.com/sec/refrigerators/side-by-side-rs82m6000s8-d2c/RS82M6000S8/",
       "has_specs": false,
       "has_support": false
     },
@@ -8466,12 +8696,32 @@
       "has_support": false
     },
     {
+      "sku": "RT25BAR41WW",
+      "market_product_key": "RT25BAR41WW",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "냉장고 255L",
+      "url": "https://www.samsung.com/sec/refrigerators/top-freezer-rt25bar41ww-d2c/RT25BAR41WW/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "RT25DARAHS9",
       "market_product_key": "RT25DARAHS9",
       "business_unit": "DA",
       "category": "refrigerators",
       "name": "냉장고 255L",
       "url": "https://www.samsung.com/sec/refrigerators/top-mount-freezer-rt25darahs9-d2c/RT25DARAHS9/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RT25FARA2S9",
+      "market_product_key": "RT25FARA2S9",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "냉장고 255L",
+      "url": "https://www.samsung.com/sec/refrigerators/top-mount-freezer-rt25fara2s9-d2c/RT25FARA2S9/",
       "has_specs": false,
       "has_support": false
     },
@@ -8532,6 +8782,16 @@
       "category": "refrigerators",
       "name": "냉장고 615L",
       "url": "https://www.samsung.com/sec/refrigerators/top-mount-freezer-rt62a7049s9-n/RT62A7049S9/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RW33C99B1TFG",
+      "market_product_key": "RW33C99B1TFG",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Infinite Line 와인냉장고 1도어 키친핏 101병 (좌열림)",
+      "url": "https://www.samsung.com/sec/refrigerators/one-door-rw33c99b1tfg-d2c/RW33C99B1TFG/",
       "has_specs": false,
       "has_support": false
     },
@@ -8646,12 +8906,32 @@
       "has_support": false
     },
     {
+      "sku": "RZ38B9871APG",
+      "market_product_key": "RZ38B9871APG",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Infinite Line 냉동고 1도어 키친핏 404L (우열림, 냉동전용)",
+      "url": "https://www.samsung.com/sec/refrigerators/one-door-rz38b9871apg-d2c/RZ38B9871APG/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "RZ38C9891APG",
       "market_product_key": "RZ38C9891APG",
       "business_unit": "DA",
       "category": "refrigerators",
       "name": "Infinite AI 냉동고 1도어 키친핏 379L (우열림, 냉동전용)",
       "url": "https://www.samsung.com/sec/refrigerators/one-door-rz38c9891apg-d2c/RZ38C9891APG/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "RZ70H32JN0",
+      "market_product_key": "RZ70H32JN0",
+      "business_unit": "DA",
+      "category": "refrigerators",
+      "name": "Bespoke AI 냉동고 1도어 키친핏 318L (우열림/열림방향 가변, 냉동전용)",
+      "url": "https://www.samsung.com/sec/refrigerators/one-door-rz70h32jn0-d2c/RZ70H32JN0/",
       "has_specs": false,
       "has_support": false
     },
@@ -9016,12 +9296,12 @@
       "has_support": false
     },
     {
-      "sku": "SM-F776NLIEKOO",
-      "market_product_key": "SM-F776NLIEKOO",
+      "sku": "SM-F776NLIVKOO",
+      "market_product_key": "SM-F776NLIVKOO",
       "business_unit": "MX",
       "category": "smartphones",
       "name": "갤럭시 Z 플립8 자급제",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-flip8-f776/SM-F776NLIEKOO/",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-flip8-f776/SM-F776NLIVKOO/",
       "has_specs": true,
       "has_support": false
     },
