@@ -1,6 +1,6 @@
 {
   "market": "kr",
-  "generated_at": "2026-11-14T21:32:21.264Z",
+  "generated_at": "2026-11-15T21:51:34.009Z",
   "ready": false,
   "gates": {
     "current_catalog_coverage": true,
@@ -12,7 +12,7 @@
   },
   "counts": {
     "sku_registry": 1360,
-    "current_skus": 1061,
+    "current_skus": 1066,
     "current_skus_with_specs": 126,
     "support_resources": 6,
     "support_linked_current_skus": 0,

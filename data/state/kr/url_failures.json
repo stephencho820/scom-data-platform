@@ -90,39 +90,39 @@
     "last_failed_at": "2026-11-14T21:32:21.264Z"
   },
   "https://www.samsung.com/sec/monitors/curved-lc24f390fhkxkr/": {
-    "failure_count": 11,
-    "retry_after": "2026-11-15T08:42:59.382Z",
-    "last_failed_at": "2026-11-10T00:42:59.382Z"
+    "failure_count": 12,
+    "retry_after": "2026-11-21T05:51:34.009Z",
+    "last_failed_at": "2026-11-15T21:51:34.009Z"
   },
   "https://www.samsung.com/sec/monitors/curved-lc27f390fhkxkr/": {
-    "failure_count": 11,
-    "retry_after": "2026-11-15T08:42:59.382Z",
-    "last_failed_at": "2026-11-10T00:42:59.382Z"
+    "failure_count": 12,
+    "retry_after": "2026-11-21T05:51:34.009Z",
+    "last_failed_at": "2026-11-15T21:51:34.009Z"
   },
   "https://www.samsung.com/sec/monitors/curved-lc27f391fhkxkr/": {
-    "failure_count": 11,
-    "retry_after": "2026-11-15T08:42:59.382Z",
-    "last_failed_at": "2026-11-10T00:42:59.382Z"
+    "failure_count": 12,
+    "retry_after": "2026-11-21T05:51:34.009Z",
+    "last_failed_at": "2026-11-15T21:51:34.009Z"
   },
   "https://www.samsung.com/sec/monitors/curved-lc27f581fdkxkr/": {
-    "failure_count": 11,
-    "retry_after": "2026-11-15T08:42:59.382Z",
-    "last_failed_at": "2026-11-10T00:42:59.382Z"
+    "failure_count": 12,
+    "retry_after": "2026-11-21T05:51:34.009Z",
+    "last_failed_at": "2026-11-15T21:51:34.009Z"
   },
   "https://www.samsung.com/sec/monitors/curved-lc27f591fdkxkr/": {
-    "failure_count": 11,
-    "retry_after": "2026-11-15T08:42:59.382Z",
-    "last_failed_at": "2026-11-10T00:42:59.382Z"
+    "failure_count": 12,
+    "retry_after": "2026-11-21T05:51:34.009Z",
+    "last_failed_at": "2026-11-15T21:51:34.009Z"
   },
   "https://www.samsung.com/sec/monitors/curved-ls24e510csx-cr/": {
-    "failure_count": 11,
-    "retry_after": "2026-11-15T08:42:59.382Z",
-    "last_failed_at": "2026-11-10T00:42:59.382Z"
+    "failure_count": 12,
+    "retry_after": "2026-11-21T05:51:34.009Z",
+    "last_failed_at": "2026-11-15T21:51:34.009Z"
   },
   "https://www.samsung.com/sec/monitors/curved-ls27e500cs-kr/": {
-    "failure_count": 11,
-    "retry_after": "2026-11-15T08:42:59.382Z",
-    "last_failed_at": "2026-11-10T00:42:59.382Z"
+    "failure_count": 12,
+    "retry_after": "2026-11-21T05:51:34.009Z",
+    "last_failed_at": "2026-11-15T21:51:34.009Z"
   },
   "https://www.samsung.com/sec/monitors/monitor-ls19e45kmrs-kr/": {
     "failure_count": 11,
