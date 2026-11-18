@@ -1,19 +1,19 @@
 {
   "schema_version": 1,
   "market": "kr",
-  "checked_at": "2026-11-17T23:51:41.952Z",
+  "checked_at": "2026-11-18T23:24:46.353Z",
   "policy": "immutable-once, versioned-on-change, offers-from-verified-source-only",
   "stats": {
-    "new_skus": 0,
-    "master_changed": 158,
+    "new_skus": 1,
+    "master_changed": 240,
     "specs_enriched_or_corrected": 0,
-    "offers_changed": 9,
+    "offers_changed": 3,
     "commerce_changed": 0,
-    "support_changed": 0,
-    "offers_verified": 423,
+    "support_changed": 115,
+    "offers_verified": 410,
     "commerce_verified": 0,
-    "unchanged_master": 1206
+    "unchanged_master": 1124
   },
   "urls_attempted": 120,
-  "crawl_failures": 2
+  "crawl_failures": 1
 }

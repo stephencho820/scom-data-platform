@@ -173,5 +173,10 @@
     "failure_count": 1,
     "retry_after": "2026-11-18T00:51:41.952Z",
     "last_failed_at": "2026-11-17T23:51:41.952Z"
+  },
+  "https://www.samsung.com/sec/support/model/AF60H17D12BT1": {
+    "failure_count": 1,
+    "retry_after": "2026-11-19T00:24:46.353Z",
+    "last_failed_at": "2026-11-18T23:24:46.353Z"
   }
 }
