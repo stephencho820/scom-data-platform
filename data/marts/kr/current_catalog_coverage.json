@@ -1,13 +1,13 @@
 {
   "market": "kr",
-  "generated_at": "2026-11-17T00:49:53.489Z",
+  "generated_at": "2026-11-17T23:51:41.952Z",
   "definition": "Current catalog coverage compares SKU identifiers discovered from each configured official Samsung.com KR catalog source with current SKU rows emitted to product_master.",
   "complete": true,
   "catalog_sources_total": 19,
   "catalog_sources_ok": 19,
   "catalog_sources_failed": 0,
-  "discovered_unique_skus": 1116,
-  "db_current_unique_skus": 1116,
+  "discovered_unique_skus": 1064,
+  "db_current_unique_skus": 1064,
   "categories": [
     {
       "source_id": "smartphones",
@@ -39,8 +39,8 @@
       "category": "tvs",
       "source_url": "https://www.samsung.com/sec/tvs/all-tvs/",
       "source_status": "ok",
-      "discovered_unique_skus": 227,
-      "db_current_unique_skus": 227,
+      "discovered_unique_skus": 125,
+      "db_current_unique_skus": 125,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -99,8 +99,8 @@
       "category": "air-conditioners",
       "source_url": "https://www.samsung.com/sec/air-conditioners/all-air-conditioners/",
       "source_status": "ok",
-      "discovered_unique_skus": 89,
-      "db_current_unique_skus": 89,
+      "discovered_unique_skus": 139,
+      "db_current_unique_skus": 139,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true

@@ -165,8 +165,13 @@
     "last_failed_at": "2026-11-17T00:49:53.489Z"
   },
   "https://www.samsung.com/sec/monitors/tv-lt27d590cde-cr/": {
-    "failure_count": 11,
-    "retry_after": "2026-11-17T07:29:11.140Z",
-    "last_failed_at": "2026-11-11T23:29:11.140Z"
+    "failure_count": 12,
+    "retry_after": "2026-11-23T07:51:41.952Z",
+    "last_failed_at": "2026-11-17T23:51:41.952Z"
+  },
+  "https://www.samsung.com/sec/air-conditioners/accessory-af-a1b1d/": {
+    "failure_count": 1,
+    "retry_after": "2026-11-18T00:51:41.952Z",
+    "last_failed_at": "2026-11-17T23:51:41.952Z"
   }
 }
