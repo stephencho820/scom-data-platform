@@ -1,9 +1,9 @@
 {
   "market": "kr",
-  "generated_at": "2026-11-18T23:24:46.353Z",
+  "generated_at": "2026-11-19T23:36:15.696Z",
   "ready": false,
   "gates": {
-    "current_catalog_coverage": true,
+    "current_catalog_coverage": false,
     "no_failed_catalog_sources": true,
     "current_specs_complete": false,
     "support_linkage_complete": false,
@@ -11,10 +11,10 @@
     "unresolved_products_zero": false
   },
   "counts": {
-    "sku_registry": 1365,
-    "current_skus": 1117,
+    "sku_registry": 1387,
+    "current_skus": 1137,
     "current_skus_with_specs": 126,
-    "support_resources": 121,
+    "support_resources": 232,
     "support_linked_current_skus": 0,
     "legacy_skus": 0,
     "unverified_skus": 10,

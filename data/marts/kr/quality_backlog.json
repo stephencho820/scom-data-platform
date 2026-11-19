@@ -1,7 +1,7 @@
 {
   "market": "kr",
-  "generated_at": "2026-11-18T23:36:45.692Z",
-  "source_snapshot_at": "2026-11-18T23:24:46.353Z",
+  "generated_at": "2026-11-19T23:47:51.599Z",
+  "source_snapshot_at": "2026-11-19T23:36:15.696Z",
   "ready": false,
   "catalog": {
     "sources_total": 19,
@@ -45,10 +45,13 @@
         "category": "monitors",
         "source_id": "monitors",
         "status": "ok",
-        "discovered_skus": 141,
-        "db_skus": 141,
-        "complete": true,
-        "missing_in_db": [],
+        "discovered_skus": 162,
+        "db_skus": 160,
+        "complete": false,
+        "missing_in_db": [
+          "LS32FM700MF1ME",
+          "LS32FM700MG1ME"
+        ],
         "unexpected_in_db": []
       },
       {
@@ -67,8 +70,8 @@
         "category": "refrigerators",
         "source_id": "refrigerators",
         "status": "ok",
-        "discovered_skus": 82,
-        "db_skus": 82,
+        "discovered_skus": 81,
+        "db_skus": 81,
         "complete": true,
         "missing_in_db": [],
         "unexpected_in_db": []
@@ -210,8 +213,8 @@
         "category": "harman-lifestyle-audio",
         "source_id": "harman-lifestyle-audio",
         "status": "ok",
-        "discovered_skus": 124,
-        "db_skus": 124,
+        "discovered_skus": 126,
+        "db_skus": 126,
         "complete": true,
         "missing_in_db": [],
         "unexpected_in_db": []
@@ -219,10 +222,10 @@
     ]
   },
   "counts": {
-    "current_products": 1365,
-    "specs_rows": 1365,
-    "support_rows": 121,
-    "products_missing_specs_or_support": 1117
+    "current_products": 1387,
+    "specs_rows": 1387,
+    "support_rows": 232,
+    "products_missing_specs_or_support": 1137
   },
   "sku_gaps": [
     {
@@ -2346,12 +2349,12 @@
       "has_support": false
     },
     {
-      "sku": "HKLUNABLK2",
-      "market_product_key": "HKLUNABLK2",
+      "sku": "HKLUNAGRY2",
+      "market_product_key": "HKLUNAGRY2",
       "business_unit": "HARMAN",
       "category": "harman-lifestyle-audio",
       "name": "하만카돈 LUNA 블루투스 스피커",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/hk-speaker-luna2-d2c/HKLUNABLK2/",
+      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/hk-speaker-luna2-d2c/HKLUNAGRY2/",
       "has_specs": false,
       "has_support": false
     },
@@ -6186,6 +6189,16 @@
       "has_support": false
     },
     {
+      "sku": "LS24HG314D402G",
+      "market_product_key": "LS24HG314D402G",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "FHD 에센셜 듀얼모니터 패키지(G31H+S40GD)",
+      "url": "https://www.samsung.com/sec/monitors/package-ls24hg314d402g-d2c/LS24HG314D402G/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS27BG400EKXKR",
       "market_product_key": "LS27BG400EKXKR",
       "business_unit": "VD",
@@ -6366,12 +6379,32 @@
       "has_support": false
     },
     {
+      "sku": "LS27FG504-PCSB",
+      "market_product_key": "LS27FG504-PCSB",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "QHD 오디세이 G5 (LS27FG504) 180Hz + PC사운드바 패키지",
+      "url": "https://www.samsung.com/sec/monitors/package-ls27fg504-pcsb-d2c/LS27FG504-PCSB/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS27FG530D604U",
       "market_product_key": "LS27FG530D604U",
       "business_unit": "VD",
       "category": "monitors",
       "name": "오디세이 G53F QHD + 뷰피니티 S60UD QHD 패키지",
       "url": "https://www.samsung.com/sec/monitors/package-ls27fg530d604u-d2c/LS27FG530D604U/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS27FG600-PCSB",
+      "market_product_key": "LS27FG600-PCSB",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "QHD 오디세이 G6 (LS27FG600) 350Hz + PC사운드바 패키지",
+      "url": "https://www.samsung.com/sec/monitors/package-ls27fg600-pcsb-d2c/LS27FG600-PCSB/",
       "has_specs": false,
       "has_support": false
     },
@@ -6436,12 +6469,42 @@
       "has_support": false
     },
     {
+      "sku": "LS27H712E-HUBG",
+      "market_product_key": "LS27H712E-HUBG",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "뷰피니티 S7 S71H 4K 블랙 (LS27H712) + 멀티허브 패키지",
+      "url": "https://www.samsung.com/sec/monitors/package-ls27h712e-hubg-d2c/LS27H712E-HUBG/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS27H800E-HUBG",
+      "market_product_key": "LS27H800E-HUBG",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "뷰피니티 S8 S80HF 5K (LS27H800) + 멀티허브 패키지",
+      "url": "https://www.samsung.com/sec/monitors/package-ls27h800e-hubg-d2c/LS27H800E-HUBG/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS27H800EFAXKR",
       "market_product_key": "LS27H800EFAXKR",
       "business_unit": "VD",
       "category": "monitors",
       "name": "뷰피니티 S8 S80HF 5K (LS27H800)",
       "url": "https://www.samsung.com/sec/monitors/high-resolution-ls27h800efaxkr-d2c/LS27H800EFAXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS27H800EH800E",
+      "market_product_key": "LS27H800EH800E",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "5K 해상도 듀얼모니터 패키지(S80HF+S80HF)",
+      "url": "https://www.samsung.com/sec/monitors/package-ls27h800eh800e-d2c/LS27H800EH800E/",
       "has_specs": false,
       "has_support": false
     },
@@ -6486,12 +6549,32 @@
       "has_support": false
     },
     {
+      "sku": "LS27HG400-PCSB",
+      "market_product_key": "LS27HG400-PCSB",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "오디세이 G4 G40H FHD 300Hz (LS27HG400) + PC사운드바 패키지",
+      "url": "https://www.samsung.com/sec/monitors/package-ls27hg400-pcsb-d2c/LS27HG400-PCSB/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS27HG400EKXKR",
       "market_product_key": "LS27HG400EKXKR",
       "business_unit": "VD",
       "category": "monitors",
       "name": "오디세이 G4 G40H FHD 300Hz (LS27HG400)",
       "url": "https://www.samsung.com/sec/monitors/gaming-ls27hg400ekxkr-d2c/LS27HG400EKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS27HG602-PCSB",
+      "market_product_key": "LS27HG602-PCSB",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "오디세이 G6 G60H QHD 600Hz (LS27HG602) + PC사운드바 패키지",
+      "url": "https://www.samsung.com/sec/monitors/package-ls27hg602-pcsb-d2c/LS27HG602-PCSB/",
       "has_specs": false,
       "has_support": false
     },
@@ -6506,6 +6589,16 @@
       "has_support": false
     },
     {
+      "sku": "LS27HG610-PCSB",
+      "market_product_key": "LS27HG610-PCSB",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "오디세이 OLED G6 G61SH QHD 240Hz (LS27HG610S) + PC사운드바 패키지",
+      "url": "https://www.samsung.com/sec/monitors/package-ls27hg610-pcsb-d2c/LS27HG610-PCSB/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS27HG610SKXKR",
       "market_product_key": "LS27HG610SKXKR",
       "business_unit": "VD",
@@ -6516,12 +6609,32 @@
       "has_support": false
     },
     {
+      "sku": "LS27HG702-PCSB",
+      "market_product_key": "LS27HG702-PCSB",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "오디세이 OLED G7 G70SH 4K 165Hz (LS27HG702S) + PC사운드바 패키지",
+      "url": "https://www.samsung.com/sec/monitors/package-ls27hg702-pcsb-d2c/LS27HG702-PCSB/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS27HG702SKXKR",
       "market_product_key": "LS27HG702SKXKR",
       "business_unit": "VD",
       "category": "monitors",
       "name": "오디세이 OLED G7 G70SH 4K 165Hz (LS27HG702S)",
       "url": "https://www.samsung.com/sec/monitors/gaming-ls27hg702skxkr-d2c/LS27HG702SKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS27HG712-PCSB",
+      "market_product_key": "LS27HG712-PCSB",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "오디세이 G7 G71H 4K 144Hz (LS27HG712) + PC사운드바 패키지",
+      "url": "https://www.samsung.com/sec/monitors/package-ls27hg712-pcsb-d2c/LS27HG712-PCSB/",
       "has_specs": false,
       "has_support": false
     },
@@ -6556,12 +6669,32 @@
       "has_support": false
     },
     {
+      "sku": "LS27HG806-PCSB",
+      "market_product_key": "LS27HG806-PCSB",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "오디세이 G8 G80HS 5K 165Hz (LS32HG806) + PC사운드바 패키지",
+      "url": "https://www.samsung.com/sec/monitors/package-ls27hg806-pcsb-d2c/LS27HG806-PCSB/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS27HG806EFXKR",
       "market_product_key": "LS27HG806EFXKR",
       "business_unit": "VD",
       "category": "monitors",
       "name": "오디세이 G8 G80HF 5K 180Hz (LS27HG806)",
       "url": "https://www.samsung.com/sec/monitors/gaming-ls27hg806efxkr-d2c/LS27HG806EFXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS27HG806H800E",
+      "market_product_key": "LS27HG806H800E",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "5K 게이밍&고해상도 듀얼모니터 패키지(G80HF+S80HF)",
+      "url": "https://www.samsung.com/sec/monitors/package-ls27hg806h800e-d2c/LS27HG806H800E/",
       "has_specs": false,
       "has_support": false
     },
@@ -6826,6 +6959,16 @@
       "has_support": false
     },
     {
+      "sku": "LS32FG504-PCSB",
+      "market_product_key": "LS32FG504-PCSB",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "QHD 오디세이 G5 (LS32FG504) 180Hz + PC사운드바 패키지",
+      "url": "https://www.samsung.com/sec/monitors/package-ls32fg504-pcsb-d2c/LS32FG504-PCSB/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS32FG504EKXKR",
       "market_product_key": "LS32FG504EKXKR",
       "business_unit": "VD",
@@ -6906,6 +7049,26 @@
       "has_support": false
     },
     {
+      "sku": "LS32FM700MF1ME",
+      "market_product_key": "LS32FM700MF1ME",
+      "business_unit": "HARMAN",
+      "category": "harman-lifestyle-audio",
+      "name": "무빙스타일 Edge (80cm) 라이트 + JBL FLIP 7 블루투스 스피커",
+      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/package-ls32fm700mf1me-d2c/LS32FM700MF1ME/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS32FM700MG1ME",
+      "market_product_key": "LS32FM700MG1ME",
+      "business_unit": "HARMAN",
+      "category": "harman-lifestyle-audio",
+      "name": "무빙스타일 Edge (80cm) 라이트 + JBL GO 5 포터블 블루투스 스피커",
+      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/package-ls32fm700mg1me-d2c/LS32FM700MG1ME/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS32FM700ML1ME",
       "market_product_key": "LS32FM700ML1ME",
       "business_unit": "VD",
@@ -6976,6 +7139,26 @@
       "has_support": false
     },
     {
+      "sku": "LS32H700E-HUBG",
+      "market_product_key": "LS32H700E-HUBG",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "뷰피니티 S7 S70H 4K 블랙 (LS32H700) + 멀티허브 패키지",
+      "url": "https://www.samsung.com/sec/monitors/package-ls32h700e-hubg-d2c/LS32H700E-HUBG/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS32H701E-HUBG",
+      "market_product_key": "LS32H701E-HUBG",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "뷰피니티 S7 S70H 4K 웜화이트 (LS32H701) + 멀티허브 패키지",
+      "url": "https://www.samsung.com/sec/monitors/package-ls32h701e-hubg-d2c/LS32H701E-HUBG/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
       "sku": "LS32H701EAKXKR",
       "market_product_key": "LS32H701EAKXKR",
       "business_unit": "VD",
@@ -7012,6 +7195,16 @@
       "category": "monitors",
       "name": "뷰피니티 S7 S70H 4K 웜화이트 (LS32H705)",
       "url": "https://www.samsung.com/sec/monitors/high-resolution-ls32h705eakxkr-d2c/LS32H705EAKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS32H712E-HUBG",
+      "market_product_key": "LS32H712E-HUBG",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "뷰피니티 S7 S71H 4K 블랙 (LS32H712) + 멀티허브 패키지",
+      "url": "https://www.samsung.com/sec/monitors/package-ls32h712e-hubg-d2c/LS32H712E-HUBG/",
       "has_specs": false,
       "has_support": false
     },
@@ -7062,6 +7255,16 @@
       "category": "monitors",
       "name": "에센셜 모니터 G3 G35H FHD 144Hz (LS32HG358)",
       "url": "https://www.samsung.com/sec/monitors/ls32hg358ekxkr-d2c/LS32HG358EKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS32HG732-PCSB",
+      "market_product_key": "LS32HG732-PCSB",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "오디세이 OLED G7 G73SH 4K 165Hz (LS32HG732S) + PC사운드바 패키지",
+      "url": "https://www.samsung.com/sec/monitors/package-ls32hg732-pcsb-d2c/LS32HG732-PCSB/",
       "has_specs": false,
       "has_support": false
     },
@@ -7142,6 +7345,16 @@
       "category": "monitors",
       "name": "오디세이 OLED G8 G85SD UWQHD 175Hz 스마트 (LS34DG852)",
       "url": "https://www.samsung.com/sec/monitors/gaming-ls34dg852skxkr-d2c/LS34DG852SKXKR/",
+      "has_specs": false,
+      "has_support": false
+    },
+    {
+      "sku": "LS34H550G-HUBG",
+      "market_product_key": "LS34H550G-HUBG",
+      "business_unit": "VD",
+      "category": "monitors",
+      "name": "뷰피니티 S5 S55GH UWQHD 120Hz (LS34H550) + 멀티허브 패키지",
+      "url": "https://www.samsung.com/sec/monitors/package-ls34h550g-hubg-d2c/LS34H550G-HUBG/",
       "has_specs": false,
       "has_support": false
     },
@@ -8212,16 +8425,6 @@
       "category": "refrigerators",
       "name": "Infinite AI 정수기 냉장고 1도어 키친핏 386L (좌열림, 냉장전용)",
       "url": "https://www.samsung.com/sec/refrigerators/one-door-rr40c9981apg-d2c/RR40C9981APG/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "RR70H39E10",
-      "market_product_key": "RR70H39E10",
-      "business_unit": "DA",
-      "category": "refrigerators",
-      "name": "Bespoke AI 냉장고 1도어 키친핏 380L (좌열림/열림방향 가변, 냉장전용)",
-      "url": "https://www.samsung.com/sec/refrigerators/one-door-rr70h39e10-d2c/RR70H39E10/",
       "has_specs": false,
       "has_support": false
     },
@@ -10006,12 +10209,12 @@
       "has_support": false
     },
     {
-      "sku": "SM-X826NZAAKOO",
-      "market_product_key": "SM-X826NZAAKOO",
+      "sku": "SM-X826NZSAKOO",
+      "market_product_key": "SM-X826NZSAKOO",
       "business_unit": "MX",
       "category": "tablets",
       "name": "갤럭시 탭 S10+ 5G",
-      "url": "https://www.samsung.com/sec/tablets/galaxy-tab-s10-5g-x826/SM-X826NZAAKOO/",
+      "url": "https://www.samsung.com/sec/tablets/galaxy-tab-s10-5g-x826/SM-X826NZSAKOO/",
       "has_specs": false,
       "has_support": false
     },

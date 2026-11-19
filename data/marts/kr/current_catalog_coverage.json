@@ -1,13 +1,13 @@
 {
   "market": "kr",
-  "generated_at": "2026-11-18T23:24:46.353Z",
+  "generated_at": "2026-11-19T23:36:15.696Z",
   "definition": "Current catalog coverage compares SKU identifiers discovered from each configured official Samsung.com KR catalog source with current SKU rows emitted to product_master.",
-  "complete": true,
+  "complete": false,
   "catalog_sources_total": 19,
   "catalog_sources_ok": 19,
   "catalog_sources_failed": 0,
-  "discovered_unique_skus": 1117,
-  "db_current_unique_skus": 1117,
+  "discovered_unique_skus": 1137,
+  "db_current_unique_skus": 1137,
   "categories": [
     {
       "source_id": "smartphones",
@@ -51,11 +51,14 @@
       "category": "monitors",
       "source_url": "https://www.samsung.com/sec/monitors/all-monitors/",
       "source_status": "ok",
-      "discovered_unique_skus": 141,
-      "db_current_unique_skus": 141,
-      "missing_in_db": [],
+      "discovered_unique_skus": 162,
+      "db_current_unique_skus": 160,
+      "missing_in_db": [
+        "LS32FM700MF1ME",
+        "LS32FM700MG1ME"
+      ],
       "unexpected_in_db": [],
-      "complete": true
+      "complete": false
     },
     {
       "source_id": "projectors",
@@ -75,8 +78,8 @@
       "category": "refrigerators",
       "source_url": "https://www.samsung.com/sec/refrigerators/all-refrigerators/",
       "source_status": "ok",
-      "discovered_unique_skus": 82,
-      "db_current_unique_skus": 82,
+      "discovered_unique_skus": 81,
+      "db_current_unique_skus": 81,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -231,8 +234,8 @@
       "category": "harman-lifestyle-audio",
       "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/all-harman-lifestyle-audio/",
       "source_status": "ok",
-      "discovered_unique_skus": 124,
-      "db_current_unique_skus": 124,
+      "discovered_unique_skus": 126,
+      "db_current_unique_skus": 126,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
