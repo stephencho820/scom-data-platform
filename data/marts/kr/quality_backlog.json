@@ -1,7 +1,7 @@
 {
   "market": "kr",
-  "generated_at": "2026-11-19T23:47:51.599Z",
-  "source_snapshot_at": "2026-11-19T23:36:15.696Z",
+  "generated_at": "2026-11-20T23:18:49.169Z",
+  "source_snapshot_at": "2026-11-20T23:07:20.652Z",
   "ready": false,
   "catalog": {
     "sources_total": 19,
@@ -45,8 +45,8 @@
         "category": "monitors",
         "source_id": "monitors",
         "status": "ok",
-        "discovered_skus": 162,
-        "db_skus": 160,
+        "discovered_skus": 143,
+        "db_skus": 141,
         "complete": false,
         "missing_in_db": [
           "LS32FM700MF1ME",
@@ -213,8 +213,8 @@
         "category": "harman-lifestyle-audio",
         "source_id": "harman-lifestyle-audio",
         "status": "ok",
-        "discovered_skus": 126,
-        "db_skus": 126,
+        "discovered_skus": 121,
+        "db_skus": 121,
         "complete": true,
         "missing_in_db": [],
         "unexpected_in_db": []
@@ -224,8 +224,8 @@
   "counts": {
     "current_products": 1387,
     "specs_rows": 1387,
-    "support_rows": 232,
-    "products_missing_specs_or_support": 1137
+    "support_rows": 331,
+    "products_missing_specs_or_support": 1113
   },
   "sku_gaps": [
     {
@@ -2249,46 +2249,6 @@
       "has_support": false
     },
     {
-      "sku": "HKCITA1100-SUB",
-      "market_product_key": "HKCITA1100-SUB",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "하만카돈 CITATION 멀티빔 1100 + 우퍼 패키지",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/package-hkcita1100-sub-d2c/HKCITA1100-SUB/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "HKCITA1100-SUB-SUR",
-      "market_product_key": "HKCITA1100-SUB-SUR",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "하만카돈 CITATION 멀티빔 1100 홈시네마 패키지",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/package-hkcita1100-sub-surr-d2c/HKCITA1100-SUB-SUR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "HKCITAB1100-SUB",
-      "market_product_key": "HKCITAB1100-SUB",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "하만카돈 CITATION 멀티빔 1100 + 우퍼 패키지",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/package-hkcitamb1100-sub-d2c/HKCITAB1100-SUB/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "HKCITAB1100-SUB-SR",
-      "market_product_key": "HKCITAB1100-SUB-SR",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "하만카돈 CITATION 멀티빔 1100 홈시네마 패키지",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/package-hkcitamb1100-sub-surr-d2c/HKCITAB1100-SUB-SR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "HKCITAMB1100GRYAS",
       "market_product_key": "HKCITAMB1100GRYAS",
       "business_unit": "HARMAN",
@@ -3715,16 +3675,6 @@
       "category": "harman-lifestyle-audio",
       "name": "JBL WIND3S 블루투스 스피커",
       "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-speaker-wind3s-d2c/JBLWIND3S/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "JBLWIRELESSMICAS3",
-      "market_product_key": "JBLWIRELESSMICAS3",
-      "business_unit": "HARMAN",
-      "category": "harman-lifestyle-audio",
-      "name": "JBL 무선 마이크",
-      "url": "https://www.samsung.com/sec/harman-lifestyle-audio/jbl-microphone-wirelessmic-d2c/JBLWIRELESSMICAS3/",
       "has_specs": false,
       "has_support": false
     },
@@ -6199,16 +6149,6 @@
       "has_support": false
     },
     {
-      "sku": "LS27BG400EKXKR",
-      "market_product_key": "LS27BG400EKXKR",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "오디세이 G4 G40B FHD 240Hz (LS27BG400)",
-      "url": "https://www.samsung.com/sec/monitors/gaming-ls25bg400ekxkr-d2c/LS27BG400EKXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "LS27BG654EKXKR",
       "market_product_key": "LS27BG654EKXKR",
       "business_unit": "VD",
@@ -6226,26 +6166,6 @@
       "name": "뷰피니티 S9 S90PC 5K 스마트 (LS27C900)",
       "url": "https://www.samsung.com/sec/monitors/high-resolution-ls27c900pakxkr-d2c/LS27C900PAKXKR/",
       "has_specs": true,
-      "has_support": false
-    },
-    {
-      "sku": "LS27CG510EKXKR",
-      "market_product_key": "LS27CG510EKXKR",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "게이밍모니터 오디세이 G51C (68.4 cm)",
-      "url": "https://www.samsung.com/sec/monitors/gaming-ls27cg510ekxkr-dc2/LS27CG510EKXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "LS27CM801UKXKR",
-      "market_product_key": "LS27CM801UKXKR",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "2023 스마트모니터 M8 M80C 웜 화이트 (68.4 cm)",
-      "url": "https://www.samsung.com/sec/monitors/smart-ls27cm801ukxkr-d2c/LS27CM801UKXKR/",
-      "has_specs": false,
       "has_support": false
     },
     {
@@ -6339,32 +6259,12 @@
       "has_support": false
     },
     {
-      "sku": "LS27F322GAKXKR",
-      "market_product_key": "LS27F322GAKXKR",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "에센셜 모니터 S3 S32GF FHD 120Hz (LS27F322)",
-      "url": "https://www.samsung.com/sec/monitors/ls27f322gakxkr-d2c/LS27F322GAKXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "LS27F430UAKXKR",
       "market_product_key": "LS27F430UAKXKR",
       "business_unit": "VD",
       "category": "monitors",
       "name": "IPS 100Hz 에센셜 모니터 (LS27F430)",
       "url": "https://www.samsung.com/sec/monitors/ls27f430uakxkr-d2c/LS27F430UAKXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "LS27F610EAKXKR",
-      "market_product_key": "LS27F610EAKXKR",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "고해상도 뷰피니티 S6(S61F) (68.4cm)",
-      "url": "https://www.samsung.com/sec/monitors/high-resolution-ls27f610eakxkr-d2c/LS27F610EAKXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -6709,52 +6609,12 @@
       "has_support": false
     },
     {
-      "sku": "LS32BG654EKXKR",
-      "market_product_key": "LS32BG654EKXKR",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "게이밍모니터 오디세이 G65B (80.1 cm)",
-      "url": "https://www.samsung.com/sec/monitors/gaming-ls27bg654ekxkr-d2c/LS32BG654EKXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "LS32BG750NKXKR",
-      "market_product_key": "LS32BG750NKXKR",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "게이밍모니터 오디세이 G75NB (80 cm)",
-      "url": "https://www.samsung.com/sec/monitors/gaming-ls32bg750nkxkr-d2c/LS32BG750NKXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "LS32CG554EKXKR",
       "market_product_key": "LS32CG554EKXKR",
       "business_unit": "VD",
       "category": "monitors",
       "name": "오디세이 G5 G55C QHD 165Hz 커브드 (LS32CG554)",
       "url": "https://www.samsung.com/sec/monitors/gaming-ls32cg554ekxkr-d2c/LS32CG554EKXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "LS32CM502EKXKR",
-      "market_product_key": "LS32CM502EKXKR",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "2023 스마트모니터 M5 M50C 블랙 (80.1 cm)",
-      "url": "https://www.samsung.com/sec/monitors/smart-ls32cm502ekxkr-d2c/LS32CM502EKXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "LS32CM80BUKXKR",
-      "market_product_key": "LS32CM80BUKXKR",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "2023 스마트모니터 M8 M80C 데이라이트 블루 (80 cm)",
-      "url": "https://www.samsung.com/sec/monitors/smart-ls32cm80bukxkr-d2c/LS32CM80BUKXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -6835,16 +6695,6 @@
       "category": "monitors",
       "name": "뷰피니티 S8 S80UD 4K USB-C (LS32D800U)",
       "url": "https://www.samsung.com/sec/monitors/high-resolution-ls32d804uakxkr-d2c/LS32D800UBKXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "LS32D806UBKXKR",
-      "market_product_key": "LS32D806UBKXKR",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "뷰피니티 S8 S80UD 4K USB-C (LS32D806U)",
-      "url": "https://www.samsung.com/sec/monitors/high-resolution-ls32d806ubkxkr-d2c/LS32D806UBKXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -6949,16 +6799,6 @@
       "has_support": false
     },
     {
-      "sku": "LS32DM803UKXKR",
-      "market_product_key": "LS32DM803UKXKR",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "2024 스마트모니터 M8 M80D 웜 화이트 (80.0 cm)",
-      "url": "https://www.samsung.com/sec/monitors/smart-ls32dm803ukxkr-d2c/LS32DM803UKXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "LS32FG504-PCSB",
       "market_product_key": "LS32FG504-PCSB",
       "business_unit": "VD",
@@ -6985,16 +6825,6 @@
       "category": "monitors",
       "name": "오디세이 G5 G51F QHD 180Hz (LS32FG510)",
       "url": "https://www.samsung.com/sec/monitors/gaming-ls32fg510ekxkr-d2c/LS32FG510EKXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "LS32FG810SKXKR",
-      "market_product_key": "LS32FG810SKXKR",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "오디세이 OLED G8 (G81SF)(80.3cm)",
-      "url": "https://www.samsung.com/sec/monitors/gaming-ls32fg810skxkr-d2c/LS32FG810SKXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -7189,16 +7019,6 @@
       "has_support": false
     },
     {
-      "sku": "LS32H705EAKXKR",
-      "market_product_key": "LS32H705EAKXKR",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "뷰피니티 S7 S70H 4K 웜화이트 (LS32H705)",
-      "url": "https://www.samsung.com/sec/monitors/high-resolution-ls32h705eakxkr-d2c/LS32H705EAKXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "LS32H712E-HUBG",
       "market_product_key": "LS32H712E-HUBG",
       "business_unit": "VD",
@@ -7299,42 +7119,12 @@
       "has_support": false
     },
     {
-      "sku": "LS34C500GAKXKR",
-      "market_product_key": "LS34C500GAKXKR",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "고해상도 뷰피니티 S50GC (86.4 cm)",
-      "url": "https://www.samsung.com/sec/monitors/high-resolution-ls34c500gakxkr-d2c/LS34C500GAKXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "LS34C502GAKXKR",
-      "market_product_key": "LS34C502GAKXKR",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "뷰피니티 S5 UWQHD 모니터 86.4cm",
-      "url": "https://www.samsung.com/sec/monitors/high-resolution-ls34c502gakxkr-d2c/LS34C502GAKXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
       "sku": "LS34C650TAKXKR",
       "market_product_key": "LS34C650TAKXKR",
       "business_unit": "VD",
       "category": "monitors",
       "name": "뷰피니티 S6 S65TC UWQHD (LS34C650T)",
       "url": "https://www.samsung.com/sec/monitors/high-resolution-ls34c650takxkr-d2c/LS34C650TAKXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "LS34C650UAKXKR",
-      "market_product_key": "LS34C650UAKXKR",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "고해상도 뷰피니티 S65UC (86.4 cm)",
-      "url": "https://www.samsung.com/sec/monitors/high-resolution-ls34c650uakxkr-d2c/LS34C650UAKXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -7445,26 +7235,6 @@
       "category": "monitors",
       "name": "뷰피니티 S8 S85TH 5K2K WUHD (LS40H852)",
       "url": "https://www.samsung.com/sec/monitors/high-resolution-ls40h852takxkr-d2c/LS40H852TAKXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "LS43BM703UKXKR",
-      "market_product_key": "LS43BM703UKXKR",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "스마트모니터 M7(M70B) 화이트 (107.9 cm)",
-      "url": "https://www.samsung.com/sec/monitors/smart-ls43bm703ukxkr-d2c/LS43BM703UKXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "LS43CG700NKXKR",
-      "market_product_key": "LS43CG700NKXKR",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "게이밍모니터 오디세이 G70NC (107.9 cm)",
-      "url": "https://www.samsung.com/sec/monitors/gaming-ls43cg700nkxkr-d2c/LS43CG700NKXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -7635,16 +7405,6 @@
       "category": "monitors",
       "name": "오디세이 Neo G9 G95NC DUHD (LS57CG950)",
       "url": "https://www.samsung.com/sec/monitors/gaming-ls57cg950nkxkr-d2c/LS57CG950NKXKR/",
-      "has_specs": false,
-      "has_support": false
-    },
-    {
-      "sku": "LU32J592UQKXKR",
-      "market_product_key": "LU32J592UQKXKR",
-      "business_unit": "VD",
-      "category": "monitors",
-      "name": "고해상도 UHD (UJ590) (80.1 cm)",
-      "url": "https://www.samsung.com/sec/monitors/uhd-monitor-u32j592uqk-d2c/LU32J592UQKXKR/",
       "has_specs": false,
       "has_support": false
     },
@@ -9139,12 +8899,12 @@
       "has_support": false
     },
     {
-      "sku": "SM-F976NDGIKOO",
-      "market_product_key": "SM-F976NDGIKOO",
+      "sku": "SM-F976NDGVKOO",
+      "market_product_key": "SM-F976NDGVKOO",
       "business_unit": "MX",
       "category": "smartphones",
       "name": "갤럭시 Z 폴드8 울트라 자급제 (삼성닷컴/삼성 강남 전용컬러)",
-      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-fold8-ultra-f976-cpo/SM-F976NDGIKOO/",
+      "url": "https://www.samsung.com/sec/smartphones/galaxy-z-fold8-ultra-f976-cpo/SM-F976NDGVKOO/",
       "has_specs": true,
       "has_support": false
     },
