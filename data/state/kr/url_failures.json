@@ -175,98 +175,93 @@
     "last_failed_at": "2026-11-17T23:51:41.952Z"
   },
   "https://www.samsung.com/sec/support/model/AF60H17D12BT1": {
-    "failure_count": 3,
-    "retry_after": "2026-11-21T03:07:20.652Z",
-    "last_failed_at": "2026-11-20T23:07:20.652Z"
-  },
-  "https://www.samsung.com/sec/support/model/CRFF-1762": {
-    "failure_count": 1,
-    "retry_after": "2026-11-21T00:07:20.652Z",
-    "last_failed_at": "2026-11-20T23:07:20.652Z"
+    "failure_count": 4,
+    "retry_after": "2026-11-22T06:11:46.916Z",
+    "last_failed_at": "2026-11-21T22:11:46.916Z"
   },
   "https://www.samsung.com/sec/support/model/cup-pizza-select-008": {
-    "failure_count": 1,
-    "retry_after": "2026-11-21T00:07:20.652Z",
-    "last_failed_at": "2026-11-20T23:07:20.652Z"
+    "failure_count": 2,
+    "retry_after": "2026-11-22T00:11:46.916Z",
+    "last_failed_at": "2026-11-21T22:11:46.916Z"
   },
   "https://www.samsung.com/sec/support/model/DF-AH": {
-    "failure_count": 1,
-    "retry_after": "2026-11-21T00:07:20.652Z",
-    "last_failed_at": "2026-11-20T23:07:20.652Z"
+    "failure_count": 2,
+    "retry_after": "2026-11-22T00:11:46.916Z",
+    "last_failed_at": "2026-11-21T22:11:46.916Z"
   },
   "https://www.samsung.com/sec/support/model/DF-AS1": {
-    "failure_count": 1,
-    "retry_after": "2026-11-21T00:07:20.652Z",
-    "last_failed_at": "2026-11-20T23:07:20.652Z"
+    "failure_count": 2,
+    "retry_after": "2026-11-22T00:11:46.916Z",
+    "last_failed_at": "2026-11-21T22:11:46.916Z"
   },
   "https://www.samsung.com/sec/support/model/DF-AS1DF": {
-    "failure_count": 1,
-    "retry_after": "2026-11-21T00:07:20.652Z",
-    "last_failed_at": "2026-11-20T23:07:20.652Z"
+    "failure_count": 2,
+    "retry_after": "2026-11-22T00:11:46.916Z",
+    "last_failed_at": "2026-11-21T22:11:46.916Z"
   },
   "https://www.samsung.com/sec/support/model/DF-AS1FL": {
-    "failure_count": 1,
-    "retry_after": "2026-11-21T00:07:20.652Z",
-    "last_failed_at": "2026-11-20T23:07:20.652Z"
+    "failure_count": 2,
+    "retry_after": "2026-11-22T00:11:46.916Z",
+    "last_failed_at": "2026-11-21T22:11:46.916Z"
   },
   "https://www.samsung.com/sec/support/model/DF-DF": {
-    "failure_count": 1,
-    "retry_after": "2026-11-21T00:07:20.652Z",
-    "last_failed_at": "2026-11-20T23:07:20.652Z"
+    "failure_count": 2,
+    "retry_after": "2026-11-22T00:11:46.916Z",
+    "last_failed_at": "2026-11-21T22:11:46.916Z"
   },
   "https://www.samsung.com/sec/support/model/DF-DFC": {
-    "failure_count": 1,
-    "retry_after": "2026-11-21T00:07:20.652Z",
-    "last_failed_at": "2026-11-20T23:07:20.652Z"
+    "failure_count": 2,
+    "retry_after": "2026-11-22T00:11:46.916Z",
+    "last_failed_at": "2026-11-21T22:11:46.916Z"
   },
   "https://www.samsung.com/sec/support/model/DF-DFSC": {
-    "failure_count": 1,
-    "retry_after": "2026-11-21T00:07:20.652Z",
-    "last_failed_at": "2026-11-20T23:07:20.652Z"
+    "failure_count": 2,
+    "retry_after": "2026-11-22T00:11:46.916Z",
+    "last_failed_at": "2026-11-21T22:11:46.916Z"
   },
   "https://www.samsung.com/sec/support/model/DF-HK": {
-    "failure_count": 1,
-    "retry_after": "2026-11-21T00:07:20.652Z",
-    "last_failed_at": "2026-11-20T23:07:20.652Z"
+    "failure_count": 2,
+    "retry_after": "2026-11-22T00:11:46.916Z",
+    "last_failed_at": "2026-11-21T22:11:46.916Z"
   },
   "https://www.samsung.com/sec/support/model/DF-TK": {
-    "failure_count": 1,
-    "retry_after": "2026-11-21T00:07:20.652Z",
-    "last_failed_at": "2026-11-20T23:07:20.652Z"
+    "failure_count": 2,
+    "retry_after": "2026-11-22T00:11:46.916Z",
+    "last_failed_at": "2026-11-21T22:11:46.916Z"
   },
   "https://www.samsung.com/sec/support/model/DF-WK": {
-    "failure_count": 1,
-    "retry_after": "2026-11-21T00:07:20.652Z",
-    "last_failed_at": "2026-11-20T23:07:20.652Z"
+    "failure_count": 2,
+    "retry_after": "2026-11-22T00:11:46.916Z",
+    "last_failed_at": "2026-11-21T22:11:46.916Z"
   },
   "https://www.samsung.com/sec/support/model/HAF-HIN": {
-    "failure_count": 1,
-    "retry_after": "2026-11-21T00:07:20.652Z",
-    "last_failed_at": "2026-11-20T23:07:20.652Z"
+    "failure_count": 2,
+    "retry_after": "2026-11-22T00:11:46.916Z",
+    "last_failed_at": "2026-11-21T22:11:46.916Z"
   },
   "https://www.samsung.com/sec/support/model/HAF-HIN-JCC2Y12MKIT-old1": {
-    "failure_count": 1,
-    "retry_after": "2026-11-21T00:07:20.652Z",
-    "last_failed_at": "2026-11-20T23:07:20.652Z"
+    "failure_count": 2,
+    "retry_after": "2026-11-22T00:11:46.916Z",
+    "last_failed_at": "2026-11-21T22:11:46.916Z"
   },
   "https://www.samsung.com/sec/support/model/HAF-HIN-JCC5Y12MKIT-old1": {
-    "failure_count": 1,
-    "retry_after": "2026-11-21T00:07:20.652Z",
-    "last_failed_at": "2026-11-20T23:07:20.652Z"
+    "failure_count": 2,
+    "retry_after": "2026-11-22T00:11:46.916Z",
+    "last_failed_at": "2026-11-21T22:11:46.916Z"
   },
   "https://www.samsung.com/sec/support/model/HAF-HIN-JCC5Y6MKIT-old1": {
-    "failure_count": 1,
-    "retry_after": "2026-11-21T00:07:20.652Z",
-    "last_failed_at": "2026-11-20T23:07:20.652Z"
+    "failure_count": 2,
+    "retry_after": "2026-11-22T00:11:46.916Z",
+    "last_failed_at": "2026-11-21T22:11:46.916Z"
   },
   "https://www.samsung.com/sec/support/model/HD2018KH": {
-    "failure_count": 1,
-    "retry_after": "2026-11-21T00:07:20.652Z",
-    "last_failed_at": "2026-11-20T23:07:20.652Z"
+    "failure_count": 2,
+    "retry_after": "2026-11-22T00:11:46.916Z",
+    "last_failed_at": "2026-11-21T22:11:46.916Z"
   },
   "https://www.samsung.com/sec/support/model/HKRADIANCE24BLKAS": {
-    "failure_count": 1,
-    "retry_after": "2026-11-21T00:07:20.652Z",
-    "last_failed_at": "2026-11-20T23:07:20.652Z"
+    "failure_count": 2,
+    "retry_after": "2026-11-22T00:11:46.916Z",
+    "last_failed_at": "2026-11-21T22:11:46.916Z"
   }
 }
