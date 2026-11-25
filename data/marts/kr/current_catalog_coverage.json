@@ -1,13 +1,13 @@
 {
   "market": "kr",
-  "generated_at": "2026-11-24T03:20:59.874Z",
+  "generated_at": "2026-11-25T01:26:53.969Z",
   "definition": "Current catalog coverage compares SKU identifiers discovered from each configured official Samsung.com KR catalog source with current SKU rows emitted to product_master.",
   "complete": false,
   "catalog_sources_total": 19,
   "catalog_sources_ok": 19,
   "catalog_sources_failed": 0,
-  "discovered_unique_skus": 982,
-  "db_current_unique_skus": 982,
+  "discovered_unique_skus": 1132,
+  "db_current_unique_skus": 1132,
   "categories": [
     {
       "source_id": "smartphones",
@@ -39,8 +39,8 @@
       "category": "tvs",
       "source_url": "https://www.samsung.com/sec/tvs/all-tvs/",
       "source_status": "ok",
-      "discovered_unique_skus": 124,
-      "db_current_unique_skus": 124,
+      "discovered_unique_skus": 227,
+      "db_current_unique_skus": 227,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -51,8 +51,8 @@
       "category": "monitors",
       "source_url": "https://www.samsung.com/sec/monitors/all-monitors/",
       "source_status": "ok",
-      "discovered_unique_skus": 99,
-      "db_current_unique_skus": 97,
+      "discovered_unique_skus": 143,
+      "db_current_unique_skus": 141,
       "missing_in_db": [
         "LS32FM700MF1ME",
         "LS32FM700MG1ME"
@@ -78,8 +78,8 @@
       "category": "refrigerators",
       "source_url": "https://www.samsung.com/sec/refrigerators/all-refrigerators/",
       "source_status": "ok",
-      "discovered_unique_skus": 131,
-      "db_current_unique_skus": 131,
+      "discovered_unique_skus": 100,
+      "db_current_unique_skus": 100,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -102,8 +102,8 @@
       "category": "air-conditioners",
       "source_url": "https://www.samsung.com/sec/air-conditioners/all-air-conditioners/",
       "source_status": "ok",
-      "discovered_unique_skus": 100,
-      "db_current_unique_skus": 100,
+      "discovered_unique_skus": 139,
+      "db_current_unique_skus": 139,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -234,8 +234,8 @@
       "category": "harman-lifestyle-audio",
       "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/all-harman-lifestyle-audio/",
       "source_status": "ok",
-      "discovered_unique_skus": 126,
-      "db_current_unique_skus": 126,
+      "discovered_unique_skus": 121,
+      "db_current_unique_skus": 121,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
