@@ -265,173 +265,183 @@
     "last_failed_at": "2026-11-26T01:00:18.801Z"
   },
   "https://www.samsung.com/sec/support/model/koreans0820": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan01": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan02": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan03": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan04": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan05": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan06": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan07": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan08": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan0829": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan08292": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan09": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan10": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan11": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan12": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan13": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan14": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan15": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan16": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan17": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan18": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan19": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan20": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan21": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan22": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan23": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan24": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan25": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan26": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan28": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan29": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan30": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan31": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   },
   "https://www.samsung.com/sec/support/model/koreanssan32": {
-    "failure_count": 4,
-    "retry_after": "2026-11-26T09:00:18.801Z",
-    "last_failed_at": "2026-11-26T01:00:18.801Z"
+    "failure_count": 5,
+    "retry_after": "2026-11-27T17:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
+  },
+  "https://www.samsung.com/sec/support/model/LS24F430UAKXKR": {
+    "failure_count": 1,
+    "retry_after": "2026-11-27T02:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
+  },
+  "https://www.samsung.com/sec/support/model/LS27F430UAKXKR": {
+    "failure_count": 1,
+    "retry_after": "2026-11-27T02:02:09.883Z",
+    "last_failed_at": "2026-11-27T01:02:09.883Z"
   }
 }
