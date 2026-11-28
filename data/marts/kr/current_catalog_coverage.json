@@ -1,13 +1,13 @@
 {
   "market": "kr",
-  "generated_at": "2026-11-27T01:02:09.883Z",
+  "generated_at": "2026-11-28T00:33:19.944Z",
   "definition": "Current catalog coverage compares SKU identifiers discovered from each configured official Samsung.com KR catalog source with current SKU rows emitted to product_master.",
-  "complete": true,
+  "complete": false,
   "catalog_sources_total": 19,
   "catalog_sources_ok": 19,
   "catalog_sources_failed": 0,
-  "discovered_unique_skus": 922,
-  "db_current_unique_skus": 922,
+  "discovered_unique_skus": 1105,
+  "db_current_unique_skus": 1105,
   "categories": [
     {
       "source_id": "smartphones",
@@ -51,11 +51,14 @@
       "category": "monitors",
       "source_url": "https://www.samsung.com/sec/monitors/all-monitors/",
       "source_status": "ok",
-      "discovered_unique_skus": 85,
-      "db_current_unique_skus": 85,
-      "missing_in_db": [],
+      "discovered_unique_skus": 145,
+      "db_current_unique_skus": 143,
+      "missing_in_db": [
+        "LS32FM700MF1ME",
+        "LS32FM700MG1ME"
+      ],
       "unexpected_in_db": [],
-      "complete": true
+      "complete": false
     },
     {
       "source_id": "projectors",
@@ -99,8 +102,8 @@
       "category": "air-conditioners",
       "source_url": "https://www.samsung.com/sec/air-conditioners/all-air-conditioners/",
       "source_status": "ok",
-      "discovered_unique_skus": 100,
-      "db_current_unique_skus": 100,
+      "discovered_unique_skus": 139,
+      "db_current_unique_skus": 139,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
@@ -231,8 +234,8 @@
       "category": "harman-lifestyle-audio",
       "source_url": "https://www.samsung.com/sec/harman-lifestyle-audio/all-harman-lifestyle-audio/",
       "source_status": "ok",
-      "discovered_unique_skus": 40,
-      "db_current_unique_skus": 40,
+      "discovered_unique_skus": 126,
+      "db_current_unique_skus": 126,
       "missing_in_db": [],
       "unexpected_in_db": [],
       "complete": true
